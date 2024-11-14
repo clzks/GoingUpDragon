@@ -1,8 +1,12 @@
 // src/components/TagComponent.js
 import React, { useState } from 'react';
+
+// 외부 라이브러리
+import styled from 'styled-components';
+
+// 내부 컴포넌트들
 import OvalButton from './OvalButton';
 import ArrowButton from './ArrowButton';
-import './TagComponent.css';
 
 const tags = [
     "이게 전부 9,900원",
@@ -33,7 +37,7 @@ const TagComponent = () => {
 
     return (
         <div>
-            <div className="tag-container">
+            <StyledTagContainer>
                 {tags.slice(0, 4).map((tag, index) => (
                     <OvalButton
                         key={index}
@@ -43,10 +47,11 @@ const TagComponent = () => {
                     />
                 ))}
                 <ArrowButton onClick={toggleShowAllTags} />
-            </div>
+            </StyledTagContainer>
             {showAllTags && (
-                <div className="tag-dropdown">
-                    <div className="tag-box">
+                <>
+                <StyledTagDropdown>
+                    <StyledTagBox>
                         {tags.slice(4).map((tag, index) => (
                             <OvalButton
                                 key={index + 4}
@@ -55,11 +60,42 @@ const TagComponent = () => {
                                 label={tag}
                             />
                         ))}
-                    </div>
-                </div>
+                    </StyledTagBox>
+                </StyledTagDropdown>
+                </>
             )}
         </div>
     );
 };
 
 export default TagComponent;
+
+const StyledTagContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 12px; /* 태그 간격 */
+    flex-wrap: wrap; /* 줄 바꿈 */
+    max-width:1000px; /* 태그 영역 최대 너비 조정 */
+    margin: 0 auto; /* 가운데 정렬 */
+    justify-content: right; /* 태그들이 중앙에 위치하도록 정렬 */
+    gap: 5px;
+    margin-left: 10px;    
+    margin-top: 12px;
+`;
+
+const StyledTagDropdown = styled.div`
+    margin-top: 5px; /* 화살표 버튼 아래에 위치 */
+    display: flex;
+    flex-direction: row; /* 태그들이 한 줄에 정렬 */
+    gap: 10px; /* 태그 간격 */
+    position: relative; /* 부모 요소 기준으로 위치 설정 */
+    justify-content: center; /* 중앙 정렬 */
+`;
+
+const StyledTagBox = styled.div`
+    border: 1px solid #f0f0f0; /* 박스 외곽선 */
+    border-radius: 10px; /* 둥근 모서리 */
+    padding: 5px; /* 패딩 추가 */
+    background-color: white; /* 배경색 */
+    max-width: 600px; /* 최대 너비 조정 */
+`;
