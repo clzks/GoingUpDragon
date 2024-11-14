@@ -1,0 +1,26 @@
+/* src/components/OvalButton.css */
+.tag {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px; /* 태그 크기 조정 */
+    border-radius: 50px;
+    background-color: #ffffff; /* 배경색을 흰색으로 유지 */
+    border: 1px solid #ced4da; /* 외곽선을 회색으로 변경 */
+    color: #6c757d; /* 글씨를 회색으로 변경 */
+    font-size: 18px;
+    font-weight: 300; /* 폰트 굵기 조정 */
+    margin: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tag.active {
+    background-color: #ffffff;
+    color: rgba(234, 8, 241, 0.685);
+    border-color: rgba(234, 8, 241, 0.685); /* 외곽선을 보라색으로 변경 */
+}
+
+.tag:hover {
+    background-color: #e2e6ea;
+}

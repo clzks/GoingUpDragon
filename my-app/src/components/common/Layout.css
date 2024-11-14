@@ -1,0 +1,24 @@
+/* Layout.css */
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff;
+    color: gray;
+    border: 2px solid gray;
+    border-radius: flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .scroll-to-top:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.1);
+  }
+  
