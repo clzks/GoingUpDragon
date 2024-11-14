@@ -1,0 +1,47 @@
+/* src/components/CardItem.css */
+
+.card-item {
+    width: 18rem;
+    margin: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card-item:hover {
+    transform: translateY(-5px);
+}
+
+.card-image {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-instructor {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.card-rating {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #f39c12;
+    margin-bottom: 0.5rem;
+}
+
+.star-icon {
+    margin-right: 0.2rem;
+}
+
+.num-reviews {
+    margin-left: 0.5rem;
+    color: #777;
+}
+
+.card-price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 0.5rem;
+}
