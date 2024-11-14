@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+## 아키텍쳐
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+public
+├── images
 
-## Available Scripts
+src
+├── components      // 재사용 가능한 UI 컴포넌트
+│   ├── common   // 개별 비디오 카드 관련 컴포넌트
+│   │   └── Header.js  // css은 styled component 사용
+│   ├── mainPage  // 개별 비디오 카드 관련 컴포넌트
+│   ├── searchPage   // 개별 비디오 카드 관련 컴포넌트
+│   ├── etc     // 네비게이션 바 관련 컴포넌트
+│   ├── etc     // 사이드바 관련 컴포넌트
+│   └── etc      // 푸터 관련 컴포넌트
+├── layouts        // 주요 기능별 폴더 (예: 홈, 검색, 구독 페이지 등)
+│   ├── HomePage
+│   │   ├── Home.js // css은 styled component 사용
+│   ├── SearchPage
+│   └── SubscriptionPage
+├── pages           // 주요 페이지 컴포넌트 모음
+│   ├── Home.js
+│   ├── Search.js
+│   └── VideoDetail.js
+├── App.js          // 루트 컴포넌트
+└── index.js        // 프로젝트 진입점
 
-In the project directory, you can run:
+## 컴포넌트 포맷
 
-### `npm start`
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+// components/common/header.jsx
+import React from 'react'
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+const header = () => {
 
-### `npm test`
+    function func() {
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    };
+    
+    const func2 = () => {
+    
+    };
 
-### `npm run build`
+    return (
+        <div>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+        </div>
+    )
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+export default header
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
 
-### `npm run eject`
+## 코딩 컨벤션
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. css는 styled-component 사용합니다.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. 모든 컴포넌트는 2번이상 사용 시 common 폴더로 옮겨줍니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. 폴더명은 LowCamelCase, 컴포넌트는 HighCamelCase 방식으로 작성합니다.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. 전역 스타일은 App.css에서 관리합니다.
 
-## Learn More
+5. 이름이 긴 컴포넌트의 경우 자유롭게 축약해서 선언가능. 축약했을 경우 컨벤션에 메모를 남겨주세요.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+6. import는 작은 따옴표, 함수는 큰 따옴표로 작성합니다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+7. 최상단에 주석으로 경로와 파일이름 표시, 외부 라이브러리, 내부 라이브러리를 구분해서 표시합니다.
 
-### Code Splitting
+8. 컴포넌트 확장자는 jsx로 합니다
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+9. 모든 태그는 <Item> </Item> 와 같이 여는 태그 + 닫는 태그로 작성합니다.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+10. 함수의 경우 기본 선언방식과 화살표 함수 중 편한 것으로 사용하시면 됩니다. 
