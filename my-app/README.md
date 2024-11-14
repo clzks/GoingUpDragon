@@ -61,9 +61,9 @@ export default header
 
 2. 모든 컴포넌트는 2번이상 사용 시 common 폴더로 옮겨줍니다.
 
-3. 폴더명은 LowCamelCase, 컴포넌트는 HighCamelCase 방식으로 작성합니다.
+3. 폴더명은 LowCamelCase, 컴포넌트, 스타일드 컴포넌트는 HighCamelCase 방식으로 작성합니다
 
-4. 스타일드 컴포넌트는 HighCameCase로 작성하고 이름은 자유롭게 설정하되, HTML 기본 태그나 부트스트랩 태그를 스타일링하는 경우는 Styled + "태그이름" 으로 명명합니다.
+4. 스타일드컴포넌트는 기본적으로 Styled를 붙여서 이름 짓습니다. 되도록 구체적인 이름으로 작성합니다(ex. StyledStartButton, StyledLoginButton 또는 StyledLoginBtn 등)
 
 5. 전역 스타일은 App.css에서 관리합니다.
 
