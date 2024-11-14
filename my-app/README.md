@@ -61,7 +61,7 @@ export default header
 
 2. 모든 컴포넌트는 2번이상 사용 시 common 폴더로 옮겨줍니다.
 
-3. 폴더명은 LowCamelCase, 컴포넌트, 스타일드 컴포넌트는 HighCamelCase 방식으로 작성합니다
+3. **폴더**명은 LowerCamelCase, **컴포넌트**, **스타일드 컴포넌트**는 UpperCamelCase 방식으로 작성합니다
 
 4. 스타일드컴포넌트는 기본적으로 Styled를 붙여서 이름 짓습니다. 되도록 구체적인 이름으로 작성합니다(ex. StyledStartButton, StyledLoginButton 또는 StyledLoginBtn 등)
 
