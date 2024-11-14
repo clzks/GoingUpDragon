@@ -5,8 +5,8 @@ import Col from 'react-bootstrap/Col';
 import Carousel from 'react-bootstrap/Carousel';
 import { Button } from 'react-bootstrap';
 import { BsChevronDoubleLeft, BsPause, BsChevronDoubleRight } from 'react-icons/bs';
-import './TwoGrids.css'; // CSS 파일 import
 import TagComponent from './TagComponent';
+import styled from 'styled-components';
 
 
 const images = [
@@ -57,40 +57,120 @@ function TwoGrids() {
 
 
   return (
-    <Container>
+    <StyledContainer>
               <Carousel activeIndex={index} onSelect={handleSelect} fade>
               {images.map((src, idx) => (
                     <Carousel.Item key={idx}>
-                        <div className="carousel-image-container">
-                            <img className="carousel-image" src={src} alt={`Slide ${idx + 1}`} />
-                        </div>
+                        <StyledCarouselContainer>
+                            <StyledCarouselImage src={src} alt={`Slide ${idx + 1}`} />
+                        </StyledCarouselContainer>
                     </Carousel.Item>
                 ))}
               </Carousel>
       <Row>
         <Col sm={3}>
-        <div className="button-container">
-                <span className="carousel-counter">{`${index + 1} / ${images.length}`}</span>
+        <StyledButtonContainer>
+                <StyledCarouselCounter>{`${index + 1} / ${images.length}`}</StyledCarouselCounter>
                 {/* 이전 슬라이드 버튼 */}
-                <Button variant="outline-secondary" onClick={handlePrev} className="carousel-button">
+                <StyledCarouselButton variant="outline-secondary" onClick={handlePrev}>
                     <BsChevronDoubleLeft />
-                </Button>
+                </StyledCarouselButton>
                 {/* 포즈 버튼 */}
-                <Button variant="outline-secondary" onClick={toggleAutoSlide} className="carousel-button">
+                <StyledCarouselButton variant="outline-secondary" onClick={toggleAutoSlide}>
                     {autoSlide ? <BsPause /> : <BsPause />}
-                </Button>
+                </StyledCarouselButton>
                 {/* 다음 슬라이드 버튼 */}
-                <Button variant="outline-secondary" onClick={handleNext} className="carousel-button">
+                <StyledCarouselButton variant="outline-secondary" onClick={handleNext}>
                     <BsChevronDoubleRight />
-                </Button>
-            </div>
+                </StyledCarouselButton>
+            </StyledButtonContainer>
         </Col>
         <Col sm={8}>
         <TagComponent />
         </Col>
       </Row>
-    </Container>
+    </StyledContainer>
   );
 }
 
 export default TwoGrids;
+
+/* 전체 컨테이너 스타일 */
+const StyledContainer = styled(Container)`
+    margin-top: 2rem;
+`;
+
+/* 캐러셀 이미지 컨테이너 */
+
+const StyledCarouselContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    position: relative; /* 버튼 컨테이너의 위치를 캐러셀 내에 고정시키기 위해 설정 */
+    margin-top: 1rem;
+`;
+
+
+
+/* 캐러셀 버튼 컨테이너 스타일 */
+const StyledButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 1rem;
+    padding: 5px;
+    border: 2px solid #f0f0f0;
+    border-radius: 50px;
+    background-color: #ffffff;
+`;
+
+/* 캐러셀 버튼 스타일 */
+const StyledCarouselButton = styled(Button)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 1px solid transparent !important;
+    background-color: transparent;
+    color: gray;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    z-index: 10;
+    
+    &:hover {
+        background-color: #f0f0f0;
+        color: gray;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+        background-color: #f0f0f0;
+        color: gray;
+    }
+`;
+
+/* 캐러셀 카운터 스타일 */
+const StyledCarouselCounter = styled.span`
+    margin-right: 5px;
+    color: gray;
+`;
+
+/* Carousel 이미지 컨테이너 */
+const StyledCarouselImage = styled.img`
+    width: 1220px; /* 가로 크기 고정 */
+    height: 600px; /* 세로 크기 고정 */
+    object-fit: cover; /* 이미지 비율 유지 */
+    transition: transform 0.5s ease-in-out; /* 슬라이드 효과를 부드럽게 */
+    margin-left: 0rem;
+`;
+
+
+

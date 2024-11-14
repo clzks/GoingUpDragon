@@ -26,7 +26,6 @@ const Header = () => {
                   />
                 </div>
                 <ul className="navbar-nav me-auto my-2 my-lg-0">
-                  123
                   <li className="nav-item category-dropdown">
                     <span className="nav-link">카테고리</span>
                     <ul className="submenu">
