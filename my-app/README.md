@@ -1,28 +1,29 @@
-## 아키텍쳐
+## 아키텍처
 
+```plaintext
 public
-├── images
+└── images
 
 src
-├── components      // 재사용 가능한 UI 컴포넌트
-│   ├── common   // 개별 비디오 카드 관련 컴포넌트
-│   │   └── Header.js  // css은 styled component 사용
-│   ├── mainPage  // 개별 비디오 카드 관련 컴포넌트
-│   ├── searchPage   // 개별 비디오 카드 관련 컴포넌트
-│   ├── etc     // 네비게이션 바 관련 컴포넌트
-│   ├── etc     // 사이드바 관련 컴포넌트
-│   └── etc      // 푸터 관련 컴포넌트
-├── layouts        // 주요 기능별 폴더 (예: 홈, 검색, 구독 페이지 등)
+├── components              # 재사용 가능한 UI 컴포넌트
+│   ├── common              # 공통 컴포넌트
+│   │   └── Header.js       # styled-components 사용
+│   ├── mainPage            # 메인 페이지 관련 컴포넌트
+│   ├── searchPage          # 검색 페이지 관련 컴포넌트
+│   ├── navigation          # 네비게이션 바 관련 컴포넌트
+│   ├── sidebar             # 사이드바 관련 컴포넌트
+│   └── footer              # 푸터 관련 컴포넌트
+├── layouts                 # 주요 기능별 레이아웃 (예: 홈, 검색, 구독 페이지 등)
 │   ├── HomePage
-│   │   ├── Home.js // css은 styled component 사용
+│   │   └── Home.js         # styled-components 사용
 │   ├── SearchPage
 │   └── SubscriptionPage
-├── pages           // 주요 페이지 컴포넌트 모음
+├── pages                   # 주요 페이지 컴포넌트 모음
 │   ├── Home.js
 │   ├── Search.js
 │   └── VideoDetail.js
-├── App.js          // 루트 컴포넌트
-└── index.js        // 프로젝트 진입점
+├── App.js                  # 루트 컴포넌트
+└── index.js                # 프로젝트 진입점
 
 ## 컴포넌트 포맷
 
