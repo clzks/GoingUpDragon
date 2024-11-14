@@ -1,0 +1,19 @@
+/* src/components/MainCards.css */
+
+.main-cards-container {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    max-width: 1300px;
+  }
+
+.cards-subtitle {
+    text-align: left;  /* 서브타이틀을 왼쪽으로 정렬 */
+    margin-right: 900px; /* 원하는 만큼 오른쪽으로 간격을 추가 */
+    font-weight: bold; /* 서브타이틀을 더 잘 보이도록 볼드체 설정 (옵션) */
+  }  
+
+  
+
+  

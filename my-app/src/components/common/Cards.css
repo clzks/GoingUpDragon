@@ -1,0 +1,38 @@
+/* src/components/Cards.css */
+
+.card-carousel-container {
+    display: flex;  /* 추가: 카드 전체를 중앙으로 정렬 */
+    flex-direction: column;  /* 세로로 정렬하여 버튼과 카드 정렬 */
+    align-items: center;  /* 카드와 슬라이드 버튼을 중앙에 배치 */
+    justify-content: center;  /* 가로로 중앙에 배치 */
+    margin-top: 2rem;
+    position: relative;
+    background-color: transparent; /* 배경색을 투명하게 설정 */
+}
+
+.cards-wrapper {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    justify-content: space-between; /* 카드 컴포넌트를 일정 간격으로 배치하여 슬라이드 버튼과 잘 어울리게 만듦 */
+    margin-right: 3rem;
+}
+
+.cards-slide-button {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50% !important;
+    background-color: White; /* 배경을 투명하게 설정 */
+    border: 1px solid #f0f0f0 !important; /* 동그란 회색 외곽선 추가 */
+    box-shadow: none; /* 그림자 제거 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;;
+    margin: 0 1px; /* 버튼과 카드 사이의 간격 조절 */
+    position: relative; /* 위치 조정을 위해 position 속성 추가 */
+    top: 200px; /* 버튼을 아래로 10px 이동 */
+}
+
+

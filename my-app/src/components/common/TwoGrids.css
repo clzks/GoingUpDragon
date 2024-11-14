@@ -1,0 +1,82 @@
+/* src/components/TwoGrids.css */
+
+/* 전체 컨테이너 스타일 */
+.container {
+    margin-top: 2rem;
+}
+
+/* 캐러셀 이미지 컨테이너 */
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+}
+
+/* 캐러셀 버튼 컨테이너 스타일 */
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 1rem;
+    padding: 5px;
+    border: 2px solid #f0f0f0;
+    border-radius: 50px;
+    background-color: #ffffff;
+}
+
+/* 캐러셀 버튼 스타일 */
+.carousel-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 1px solid transparent !important;
+    background-color: transparent;
+    color: gray;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    z-index: 10;
+}
+
+.carousel-button:hover {
+    background-color: #f0f0f0;
+    color: gray;
+}
+
+.carousel-button:focus {
+    outline: none;
+    box-shadow: none;
+    background-color: #f0f0f0;
+    color: gray;
+}
+
+/* 캐러셀 카운터 스타일 */
+.carousel-counter {
+    margin-right: 5px;
+    color: gray;
+}
+
+/* src/components/Carousel.css */
+
+/* Carousel 이미지 컨테이너 */
+
+
+.carousel-image {
+    width: 1220px; /* 가로 크기 고정 */
+    height: 600px; /* 세로 크기 고정 */
+    object-fit: cover; /* 이미지 비율 유지 */
+    transition: transform 0.5s ease-in-out; /* 슬라이드 효과를 부드럽게 */
+    margin-left: 0rem;
+}
+
+.carousel-container {
+    position: relative; /* 버튼 컨테이너의 위치를 캐러셀 내에 고정시키기 위해 설정 */
+    margin-top: 1rem;
+}
