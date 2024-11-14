@@ -1,9 +1,12 @@
+// components/common/Header.jsx
 import React from 'react';
+// 외부 라이브러리
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+//
 import './Header.css';
 
 const Header = () => {
@@ -23,6 +26,7 @@ const Header = () => {
                   />
                 </div>
                 <ul className="navbar-nav me-auto my-2 my-lg-0">
+                  123
                   <li className="nav-item category-dropdown">
                     <span className="nav-link">카테고리</span>
                     <ul className="submenu">

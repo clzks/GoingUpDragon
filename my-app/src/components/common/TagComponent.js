@@ -1,7 +1,7 @@
 // src/components/TagComponent.js
 import React, { useState } from 'react';
-import OvalButton from './Button/OvalButton';
-import ArrowButton from './Button/ArrowButton';
+import OvalButton from './OvalButton';
+import ArrowButton from './ArrowButton';
 import './TagComponent.css';
 
 const tags = [
