@@ -1,12 +1,18 @@
+// components/common/TwoGrids.jsx
 import React, { useState, useEffect } from 'react';
+
+// 외부 라이브러리
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Carousel from 'react-bootstrap/Carousel';
 import { Button } from 'react-bootstrap';
 import { BsChevronDoubleLeft, BsPause, BsChevronDoubleRight } from 'react-icons/bs';
-import TagComponent from './TagComponent';
 import styled from 'styled-components';
+
+// 내부 컴포넌트
+import TagComponent from './TagComponent';
+
 
 
 const images = [
@@ -58,7 +64,9 @@ function TwoGrids() {
 
   return (
     <StyledContainer>
-              <Carousel activeIndex={index} onSelect={handleSelect} fade>
+        {/* 캐러셀 이미지 */}
+        {/* indicators={false} = 캐러셀 하단 네비게이션 삭제 */}
+              <Carousel activeIndex={index} onSelect={handleSelect} fade indicators={false}> 
               {images.map((src, idx) => (
                     <Carousel.Item key={idx}>
                         <StyledCarouselContainer>
@@ -69,6 +77,7 @@ function TwoGrids() {
               </Carousel>
       <Row>
         <Col sm={3}>
+        {/* 캐러셀 버튼 */}
         <StyledButtonContainer>
                 <StyledCarouselCounter>{`${index + 1} / ${images.length}`}</StyledCarouselCounter>
                 {/* 이전 슬라이드 버튼 */}
@@ -86,6 +95,7 @@ function TwoGrids() {
             </StyledButtonContainer>
         </Col>
         <Col sm={8}>
+        {/* 버튼 태그 */}
         <TagComponent />
         </Col>
       </Row>
@@ -97,7 +107,7 @@ export default TwoGrids;
 
 /* 전체 컨테이너 스타일 */
 const StyledContainer = styled(Container)`
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
 `;
 
 /* 캐러셀 이미지 컨테이너 */
@@ -112,6 +122,16 @@ const StyledCarouselContainer = styled.div`
     margin-left: 1rem;
     position: relative; /* 버튼 컨테이너의 위치를 캐러셀 내에 고정시키기 위해 설정 */
     margin-top: 1rem;
+`;
+
+const StyledCarouselImage = styled.img`
+    max-width: 100%;
+    max-height: 100%;
+    /* width: 1220px; 가로 크기 고정 */
+    /* height: 600px; 세로 크기 고정 */
+    object-fit: cover; /* 이미지 비율 유지 */
+    transition: transform 0.5s ease-in-out; /* 슬라이드 효과를 부드럽게 */
+    margin-left: 0rem;
 `;
 
 
@@ -163,14 +183,7 @@ const StyledCarouselCounter = styled.span`
     color: gray;
 `;
 
-/* Carousel 이미지 컨테이너 */
-const StyledCarouselImage = styled.img`
-    width: 1220px; /* 가로 크기 고정 */
-    height: 600px; /* 세로 크기 고정 */
-    object-fit: cover; /* 이미지 비율 유지 */
-    transition: transform 0.5s ease-in-out; /* 슬라이드 효과를 부드럽게 */
-    margin-left: 0rem;
-`;
+
 
 
 
