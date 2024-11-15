@@ -37,6 +37,8 @@ return (
                         rating={card.rating}
                         numReviews={card.numReviews}
                         price={card.price}
+                        level={card.level}
+                        tag={card.tag}
                     />
                 ))}
                 <StyledCardsSlideButton variant="outline-secondary" onClick={handleNext}>

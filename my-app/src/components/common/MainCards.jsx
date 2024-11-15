@@ -10,7 +10,7 @@ const MainCards = () => {
     {
       subtitle: "이런 강의는 어때요?",
       cards: [
-        //데이터 (1)
+        // 데이터 (1)
         {
           title: "재대로 파는 html css",
           text: "이 강좌는 html css의 기초를 다룹니다.",
@@ -19,18 +19,22 @@ const MainCards = () => {
           rating: 4.9,
           numReviews: 77,
           price: "55,000원",
+          level: "입문",
+          tag: ["개발", "웹 디자인"]
         },
-        //데이터 (2)
+        // 데이터 (2)
         {
-          title: "프로그래밍 시작하기:파이썬 입문",
+          title: "프로그래밍 시작하기: 파이썬 입문",
           text: "이 강좌는 프로그래밍의 기초를 다룹니다.",
           imageUrl: "/images/012.png",
           instructor: "강감찬",
           rating: 4.8,
           numReviews: 248,
           price: "33,000원",
+          level: "초급",
+          tag: ["프론트엔드", "파이썬", "기초"]
         },
-        //데이터 (3)
+        // 데이터 (3)
         {
           title: "한입 크기로 잘라먹는 리엑트",
           text: "이 강좌는 리엑트의 기초를 다룹니다.",
@@ -39,8 +43,10 @@ const MainCards = () => {
           rating: 3.6,
           numReviews: 13,
           price: "155,000원",
+          level: "입문",
+          tag: ["리엑트", "프론트엔드"]
         },
-        //데이터 (4)
+        // 데이터 (4)
         {
           title: "제일 쉬운 리눅스 커널",
           text: "이 강좌는 리눅스의 기초를 다룹니다.",
@@ -49,8 +55,10 @@ const MainCards = () => {
           rating: 4.5,
           numReviews: 772,
           price: "무료",
+          level: "입문",
+          tag: ["리눅스", "시스템 프로그래밍"]
         },
-        //데이터 (5)
+        // 데이터 (5)
         {
           title: "정보처리기사 실기 일주일 정복",
           text: "이 강좌는 정보처리기사 실기의 기초를 다룹니다.",
@@ -59,8 +67,10 @@ const MainCards = () => {
           rating: 2.7,
           numReviews: 123,
           price: "11,000원",
+          level: "중급",
+          tag: ["자격증", "정보처리기사"]
         },
-        //데이터 (6)
+        // 데이터 (6)
         {
           title: "초등 스크래치 코딩 기초",
           text: "이 강좌는 스크래치의 기초를 다룹니다.",
@@ -69,8 +79,10 @@ const MainCards = () => {
           rating: 4.8,
           numReviews: 30,
           price: "110,000원",
+          level: "입문",
+          tag: ["코딩교육", "초등교육"]
         },
-        //데이터 (7)
+        // 데이터 (7)
         {
           title: "엄마표 코딩",
           text: "이 강좌는 초등 코딩의 기초를 다룹니다.",
@@ -79,8 +91,10 @@ const MainCards = () => {
           rating: 4.3,
           numReviews: 870,
           price: "30,000원",
+          level: "입문",
+          tag: ["교육", "코딩"]
         },
-        //데이터 (8)
+        // 데이터 (8)
         {
           title: "할아버지 할머니도 코딩해요",
           text: "이 강좌는 프로그래밍의 기초를 다룹니다.",
@@ -89,8 +103,10 @@ const MainCards = () => {
           rating: 4.9,
           numReviews: 7,
           price: "무료",
+          level: "입문",
+          tag: ["시니어", "코딩"]
         },
-        //데이터 (9)
+        // 데이터 (9)
         {
           title: "일타 자바스크립트 기초반",
           text: "이 강좌는 자바스크립트의 기초를 다룹니다.",
@@ -99,8 +115,10 @@ const MainCards = () => {
           rating: 4.9,
           numReviews: 1250,
           price: "22,000원",
+          level: "초급",
+          tag: ["자바스크립트", "웹 개발"]
         },
-        //데이터 (10)
+        // 데이터 (10)
         {
           title: "스마트폰 100% 사용하기",
           text: "이 강좌는 시니어를 위한 스마트폰 사용법을 다룹니다.",
@@ -109,13 +127,15 @@ const MainCards = () => {
           rating: 4.7,
           numReviews: 35,
           price: "5,000원",
+          level: "입문",
+          tag: ["시니어", "스마트폰"]
         },
       ],
     },
     {
       subtitle: "무료 강의 추천 리스트",
       cards: [
-        //데이터 (1)
+        // 데이터 (1)
         {
           title: "선생님 토끼의 실전 자바",
           text: "웹 개발에 필요한 자바 기초 기술을 배웁니다.",
@@ -124,8 +144,10 @@ const MainCards = () => {
           rating: 4.6,
           numReviews: 7942,
           price: "무료",
+          level: "초급", 
+          tag: ["웹 개발", "자바"] 
         },
-        //데이터 (2)
+        // 데이터 (2)
         {
           title: "초보자를 위한 프로그래밍 입문",
           text: "이 강좌는 프로그래밍의 기초를 다룹니다.",
@@ -134,8 +156,10 @@ const MainCards = () => {
           rating: 5.0,
           numReviews: 3,
           price: "무료",
+          level: "초급", 
+          tag: ["프로그래밍", "입문"] 
         },
-        //데이터 (3)
+        // 데이터 (3)
         {
           title: '실전 코딩: 웹 개발 마스터하기',
           text: '웹 개발에 필요한 기초 기술을 배웁니다.',
@@ -144,8 +168,10 @@ const MainCards = () => {
           rating: 4.2,
           numReviews: 513,
           price: '무료',
+          level: "초급", 
+          tag: ["웹 개발", "코딩"] 
         },
-        //데이터 (4)
+        // 데이터 (4)
         {
           title: 'Python으로 시작하는 데이터 과학',
           text: '이 강좌는 파이썬의 기초를 다룹니다.',
@@ -154,8 +180,10 @@ const MainCards = () => {
           rating: 4.7,
           numReviews: 63,
           price: '무료',
+          level: "초급", 
+          tag: ["파이썬", "데이터 과학"] 
         },
-        //데이터 (5)
+        // 데이터 (5)
         {
           title: '모바일 프로그래밍',
           text: '모바일 프로그래밍에 필요한 기초 기술을 배웁니다.',
@@ -164,8 +192,10 @@ const MainCards = () => {
           rating: 1.7,
           numReviews: 40,
           price: '무료',
+          level: "초급", 
+          tag: ["모바일", "프로그래밍"] 
         },
-        //데이터 (6)
+        // 데이터 (6)
         {
           title: '프론트엔드 기초 연습',
           text: '이 강좌는 프론트엔드의 기초를 다룹니다.',
@@ -174,8 +204,10 @@ const MainCards = () => {
           rating: 3.8,
           numReviews: 77,
           price: '무료',
+          level: "초급", 
+          tag: ["프론트엔드", "기초"] 
         },
-        //데이터 (7)
+        // 데이터 (7)
         {
           title: '프론트엔드 실전 연습',
           text: '프론트엔드 개발에 필요한 실전 기술을 배웁니다.',
@@ -184,8 +216,10 @@ const MainCards = () => {
           rating: 4.5,
           numReviews: 54,
           price: '무료',
+          level: "중급", 
+          tag: ["프론트엔드", "실전"] 
         },
-        //데이터 (8)
+        // 데이터 (8)
         {
           title: '리엑트 부트스트랩 100% 활용하기',
           text: '이 강좌는 리엑트 부트스트랩의 기초를 다룹니다.',
@@ -194,8 +228,10 @@ const MainCards = () => {
           rating: 4.5,
           numReviews: 120,
           price: '무료',
+          level: "중급", 
+          tag: ["리엑트", "부트스트랩"] 
         },
-        //데이터 (9)
+        // 데이터 (9)
         {
           title: '친구와 함께 하는 엔트리 코딩',
           text: '엔트리 코딩 프로그램의 기초를 배웁니다.',
@@ -204,8 +240,10 @@ const MainCards = () => {
           rating: 4.2,
           numReviews: 540,
           price: '무료',
+          level: "초급", 
+          tag: ["엔트리", "코딩"] 
         },
-        //데이터 (10)
+        // 데이터 (10)
         {
           title: '정보교과서 평가문제 풀이',
           text: '이 강좌는 정보 교과서 관련 기초 지식을 다룹니다.',
@@ -214,13 +252,15 @@ const MainCards = () => {
           rating: 4.9,
           numReviews: 125000,
           price: '무료',
+          level: "초급", 
+          tag: ["정보", "교과서"] 
         },
       ],
     },
     {
       subtitle: "초심자 추천 리스트",
       cards: [
-        //데이터 (1)
+        // 데이터 (1)
         {
           title: "실전 개발 마스터 클래스",
           text: "초보 개발자를 위한 마스터 클래스 강의입니다.",
@@ -229,8 +269,10 @@ const MainCards = () => {
           rating: 4.1,
           numReviews: 1111,
           price: "99,000원",
+          level: "초급", 
+          tag: ["실전", "개발"] 
         },
-        //데이터 (2)
+        // 데이터 (2)
         {
           title: "현업에서 통하는 개발 스킬",
           text: "웹 개발에 필요한 실전 기술을 배웁니다.",
@@ -239,8 +281,10 @@ const MainCards = () => {
           rating: 4.7,
           numReviews: 3,
           price: "89,000원",
+          level: "중급", 
+          tag: ["웹 개발", "실전"] 
         },
-        //데이터 (3)
+        // 데이터 (3)
         {
           title: "클라우드 개발 완전 정복",
           text: "이 강좌는 클라우드 개발의 정석을 다룹니다.",
@@ -249,8 +293,10 @@ const MainCards = () => {
           rating: 4.8,
           numReviews: 113,
           price: "무료",
+          level: "중급", 
+          tag: ["클라우드", "개발"] 
         },
-        //데이터 (4)
+        // 데이터 (4)
         {
           title: "프로그래밍 기초부터 심화까지",
           text: "코딩 초심자를 위한 쉬운 강의입니다.",
@@ -259,8 +305,10 @@ const MainCards = () => {
           rating: 3.4,
           numReviews: 150,
           price: "120,000원",
+          level: "초급", 
+          tag: ["프로그래밍", "기초"]
         },
-        //데이터 (5)
+        // 데이터 (5)
         {
           title: "코드로 만드는 나만의 앱",
           text: "앱 개발에 필요한 기초 기술을 배웁니다.",
@@ -269,8 +317,10 @@ const MainCards = () => {
           rating: 2.1,
           numReviews: 200,
           price: "무료",
+          level: "초급",
+          tag: ["앱", "개발"]
         },
-        //데이터 (6)
+        // 데이터 (6)
         {
           title: "시니어를 위한 컴퓨터 기초 입문",
           text: "이 강좌는 컴퓨터 사용의 기초를 다룹니다.",
@@ -279,8 +329,10 @@ const MainCards = () => {
           rating: 4.8,
           numReviews: 1270,
           price: "5,000원",
+          level: "초급", 
+          tag: ["시니어", "컴퓨터 기초"] 
         },
-        //데이터 (7)
+        // 데이터 (7)
         {
           title: "AI와 함께 짜는 코딩",
           text: "코딩 초심자를 위한 쉬운 강의입니다.",
@@ -289,18 +341,22 @@ const MainCards = () => {
           rating: 4.8,
           numReviews: 365,
           price: "30,000원",
+          level: "초급", 
+          tag: ["AI", "코딩"] 
         },
-        //데이터 (8)
+        // 데이터 (8)
         {
-          title: "입문자를 위한 알고리름 핵심 이론",
+          title: "입문자를 위한 알고리즘 핵심 이론",
           text: "알고리즘에 대한 기초 지식을 배웁니다.",
           imageUrl: "/images/038.png",
           instructor: "아이티 고",
           rating: 4.6,
           numReviews: 35,
           price: "45,000원",
+          level: "초급", 
+          tag: ["알고리즘", "입문"] 
         },
-        //데이터 (9)
+        // 데이터 (9)
         {
           title: "실전 웹사이트 제작(초급)",
           text: "이 강좌는 웹사이트 제작의 기초를 다룹니다.",
@@ -309,8 +365,10 @@ const MainCards = () => {
           rating: 4.5,
           numReviews: 28,
           price: "77,000원",
+          level: "초급", 
+          tag: ["웹사이트", "제작"] 
         },
-        //데이터 (10)
+        // 데이터 (10)
         {
           title: "초심자를 위한 코딩",
           text: "코딩 초심자를 위한 쉬운 강의입니다.",
@@ -319,9 +377,12 @@ const MainCards = () => {
           rating: 4.8,
           numReviews: 240,
           price: "20,000원",
+          level: "초급", 
+          tag: ["코딩", "초심자"] 
         },
       ],
     },
+
   ];
 
   return (
