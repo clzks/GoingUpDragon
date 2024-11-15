@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 // 내부 라이브러리
 
-const CardItem = ({ title, instructor, rating, numReviews, price, imageUrl }) => {
+const CardItem = ({ title, text, instructor, rating, numReviews, price, imageUrl, level, tag }) => {
     return (
         <StyledCardItem>
             <StyledCardImage variant="top" src={imageUrl} />
@@ -21,11 +21,36 @@ const CardItem = ({ title, instructor, rating, numReviews, price, imageUrl }) =>
                 </StyledCardRating>
                 <StyledCardPrice>{price.toLocaleString()}</StyledCardPrice>
             </Card.Body>
+            <StyledOverlay>
+            <StyledOverlayText>{text}</StyledOverlayText>
+            <StyledOverlayLevel>난이도 : {level}</StyledOverlayLevel>
+            <StyledOverlayTag>태그 : {tag.join(", ")}</StyledOverlayTag>
+            </StyledOverlay>
         </StyledCardItem>
     );
 };
 
 export default CardItem;
+
+
+const StyledOverlay = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* 투명한 검은색 배경 */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px 10px;
+    text-align: center;
+`;
+
 
 
 const StyledCardItem = styled(Card)`
@@ -37,7 +62,12 @@ const StyledCardItem = styled(Card)`
     &:hover {
         transform: translateY(-5px);
     }
+
+    &:hover ${StyledOverlay} {
+        opacity: 1;
+    }
 `;
+
 
 const StyledCardImage = styled(Card.Img)`
     height: 200px;
@@ -76,4 +106,20 @@ const StyledCardPrice = styled(Card.Text)`
     font-weight: bold;
     color: #333;
     margin-top: 0.5rem;
+`;
+
+const StyledOverlayText = styled.div`
+    font-size: 1rem;
+    margin-top: 20px;
+    text-align: left;
+`;
+
+const StyledOverlayLevel = styled.div`
+    font-size: 0.9rem;
+    margin-top: auto;
+`;
+
+const StyledOverlayTag = styled.div`
+    font-size: 0.9rem;
+    margin-bottom: 20px;
 `;
