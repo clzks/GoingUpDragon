@@ -1,11 +1,11 @@
-// src/components/Cards.jsx
+// src/components/Cards.jsx 
 // 외부 라이브러리
 import React, { useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import styled from "styled-components";
 import CardItem from "./CardItem";
 
-const Cards = ({ subtitle, cardData }) => {
+const Cards = ({ cardData }) => {
   const [startIndex, setStartIndex] = useState(0);
   const cardsToShow = 4;
 
@@ -21,42 +21,30 @@ const Cards = ({ subtitle, cardData }) => {
     );
   };
 
-  return (
-    <StyledCardCarouselContainer>
-      <div className="cards-header">
-        <h2 className="cards-subtitle">{subtitle}</h2>
-      </div>
-      <StyledCardsWrapper>
-        <StyledCardsSlideButton
-          variant="outline-secondary"
-          onClick={handlePrev}
-        >
-          {"<"}
-        </StyledCardsSlideButton>
-        {cardData
-          .slice(startIndex, startIndex + cardsToShow)
-          .map((card, index) => (
-            <CardItem
-              key={index}
-              title={card.title}
-              text={card.text}
-              imageUrl={card.imageUrl}
-              instructor={card.instructor}
-              rating={card.rating}
-              numReviews={card.numReviews}
-              price={card.price}
-            />
-          ))}
-        <StyledCardsSlideButton
-          variant="outline-secondary"
-          onClick={handleNext}
-        >
-          {">"}
-        </StyledCardsSlideButton>
-      </StyledCardsWrapper>
-    </StyledCardCarouselContainer>
-  );
-};
+return (
+        <StyledCardCarouselContainer>
+            <StyledCardsWrapper>
+                <StyledCardsSlideButton variant="outline-secondary" onClick={handlePrev}>
+                    {"<"}
+                </StyledCardsSlideButton>
+                {cardData.slice(startIndex, startIndex + cardsToShow).map((card, index) => (
+                    <CardItem
+                        key={index}
+                        title={card.title}
+                        text={card.text}
+                        imageUrl={card.imageUrl}
+                        instructor={card.instructor}
+                        rating={card.rating}
+                        numReviews={card.numReviews}
+                        price={card.price}
+                    />
+                ))}
+                <StyledCardsSlideButton variant="outline-secondary" onClick={handleNext}>
+                    {">"}
+                </StyledCardsSlideButton>
+            </StyledCardsWrapper>
+        </StyledCardCarouselContainer>
+    );};
 
 export default Cards;
 
@@ -72,12 +60,10 @@ const StyledCardCarouselContainer = styled(Container)`
 `;
 
 const StyledCardsWrapper = styled.div`
-  display: flex;
-  overflow: hidden;
-  width: 100%;
-  justify-content: space-between;
-  margin-right: 3rem;
-`;
+	display: flex;
+    overflow: hidden;
+    width: 100%;
+    justify-content: space-between;`;
 
 const StyledCardsSlideButton = styled(Button)`
   height: 3rem;
