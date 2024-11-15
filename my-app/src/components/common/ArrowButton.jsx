@@ -1,7 +1,7 @@
 // src/components/Button/ArrowButton.js
-import React from 'react';
-import { SlArrowDown } from 'react-icons/sl'; // SlArrowDown 아이콘 import
-import styled from 'styled-components';
+import React from "react";
+import { SlArrowDown } from "react-icons/sl"; // SlArrowDown 아이콘 import
+import styled from "styled-components";
 
 const ArrowButton = ({ onClick }) => {
   return (
@@ -25,16 +25,16 @@ const StyledArrowButton = styled.button`
   cursor: pointer;
   transition: background-color 0.3s ease, border 0.3s ease, color 0.3s ease;
 
-  &:hover{
+  &:hover {
     background-color: #f0f0f0; /* 마우스 오버 시 배경색을 연회색으로 변경 */
     border-color: #a9a9a9; /* 마우스 오버 시 외곽선 색상 변경 */
     color: #a9a9a9; /* 마우스 오버 시 화살표 아이콘 색상 변경 */
   }
 
-  &:focus{
+  &:focus {
     outline: none;
     box-shadow: none; /* 포커스 시 그림자 제거 */
   }
-`
+`;
 
 export default ArrowButton;
