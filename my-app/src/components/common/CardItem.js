@@ -18,6 +18,13 @@ function CardItem({ title, instructor, rating, numReviews, price, imageUrl, butt
                 </div>
                 <Card.Text className="card-price"> {price.toLocaleString()}</Card.Text>
             </Card.Body>
+
+            <div className="card-overlay">
+                <h3>{title}</h3>
+                <p>난이도</p>
+                <p>태그</p>
+            </div>
+
         </Card>
     );
 }
