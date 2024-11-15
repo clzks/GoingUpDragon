@@ -1,4 +1,4 @@
-// src/components/CardsPick.jsx
+// src/components/CardsPick.jsx 
 // 외부 라이브러리
 import React, { useState } from 'react';
 import { Container, Button } from 'react-bootstrap';

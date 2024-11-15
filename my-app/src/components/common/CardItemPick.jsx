@@ -1,4 +1,4 @@
-// src/components/CardItem.jsx
+// src/components/CardItem.jsx  
 // 외부 라이브러리
 import React from 'react';
 import Card from 'react-bootstrap/Card';

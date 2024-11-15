@@ -1,4 +1,4 @@
-// App.js
+// App.js  
 import "./App.css";
 import Layout from "./components/common/Layout"; // 레이아웃 컴포넌트 import
 import { Container } from "react-bootstrap";
