@@ -1,12 +1,25 @@
 // src/components/Button/ArrowButton.js
-import React from "react";
+import { SlArrowUp } from "react-icons/sl"; // SlArrowUp 아이콘 import
 import { SlArrowDown } from "react-icons/sl"; // SlArrowDown 아이콘 import
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const ArrowButton = ({ onClick }) => {
+  const [isClick, SetClick] = useState(false);
+
+  function handleClick() {
+    SetClick((prev) => !prev);
+  }
+
   return (
-    <StyledArrowButton onClick={onClick}>
-      <SlArrowDown></SlArrowDown> {/* SlArrowDown 아이콘 사용 */}
+    <StyledArrowButton
+      onClick={() => {
+        handleClick();
+        onClick && onClick(); // 여기서 onClick()은 부모에서 전달받은 prop
+      }}
+    >
+      {isClick ? <SlArrowUp /> : <SlArrowDown />}{" "}
+      {/* 안눌렀을때는 SlArrowDown 아이콘, 눌렀을 경우  SlArrowUp 아이콘 사용*/}
     </StyledArrowButton>
   );
 };
