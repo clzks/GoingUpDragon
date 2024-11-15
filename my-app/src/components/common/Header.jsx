@@ -1,17 +1,23 @@
 // components/common/Header.jsx
-import React from 'react';
+import React from "react";
 // 외부 라이브러리
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 //
-import './Header.css';
+import "./Header.css";
 
 const Header = () => {
   return (
-    <header style={{ backgroundColor: '#ffffff', padding: '1rem', textAlign: 'center' }}>
+    <header
+      style={{
+        backgroundColor: "#ffffff",
+        padding: "1rem",
+        textAlign: "center",
+      }}
+    >
       <Container>
         <Row>
           {/* 로고 및 카테고리 */}
@@ -40,7 +46,9 @@ const Header = () => {
                             <ul className="submenu">
                               <li className="nav-dropdown-item">ChatGPT</li>
                               <li className="nav-dropdown-item">Python</li>
-                              <li className="nav-dropdown-item">인공지능(AI)</li>
+                              <li className="nav-dropdown-item">
+                                인공지능(AI)
+                              </li>
                             </ul>
                           </li>
                           <li className="nav-dropdown-item">딥러닝/머신러닝</li>
@@ -62,7 +70,10 @@ const Header = () => {
           </Col>
 
           {/* 강의 검색창 */}
-          <Col xs={6} className="d-flex justify-content-center align-items-center">
+          <Col
+            xs={6}
+            className="d-flex justify-content-center align-items-center"
+          >
             <Form className="d-flex">
               <Form.Control
                 type="search"
@@ -70,7 +81,11 @@ const Header = () => {
                 className="me-2 search-input"
                 aria-label="Search"
               />
-              <Button type="submit" variant="outline-success" className="custom-button">
+              <Button
+                type="submit"
+                variant="outline-success"
+                className="custom-button"
+              >
                 검색
               </Button>
             </Form>
@@ -78,8 +93,12 @@ const Header = () => {
 
           {/* 로그인 및 회원가입 버튼 */}
           <Col className="d-flex justify-content-center align-items-center">
-            <Button variant="outline-success" className="custom-button me-2">로그인</Button>
-            <Button variant="outline-success" className="custom-button">회원가입</Button>
+            <Button variant="outline-success" className="custom-button me-2">
+              로그인
+            </Button>
+            <Button variant="outline-success" className="custom-button">
+              회원가입
+            </Button>
           </Col>
         </Row>
       </Container>
