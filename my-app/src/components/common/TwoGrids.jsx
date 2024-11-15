@@ -62,7 +62,7 @@ function TwoGrids() {
 }, [autoSlide, index]);
 
 
-  return (
+return (
     <StyledContainer>
         {/* 캐러셀 이미지 */}
         {/* indicators={false} = 캐러셀 하단 네비게이션 삭제 */}
@@ -127,9 +127,9 @@ const StyledCarouselContainer = styled.div`
 const StyledCarouselImage = styled.img`
     max-width: 100%;
     max-height: 100%;
-    /* width: 1220px; 가로 크기 고정 */
-    /* height: 600px; 세로 크기 고정 */
-    object-fit: cover; /* 이미지 비율 유지 */
+    width: 1220px; // 가로 크기 고정 
+    height: 600px; // 세로 크기 고정 
+    /* object-fit: cover; 이미지 비율 유지 */
     transition: transform 0.5s ease-in-out; /* 슬라이드 효과를 부드럽게 */
     margin-left: 0rem;
 `;
