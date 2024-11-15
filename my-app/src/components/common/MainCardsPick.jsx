@@ -1,8 +1,8 @@
-// src/components/MainCards.jsx  
+// src/components/MainCards.jsx
 // 외부 라이브러리
-import React from 'react';
-import styled from 'styled-components';
-import CardsPick from './CardsPick';
+import React from "react";
+import styled from "styled-components";
+import CardsPick from "./CardsPick";
 
 const MainCardsPick = () => {
   // 카드 그룹 데이터들
@@ -89,7 +89,8 @@ const MainCardsPick = () => {
       {cardsGroupData.map((group, index) => (
         <React.Fragment key={index}>
           <StyledCardsSubtitle>{group.subtitle}</StyledCardsSubtitle>
-          <CardsPick subtitle={group.subtitle} cardData={group.cards} /> {/* 여기서 CardsPick을 사용 */}
+          <CardsPick subtitle={group.subtitle} cardData={group.cards} />{" "}
+          {/* 여기서 CardsPick을 사용 */}
         </React.Fragment>
       ))}
     </StyledMainCardsPickContainer>

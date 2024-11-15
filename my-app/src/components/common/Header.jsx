@@ -1,5 +1,5 @@
 // components/common/Header.jsx
-import React from "react";
+import React, { useState } from "react";
 // 외부 라이브러리
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -10,6 +10,13 @@ import Button from "react-bootstrap/Button";
 import styled from "styled-components";
 
 const Header = () => {
+  const [searchInput, setSearchInput] = useState("");
+
+  // 입력값이 변경될 때 상태 업데이트
+  function handleInputChange(event) {
+    setSearchInput(event.target.value);
+  }
+
   return (
     <header
       style={{
@@ -109,8 +116,14 @@ const Header = () => {
                 type="search"
                 placeholder="강의검색"
                 aria-label="Search"
+                value={searchInput}
+                onChange={handleInputChange}
               ></StyledFormControl>
-              <StyledButton type="submit" variant="outline-success">
+              <StyledButton
+                type="submit"
+                variant="outline-success"
+                disabled={!searchInput.trim()}
+              >
                 검색
               </StyledButton>
             </StyledForm>
@@ -309,8 +322,15 @@ const StyledThirdItem = styled.li`
 `;
 
 const StyledFormControl = styled(Form.Control)`
-  width: 500px !important; /* 원하는 너비로 설정 */
+  width: 500px !important; /* 원하는 너비로 설정. 나중에 크기 유동적으로 변하게 */
   margin-right: 0.5rem;
+
+  &:focus {
+    border-color: #7cd0d5 !important; /* 원하는 보더 색상으로 변경 */
+    border: 1px solid #7cd0d5;
+    box-shadow: none;
+    outline: 3px solid #7cd0d5; /* 원하는 색상으로 변경 */
+  }
 `;
 
 const StyledButton = styled(Button)`
@@ -322,7 +342,7 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const StyledLoginButton = styled(Button)`
+const StyledLoginButton = styled(StyledButton)`
   margin-right: 0.5rem;
 `;
 
