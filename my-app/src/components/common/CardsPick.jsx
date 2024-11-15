@@ -1,13 +1,13 @@
-// src/components/Cards.jsx
+// src/components/CardsPick.jsx
 // 외부 라이브러리
 import React, { useState } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import styled from 'styled-components';
-import CardItem from './CardItem';
+import CardItem from './CardItemPick';
 
-const Cards = ({ cardData }) => {
+const CardsPick = ({ subtitle, cardData }) => {
     const [startIndex, setStartIndex] = useState(0);
-    const cardsToShow = 4;
+    const cardsToShow = 3;
 
     const handlePrev = () => {
         setStartIndex((prevIndex) =>
@@ -23,6 +23,9 @@ const Cards = ({ cardData }) => {
 
     return (
         <StyledCardCarouselContainer>
+            <div className="cards-header">
+                <h2 className="cards-subtitle">{subtitle}</h2>
+            </div>
             <StyledCardsWrapper>
                 <StyledCardsSlideButton variant="outline-secondary" onClick={handlePrev}>
                     {"<"}
@@ -34,9 +37,6 @@ const Cards = ({ cardData }) => {
                         text={card.text}
                         imageUrl={card.imageUrl}
                         instructor={card.instructor}
-                        rating={card.rating}
-                        numReviews={card.numReviews}
-                        price={card.price}
                     />
                 ))}
                 <StyledCardsSlideButton variant="outline-secondary" onClick={handleNext}>
@@ -47,7 +47,7 @@ const Cards = ({ cardData }) => {
     );
 };
 
-export default Cards;
+export default CardsPick;
 
 
 // 내부 스타일 컴포넌트 정의
@@ -65,8 +65,8 @@ const StyledCardsWrapper = styled.div`
     display: flex;
     overflow: hidden;
     width: 100%;
-    justify-content: space-between;
-    margin-right: 0rem;
+    justify-content: space-evenly; /* 카드 사이 균등 분배 */
+    margin-right: 3; /* 슬라이드 버튼과 카드 사이 간격 없앰 */
 `;
 
 const StyledCardsSlideButton = styled(Button)`
