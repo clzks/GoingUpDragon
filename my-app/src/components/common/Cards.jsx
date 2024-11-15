@@ -1,31 +1,28 @@
-// src/components/Cards.jsx
+// src/components/Cards.jsx 
 // 외부 라이브러리
-import React, { useState } from 'react';
-import { Container, Button } from 'react-bootstrap';
-import styled from 'styled-components';
-import CardItem from './CardItem';
+import React, { useState } from "react";
+import { Container, Button } from "react-bootstrap";
+import styled from "styled-components";
+import CardItem from "./CardItem";
 
-const Cards = ({ subtitle, cardData }) => {
-    const [startIndex, setStartIndex] = useState(0);
-    const cardsToShow = 4;
+const Cards = ({ cardData }) => {
+  const [startIndex, setStartIndex] = useState(0);
+  const cardsToShow = 4;
 
-    const handlePrev = () => {
-        setStartIndex((prevIndex) =>
-            prevIndex === 0 ? cardData.length - cardsToShow : prevIndex - 1
-        );
-    };
+  const handlePrev = () => {
+    setStartIndex((prevIndex) =>
+      prevIndex === 0 ? cardData.length - cardsToShow : prevIndex - 1
+    );
+  };
 
-    const handleNext = () => {
-        setStartIndex((prevIndex) =>
-            prevIndex + cardsToShow >= cardData.length ? 0 : prevIndex + 1
-        );
-    };
+  const handleNext = () => {
+    setStartIndex((prevIndex) =>
+      prevIndex + cardsToShow >= cardData.length ? 0 : prevIndex + 1
+    );
+  };
 
-    return (
+return (
         <StyledCardCarouselContainer>
-            <div className="cards-header">
-                <h2 className="cards-subtitle">{subtitle}</h2>
-            </div>
             <StyledCardsWrapper>
                 <StyledCardsSlideButton variant="outline-secondary" onClick={handlePrev}>
                     {"<"}
@@ -47,44 +44,40 @@ const Cards = ({ subtitle, cardData }) => {
                 </StyledCardsSlideButton>
             </StyledCardsWrapper>
         </StyledCardCarouselContainer>
-    );
-};
+    );};
 
 export default Cards;
 
-
 // 내부 스타일 컴포넌트 정의
 const StyledCardCarouselContainer = styled(Container)`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2rem;
-    position: relative;
-    background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  position: relative;
+  background-color: transparent;
 `;
 
 const StyledCardsWrapper = styled.div`
-    display: flex;
+	display: flex;
     overflow: hidden;
     width: 100%;
-    justify-content: space-between;
-    margin-right: 3rem;
-`;
+    justify-content: space-between;`;
 
 const StyledCardsSlideButton = styled(Button)`
-    height: 3rem;
-    width: 3rem;
-    border-radius: 50% !important;
-    background-color: white !important;
-    border: 1px solid #f0f0f0 !important;
-    box-shadow: none !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 0 1px;
-    position: relative;
-    top: 200px;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50% !important;
+  background-color: white !important;
+  border: 1px solid #f0f0f0 !important;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0 1px;
+  position: relative;
+  top: 200px;
 `;
