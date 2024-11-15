@@ -2,7 +2,7 @@
 import React from 'react';
 import Cards from './Cards';
 import './MainCards.css'; // 스타일 관리용 CSS 파일 import
-
+//1
 const MainCards = () => {
   // 카드 그룹 데이터들
   const cardsGroupData = [
