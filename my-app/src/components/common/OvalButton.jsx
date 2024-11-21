@@ -30,9 +30,9 @@ const StyledOvalButton = styled.div`
 
     /* active 상태 스타일 */
     &.active {
-        background-color: #ffffff;
-        color: rgba(234, 8, 241, 0.685);
-        border-color: rgba(234, 8, 241, 0.685);
+        background-color: #ffffff; /* 배경색을 흰색으로 설정 */
+        color: rgba(234, 8, 241, 0.685); /* 텍스트 색상을 반투명한 핑크색으로 설정 */
+        border-color: rgba(234, 8, 241, 0.685); /* 테두리 색상을 반투명한 핑크색으로 설정 */
     }
 
     /* hover 상태 스타일 */
