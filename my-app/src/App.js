@@ -6,9 +6,12 @@ import TwoGrids from "./components/common/TwoGrids";
 import "bootstrap/dist/css/bootstrap.min.css"; // 리액트 부트스트랩 임포트
 import MainCards from "./components/common/MainCards";
 import MainCardsPick from "./components/common/MainCardsPick";
+import SearchSortOption from "./components/searchPage/SearchSortOption";
 
 function App() {
   return (
+    <>
+    <SearchSortOption></SearchSortOption>
     <Layout>
       <Container className="my-4">
         <TwoGrids />
@@ -19,6 +22,7 @@ function App() {
         <MainCardsPick />
       </Container>
     </Layout>
+    </>
   );
 }
 export default App;
