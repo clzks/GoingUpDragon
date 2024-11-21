@@ -39,10 +39,6 @@ const header = () => {
     function func() {
 
     };
-    
-    const func2 = () => {
-    
-    };
 
     return (
         <div>
@@ -76,5 +72,3 @@ export default header
 9. 컴포넌트 확장자는 jsx로 합니다
 
 10. 모든 태그는 <Item> </Item> 와 같이 여는 태그 + 닫는 태그로 작성합니다.
-
-11. 함수의 경우 기본 선언방식과 화살표 함수 중 편한 것으로 사용하시면 됩니다.
