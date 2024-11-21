@@ -38,25 +38,25 @@ function TwoGrids() {
   const [autoSlide, setAutoSlide] = useState(true); // 초기값을 true로 설정
   const slideIntervalRef = useRef(null);
 
-  const handleSelect = (selectedIndex) => {
+  function handleSelect(selectedIndex) {
     setIndex(selectedIndex);
-  };
+  }
 
-  const handlePrev = () => {
+  function handlePrev() {
     setIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
-  };
+  }
 
-  const handleNext = () => {
+  function handleNext() {
     setIndex((prevIndex) =>
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
-  };
+  }
 
-  const toggleAutoSlide = () => {
+  function toggleAutoSlide() {
     setAutoSlide((prev) => !prev);
-  };
+  }
 
   useEffect(() => {
     if (autoSlide) {

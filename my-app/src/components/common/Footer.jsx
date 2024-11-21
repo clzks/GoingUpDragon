@@ -1,13 +1,16 @@
 // src/components/Footer.js
-import React from 'react';
-import styled from 'styled-components';
-import { Container } from 'react-bootstrap';
+import React from "react";
+import styled from "styled-components";
+import { Container } from "react-bootstrap";
 
 const Footer = () => {
   return (
     <StyledFooter>
       <StyledFooterContainer>
-        <StyledFooterLogo src={`${process.env.PUBLIC_URL}/images/tplogo2.png`} alt="Footer Logo"></StyledFooterLogo>
+        <StyledFooterLogo
+          src={`${process.env.PUBLIC_URL}/images/tplogo2.png`}
+          alt="Footer Logo"
+        ></StyledFooterLogo>
         <span>개인정보처리방침</span>
         <span>이용약관</span>
         <span>이메일: showlee00@gmail.com</span>
@@ -18,10 +21,10 @@ const Footer = () => {
 };
 
 const StyledFooter = styled.footer`
-  background-color: #7CD0D5;
+  background-color: #7cd0d5;
   padding: 1rem;
   text-align: center;
-`
+`;
 
 const StyledFooterContainer = styled(Container)`
   display: flex;
@@ -29,12 +32,11 @@ const StyledFooterContainer = styled(Container)`
   align-items: center;
   gap: 1rem; /* 각 요소 간의 간격 */
   flex-wrap: wrap; /* 작은 화면에서 줄 바꿈 */
-`
+`;
 
 const StyledFooterLogo = styled.img`
   width: 150px; /* 이미지 크기 조정 */
   height: auto; /* 비율 유지 */
-`
-
+`;
 
 export default Footer;

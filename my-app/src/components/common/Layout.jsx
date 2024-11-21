@@ -21,12 +21,12 @@ const Layout = ({ children }) => {
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
-  const scrollToTop = () => {
+  function scrollToTop() {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
-  };
+  }
 
   return (
     <>

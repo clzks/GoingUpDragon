@@ -1,8 +1,8 @@
-// src/components/MainCards.jsx 
+// src/components/MainCards.jsx
 // 외부 라이브러리
-import React from 'react';
-import styled from 'styled-components';
-import Cards from './Cards';
+import React from "react";
+import styled from "styled-components";
+import Cards from "./Cards";
 
 const MainCards = () => {
   // 카드 그룹 데이터들
@@ -20,7 +20,7 @@ const MainCards = () => {
           numReviews: 77,
           price: "55,000원",
           level: "입문",
-          tag: ["개발", "웹 디자인"]
+          tag: ["개발", "웹 디자인"],
         },
         // 데이터 (2)
         {
@@ -32,7 +32,7 @@ const MainCards = () => {
           numReviews: 248,
           price: "33,000원",
           level: "초급",
-          tag: ["프론트엔드", "파이썬", "기초"]
+          tag: ["프론트엔드", "파이썬", "기초"],
         },
         // 데이터 (3)
         {
@@ -44,7 +44,7 @@ const MainCards = () => {
           numReviews: 13,
           price: "155,000원",
           level: "입문",
-          tag: ["리엑트", "프론트엔드"]
+          tag: ["리엑트", "프론트엔드"],
         },
         // 데이터 (4)
         {
@@ -56,7 +56,7 @@ const MainCards = () => {
           numReviews: 772,
           price: "무료",
           level: "입문",
-          tag: ["리눅스", "시스템 프로그래밍"]
+          tag: ["리눅스", "시스템 프로그래밍"],
         },
         // 데이터 (5)
         {
@@ -68,7 +68,7 @@ const MainCards = () => {
           numReviews: 123,
           price: "11,000원",
           level: "중급",
-          tag: ["자격증", "정보처리기사"]
+          tag: ["자격증", "정보처리기사"],
         },
         // 데이터 (6)
         {
@@ -80,7 +80,7 @@ const MainCards = () => {
           numReviews: 30,
           price: "110,000원",
           level: "입문",
-          tag: ["코딩교육", "초등교육"]
+          tag: ["코딩교육", "초등교육"],
         },
         // 데이터 (7)
         {
@@ -92,7 +92,7 @@ const MainCards = () => {
           numReviews: 870,
           price: "30,000원",
           level: "입문",
-          tag: ["교육", "코딩"]
+          tag: ["교육", "코딩"],
         },
         // 데이터 (8)
         {
@@ -104,7 +104,7 @@ const MainCards = () => {
           numReviews: 7,
           price: "무료",
           level: "입문",
-          tag: ["시니어", "코딩"]
+          tag: ["시니어", "코딩"],
         },
         // 데이터 (9)
         {
@@ -116,7 +116,7 @@ const MainCards = () => {
           numReviews: 1250,
           price: "22,000원",
           level: "초급",
-          tag: ["자바스크립트", "웹 개발"]
+          tag: ["자바스크립트", "웹 개발"],
         },
         // 데이터 (10)
         {
@@ -128,7 +128,7 @@ const MainCards = () => {
           numReviews: 35,
           price: "5,000원",
           level: "입문",
-          tag: ["시니어", "스마트폰"]
+          tag: ["시니어", "스마트폰"],
         },
       ],
     },
@@ -144,8 +144,8 @@ const MainCards = () => {
           rating: 4.6,
           numReviews: 7942,
           price: "무료",
-          level: "초급", 
-          tag: ["웹 개발", "자바"] 
+          level: "초급",
+          tag: ["웹 개발", "자바"],
         },
         // 데이터 (2)
         {
@@ -156,104 +156,104 @@ const MainCards = () => {
           rating: 5.0,
           numReviews: 3,
           price: "무료",
-          level: "초급", 
-          tag: ["프로그래밍", "입문"] 
+          level: "초급",
+          tag: ["프로그래밍", "입문"],
         },
         // 데이터 (3)
         {
-          title: '실전 코딩: 웹 개발 마스터하기',
-          text: '웹 개발에 필요한 기초 기술을 배웁니다.',
-          imageUrl: './images/023.png',
-          instructor: '코드비전',
+          title: "실전 코딩: 웹 개발 마스터하기",
+          text: "웹 개발에 필요한 기초 기술을 배웁니다.",
+          imageUrl: "./images/023.png",
+          instructor: "코드비전",
           rating: 4.2,
           numReviews: 513,
-          price: '무료',
-          level: "초급", 
-          tag: ["웹 개발", "코딩"] 
+          price: "무료",
+          level: "초급",
+          tag: ["웹 개발", "코딩"],
         },
         // 데이터 (4)
         {
-          title: 'Python으로 시작하는 데이터 과학',
-          text: '이 강좌는 파이썬의 기초를 다룹니다.',
-          imageUrl: './images/024.png',
-          instructor: '프로그랩',
+          title: "Python으로 시작하는 데이터 과학",
+          text: "이 강좌는 파이썬의 기초를 다룹니다.",
+          imageUrl: "./images/024.png",
+          instructor: "프로그랩",
           rating: 4.7,
           numReviews: 63,
-          price: '무료',
-          level: "초급", 
-          tag: ["파이썬", "데이터 과학"] 
+          price: "무료",
+          level: "초급",
+          tag: ["파이썬", "데이터 과학"],
         },
         // 데이터 (5)
         {
-          title: '모바일 프로그래밍',
-          text: '모바일 프로그래밍에 필요한 기초 기술을 배웁니다.',
-          imageUrl: './images/025.png',
-          instructor: '코드스킬',
+          title: "모바일 프로그래밍",
+          text: "모바일 프로그래밍에 필요한 기초 기술을 배웁니다.",
+          imageUrl: "./images/025.png",
+          instructor: "코드스킬",
           rating: 1.7,
           numReviews: 40,
-          price: '무료',
-          level: "초급", 
-          tag: ["모바일", "프로그래밍"] 
+          price: "무료",
+          level: "초급",
+          tag: ["모바일", "프로그래밍"],
         },
         // 데이터 (6)
         {
-          title: '프론트엔드 기초 연습',
-          text: '이 강좌는 프론트엔드의 기초를 다룹니다.',
-          imageUrl: './images/026.png',
-          instructor: '프론트맨',
+          title: "프론트엔드 기초 연습",
+          text: "이 강좌는 프론트엔드의 기초를 다룹니다.",
+          imageUrl: "./images/026.png",
+          instructor: "프론트맨",
           rating: 3.8,
           numReviews: 77,
-          price: '무료',
-          level: "초급", 
-          tag: ["프론트엔드", "기초"] 
+          price: "무료",
+          level: "초급",
+          tag: ["프론트엔드", "기초"],
         },
         // 데이터 (7)
         {
-          title: '프론트엔드 실전 연습',
-          text: '프론트엔드 개발에 필요한 실전 기술을 배웁니다.',
-          imageUrl: './images/027.png',
-          instructor: '프론트맨',
+          title: "프론트엔드 실전 연습",
+          text: "프론트엔드 개발에 필요한 실전 기술을 배웁니다.",
+          imageUrl: "./images/027.png",
+          instructor: "프론트맨",
           rating: 4.5,
           numReviews: 54,
-          price: '무료',
-          level: "중급", 
-          tag: ["프론트엔드", "실전"] 
+          price: "무료",
+          level: "중급",
+          tag: ["프론트엔드", "실전"],
         },
         // 데이터 (8)
         {
-          title: '리엑트 부트스트랩 100% 활용하기',
-          text: '이 강좌는 리엑트 부트스트랩의 기초를 다룹니다.',
-          imageUrl: './images/028.png',
-          instructor: '생각의 틀',
+          title: "리엑트 부트스트랩 100% 활용하기",
+          text: "이 강좌는 리엑트 부트스트랩의 기초를 다룹니다.",
+          imageUrl: "./images/028.png",
+          instructor: "생각의 틀",
           rating: 4.5,
           numReviews: 120,
-          price: '무료',
-          level: "중급", 
-          tag: ["리엑트", "부트스트랩"] 
+          price: "무료",
+          level: "중급",
+          tag: ["리엑트", "부트스트랩"],
         },
         // 데이터 (9)
         {
-          title: '친구와 함께 하는 엔트리 코딩',
-          text: '엔트리 코딩 프로그램의 기초를 배웁니다.',
-          imageUrl: './images/029.png',
-          instructor: '코딩선생님',
+          title: "친구와 함께 하는 엔트리 코딩",
+          text: "엔트리 코딩 프로그램의 기초를 배웁니다.",
+          imageUrl: "./images/029.png",
+          instructor: "코딩선생님",
           rating: 4.2,
           numReviews: 540,
-          price: '무료',
-          level: "초급", 
-          tag: ["엔트리", "코딩"] 
+          price: "무료",
+          level: "초급",
+          tag: ["엔트리", "코딩"],
         },
         // 데이터 (10)
         {
-          title: '정보교과서 평가문제 풀이',
-          text: '이 강좌는 정보 교과서 관련 기초 지식을 다룹니다.',
-          imageUrl: './images/030.png',
-          instructor: '정컴쌤',
+          title: "정보교과서 평가문제 풀이",
+          text: "이 강좌는 정보 교과서 관련 기초 지식을 다룹니다.",
+          imageUrl: "./images/030.png",
+          instructor: "정컴쌤",
           rating: 4.9,
           numReviews: 125000,
-          price: '무료',
-          level: "초급", 
-          tag: ["정보", "교과서"] 
+          price: "무료",
+          level: "초급",
+          tag: ["정보", "교과서"],
         },
       ],
     },
@@ -269,8 +269,8 @@ const MainCards = () => {
           rating: 4.1,
           numReviews: 1111,
           price: "99,000원",
-          level: "초급", 
-          tag: ["실전", "개발"] 
+          level: "초급",
+          tag: ["실전", "개발"],
         },
         // 데이터 (2)
         {
@@ -281,8 +281,8 @@ const MainCards = () => {
           rating: 4.7,
           numReviews: 3,
           price: "89,000원",
-          level: "중급", 
-          tag: ["웹 개발", "실전"] 
+          level: "중급",
+          tag: ["웹 개발", "실전"],
         },
         // 데이터 (3)
         {
@@ -293,8 +293,8 @@ const MainCards = () => {
           rating: 4.8,
           numReviews: 113,
           price: "무료",
-          level: "중급", 
-          tag: ["클라우드", "개발"] 
+          level: "중급",
+          tag: ["클라우드", "개발"],
         },
         // 데이터 (4)
         {
@@ -305,8 +305,8 @@ const MainCards = () => {
           rating: 3.4,
           numReviews: 150,
           price: "120,000원",
-          level: "초급", 
-          tag: ["프로그래밍", "기초"]
+          level: "초급",
+          tag: ["프로그래밍", "기초"],
         },
         // 데이터 (5)
         {
@@ -318,7 +318,7 @@ const MainCards = () => {
           numReviews: 200,
           price: "무료",
           level: "초급",
-          tag: ["앱", "개발"]
+          tag: ["앱", "개발"],
         },
         // 데이터 (6)
         {
@@ -329,8 +329,8 @@ const MainCards = () => {
           rating: 4.8,
           numReviews: 1270,
           price: "5,000원",
-          level: "초급", 
-          tag: ["시니어", "컴퓨터 기초"] 
+          level: "초급",
+          tag: ["시니어", "컴퓨터 기초"],
         },
         // 데이터 (7)
         {
@@ -341,8 +341,8 @@ const MainCards = () => {
           rating: 4.8,
           numReviews: 365,
           price: "30,000원",
-          level: "초급", 
-          tag: ["AI", "코딩"] 
+          level: "초급",
+          tag: ["AI", "코딩"],
         },
         // 데이터 (8)
         {
@@ -353,8 +353,8 @@ const MainCards = () => {
           rating: 4.6,
           numReviews: 35,
           price: "45,000원",
-          level: "초급", 
-          tag: ["알고리즘", "입문"] 
+          level: "초급",
+          tag: ["알고리즘", "입문"],
         },
         // 데이터 (9)
         {
@@ -365,8 +365,8 @@ const MainCards = () => {
           rating: 4.5,
           numReviews: 28,
           price: "77,000원",
-          level: "초급", 
-          tag: ["웹사이트", "제작"] 
+          level: "초급",
+          tag: ["웹사이트", "제작"],
         },
         // 데이터 (10)
         {
@@ -377,12 +377,11 @@ const MainCards = () => {
           rating: 4.8,
           numReviews: 240,
           price: "20,000원",
-          level: "초급", 
-          tag: ["코딩", "초심자"] 
+          level: "초급",
+          tag: ["코딩", "초심자"],
         },
       ],
     },
-
   ];
 
   return (
