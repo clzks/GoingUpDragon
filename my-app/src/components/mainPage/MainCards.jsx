@@ -2,7 +2,7 @@
 // 외부 라이브러리
 import React from "react";
 import styled from "styled-components";
-import Cards from "./Cards";
+import Cards from "../common/card/Cards";
 
 const MainCards = () => {
   // 카드 그룹 데이터들

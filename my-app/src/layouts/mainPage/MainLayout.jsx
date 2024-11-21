@@ -1,9 +1,9 @@
 import React from "react";
-import Layout from "../../components/common/Layout"; // 레이아웃 컴포넌트 import
-import { Container } from "react-bootstrap";
-import TwoGrids from "../../components/common/TwoGrids";
-import MainCards from "../../components/common/MainCards";
-import MainCardsPick from "../../components/common/MainCardsPick";
+import Layout from "../../components/common/layout/Layout"; // 레이아웃 컴포넌트 import
+import { Container, Pagination } from "react-bootstrap";
+import TwoGrids from "../../components/mainPage/TwoGrids";
+import MainCards from "../../components/mainPage/MainCards";
+import MainCardsPick from "../../components/mainPage/MainCardsPick";
 
 const MainLayout = () => {
   return (
@@ -17,6 +17,6 @@ const MainLayout = () => {
       </Container>
     </Layout>
   );
-}
+};
 
 export default MainLayout;

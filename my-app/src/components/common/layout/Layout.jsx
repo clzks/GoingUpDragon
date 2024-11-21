@@ -2,7 +2,7 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import ScrollTopButton from "./ScrollTopButton";
+import ScrollTopButton from "../utilities/ScrollTopButton";
 
 const Layout = ({ children }) => {
   // 스크롤 이벤트 처리

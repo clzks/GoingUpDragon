@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Dropdown } from 'react-bootstrap';
-import { FaExchangeAlt } from 'react-icons/fa';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Dropdown } from "react-bootstrap";
+import { FaExchangeAlt } from "react-icons/fa";
 
 const SortOption = ({ options, defaultOption, onSelect }) => {
   const [selectedItem, setSelectedItem] = useState(defaultOption); // 기본 선택된 아이템
@@ -18,7 +18,9 @@ const SortOption = ({ options, defaultOption, onSelect }) => {
       <Dropdown onSelect={handleSelect}>
         <CustomDropdownToggle id="dropdown-basic">
           {selectedItem}
-          <FaExchangeAlt style={{ transform: 'rotate(90deg)', color: '#000000' }} />
+          <FaExchangeAlt
+            style={{ transform: "rotate(90deg)", color: "#000000" }}
+          />
         </CustomDropdownToggle>
 
         <CustomDropdownMenu>
@@ -80,8 +82,10 @@ const CustomDropdownMenu = styled(Dropdown.Menu)`
 
 const CustomDropdownItem = styled(Dropdown.Item)`
   color: #333;
-  background-color: ${(props) => (props.isActive ? '#007bff' : 'transparent')}; /* 선택된 항목에 배경색 추가 */
-  color: ${(props) => (props.isActive ? '#fff' : '#333')}; /* 선택된 항목에 글자색 변경 */
+  background-color: ${(props) =>
+    props.isActive ? "#007bff" : "transparent"}; /* 선택된 항목에 배경색 추가 */
+  color: ${(props) =>
+    props.isActive ? "#fff" : "#333"}; /* 선택된 항목에 글자색 변경 */
 
   &:hover {
     background-color: #f8f9fa;
