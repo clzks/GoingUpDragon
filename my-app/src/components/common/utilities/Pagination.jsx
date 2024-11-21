@@ -32,7 +32,11 @@ const Pagination = () => {
     } else {
       buttons.push(1);
       buttons.push("...");
-      for (let i = currentPage - sideButtons; i <= currentPage + sideButtons; i++) {
+      for (
+        let i = currentPage - sideButtons;
+        i <= currentPage + sideButtons;
+        i++
+      ) {
         buttons.push(i);
       }
       buttons.push("...");
@@ -111,7 +115,8 @@ const PaginationButton = styled.button`
   width: 40px;
   height: 40px;
   background-color: ${(props) => (props.isActive ? "#7CD0D5" : "#fff")};
-  color: ${(props) => (props.isActive ? "#fff" : props.isEllipsis ? "#000" : "#000")};
+  color: ${(props) =>
+    props.isActive ? "#fff" : props.isEllipsis ? "#000" : "#000"};
   border: ${(props) => (props.isEllipsis ? "none" : "1px solid #ccc")};
   cursor: ${(props) => (props.isEllipsis ? "default" : "pointer")};
   border-radius: 4px;
