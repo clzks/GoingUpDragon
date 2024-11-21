@@ -8,6 +8,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 //
 import styled from "styled-components";
+import Logo from "./Logo";
 
 const Header = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -31,12 +32,7 @@ const Header = () => {
           <Col>
             <div>
               <StyledHeaderContainer>
-                <StyledNavbarBrand>
-                  <StyledHeaderImage
-                    src={`${process.env.PUBLIC_URL}/images/tplogo.png`}
-                    alt="Logo"
-                  ></StyledHeaderImage>
-                </StyledNavbarBrand>
+                <Logo></Logo>
                 <StyledNavbarNav>
                   <StyledCategoryDropdown>
                     <StyledNavLink>카테고리</StyledNavLink>
@@ -147,16 +143,6 @@ const StyledHeaderContainer = styled(Container)`
   align-items: center;
 `;
 
-const StyledNavbarBrand = styled.div`
-  /* 필요한 스타일을 여기에서 지정 */
-  display: flex;
-  align-items: center;
-  font-size: 1.25rem;
-  font-weight: bold;
-  text-decoration: none;
-  /* 추가 스타일 설정 */
-`;
-
 const StyledNavbarNav = styled.ul`
   display: flex;
   align-items: center; /* 세로 가운데 정렬 */
@@ -179,13 +165,6 @@ const StyledCategoryDropdown = styled.li`
 
 const StyledForm = styled(Form)`
   display: flex;
-`;
-
-const StyledHeaderImage = styled.img`
-  width: 150px; /* 원하는 너비로 설정 */
-  height: auto; /* 비율을 유지하면서 높이를 자동 조정 */
-  max-width: 100%; /* 최대 너비를 부모 요소에 맞추도록 설정 */
-  margin-bottom: 1rem; /* 로고 이미지 아래 여백 추가 */
 `;
 
 const StyledNavDropDownItem = styled.li`
