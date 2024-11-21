@@ -18,9 +18,9 @@ const StyledLogoButton = styled.button`
 `;
 
 const StyledLogoImage = styled.img`
-  width: 150px; /* 원하는 너비로 설정 */
+  width: 130px; /* 원하는 너비로 설정 */
   height: auto; /* 비율을 유지하면서 높이를 자동 조정 */
-  min-width: 150px; /* 최대 너비를 부모 요소에 맞추도록 설정 */
+  max-width: 130px; /* 최대 너비를 부모 요소에 맞추도록 설정 */
   margin-bottom: 1rem; /* 로고 이미지 아래 여백 추가 */
 `;
 
