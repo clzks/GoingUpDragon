@@ -1,17 +1,24 @@
+import React, { useState } from "react";
 import { FaThumbsUp, FaRegThumbsUp } from "react-icons/fa";
-import { MdThumbUp, MdThumbUpOffAlt } from "react-icons/md";
-import { FiThumbsUp } from "react-icons/fi";
 
-function LikeButton() {
+function LikeButton({
+  size = "40px",
+  activeColor = "#7CD0D5",
+  inactiveColor = "#6C757D",
+}) {
+  const [isLiked, setIsLiked] = useState(false);
+
+  function toggleLike() {
+    setIsLiked((prev) => !prev); // 좋아요 상태 토글
+  }
+
   return (
-    <div>
-      <FaThumbsUp color="blue" size="40px" /> {/* 채워진 엄지 */}
-      <FaRegThumbsUp color="gray" size="40px" /> {/* 테두리 엄지 */}
-      <MdThumbUp color="green" size="40px" />{" "}
-      {/* Material Design 채워진 엄지 */}
-      <MdThumbUpOffAlt color="black" size="40px" />{" "}
-      {/* Material Design 테두리 엄지 */}
-      <FiThumbsUp color="orange" size="40px" /> {/* Feather 스타일 엄지 */}
+    <div onClick={toggleLike} style={{ cursor: "pointer" }}>
+      {isLiked ? (
+        <FaThumbsUp size={size} color={activeColor} /> // 좋아요 상태
+      ) : (
+        <FaRegThumbsUp size={size} color={inactiveColor} /> // 기본 상태
+      )}
     </div>
   );
 }
