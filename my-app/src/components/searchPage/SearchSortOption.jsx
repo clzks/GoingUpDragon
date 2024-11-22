@@ -1,5 +1,5 @@
 import React from "react";
-import SortOption from "../common/SortOption";
+import SortOption from "../common/utilities/SortOption";
 
 const SearchSortOption = () => {
   const handleDropdownSelect = (value) => {
