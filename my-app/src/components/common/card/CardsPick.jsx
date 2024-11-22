@@ -23,9 +23,6 @@ const CardsPick = ({ subtitle, cardData }) => {
 
   return (
     <StyledCardCarouselContainer>
-      <div className="cards-header">
-        <h2 className="cards-subtitle">{subtitle}</h2>
-      </div>
       <StyledCardsWrapper>
         <StyledCardsSlideButton
           variant="outline-secondary"
