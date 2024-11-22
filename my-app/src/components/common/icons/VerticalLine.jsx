@@ -1,0 +1,16 @@
+import React from "react";
+import styled from "styled-components";
+
+function VerticalLine({ width = "1px", height = "100%" }) {
+  return (
+    <StyledVerticalLine width={width} height={height}></StyledVerticalLine>
+  );
+}
+
+export default VerticalLine;
+
+const StyledVerticalLine = styled.div`
+  width: ${(props) => props.width}; /* 프롭스에서 width 값 적용 */
+  height: ${(props) => props.height}; /* 프롭스에서 height 값 적용 */
+  background-color: #ccd5ae; /* 선의 색상 */
+`;
