@@ -4,6 +4,7 @@ import CourseThumnail from "./CourseThumnail";
 import { Container } from "react-bootstrap";
 import RatingStar from "../../common/icons/RatingStar";
 import { FaUser } from "react-icons/fa";
+import SharpTagComponent from "../../common/utilities/tag/SharpTagComponent";
 
 const DetailCourseBanner = ({ lectureData, enrollmentData }) => {
   const { mainCategory, secondaryCategory, title, keyPoint, tags } =
@@ -29,7 +30,11 @@ const DetailCourseBanner = ({ lectureData, enrollmentData }) => {
           <StyledReviewText>{reviewText}</StyledReviewText>
           <StyledEnrollmentText>{studentText}</StyledEnrollmentText>
         </StyledEnrollmentContainer>
-        <StyledFaUser></StyledFaUser>
+        <StyledEnrollmentContainer>
+          <FaUser></FaUser>
+          <StyledReviewText>{instructor}</StyledReviewText>
+        </StyledEnrollmentContainer>
+        <SharpTagComponent tags = {tags}></SharpTagComponent>
       </StyledBannerContainer>
     </StyledBannerBackground>
   );
@@ -37,7 +42,7 @@ const DetailCourseBanner = ({ lectureData, enrollmentData }) => {
 
 const StyledBannerBackground = styled.div`
   background-color: black;
-  min-height: 500px;
+  min-height: 100px;
   height: auto;
   position: relative;
   color: white;
@@ -46,9 +51,12 @@ const StyledBannerBackground = styled.div`
 const StyledBannerContainer = styled(Container)`
   flex-direction: column;
   display: flex;
+  padding-bottom : 30px;
 `;
 
-const StyledCategoryTextContainer = styled.div`
+const StyledCategoryTextContainer = styled.button`
+  background: transparent; /* 배경 투명 */
+  border: none; /* 테두리 제거 */
   margin-top: 60px;
   display: flex;
   padding-left: 45px; /* 왼쪽 여백 */
@@ -103,10 +111,6 @@ const StyledReviewText = styled.button`
   text-decoration: underline; /* 테스트 밑줄 */
   text-underline-offset: 3px; /* 간격 설정 */
   color: white;
-`;
-
-const StyledFaUser = styled(FaUser)`
-  margin-left: 50px;
 `;
 
 export default DetailCourseBanner;
