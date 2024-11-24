@@ -7,9 +7,9 @@ const TagButton = ({ tag }) => {
 
 const StyledTagButton = styled.button`
   border-radius: 20px;
-  margin-left : 10px;
+  margin-left: 10px;
   padding: 3px 10px;
-  border : none;
+  border: none;
 `;
 
 export default TagButton;

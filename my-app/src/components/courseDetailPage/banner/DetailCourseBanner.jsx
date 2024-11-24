@@ -34,7 +34,7 @@ const DetailCourseBanner = ({ lectureData, enrollmentData }) => {
           <FaUser></FaUser>
           <StyledReviewText>{instructor}</StyledReviewText>
         </StyledEnrollmentContainer>
-        <SharpTagComponent tags = {tags}></SharpTagComponent>
+        <SharpTagComponent tags={tags}></SharpTagComponent>
       </StyledBannerContainer>
     </StyledBannerBackground>
   );
@@ -51,7 +51,7 @@ const StyledBannerBackground = styled.div`
 const StyledBannerContainer = styled(Container)`
   flex-direction: column;
   display: flex;
-  padding-bottom : 30px;
+  padding-bottom: 30px;
 `;
 
 const StyledCategoryTextContainer = styled.button`

@@ -15,8 +15,8 @@ const SharpTagComponent = ({ tags }) => {
 };
 
 const StyledSharpTag = styled.div`
-  font-size : 20px;
-  margin-top : 10px;
+  font-size: 20px;
+  margin-top: 10px;
   margin-left: 50px;
 `;
 
