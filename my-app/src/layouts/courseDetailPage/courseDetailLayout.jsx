@@ -106,7 +106,9 @@ const CourseDetailLayout = () => {
         lectureData={lectureInfo}
         enrollmentData={enrollmentInfo}
       ></DetailCourseBanner>
-      <CourseDetailMainPanel></CourseDetailMainPanel>
+      <CourseDetailMainPanel>
+        curriculumData = {curriculum}
+      </CourseDetailMainPanel>
     </Layout>
   );
 };
