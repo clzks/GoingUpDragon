@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../../components/common/layout/Layout";
 import DetailCourseBanner from "../../components/courseDetailPage/banner/DetailCourseBanner";
-import CourseNavigation from "../../components/courseDetailPage/main/CourseNavigation";
+import CourseNavigation from "../../components/courseDetailPage/navigation/CourseNavigation";
 import Curriculum from "../../components/courseDetailPage/main/Curriculum";
 import CourseDetailMainPanel from "../../components/courseDetailPage/main/CourseDetailMainPanel";
 
@@ -106,9 +106,10 @@ const CourseDetailLayout = () => {
         lectureData={lectureInfo}
         enrollmentData={enrollmentInfo}
       ></DetailCourseBanner>
-      <CourseDetailMainPanel>
-        curriculumData = {curriculum}
-      </CourseDetailMainPanel>
+      <CourseNavigation></CourseNavigation>
+      <CourseDetailMainPanel
+        curriculumData={curriculum}
+      ></CourseDetailMainPanel>
     </Layout>
   );
 };

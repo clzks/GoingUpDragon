@@ -1,22 +1,18 @@
-import React from 'react'
-import CourseNavigation from './CourseNavigation'
-import HorizontalLine from '../../common/icons/HorizontalLine'
-import Curriculum from './Curriculum'
+import React from "react";
+import CourseNavigation from "../navigation/CourseNavigation";
+import Curriculum from "./Curriculum";
 import styled from "styled-components";
-import { Container } from 'react-bootstrap';
+import { Container } from "react-bootstrap";
+import HorizontalLine from "../../common/icons/HorizontalLine";
 
-const CourseDetailMainPanel = () => {
+const CourseDetailMainPanel = ({ curriculumData }) => {
   return (
     <StyledCourseMainPanel>
-        <CourseNavigation></CourseNavigation>
-        <HorizontalLine></HorizontalLine>
-        <Curriculum></Curriculum>
+      <Curriculum curriculumData={curriculumData}></Curriculum>
     </StyledCourseMainPanel>
-  )
-}
+  );
+};
 
-const StyledCourseMainPanel = styled(Container)`
+const StyledCourseMainPanel = styled(Container)``;
 
-`
-
-export default CourseDetailMainPanel
+export default CourseDetailMainPanel;

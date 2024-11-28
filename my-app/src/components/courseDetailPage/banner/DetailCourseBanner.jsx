@@ -5,6 +5,8 @@ import { Container } from "react-bootstrap";
 import RatingStar from "../../common/icons/RatingStar";
 import { FaUser } from "react-icons/fa";
 import SharpTagComponent from "../../common/utilities/tag/SharpTagComponent";
+import CourseNavigation from "../navigation/CourseNavigation";
+import HorizontalLine from "../../common/icons/HorizontalLine";
 
 const DetailCourseBanner = ({ lectureData, enrollmentData }) => {
   const { mainCategory, secondaryCategory, title, keyPoint, tags } =
