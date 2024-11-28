@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 import styled from "styled-components";
 import Logo from "./Logo";
 
-const Header = () => {
+const Header = ({ inputRef }) => {
   const [searchInput, setSearchInput] = useState("");
 
   // 입력값이 변경될 때 상태 업데이트
@@ -109,6 +109,7 @@ const Header = () => {
           <StyledCol xs={6}>
             <StyledForm>
               <StyledFormControl
+                ref={inputRef}
                 type="search"
                 placeholder="강의검색"
                 aria-label="Search"
