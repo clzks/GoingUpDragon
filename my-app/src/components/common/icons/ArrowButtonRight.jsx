@@ -2,7 +2,7 @@ import React from "react";
 import { FaChevronRight } from "react-icons/fa";
 import styled from "styled-components";
 
-const ArrowButtonRight = ( {scrollRight} ) => {
+const ArrowButtonRight = ({ scrollRight }) => {
   return (
     <StyledArrowButton onClick={scrollRight}>
       <FaChevronRight />
