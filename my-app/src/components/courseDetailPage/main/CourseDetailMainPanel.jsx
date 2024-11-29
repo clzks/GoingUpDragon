@@ -1,22 +1,41 @@
-import React from 'react'
-import CourseNavigation from './CourseNavigation'
-import HorizontalLine from '../../common/icons/HorizontalLine'
-import Curriculum from './Curriculum'
+import React from "react";
+import CourseNavigation from "../navigation/CourseNavigation";
+import Curriculum from "./curriculum/Curriculum";
 import styled from "styled-components";
-import { Container } from 'react-bootstrap';
+import { Container } from "react-bootstrap";
+import HorizontalLine from "../../common/icons/HorizontalLine";
+import LectureInfo from "./LectureInfo";
+import CourseReviewSection from "./reviewSection/CourseReviewSection";
+import QnASection from "./QnASection";
 
-const CourseDetailMainPanel = () => {
+const CourseDetailMainPanel = ({ curriculumData, description }) => {
   return (
     <StyledCourseMainPanel>
-        <CourseNavigation></CourseNavigation>
-        <HorizontalLine></HorizontalLine>
-        <Curriculum></Curriculum>
+      <StyledLeftPanel>
+        <Curriculum curriculumData={curriculumData}></Curriculum>
+        <LectureInfo description={description}></LectureInfo>
+        <CourseReviewSection></CourseReviewSection>
+        <QnASection></QnASection>
+      </StyledLeftPanel>
+      <StyledRightPanel></StyledRightPanel>
     </StyledCourseMainPanel>
-  )
-}
+  );
+};
 
 const StyledCourseMainPanel = styled(Container)`
+  display: flex;
 
-`
+  > * {
+    margin-left: 50px;
+  }
+`;
 
-export default CourseDetailMainPanel
+const StyledLeftPanel = styled.div`
+  flex: 2;
+`;
+
+const StyledRightPanel = styled.div`
+  flex: 1;
+`;
+
+export default CourseDetailMainPanel;

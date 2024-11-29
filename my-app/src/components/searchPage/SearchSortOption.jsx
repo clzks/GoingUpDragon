@@ -7,6 +7,7 @@ const SearchSortOption = () => {
   };
 
   return (
+    <div style={{ padding: '20px' }}>
     <>
       {/* 드롭다운 1 */}
       <SortOption
@@ -14,6 +15,7 @@ const SearchSortOption = () => {
         defaultOption="정확도순"
         onSelect={handleDropdownSelect}
       />
+    </div>
     </>
   );
 }
