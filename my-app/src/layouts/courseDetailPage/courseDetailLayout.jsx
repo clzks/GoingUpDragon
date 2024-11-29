@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../../components/common/layout/Layout";
 import DetailCourseBanner from "../../components/courseDetailPage/banner/DetailCourseBanner";
 import CourseNavigation from "../../components/courseDetailPage/navigation/CourseNavigation";
-import Curriculum from "../../components/courseDetailPage/main/Curriculum";
+import Curriculum from "../../components/courseDetailPage/main/curriculum/Curriculum";
 import CourseDetailMainPanel from "../../components/courseDetailPage/main/CourseDetailMainPanel";
 
 const CourseDetailLayout = () => {
@@ -14,6 +14,15 @@ const CourseDetailLayout = () => {
     keyPoint:
       "이 강좌는 HTML, CSS, JavaScript의 기본부터 React, Vue.js와 같은 최신 프레임워크까지 아우르며, 실제 프로젝트를 통해 실무 능력을 키우는 데 중점을 둡니다.",
     tags: ["Html", "CSS"],
+    description: [
+      "모던 웹 개발: 프론트엔드 기초부터 심화까지 강좌는 웹 애플리케이션의 프론트엔드 개발에 필요한 필수 기술과 최신 트렌드를 심층적으로 다룹니다. 강의는 다음과 같은 주요 주제로 구성됩니다",
+      "기초 개념 : HTML, CSS, JavaScript의 기본 문법과 사용법을 익히고, 웹 페이지 구조와 스타일링의 기초를 다집니다. 반응형 디자인: 다양한 디바이스에 적합한 웹 페이지를 만들기 위한 미디어 쿼리와 Flexbox, Grid 레이아웃 기법을 학습합니다.",
+      "반응형 디자인: 다양한 디바이스에 적합한 웹 페이지를 만들기 위한 미디어 쿼리와 Flexbox, Grid 레이아웃 기법을 학습합니다.",
+      "JavaScript 심화: 비동기 프로그래밍, DOM 조작, 이벤트 핸들링 등 JavaScript의 고급 기능을 통해 동적인 사용자 경험을 구현합니다.",
+      "프레임워크 소개: React와 Vue.js와 같은 현대적인 JavaScript 프레임워크의 개념과 기본 사용법을 배워, 실제 애플리케이션 개발에 적용합니다.",
+      "프로젝트 기반 학습: 실전 프로젝트를 통해 배운 기술을 활용하고, 팀워크와 문제 해결 능력을 기릅니다.",
+      "이 강좌는 초보자는 물론, 프론트엔드 개발을 더 깊이 이해하고 싶은 중급자에게도 적합하며, 수강 후에는 실무에서 요구되는 프론트엔드 개발 능력을 갖추게 될 것입니다.",
+    ],
   };
 
   const enrollmentInfo = {
@@ -109,6 +118,7 @@ const CourseDetailLayout = () => {
       <CourseNavigation></CourseNavigation>
       <CourseDetailMainPanel
         curriculumData={curriculum}
+        description={lectureInfo.description}
       ></CourseDetailMainPanel>
     </Layout>
   );

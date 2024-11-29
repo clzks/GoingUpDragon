@@ -1,21 +1,29 @@
 import React from "react";
-import SortOption from "../common/utilities/SortOption";
+import styled from "styled-components";
 
-const SearchSortOption = () => {
+import SortOption from "../../../common/utilities/SortOption";
+
+const ReviewSortOption = () => {
   const handleDropdownSelect = (value) => {
     console.log(`Selected: ${value}`);
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <StyledSortOption>
       {/* 드롭다운 1 */}
       <SortOption
         options={["정확도순", "인기순", "최신순", "평점순", "좋아요순"]}
         defaultOption="정확도순"
         onSelect={handleDropdownSelect}
-      />
-    </div>
+      ></SortOption>
+    </StyledSortOption>
   );
 };
 
-export default SearchSortOption;
+const StyledSortOption = styled.div`
+  position: absolute;
+  right: 100px;
+  top: 40px;
+`;
+
+export default ReviewSortOption;
