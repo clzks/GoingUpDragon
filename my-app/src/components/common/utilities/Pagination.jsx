@@ -1,11 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
-const Pagination = () => {
-  const items = Array.from({ length: 50 }, (_, i) => `Item ${i + 1}`);
-  const itemsPerPage = 5;
-  const [currentPage, setCurrentPage] = useState(1);
-
+const Pagination = ({ items, itemsPerPage, paginate, currentPage }) => {
   const totalPages = Math.ceil(items.length / itemsPerPage);
 
   const getPaginationButtons = () => {
@@ -48,20 +44,12 @@ const Pagination = () => {
 
   const handlePageChange = (page) => {
     if (typeof page === "number" && page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
+      paginate(page);
     }
   };
 
   return (
     <PaginationWrapper>
-      <ItemList>
-        {items
-          .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-          .map((item, index) => (
-            <Item key={index}>{item}</Item>
-          ))}
-      </ItemList>
-
       <PaginationControls>
         <PaginationButton
           onClick={() => handlePageChange(currentPage - 1)}
@@ -74,8 +62,7 @@ const Pagination = () => {
             key={index}
             onClick={() => handlePageChange(page)}
             isActive={currentPage === page}
-            isEllipsis={page === "..."}
-          >
+            isEllipsis={page === "..."}>
             {page}
           </PaginationButton>
         ))}
@@ -96,21 +83,13 @@ const PaginationWrapper = styled.div`
   text-align: center;
 `;
 
-const ItemList = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const Item = styled.li`
-  margin: 0.5rem 0;
-`;
-
 const PaginationControls = styled.div`
   display: flex;
   gap: 8px;
   justify-content: center;
   margin-top: 1rem;
 `;
+
 const PaginationButton = styled.button`
   width: 40px;
   height: 40px;
