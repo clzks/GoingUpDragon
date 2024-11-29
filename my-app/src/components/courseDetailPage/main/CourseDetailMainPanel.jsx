@@ -1,9 +1,7 @@
 import React from "react";
-import CourseNavigation from "../navigation/CourseNavigation";
 import Curriculum from "./curriculum/Curriculum";
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
-import HorizontalLine from "../../common/icons/HorizontalLine";
 import LectureInfo from "./LectureInfo";
 import CourseReviewSection from "./reviewSection/CourseReviewSection";
 import QnASection from "./QnASection";

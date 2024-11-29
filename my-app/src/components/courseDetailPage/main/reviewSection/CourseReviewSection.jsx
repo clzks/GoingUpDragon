@@ -16,6 +16,7 @@ const CourseReviewSection = () => {
 const StyledReviewContainer = styled.div`
   width: 100%;
   position: relative;
+  margin-top: 200px;
 `;
 
 const StyledTitleText = styled.h2`
