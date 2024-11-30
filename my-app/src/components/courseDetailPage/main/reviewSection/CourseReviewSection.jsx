@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ReviewSortOption from "./ReviewSortOption";
 import ReviewBanner from "./ReviewBanner";
+import ReviewCard from "../../../common/card/ReviewCard";
 
 const CourseReviewSection = () => {
   return (
@@ -9,6 +10,7 @@ const CourseReviewSection = () => {
       <StyledTitleText>수강평</StyledTitleText>
       <ReviewSortOption></ReviewSortOption>
       <ReviewBanner></ReviewBanner>
+      <ReviewCard isMyPage={false}></ReviewCard>
     </StyledReviewContainer>
   );
 };

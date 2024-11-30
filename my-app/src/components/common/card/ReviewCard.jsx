@@ -1,20 +1,29 @@
 // src/components/myPage/card/ReviewCard.jsx
 import React from "react";
 import styled from "styled-components";
-import { FaStar, FaRegThumbsUp } from "react-icons/fa";
+import { FaRegThumbsUp } from "react-icons/fa";
+import RatingStarList from "../icons/RatingStarList";
+import LikeButton from "../utilities/LikeButton";
+import ShareButton from "../utilities/ShareButton";
 
-const ReviewCard = ({ title, content, rating, date, likes }) => {
+const ReviewCard = ({
+  title = "C++ 프로그래밍",
+  content = "기초부터 고급 개념까지 차근차근 설명한 강의였습니다.",
+  rating = 3.6,
+  date = "2023.10.15",
+  likes = 7,
+  isMyPage = true,
+}) => {
   return (
     <CardWrapper>
       <Header>
+        {isMyPage ? <></> : <ProfileCircle></ProfileCircle>}
         <LectureTitle>{title}</LectureTitle>
         <ReviewDate>{date}</ReviewDate>
       </Header>
 
       <RatingWrapper>
-        {Array.from({ length: 5 }, (_, index) => (
-          <StarIcon key={index} filled={index < rating} />
-        ))}
+        <RatingStarList rating={rating}></RatingStarList>
         <RatingNumber>{rating}</RatingNumber>
       </RatingWrapper>
 
@@ -22,8 +31,9 @@ const ReviewCard = ({ title, content, rating, date, likes }) => {
 
       <Footer>
         <Recommendation>
-          <FaRegThumbsUp />
+          <LikeButton></LikeButton>
           <Likes>{likes || 0}</Likes>
+          {isMyPage ? <></> : <ShareButton></ShareButton>}
         </Recommendation>
       </Footer>
     </CardWrapper>
@@ -45,7 +55,6 @@ const Header = styled.div`
   gap: 10px;
 `;
 
-
 const LectureTitle = styled.h3`
   font-size: 18px;
   font-weight: bold;
@@ -53,7 +62,7 @@ const LectureTitle = styled.h3`
 
 const ReviewDate = styled.span`
   font-size: 14px;
-  color: #000; 
+  color: #000;
   margin-left: 10px;
 `;
 
@@ -61,11 +70,6 @@ const RatingWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-`;
-
-const StarIcon = styled(FaStar)`
-  color: ${({ filled }) => (filled ? "#FFD700" : "#ddd")};
-  margin-right: 2px;
 `;
 
 const RatingNumber = styled.span`
@@ -99,4 +103,15 @@ const Recommendation = styled.div`
 const Likes = styled.span`
   font-size: 14px;
   color: #444;
+`;
+
+const ProfileCircle = styled.div`
+  width: 40px; // 원하는 크기
+  height: 40px; // 원하는 크기
+  border-radius: 50%; // 동그라미 모양
+  background-color: #ccc; // 임시 배경색
+  display: inline-block; // 레이아웃에 맞게 조정
+  background-image: url("/path/to/profile.jpg"); // 프로필 이미지 추가 가능
+  background-size: cover; // 이미지가 꽉 차도록
+  background-position: center; // 이미지를 가운데 정렬
 `;

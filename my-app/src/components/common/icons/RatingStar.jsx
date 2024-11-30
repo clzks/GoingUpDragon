@@ -12,8 +12,8 @@ const RatingStar = ({ type = "full", size = "24px", color = "gold" }) => {
   if (type === "half") {
     return (
       <HalfStarWrapper size={size}>
-        <FaStar className="full" size={size} color={color} />
-        <FaRegStar className="empty" size={size} color={color} />
+        <FaStar className="full" size={size} color={color}></FaStar>
+        <FaRegStar className="empty" size={size} color={color}></FaRegStar>
       </HalfStarWrapper>
     );
   }
@@ -25,6 +25,7 @@ const HalfStarWrapper = styled.div`
   display: inline-block;
   width: ${({ size }) => size};
   height: ${({ size }) => size};
+  vertical-align: middle; /* 부모 컨테이너와 정렬 */
 
   svg {
     position: absolute;

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ReviewCard from "./card/ReviewCard";
 import { reviewItems } from "./card/ReviewCardItem";
 import Pagination from "../common/utilities/Pagination"; // Pagination 컴포넌트 가져오기
+import ReviewCard from "../common/card/ReviewCard";
 
 const Review = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -11,7 +11,10 @@ const Review = () => {
   // 페이지에 맞는 리뷰 목록 추출
   const indexOfLastReview = currentPage * reviewsPerPage;
   const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
-  const currentReviews = reviewItems.slice(indexOfFirstReview, indexOfLastReview);
+  const currentReviews = reviewItems.slice(
+    indexOfFirstReview,
+    indexOfLastReview
+  );
 
   // 페이지 변경 핸들러
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -28,7 +31,7 @@ const Review = () => {
             rating={review.rating}
             date={review.date}
             likes={review.likes}
-          />
+          ></ReviewCard>
         ))}
       </ReviewList>
       {/* 페이지네이션 컴포넌트 */}
