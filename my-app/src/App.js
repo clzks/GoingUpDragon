@@ -6,6 +6,6 @@ import CourseDetailLayout from "./layouts/courseDetailPage/courseDetailLayout";
 import MyPageLayout from "./layouts/myPage/MyPageLayout";
 
 function App() {
-  return <MainLayout></MainLayout>;
+  return <CourseDetailLayout></CourseDetailLayout>;
 }
 export default App;

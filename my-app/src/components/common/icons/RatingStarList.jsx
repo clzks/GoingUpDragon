@@ -1,7 +1,7 @@
 import React from "react";
 import RatingStar from "./RatingStar";
 
-const RatingStarList = ({ rating }) => {
+const RatingStarList = ({ rating, size }) => {
   return (
     <div>
       {Array.from({ length: 5 }, (_, index) => {
@@ -13,7 +13,7 @@ const RatingStarList = ({ rating }) => {
             ? "half"
             : "empty"; // 나머지는 empty
 
-        return <RatingStar key={index} type={type} />;
+        return <RatingStar key={index} type={type} size={size}></RatingStar>;
       })}
     </div>
   );
