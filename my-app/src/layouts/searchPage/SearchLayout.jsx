@@ -7,12 +7,15 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Button } from "react-bootstrap";
 import { FaSlidersH } from "react-icons/fa";
-import { Stack } from "react-bootstrap";
 
 // 공통 컴포넌트
 import VerticalLine from "../../components/common/icons/VerticalLine";
 import HorizontalLine from "../../components/common/icons/HorizontalLine";
 import Header from "../../components/common/layout/Header";
+import ArrowButtonRight from "../../components/common/icons/ArrowButtonRight";
+import ArrowButtonLeft from "../../components/common/icons/ArrowButtonLeft";
+import Footer from "../../components/common/layout/Footer";
+import ScrollTopButton from "../../components/common/utilities/ScrollTopButton"
 
 // 검색 페이지 컴포넌트
 import SearchCategory from "../../components/searchPage/SearchCategory";
@@ -20,14 +23,12 @@ import MainCategoryDatas from "../../components/searchPage/MainCategoryDatas";
 import MiddleCategoryBox from "../../components/searchPage/MiddleCategoryBox";
 import SkillSearchModal from "../../components/searchPage/SkillSearchModal";
 import SearchSortOption from "../../components/searchPage/SearchSortOption";
-import ArrowButtonRight from "../../components/searchPage/ArrowButtonRight";
-import ArrowButtonLeft from "../../components/searchPage/ArrowButtonLeft";
-import HorizontalScroll from "../../components/searchPage/test1/HorizontalScroll";
+import SearchFillterParent from "../../components/searchPage/searchFillter/SearchFillterParent";
+import SearchCardDatas from "../../components/searchPage/searchCourseCards/SearchCardDatas";
 
 const SearchLayout = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const inputRef = useRef(null); // 검색창에 대한 참조 생성
-  const scrollRef = useRef(null);
 
   const handleSearchIconClick = () => {
     if (inputRef.current) {
@@ -35,43 +36,30 @@ const SearchLayout = () => {
     }
   };
 
-  const scrollLeft = () => {
-    scrollRef.current.scrollBy({ left: -200, behavior: "smooth" });
-  };
-
-  const scrollRight = () => {
-    scrollRef.current.scrollBy({ left: 200, behavior: "smooth" });
-  };
-
   return (
     <>
       <Header inputRef={inputRef}></Header>
       <HorizontalLine></HorizontalLine>
-      <StyledSection ref={scrollRef}>
+      <StyledSection>
         <Container>
-          <Row>
+        <Row>
             {/* 왼쪽 화살표 */}
               <StyledCol xs={1}>
-                  <ArrowButtonLeft onClick={scrollLeft}/>
+                <ArrowButtonLeft/>
               </StyledCol>
-            <StyledCol xs={1}>
+              <StyledCol>
               <SearchCategory onClick={handleSearchIconClick} />
-            </StyledCol>
-            <StyledColHorizontalCenter xs={1}>
-              <VerticalLine />
-            </StyledColHorizontalCenter>
-            <StyledColVerticalCenter xs={8} >
+              <VerticalLine margin="0px 20px" />
               <MainCategoryDatas />
-            </StyledColVerticalCenter>
+              </StyledCol>
             {/* 오른쪽 화살표 */}
               <StyledCol xs={1}>
-                  <ArrowButtonRight onClick={scrollRight} />
+                  <ArrowButtonRight/>
               </StyledCol>
           </Row>
         </Container>
       </StyledSection>
       <HorizontalLine></HorizontalLine>
-      <HorizontalScroll></HorizontalScroll>
       <StyledSection>
         <Container>
           <StyledMiddleCategoryBoxRow>
@@ -97,37 +85,36 @@ const SearchLayout = () => {
       </StyledSection>
       <StyledSection>
         <Container>
-          <Stack gap={3}>
-            <div className="p-2">First item</div>
-            <div className="p-2">Second item</div>
-            <div className="p-2">Third item</div>
-          </Stack>
+          <StyledSearchCourseContainer>
+          <SearchFillterParent></SearchFillterParent>
+          <StyledInstructorCoursesContainer>
+          <SearchCardDatas></SearchCardDatas>
+          </StyledInstructorCoursesContainer>
+          </StyledSearchCourseContainer>
         </Container>
       </StyledSection>
+      <ScrollTopButton></ScrollTopButton>
+      <Footer></Footer>
     </>
   );
 };
 
 export default SearchLayout;
 
+const StyledSearchCourseContainer = styled.div`
+  display:flex
+`
+
+const StyledInstructorCoursesContainer = styled.div`
+
+`
+
 const StyledSection = styled.section`
   padding: 16px;
 `;
 
-const StyledColHorizontalCenter = styled(Col)`
-  display: flex;
-  justify-content: center; /* 수평 위치 조정: start, center, end, space-between 등 */
-`;
-
-const StyledColVerticalCenter = styled(Col)`
-  display: flex;
-  align-items: center; /* 수직 가운데 정렬 */
-`;
-
 const StyledCol = styled(Col)`
   display: flex;
-  align-items: center; /* 수직 가운데 정렬 */
-  justify-content: center;
 `;
 
 const StyledMiddleCategoryBoxRow = styled(Row)`
