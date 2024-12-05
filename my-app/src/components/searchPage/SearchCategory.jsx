@@ -23,12 +23,8 @@ const IconButton = styled.button`
   border: none;
   cursor: pointer;
   gap: 8px;
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column; /* 수직 정렬 */
-  justify-content: center;  /* 수직 가운데 정렬 */
-  align-items: center;
   color: #333;
   position: relative;  /* 밑줄 위치를 위해 relative 설정 */
 

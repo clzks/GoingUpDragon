@@ -1,5 +1,5 @@
 // components/searchPage/MiddleCategoryBox.jsx
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
@@ -15,6 +15,16 @@ const categories = [
 ];
 
 const MiddleCategoryBox = () => {
+
+  // 스킬태그를 추적하는 상태
+  const [selectedSkillTagId, setSelectedSkillTagId] = useState(null);
+
+    // 스킬태그 클릭 시 선택된 스킬태그 상태 변경
+    const handleSkillTagClick = (id) => {
+      setSelectedSkillTagId(id);
+    };
+
+
   return (
     <OuterContainer>
       <StyledArrowButton>
@@ -23,7 +33,10 @@ const MiddleCategoryBox = () => {
       <InnerContainer>
         {categories.map((item) => (
           <CategoryItem key={item.id}>
-            <CategoryIcon>{item.title}</CategoryIcon>
+            <CategoryIcon 
+             onClick={() => handleSkillTagClick(item.id)}
+             isSelected={selectedSkillTagId === item.id}
+             >{item.title}</CategoryIcon>
           </CategoryItem>
         ))}
       </InnerContainer>
@@ -65,8 +78,17 @@ const CategoryItem = styled.div`
   cursor: pointer;
   transition: background-color 0.3s;
 
+    &::after {
+    background-color: #e6f7ff;
+    opacity: 0;
+  }
+
   &:hover {
     background-color: #e6f7ff; /* 호버 시 배경색 변경 */
+  }
+
+    &:hover::after {
+    opacity: 1; /* 호버 시 밑줄이 나타나도록 설정 */
   }
 `;
 
