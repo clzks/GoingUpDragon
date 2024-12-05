@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ReviewSortOption from "./ReviewSortOption";
 import ReviewBanner from "./ReviewBanner";
-import ReviewCard from "../../../common/card/ReviewCard";
+import CourseReviewCardList from "./CourseReviewCardList";
 
 const CourseReviewSection = ({ reviewData }) => {
   const reviewCount = 113;
@@ -12,11 +12,7 @@ const CourseReviewSection = ({ reviewData }) => {
       <StyledTitleText>수강평</StyledTitleText>
       <ReviewSortOption></ReviewSortOption>
       <ReviewBanner reviewData={reviewData}></ReviewBanner>
-      <ReviewCard isMyPage={false}></ReviewCard>
-      <ReviewCard isMyPage={false}></ReviewCard>
-      <ReviewCard isMyPage={false}></ReviewCard>
-      <ReviewCard isMyPage={false}></ReviewCard>
-      <ReviewCard isMyPage={false}></ReviewCard>
+      <CourseReviewCardList count={reviewCount}></CourseReviewCardList>
     </StyledReviewContainer>
   );
 };

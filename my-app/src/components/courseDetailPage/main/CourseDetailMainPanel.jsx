@@ -4,25 +4,37 @@ import styled from "styled-components";
 import { Container } from "react-bootstrap";
 import LectureInfo from "./LectureInfo";
 import CourseReviewSection from "./reviewSection/CourseReviewSection";
-import QnASection from "./QnASection";
+import SimilarCardList from "./recommendedSection/SimilarCardList";
+import InstructorCardList from "./recommendedSection/InstructorCardList";
+import PricingPanel from "../SideComponent/PricingPanel";
 
-const CourseDetailMainPanel = ({ curriculumData, description }) => {
+const CourseDetailMainPanel = ({
+  curriculumData,
+  description,
+  recommendLectureList,
+  similarLectureList,
+  enrollmentData,
+}) => {
   return (
     <StyledCourseMainPanel>
       <StyledLeftPanel>
         <Curriculum curriculumData={curriculumData}></Curriculum>
         <LectureInfo description={description}></LectureInfo>
         <CourseReviewSection></CourseReviewSection>
-        <QnASection></QnASection>
+        <InstructorCardList
+          lectureList={recommendLectureList}
+        ></InstructorCardList>
+        <SimilarCardList lectureList={similarLectureList}></SimilarCardList>
       </StyledLeftPanel>
-      <StyledRightPanel></StyledRightPanel>
+      <StyledRightPanel>
+        <PricingPanel data={enrollmentData}></PricingPanel>
+      </StyledRightPanel>
     </StyledCourseMainPanel>
   );
 };
 
 const StyledCourseMainPanel = styled(Container)`
   display: flex;
-
   > * {
     margin-left: 50px;
   }

@@ -62,7 +62,8 @@ const Pagination = ({ items, itemsPerPage, paginate, currentPage }) => {
             key={index}
             onClick={() => handlePageChange(page)}
             isActive={currentPage === page}
-            isEllipsis={page === "..."}>
+            isEllipsis={page === "..."}
+          >
             {page}
           </PaginationButton>
         ))}
