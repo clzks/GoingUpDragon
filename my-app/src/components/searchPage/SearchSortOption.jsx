@@ -8,13 +8,14 @@ const SearchSortOption = () => {
 
   return (
     <>
-      {/* 드롭다운 1 */}
-      <SortOption
-        options={['정확도순', '인기순', '최신순', '평점순', '좋아요순']}
-        defaultOption="정확도순"
-        onSelect={handleDropdownSelect}
-      />
-    </div>
+      <div>
+        {/* 드롭다운 1 */}
+        <SortOption
+          options={["정확도순", "인기순", "최신순", "평점순", "좋아요순"]}
+          defaultOption="정확도순"
+          onSelect={handleDropdownSelect}
+        />
+      </div>
     </>
   );
 };
