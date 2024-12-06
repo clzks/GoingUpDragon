@@ -42,7 +42,7 @@ const CourseDetailMainPanel = ({
       <StyledRightPanel>
         <PricingPanel
           data={enrollmentData}
-          count={getLectureCount}
+          count={getLectureCount(curriculumData)}
         ></PricingPanel>
       </StyledRightPanel>
     </StyledCourseMainPanel>
