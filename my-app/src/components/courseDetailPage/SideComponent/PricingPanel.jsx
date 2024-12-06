@@ -29,7 +29,7 @@ const PricingPanel = ({ data, count }) => {
         setIsSticky(false);
       }
     }
-
+    // 주석
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [initialOffset]);
