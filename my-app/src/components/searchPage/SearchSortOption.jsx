@@ -1,11 +1,9 @@
 import React from "react";
 import SortOption from "../common/utilities/SortOption";
-
 const SearchSortOption = () => {
   const handleDropdownSelect = (value) => {
     console.log(`Selected: ${value}`);
   };
-
   return (
     <>
       <div>
@@ -19,5 +17,4 @@ const SearchSortOption = () => {
     </>
   );
 };
-
 export default SearchSortOption;
