@@ -1,14 +1,14 @@
 // components/common/controlledTabs.jsx
 // 외부 라이브러리
 import React, { useState } from "react";
-import Container from 'react-bootstrap/Container';
+import Container from "react-bootstrap/Container";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import styled from "styled-components";
 
 // 내부 라이브러리
 
-const ControlledTabs = () => {
+const PolicyLayout = () => {
   const [activeKey, setActiveKey] = useState("terms");
 
   function handleSelect(selectedKey) {
@@ -353,7 +353,7 @@ const ControlledTabs = () => {
   );
 };
 
-export default ControlledTabs;
+export default PolicyLayout;
 
 // 스타일 컴포넌트 정의
 const StyledTabs = styled(Tabs)`

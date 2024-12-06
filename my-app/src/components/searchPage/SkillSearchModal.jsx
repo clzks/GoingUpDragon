@@ -19,11 +19,16 @@ const SkillSearchModal = (props) => {
     "CSS3",
   ];
 
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   // 카테고리 선택 시 선택한 카테고리 저장
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
+    // 카테고리가 이미 선택되었으면 제거하고, 아니면 추가
+    setSelectedCategories((prevCategories) =>
+      prevCategories.includes(category)
+        ? prevCategories.filter((item) => item !== category)
+        : [...prevCategories, category]
+    );
   };
 
   return (
@@ -42,14 +47,20 @@ const SkillSearchModal = (props) => {
             type="search"
             placeholder="강의검색"
             aria-label="Search"
-          ></StyledFormControl>
+          />
         </Form>
+        {/* 선택된 카테고리들 표시 */}
+        <SelectedCategories>
+          {selectedCategories.map((category) => (
+            <SelectedCategory key={category}>{category}</SelectedCategory>
+          ))}
+        </SelectedCategories>
         <CategoryList>
           {categories.map((category) => (
             <CategoryButton
               key={category}
               onClick={() => handleCategoryClick(category)}
-              selected={category === selectedCategory}
+              selected={selectedCategories.includes(category)}
             >
               {category}
             </CategoryButton>
@@ -86,7 +97,22 @@ const StyledFormControl = styled(Form.Control)`
   }
 `;
 
-// Styled Components
+// 선택된 카테고리들 표시
+const SelectedCategories = styled.div`
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+`;
+
+const SelectedCategory = styled.span`
+  background-color: #007bff;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+`;
+
 const CategoryList = styled.div`
   display: flex;
   flex-wrap: wrap;

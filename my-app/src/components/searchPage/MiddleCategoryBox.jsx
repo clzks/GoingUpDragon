@@ -1,7 +1,7 @@
-// components/searchPage/MiddleCategoryBox.jsx
-import React from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import ArrowButtonLeft from "../common/icons/ArrowButtonLeft";
+import ArrowButtonRight from "../common/icons/ArrowButtonRight";
 
 const categories = [
   { id: 1, title: "전체" },
@@ -12,24 +12,50 @@ const categories = [
   { id: 6, title: "Java" },
   { id: 7, title: "PHP" },
   { id: 8, title: "node.js" },
+  { id: 9, title: "전체" },
+  { id: 10, title: "html" },
+  { id: 11, title: "css" },
+  { id: 12, title: "css" },
 ];
 
 const MiddleCategoryBox = () => {
+  const [selectedSkillTagId, setSelectedSkillTagId] = useState(null);
+  const innerContainerRef = useRef(null); // InnerContainer ref
+
+  // Handle skill tag click
+  const handleSkillTagClick = (id) => {
+    setSelectedSkillTagId(id);
+  };
+
+  // Scroll functions to move 1 item at a time
+  const scrollLeft = () => {
+    if (innerContainerRef.current) {
+      innerContainerRef.current.scrollBy({ left: -200, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (innerContainerRef.current) {
+      innerContainerRef.current.scrollBy({ left: 200, behavior: "smooth" });
+    }
+  };
+
   return (
     <OuterContainer>
-      <StyledArrowButton>
-        <FaChevronLeft />
-      </StyledArrowButton>
-      <InnerContainer>
+      <ArrowButtonLeft scrollLeft={scrollLeft} />
+      <InnerContainer ref={innerContainerRef}>
         {categories.map((item) => (
           <CategoryItem key={item.id}>
-            <CategoryIcon>{item.title}</CategoryIcon>
+            <CategoryIcon
+              onClick={() => handleSkillTagClick(item.id)}
+              isSelected={selectedSkillTagId === item.id}
+            >
+              {item.title}
+            </CategoryIcon>
           </CategoryItem>
         ))}
       </InnerContainer>
-      <StyledArrowButton>
-        <FaChevronRight />
-      </StyledArrowButton>
+      <ArrowButtonRight scrollRight={scrollRight} />
     </OuterContainer>
   );
 };
@@ -39,63 +65,60 @@ export default MiddleCategoryBox;
 // Styled Components
 const OuterContainer = styled.div`
   display: flex;
-  justify-content: center; /* 수평 중앙 정렬 */
-  align-items: center; /* 수직 중앙 정렬 */
-  border: 2px solid #ccc; /* 외곽선 */
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ccc;
   border-radius: 10px;
   padding: 10px;
-  max-width: 100%; /* 전체 너비 */
+  max-width: 100%;
 `;
 
 const InnerContainer = styled.div`
   display: flex;
-  justify-content: space-evenly; /* 아이템 간 균등 간격 */
-  align-items: center; /* 수직 중앙 정렬 */
-  width: 100%; /* 부모 컨테이너 전체 너비 사용 */
+  gap: 2rem;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  white-space: nowrap; /* 항목이 줄 바꿈 되지 않도록 설정 */
+
+  
 `;
 
 const CategoryItem = styled.div`
   display: flex;
-  flex-direction: column; /* 아이콘 위 텍스트 정렬 */
+  flex-direction: column;
   align-items: center;
   padding: 5px 10px;
-  border: 1px solid #e0e0e0; /* 각 아이템 경계선 */
+  border: 1px solid #e0e0e0;
   border-radius: 5px;
   background-color: #f9f9f9;
   cursor: pointer;
   transition: background-color 0.3s;
+  min-width: 100px; /* 각 항목의 너비를 고정 */
+  max-width: 100px; /* 항목이 커지지 않도록 제한 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  overflow: hidden; /* 텍스트가 넘칠 경우 숨기기 */
+  text-overflow: ellipsis; /* 텍스트가 넘치면 '...' 표시 */
 
   &:hover {
-    background-color: #e6f7ff; /* 호버 시 배경색 변경 */
+    background-color: #e6f7ff;
   }
+
+  ${({ isSelected }) =>
+    isSelected &&
+    `
+    background-color: #007bff;
+    color: white;
+  `}
 `;
 
 const CategoryIcon = styled.div`
-  font-size: 24px;
-`;
+  font-size: 16px; /* 텍스트 크기 조정 */
+  transition: color 0.3s ease;
 
-const StyledArrowButton = styled.button`
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 50%;
-  background-color: #ffffff;
-  border: 1px solid #a9a9a9;
-  color: #a9a9a9;
-  box-shadow: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease, border 0.3s ease, color 0.3s ease;
-
-  &:hover {
-    background-color: #f0f0f0;
-    border-color: #a9a9a9;
-    color: #a9a9a9;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: none;
-  }
+  ${({ isSelected }) =>
+    isSelected &&
+    `
+    font-weight: bold;
+  `}
 `;

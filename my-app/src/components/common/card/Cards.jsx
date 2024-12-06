@@ -1,13 +1,12 @@
 // src/components/Cards.jsx
 // 외부 라이브러리
 import React, { useState } from "react";
-import { Container, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import styled from "styled-components";
 import CardItem from "./CardItem";
 
-const Cards = ({ cardData }) => {
+const Cards = ({ cardData, cardsToShow = 4, maxWidth }) => {
   const [startIndex, setStartIndex] = useState(0);
-  const cardsToShow = 4;
 
   function handlePrev() {
     setStartIndex((prevIndex) =>
@@ -22,7 +21,7 @@ const Cards = ({ cardData }) => {
   }
 
   return (
-    <StyledCardCarouselContainer>
+    <StyledCardCarouselContainer maxWidth={maxWidth}>
       <StyledCardsWrapper>
         <StyledCardsSlideButton
           variant="outline-secondary"
@@ -60,9 +59,9 @@ const Cards = ({ cardData }) => {
 export default Cards;
 
 // 내부 스타일 컴포넌트 정의
-const StyledCardCarouselContainer = styled(Container)`
-  display: flex;
-  flex-direction: column;
+const StyledCardCarouselContainer = styled.div`
+  max-width: ${(props) =>
+    props.maxWidth || "100%"}; /* props.width 사용, 기본값은 100% */
   align-items: center;
   justify-content: center;
   margin-top: 2rem;

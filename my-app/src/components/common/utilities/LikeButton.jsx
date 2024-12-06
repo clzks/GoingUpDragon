@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { FaThumbsUp, FaRegThumbsUp } from "react-icons/fa";
 
-function LikeButton({
-  size = "40px",
+const LikeButton = ({
+  size = "16px",
   activeColor = "#7CD0D5",
   inactiveColor = "#6C757D",
-}) {
+}) => {
   const [isLiked, setIsLiked] = useState(false);
 
   function toggleLike() {
@@ -21,6 +21,6 @@ function LikeButton({
       )}
     </div>
   );
-}
+};
 
 export default LikeButton;
