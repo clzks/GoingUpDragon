@@ -1,3 +1,4 @@
+// components/courseDetailPage/main/curriculum/CurriculumItem.jsx
 import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import styled from "styled-components";

@@ -10,6 +10,6 @@ import SignUpPage from "./layouts/loginPage/SignUpPage";
 import LoginModal from "./components/common/utilities/LoginModal";
 
 function App() {
-  return <MainLayout></MainLayout>;
+  return <SearchLayout></SearchLayout>;
 }
 export default App;

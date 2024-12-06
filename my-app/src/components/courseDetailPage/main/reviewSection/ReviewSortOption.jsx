@@ -1,12 +1,13 @@
+// components/courseDetailPage/main/reviewSection/ReviewSortOption.jsx
 import React from "react";
 import styled from "styled-components";
 
 import SortOption from "../../../common/utilities/SortOption";
 
 const ReviewSortOption = () => {
-  const handleDropdownSelect = (value) => {
+  function handleDropdownSelect(value) {
     console.log(`Selected: ${value}`);
-  };
+  }
 
   return (
     <StyledSortOption>

@@ -1,3 +1,4 @@
+// components/courseDetailPage/main/reviewSection/CourseReviewSection.jsx
 import React, { forwardRef } from "react";
 import styled from "styled-components";
 import ReviewSortOption from "./ReviewSortOption";

@@ -1,3 +1,4 @@
+// components/courseDetailPage/main/recommendedSection/InstructorCardList.jsx
 import React from "react";
 import styled from "styled-components";
 import Cards from "../../../common/card/Cards";

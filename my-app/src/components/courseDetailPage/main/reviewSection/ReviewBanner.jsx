@@ -1,3 +1,4 @@
+// components/courseDetailPage/main/reviewSection/ReviewBanner.jsx
 import React from "react";
 import styled from "styled-components";
 import RatingStarList from "../../../common/icons/RatingStarList";

@@ -1,3 +1,4 @@
+// components/courseDetailPage/main/CourseDetailMainPanel.jsx
 import React from "react";
 import Curriculum from "./curriculum/Curriculum";
 import styled from "styled-components";
@@ -16,10 +17,11 @@ const CourseDetailMainPanel = ({
   enrollmentData,
   refList,
 }) => {
-  const lectureCount = curriculumData.reduce((total, section) => {
-    return total + section.lectures.length;
-  }, 0);
-
+  function getLectureCount(curriculumData) {
+    return curriculumData.reduce((total, section) => {
+      return total + section.lectures.length;
+    }, 0);
+  }
   return (
     <StyledCourseMainPanel>
       <StyledLeftPanel>
@@ -38,7 +40,10 @@ const CourseDetailMainPanel = ({
         <SimilarCardList lectureList={similarLectureList}></SimilarCardList>
       </StyledLeftPanel>
       <StyledRightPanel>
-        <PricingPanel data={enrollmentData} count={lectureCount}></PricingPanel>
+        <PricingPanel
+          data={enrollmentData}
+          count={getLectureCount}
+        ></PricingPanel>
       </StyledRightPanel>
     </StyledCourseMainPanel>
   );

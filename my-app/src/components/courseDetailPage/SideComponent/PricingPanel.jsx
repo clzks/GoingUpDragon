@@ -1,3 +1,4 @@
+// components/courseDetailPage/SideComponent/PricingPanel.jsx
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { FaHeart } from "react-icons/fa";
@@ -18,7 +19,7 @@ const PricingPanel = ({ data, count }) => {
     const scrollY = window.scrollY;
     setInitialOffset(rect.top + scrollY);
 
-    const handleScroll = () => {
+    function handleScroll() {
       const scrollTop = window.scrollY;
 
       // 배너가 화면에 나타난 이후에 고정
@@ -27,7 +28,7 @@ const PricingPanel = ({ data, count }) => {
       } else {
         setIsSticky(false);
       }
-    };
+    }
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);

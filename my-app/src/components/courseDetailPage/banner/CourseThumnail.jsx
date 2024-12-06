@@ -1,3 +1,4 @@
+// component/courseDetailPage/banner/CourseThumnail.jsx
 import React from "react";
 import styled from "styled-components";
 
