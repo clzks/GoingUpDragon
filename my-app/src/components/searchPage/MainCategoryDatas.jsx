@@ -31,6 +31,12 @@ const MainCategoryDatas = () => {
     { id: 8, icon: <FaNode />, label: "Node.js" },
     { id: 9, icon: <FaReact />, label: "React" },
     { id: 10, icon: <FaSwift />, label: "Swift" },
+    { id: 11, icon: <FaPython />, label: "Python" },
+    { id: 12, icon: <FaJava />, label: "Java" },
+    { id: 13, icon: <FaPhp />, label: "PHP" },
+    { id: 14, icon: <FaNode />, label: "Node.js" },
+    { id: 15, icon: <FaReact />, label: "React" },
+    { id: 16, icon: <FaSwift />, label: "Swift" },
   ];
 
   // 아이콘 클릭 시 선택된 아이콘 상태 변경
@@ -59,11 +65,9 @@ export default MainCategoryDatas;
 
 const StyledStack = styled.div`
   display: flex;
-  flex-direction: row; /* 수평 */
   gap: 2rem; /* 간격 1rem = 16px */
 `;
 
-// 스타일드 컴포넌트
 const StyledIconLabelCenter = styled.div`
   display: flex;
   flex-direction: column; /* 수직 */

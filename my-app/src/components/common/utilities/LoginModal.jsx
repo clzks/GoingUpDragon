@@ -7,8 +7,8 @@ import Row from "react-bootstrap/Row";
 import styled from "styled-components";
 // import 필요한 외부 라이브러리와 내부 라이브러리 구분
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import GoogleIcon from "../components/common/icons/GoogleIcon"; // GoogleIcon 컴포넌트 불러오기
-import NaverIcon from "../components/common/icons/NaverIcon"; // NaverIcon 컴포넌트 불러오기
+import GoogleIcon from "../icons/GoogleIcon";
+import NaverIcon from "../icons/NaverIcon";
 
 const LoginModal = ({ show, onHide }) => {
   const [email, setEmail] = useState("");

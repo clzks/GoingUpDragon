@@ -1,21 +1,19 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 // 외부 라이브러리
 import styled from "styled-components";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import { Button } from "react-bootstrap";
 import { FaSlidersH } from "react-icons/fa";
 
 // 공통 컴포넌트
-import VerticalLine from "../../components/common/icons/VerticalLine";
 import HorizontalLine from "../../components/common/icons/HorizontalLine";
 import Header from "../../components/common/layout/Header";
 import ArrowButtonRight from "../../components/common/icons/ArrowButtonRight";
 import ArrowButtonLeft from "../../components/common/icons/ArrowButtonLeft";
 import Footer from "../../components/common/layout/Footer";
-import ScrollTopButton from "../../components/common/utilities/ScrollTopButton"
+import ScrollTopButton from "../../components/common/utilities/ScrollTopButton";
 
 // 검색 페이지 컴포넌트
 import SearchCategory from "../../components/searchPage/SearchCategory";
@@ -27,12 +25,27 @@ import SearchFillterParent from "../../components/searchPage/searchFillter/Searc
 import SearchCardDatas from "../../components/searchPage/searchCourseCards/SearchCardDatas";
 
 const SearchLayout = () => {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
   const inputRef = useRef(null); // 검색창에 대한 참조 생성
+
+  // 각 카테고리의 스크롤을 위한 ref
+  const searchCategoryRef = useRef(null);
 
   const handleSearchIconClick = () => {
     if (inputRef.current) {
       inputRef.current.focus(); // 검색창에 포커스 부여
+    }
+  };
+
+  const scrollLeft = (ref) => {
+    if (ref.current) {
+      ref.current.scrollBy({ left: -200, behavior: "smooth" }); // 왼쪽으로 스크롤
+    }
+  };
+
+  const scrollRight = (ref) => {
+    if (ref.current) {
+      ref.current.scrollBy({ left: 200, behavior: "smooth" }); // 오른쪽으로 스크롤
     }
   };
 
@@ -42,21 +55,18 @@ const SearchLayout = () => {
       <HorizontalLine></HorizontalLine>
       <StyledSection>
         <Container>
-        <Row>
+          <StyledCategoryContainer>
             {/* 왼쪽 화살표 */}
-              <StyledCol xs={1}>
-                <ArrowButtonLeft/>
-              </StyledCol>
-              <StyledCol>
+            <ArrowButtonLeft scrollLeft={() => scrollLeft(searchCategoryRef)} />
+            <StyledScrollableContainer ref={searchCategoryRef}>
               <SearchCategory onClick={handleSearchIconClick} />
-              <VerticalLine margin="0px 20px" />
               <MainCategoryDatas />
-              </StyledCol>
+            </StyledScrollableContainer>
             {/* 오른쪽 화살표 */}
-              <StyledCol xs={1}>
-                  <ArrowButtonRight/>
-              </StyledCol>
-          </Row>
+            <ArrowButtonRight
+              scrollRight={() => scrollRight(searchCategoryRef)}
+            />
+          </StyledCategoryContainer>
         </Container>
       </StyledSection>
       <HorizontalLine></HorizontalLine>
@@ -86,10 +96,10 @@ const SearchLayout = () => {
       <StyledSection>
         <Container>
           <StyledSearchCourseContainer>
-          <SearchFillterParent></SearchFillterParent>
-          <StyledInstructorCoursesContainer>
-          <SearchCardDatas></SearchCardDatas>
-          </StyledInstructorCoursesContainer>
+            <SearchFillterParent></SearchFillterParent>
+            <StyledInstructorCoursesContainer>
+              <SearchCardDatas></SearchCardDatas>
+            </StyledInstructorCoursesContainer>
           </StyledSearchCourseContainer>
         </Container>
       </StyledSection>
@@ -101,20 +111,28 @@ const SearchLayout = () => {
 
 export default SearchLayout;
 
+const StyledCategoryContainer = styled.div`
+  display: flex;
+  align-items: center; // 수직 중앙 정렬
+  justify-content: center; // 선택 사항: 수평 중앙 정렬
+  gap: 2rem;
+`;
+
+const StyledScrollableContainer = styled.div`
+  display: flex;
+  overflow-x: hidden; /* 가로 스크롤을 제거 */
+  overflow-y: hidden;
+  gap: 1rem;
+`;
+
 const StyledSearchCourseContainer = styled.div`
-  display:flex
-`
+  display: flex;
+`;
 
-const StyledInstructorCoursesContainer = styled.div`
-
-`
+const StyledInstructorCoursesContainer = styled.div``;
 
 const StyledSection = styled.section`
   padding: 16px;
-`;
-
-const StyledCol = styled(Col)`
-  display: flex;
 `;
 
 const StyledMiddleCategoryBoxRow = styled(Row)`

@@ -1,0 +1,2202 @@
+[
+  {
+    "thumbnail": "/images/041.png",
+    "title": "React 강의",
+    "instructor": "홍길동",
+    "rating": 4,
+    "reviews": 1,
+    "price": "₩30,000"
+  },
+  {
+    "thumbnail": "/images/042.png",
+    "title": "파이썬 프로그래밍 완벽 가이드",
+    "instructor": "이파이썬",
+    "rating": 5,
+    "reviews": 200,
+    "price": "₩40,000"
+  },
+  {
+    "thumbnail": "/images/043.png",
+    "title": "실전 개발 마스터 클래스",
+    "instructor": "김코딩 전문가",
+    "rating": 3,
+    "reviews": 1111,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/043.png",
+    "title": "JavaScript 강의",
+    "instructor": "이순신",
+    "rating": 2,
+    "reviews": 27,
+    "price": "₩110,000"
+  },
+  {
+    "thumbnail": "/images/044.png",
+    "title": "C++ 기초 강의",
+    "instructor": "박찬호",
+    "rating": 4,
+    "reviews": 57,
+    "price": "₩20,000"
+  },
+  {
+    "thumbnail": "/images/045.png",
+    "title": "데이터 분석 전문가 과정",
+    "instructor": "이데이터",
+    "rating": 5,
+    "reviews": 999,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/046.png",
+    "title": "알고리즘 마스터 클래스",
+    "instructor": "정석",
+    "rating": 4,
+    "reviews": 345,
+    "price": "₩70,000"
+  },
+  {
+    "thumbnail": "/images/047.png",
+    "title": "HTML/CSS 기초",
+    "instructor": "김프론트",
+    "rating": 3,
+    "reviews": 88,
+    "price": "₩10,000"
+  },
+  {
+    "thumbnail": "/images/044.png",
+    "title": "C++ 기초 강의",
+    "instructor": "박찬호",
+    "rating": 4,
+    "reviews": 57,
+    "price": "₩20,000"
+  },
+  {
+    "thumbnail": "/images/045.png",
+    "title": "데이터 분석 전문가 과정",
+    "instructor": "이데이터",
+    "rating": 5,
+    "reviews": 999,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/046.png",
+    "title": "알고리즘 마스터 클래스",
+    "instructor": "정석",
+    "rating": 4,
+    "reviews": 345,
+    "price": "₩70,000"
+  },
+  {
+    "thumbnail": "/images/047.png",
+    "title": "HTML/CSS 기초",
+    "instructor": "김프론트",
+    "rating": 3,
+    "reviews": 88,
+    "price": "₩10,000"
+  },
+  {
+    "thumbnail": "/images/048.png",
+    "title": "Node.js 실전 프로젝트",
+    "instructor": "유노드",
+    "rating": 4,
+    "reviews": 340,
+    "price": "₩80,000"
+  },
+  {
+    "thumbnail": "/images/049.png",
+    "title": "리액트 네이티브 개발",
+    "instructor": "박리액트",
+    "rating": 5,
+    "reviews": 1280,
+    "price": "₩90,000"
+  },
+  {
+    "thumbnail": "/images/050.png",
+    "title": "MySQL 고급 쿼리",
+    "instructor": "이디비",
+    "rating": 4,
+    "reviews": 505,
+    "price": "₩60,000"
+  },
+  {
+    "thumbnail": "/images/007.png",
+    "title": "UX/UI 디자인 마스터 클래스",
+    "instructor": "디자이너",
+    "rating": 5,
+    "reviews": 1000,
+    "price": "₩100,000"
+  },
+  {
+    "thumbnail": "/images/014.png",
+    "title": "Django 웹 개발 입문",
+    "instructor": "장고코딩",
+    "rating": 3,
+    "reviews": 200,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/013.png",
+    "title": "React와 Redux로 프로젝트 만들기",
+    "instructor": "리액트마스터",
+    "rating": 4,
+    "reviews": 760,
+    "price": "₩120,000"
+  },
+  {
+    "thumbnail": "/images/012.png",
+    "title": "웹 보안 기초",
+    "instructor": "보안전문가",
+    "rating": 5,
+    "reviews": 1100,
+    "price": "₩75,000"
+  },
+  {
+    "thumbnail": "/images/011.png",
+    "title": "프로그래밍 기초 강의",
+    "instructor": "초보자",
+    "rating": 2,
+    "reviews": 56,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/042.png",
+    "title": "Django 웹 개발 입문",
+    "instructor": "장고코딩",
+    "rating": 3,
+    "reviews": 200,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/041.png",
+    "title": "React와 Redux로 프로젝트 만들기",
+    "instructor": "리액트마스터",
+    "rating": 4,
+    "reviews": 760,
+    "price": "₩120,000"
+  },
+  {
+    "thumbnail": "/images/040.png",
+    "title": "웹 보안 기초",
+    "instructor": "보안전문가",
+    "rating": 5,
+    "reviews": 1100,
+    "price": "₩75,000"
+  },
+  {
+    "thumbnail": "/images/039.png",
+    "title": "프로그래밍 기초 강의",
+    "instructor": "초보자",
+    "rating": 2,
+    "reviews": 56,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/050.png",
+    "title": "Django 웹 개발 입문",
+    "instructor": "장고코딩",
+    "rating": 3,
+    "reviews": 200,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/049.png",
+    "title": "React와 Redux로 프로젝트 만들기",
+    "instructor": "리액트마스터",
+    "rating": 4,
+    "reviews": 760,
+    "price": "₩120,000"
+  },
+  {
+    "thumbnail": "/images/048.png",
+    "title": "웹 보안 기초",
+    "instructor": "보안전문가",
+    "rating": 5,
+    "reviews": 1100,
+    "price": "₩75,000"
+  },
+  {
+    "thumbnail": "/images/047.png",
+    "title": "프로그래밍 기초 강의",
+    "instructor": "초보자",
+    "rating": 2,
+    "reviews": 56,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/046.png",
+    "title": "Django 웹 개발 입문",
+    "instructor": "장고코딩",
+    "rating": 3,
+    "reviews": 200,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/045.png",
+    "title": "React와 Redux로 프로젝트 만들기",
+    "instructor": "리액트마스터",
+    "rating": 4,
+    "reviews": 760,
+    "price": "₩120,000"
+  },
+  {
+    "thumbnail": "/images/044.png",
+    "title": "웹 보안 기초",
+    "instructor": "보안전문가",
+    "rating": 5,
+    "reviews": 1100,
+    "price": "₩75,000"
+  },
+  {
+    "thumbnail": "/images/043.png",
+    "title": "프로그래밍 기초 강의",
+    "instructor": "초보자",
+    "rating": 2,
+    "reviews": 56,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/038.png",
+    "title": "Django 웹 개발 입문",
+    "instructor": "장고코딩",
+    "rating": 3,
+    "reviews": 200,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/037.png",
+    "title": "React와 Redux로 프로젝트 만들기",
+    "instructor": "리액트마스터",
+    "rating": 4,
+    "reviews": 760,
+    "price": "₩120,000"
+  },
+  {
+    "thumbnail": "/images/036.png",
+    "title": "웹 보안 기초",
+    "instructor": "보안전문가",
+    "rating": 5,
+    "reviews": 1100,
+    "price": "₩75,000"
+  },
+  {
+    "thumbnail": "/images/035.png",
+    "title": "프로그래밍 기초 강의",
+    "instructor": "초보자",
+    "rating": 2,
+    "reviews": 56,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/001.png",
+    "title": "프로그래밍 입문 강의",
+    "instructor": "홍길동",
+    "rating": 4,
+    "reviews": 213,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/002.png",
+    "title": "데이터 분석 마스터",
+    "instructor": "이파이썬",
+    "rating": 5,
+    "reviews": 1256,
+    "price": "₩49,000"
+  },
+  {
+    "thumbnail": "/images/003.png",
+    "title": "웹 개발 초급부터 고급까지",
+    "instructor": "김코딩 전문가",
+    "rating": 3,
+    "reviews": 843,
+    "price": "₩29,000"
+  },
+  {
+    "thumbnail": "/images/004.png",
+    "title": "자바스크립트 핵심",
+    "instructor": "이진호 개발자",
+    "rating": 5,
+    "reviews": 532,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/005.png",
+    "title": "풀스택 개발 워크샵",
+    "instructor": "민수클",
+    "rating": 4,
+    "reviews": 790,
+    "price": "₩19,000"
+  },
+  {
+    "thumbnail": "/images/006.png",
+    "title": "React 완전정복",
+    "instructor": "정수현 코더",
+    "rating": 5,
+    "reviews": 1423,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/007.png",
+    "title": "AI와 머신러닝",
+    "instructor": "박소영 앱 전문가",
+    "rating": 4,
+    "reviews": 342,
+    "price": "₩99,000"
+  },
+  {
+    "thumbnail": "/images/008.png",
+    "title": "Database 디자인과 최적화",
+    "instructor": "최데이터베이스",
+    "rating": 4,
+    "reviews": 215,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/009.png",
+    "title": "웹 접근성과 UX/UI",
+    "instructor": "박접근성",
+    "rating": 3,
+    "reviews": 95,
+    "price": "₩9,000"
+  },
+  {
+    "thumbnail": "/images/010.png",
+    "title": "백엔드 서버 구현",
+    "instructor": "코드스킬",
+    "rating": 5,
+    "reviews": 543,
+    "price": "₩69,000"
+  },
+  {
+    "thumbnail": "/images/011.png",
+    "title": "클라우드 컴퓨팅 입문",
+    "instructor": "홍길동",
+    "rating": 4,
+    "reviews": 674,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/012.png",
+    "title": "파이썬 데이터 분석",
+    "instructor": "이파이썬",
+    "rating": 5,
+    "reviews": 1176,
+    "price": "₩39,000"
+  },
+  {
+    "thumbnail": "/images/013.png",
+    "title": "네트워크의 기초",
+    "instructor": "김코딩 전문가",
+    "rating": 3,
+    "reviews": 310,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/014.png",
+    "title": "하이브리드 앱 개발",
+    "instructor": "이진호 개발자",
+    "rating": 4,
+    "reviews": 223,
+    "price": "₩79,000"
+  },
+  {
+    "thumbnail": "/images/015.png",
+    "title": "HTML과 CSS의 비밀",
+    "instructor": "민수클",
+    "rating": 4,
+    "reviews": 801,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/016.png",
+    "title": "RESTful API 설계",
+    "instructor": "정수현 코더",
+    "rating": 5,
+    "reviews": 1342,
+    "price": "₩49,000"
+  },
+  {
+    "thumbnail": "/images/017.png",
+    "title": "안드로이드 개발 마스터",
+    "instructor": "박소영 앱 전문가",
+    "rating": 3,
+    "reviews": 432,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/018.png",
+    "title": "데이터베이스 관리",
+    "instructor": "최데이터베이스",
+    "rating": 4,
+    "reviews": 178,
+    "price": "₩19,000"
+  },
+  {
+    "thumbnail": "/images/019.png",
+    "title": "웹 접근성과 UI/UX",
+    "instructor": "박접근성",
+    "rating": 5,
+    "reviews": 208,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/020.png",
+    "title": "C++ 프로그래밍 기초",
+    "instructor": "코드스킬",
+    "rating": 3,
+    "reviews": 356,
+    "price": "₩29,000"
+  },
+  {
+    "thumbnail": "/images/014.png",
+    "title": "C++ 기초",
+    "instructor": "김코딩 전문가",
+    "rating": 4,
+    "reviews": 321,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/037.png",
+    "title": "Python 데이터 분석",
+    "instructor": "홍길동",
+    "rating": 5,
+    "reviews": 654,
+    "price": "₩29,000"
+  },
+  {
+    "thumbnail": "/images/004.png",
+    "title": "ReactJS 완전정복",
+    "instructor": "박소영 앱 전문가",
+    "rating": 4,
+    "reviews": 432,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/048.png",
+    "title": "네트워크 기초",
+    "instructor": "최데이터베이스",
+    "rating": 3,
+    "reviews": 213,
+    "price": "₩19,000"
+  },
+  {
+    "thumbnail": "/images/020.png",
+    "title": "HTML과 CSS 디자인",
+    "instructor": "이진호 개발자",
+    "rating": 5,
+    "reviews": 987,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/045.png",
+    "title": "풀스택 개발의 정석",
+    "instructor": "민수클",
+    "rating": 4,
+    "reviews": 842,
+    "price": "₩49,000"
+  },
+  {
+    "thumbnail": "/images/003.png",
+    "title": "Javascript 마스터",
+    "instructor": "정수현 코더",
+    "rating": 5,
+    "reviews": 1423,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/009.png",
+    "title": "머신러닝 기초",
+    "instructor": "코드스킬",
+    "rating": 4,
+    "reviews": 643,
+    "price": "₩59,000"
+  },
+  {
+    "thumbnail": "/images/028.png",
+    "title": "백엔드 서버와 API",
+    "instructor": "김코딩 전문가",
+    "rating": 4,
+    "reviews": 854,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/015.png",
+    "title": "모바일 앱 개발",
+    "instructor": "홍길동",
+    "rating": 5,
+    "reviews": 723,
+    "price": "₩39,000"
+  },
+  {
+    "thumbnail": "/images/030.png",
+    "title": "AI 실전 활용",
+    "instructor": "박소영 앱 전문가",
+    "rating": 4,
+    "reviews": 563,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/013.png",
+    "title": "Git/GitHub 협업",
+    "instructor": "민수클",
+    "rating": 5,
+    "reviews": 342,
+    "price": "₩9,000"
+  },
+  {
+    "thumbnail": "/images/035.png",
+    "title": "데이터베이스 최적화",
+    "instructor": "최데이터베이스",
+    "rating": 3,
+    "reviews": 298,
+    "price": "₩19,000"
+  },
+  {
+    "thumbnail": "/images/050.png",
+    "title": "안드로이드 스튜디오",
+    "instructor": "코드스킬",
+    "rating": 4,
+    "reviews": 458,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/012.png",
+    "title": "클라우드 컴퓨팅",
+    "instructor": "이진호 개발자",
+    "rating": 4,
+    "reviews": 672,
+    "price": "₩99,000"
+  },
+  {
+    "thumbnail": "/images/022.png",
+    "title": "프론트엔드 프로젝트",
+    "instructor": "정수현 코더",
+    "rating": 5,
+    "reviews": 1342,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/013.png",
+    "title": "Git/GitHub 협업",
+    "instructor": "민수클",
+    "rating": 5,
+    "reviews": 342,
+    "price": "₩9,000"
+  },
+  {
+    "thumbnail": "/images/035.png",
+    "title": "데이터베이스 최적화",
+    "instructor": "최데이터베이스",
+    "rating": 3,
+    "reviews": 298,
+    "price": "₩19,000"
+  },
+  {
+    "thumbnail": "/images/050.png",
+    "title": "안드로이드 스튜디오",
+    "instructor": "코드스킬",
+    "rating": 4,
+    "reviews": 458,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/012.png",
+    "title": "클라우드 컴퓨팅",
+    "instructor": "이진호 개발자",
+    "rating": 4,
+    "reviews": 672,
+    "price": "₩99,000"
+  },
+  {
+    "thumbnail": "/images/022.png",
+    "title": "프론트엔드 프로젝트",
+    "instructor": "정수현 코더",
+    "rating": 5,
+    "reviews": 1342,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/001.png",
+    "title": "초보자용 Python",
+    "instructor": "김파이썬",
+    "rating": 4,
+    "reviews": 400,
+    "price": "₩10,000"
+  },
+  {
+    "thumbnail": "/images/015.png",
+    "title": "React 깊이 이해하기",
+    "instructor": "박리액트",
+    "rating": 5,
+    "reviews": 500,
+    "price": "₩25,000"
+  },
+  {
+    "thumbnail": "/images/045.png",
+    "title": "Node.js 마스터 클래스",
+    "instructor": "노드개발자",
+    "rating": 4,
+    "reviews": 320,
+    "price": "₩30,000"
+  },
+  {
+    "thumbnail": "/images/003.png",
+    "title": "알고리즘 문제 풀이",
+    "instructor": "알고리즘마스터",
+    "rating": 5,
+    "reviews": 550,
+    "price": "₩20,000"
+  },
+  {
+    "thumbnail": "/images/025.png",
+    "title": "JavaScript 고급",
+    "instructor": "자바스크립트고수",
+    "rating": 4,
+    "reviews": 450,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/042.png",
+    "title": "HTML/CSS 기초",
+    "instructor": "웹디자이너",
+    "rating": 3,
+    "reviews": 280,
+    "price": "₩8,000"
+  },
+  {
+    "thumbnail": "/images/038.png",
+    "title": "AI와 머신러닝",
+    "instructor": "인공지능박사",
+    "rating": 5,
+    "reviews": 720,
+    "price": "₩40,000"
+  },
+  {
+    "thumbnail": "/images/020.png",
+    "title": "빅데이터 분석",
+    "instructor": "데이터과학자",
+    "rating": 4,
+    "reviews": 600,
+    "price": "₩35,000"
+  },
+  {
+    "thumbnail": "/images/006.png",
+    "title": "UX/UI 디자인",
+    "instructor": "디자인전문가",
+    "rating": 3,
+    "reviews": 340,
+    "price": "₩22,000"
+  },
+  {
+    "thumbnail": "/images/027.png",
+    "title": "소프트웨어 공학",
+    "instructor": "소프트웨어엔지니어",
+    "rating": 5,
+    "reviews": 780,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/008.png",
+    "title": "백엔드 개발",
+    "instructor": "백엔드마스터",
+    "rating": 4,
+    "reviews": 520,
+    "price": "₩40,000"
+  },
+  {
+    "thumbnail": "/images/030.png",
+    "title": "모바일 앱 개발",
+    "instructor": "모바일개발자",
+    "rating": 4,
+    "reviews": 560,
+    "price": "₩45,000"
+  },
+  {
+    "thumbnail": "/images/017.png",
+    "title": "DevOps 실습",
+    "instructor": "오퍼레이션전문가",
+    "rating": 5,
+    "reviews": 400,
+    "price": "₩25,000"
+  },
+  {
+    "thumbnail": "/images/048.png",
+    "title": "데이터 시각화",
+    "instructor": "데이터아티스트",
+    "rating": 4,
+    "reviews": 500,
+    "price": "₩30,000"
+  },
+  {
+    "thumbnail": "/images/005.png",
+    "title": "클라우드 컴퓨팅 심화",
+    "instructor": "클라우드엔지니어",
+    "rating": 5,
+    "reviews": 900,
+    "price": "₩60,000"
+  },
+  {
+    "thumbnail": "/images/019.png",
+    "title": "C++ 프로그래밍",
+    "instructor": "씨플플고수",
+    "rating": 4,
+    "reviews": 450,
+    "price": "₩20,000"
+  },
+  {
+    "thumbnail": "/images/040.png",
+    "title": "Go 언어 마스터하기",
+    "instructor": "고개발자",
+    "rating": 5,
+    "reviews": 480,
+    "price": "₩35,000"
+  },
+  {
+    "thumbnail": "/images/014.png",
+    "title": "게임 개발 입문",
+    "instructor": "게임디자이너",
+    "rating": 4,
+    "reviews": 390,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/033.png",
+    "title": "블록체인 기술",
+    "instructor": "블록체인전문가",
+    "rating": 5,
+    "reviews": 600,
+    "price": "₩45,000"
+  },
+  {
+    "thumbnail": "/images/010.png",
+    "title": "프로그래밍 기초",
+    "instructor": "프로그래머",
+    "rating": 3,
+    "reviews": 280,
+    "price": "₩12,000"
+  },
+  {
+    "thumbnail": "/images/018.png",
+    "title": "Docker 실습",
+    "instructor": "도커전문가",
+    "rating": 5,
+    "reviews": 750,
+    "price": "₩55,000"
+  },
+  {
+    "thumbnail": "/images/046.png",
+    "title": "Java 프로그래밍",
+    "instructor": "자바개발자",
+    "rating": 4,
+    "reviews": 500,
+    "price": "₩25,000"
+  },
+  {
+    "thumbnail": "/images/024.png",
+    "title": "Kubernetes 클러스터",
+    "instructor": "쿠버네티스전문가",
+    "rating": 5,
+    "reviews": 640,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/009.png",
+    "title": "데이터 과학 입문",
+    "instructor": "데이터사이언티스트",
+    "rating": 4,
+    "reviews": 300,
+    "price": "₩18,000"
+  },
+  {
+    "thumbnail": "/images/029.png",
+    "title": "Python 심화",
+    "instructor": "파이썬마스터",
+    "rating": 5,
+    "reviews": 900,
+    "price": "₩35,000"
+  },
+  {
+    "thumbnail": "/images/032.png",
+    "title": "웹 개발 기초",
+    "instructor": "웹마스터",
+    "rating": 4,
+    "reviews": 330,
+    "price": "₩10,000"
+  },
+  {
+    "thumbnail": "/images/003.png",
+    "title": "프론트엔드 완벽 가이드",
+    "instructor": "프론트장인",
+    "rating": 5,
+    "reviews": 1200,
+    "price": "₩60,000"
+  },
+  {
+    "thumbnail": "/images/017.png",
+    "title": "Node.js로 서버 만들기",
+    "instructor": "노드전문가",
+    "rating": 4,
+    "reviews": 450,
+    "price": "₩28,000"
+  },
+  {
+    "thumbnail": "/images/045.png",
+    "title": "데이터베이스 설계",
+    "instructor": "DB마스터",
+    "rating": 5,
+    "reviews": 700,
+    "price": "₩40,000"
+  },
+  {
+    "thumbnail": "/images/014.png",
+    "title": "React와 Redux 마스터",
+    "instructor": "리액트코더",
+    "rating": 4,
+    "reviews": 520,
+    "price": "₩32,000"
+  },
+  {
+    "thumbnail": "/images/041.png",
+    "title": "클라우드 컴퓨팅 입문",
+    "instructor": "클라우드구루",
+    "rating": 4,
+    "reviews": 280,
+    "price": "₩25,000"
+  },
+  {
+    "thumbnail": "/images/011.png",
+    "title": "인공지능 기초",
+    "instructor": "AI마스터",
+    "rating": 5,
+    "reviews": 850,
+    "price": "₩45,000"
+  },
+  {
+    "thumbnail": "/images/038.png",
+    "title": "CSS 그리드와 플렉스",
+    "instructor": "디자인장인",
+    "rating": 4,
+    "reviews": 340,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/050.png",
+    "title": "Go 언어로 배우는 백엔드",
+    "instructor": "고퍼개발자",
+    "rating": 5,
+    "reviews": 420,
+    "price": "₩38,000"
+  },
+  {
+    "thumbnail": "/images/022.png",
+    "title": "Docker로 컨테이너 관리",
+    "instructor": "도커마스터",
+    "rating": 5,
+    "reviews": 610,
+    "price": "₩33,000"
+  },
+  {
+    "thumbnail": "/images/005.png",
+    "title": "기계 학습 A to Z",
+    "instructor": "머신러닝장인",
+    "rating": 5,
+    "reviews": 1100,
+    "price": "₩55,000"
+  },
+  {
+    "thumbnail": "/images/019.png",
+    "title": "Swift로 iOS 앱 개발",
+    "instructor": "스위프트개발자",
+    "rating": 4,
+    "reviews": 280,
+    "price": "₩30,000"
+  },
+  {
+    "thumbnail": "/images/037.png",
+    "title": "마케팅 분석과 데이터",
+    "instructor": "마케팅전문가",
+    "rating": 4,
+    "reviews": 400,
+    "price": "₩22,000"
+  },
+  {
+    "thumbnail": "/images/012.png",
+    "title": "TypeScript 시작하기",
+    "instructor": "타입장인",
+    "rating": 5,
+    "reviews": 310,
+    "price": "₩26,000"
+  },
+  {
+    "thumbnail": "/images/046.png",
+    "title": "풀스택 개발 가이드",
+    "instructor": "풀스택코더",
+    "rating": 5,
+    "reviews": 980,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/034.png",
+    "title": "UX/UI 디자인 심화",
+    "instructor": "UX디자이너",
+    "rating": 4,
+    "reviews": 240,
+    "price": "₩18,000"
+  },
+  {
+    "thumbnail": "/images/021.png",
+    "title": "Java로 배우는 객체지향",
+    "instructor": "자바전문가",
+    "rating": 5,
+    "reviews": 890,
+    "price": "₩42,000"
+  },
+  {
+    "thumbnail": "/images/037.png",
+    "title": "마케팅 분석과 데이터",
+    "instructor": "마케팅전문가",
+    "rating": 4,
+    "reviews": 400,
+    "price": "₩22,000"
+  },
+  {
+    "thumbnail": "/images/012.png",
+    "title": "TypeScript 시작하기",
+    "instructor": "타입장인",
+    "rating": 5,
+    "reviews": 310,
+    "price": "₩26,000"
+  },
+  {
+    "thumbnail": "/images/046.png",
+    "title": "풀스택 개발 가이드",
+    "instructor": "풀스택코더",
+    "rating": 5,
+    "reviews": 980,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/034.png",
+    "title": "UX/UI 디자인 심화",
+    "instructor": "UX디자이너",
+    "rating": 4,
+    "reviews": 240,
+    "price": "₩18,000"
+  },
+  {
+    "thumbnail": "/images/021.png",
+    "title": "Java로 배우는 객체지향",
+    "instructor": "자바전문가",
+    "rating": 5,
+    "reviews": 890,
+    "price": "₩42,000"
+  },
+  {
+    "thumbnail": "/images/005.png",
+    "title": "데이터 시각화 기초",
+    "instructor": "데이터시각화전문가",
+    "rating": 4,
+    "reviews": 530,
+    "price": "₩28,000"
+  },
+  {
+    "thumbnail": "/images/039.png",
+    "title": "React Native 완벽 가이드",
+    "instructor": "리액트네이티브고수",
+    "rating": 5,
+    "reviews": 620,
+    "price": "₩38,000"
+  },
+  {
+    "thumbnail": "/images/002.png",
+    "title": "Python 입문",
+    "instructor": "파이썬초보",
+    "rating": 3,
+    "reviews": 1200,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/017.png",
+    "title": "SEO 마케팅 전략",
+    "instructor": "SEO컨설턴트",
+    "rating": 4,
+    "reviews": 720,
+    "price": "₩29,000"
+  },
+  {
+    "thumbnail": "/images/049.png",
+    "title": "Node.js 기반 서버 개발",
+    "instructor": "노드마스터",
+    "rating": 5,
+    "reviews": 860,
+    "price": "₩40,000"
+  },
+  {
+    "thumbnail": "/images/025.png",
+    "title": "모바일 앱 디자인",
+    "instructor": "디자인마스터",
+    "rating": 4,
+    "reviews": 670,
+    "price": "₩32,000"
+  },
+  {
+    "thumbnail": "/images/011.png",
+    "title": "C++ 심화 프로그래밍",
+    "instructor": "시플플장인",
+    "rating": 5,
+    "reviews": 520,
+    "price": "₩45,000"
+  },
+  {
+    "thumbnail": "/images/043.png",
+    "title": "실전 클라우드 아키텍처",
+    "instructor": "클라우드전문가",
+    "rating": 5,
+    "reviews": 450,
+    "price": "₩55,000"
+  },
+  {
+    "thumbnail": "/images/006.png",
+    "title": "데이터베이스 설계",
+    "instructor": "DB마스터",
+    "rating": 4,
+    "reviews": 890,
+    "price": "₩35,000"
+  },
+  {
+    "thumbnail": "/images/014.png",
+    "title": "기계 학습 초급",
+    "instructor": "머신러닝초보",
+    "rating": 3,
+    "reviews": 400,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/018.png",
+    "title": "블록체인 기본 원리",
+    "instructor": "블록체인고수",
+    "rating": 5,
+    "reviews": 700,
+    "price": "₩48,000"
+  },
+  {
+    "thumbnail": "/images/030.png",
+    "title": "풀스택 Next.js",
+    "instructor": "넥스트장인",
+    "rating": 5,
+    "reviews": 830,
+    "price": "₩52,000"
+  },
+  {
+    "thumbnail": "/images/044.png",
+    "title": "웹 보안 심화",
+    "instructor": "웹보안전문가",
+    "rating": 4,
+    "reviews": 620,
+    "price": "₩37,000"
+  },
+  {
+    "thumbnail": "/images/033.png",
+    "title": "JavaScript 패턴",
+    "instructor": "JS고수",
+    "rating": 4,
+    "reviews": 310,
+    "price": "₩21,000"
+  },
+  {
+    "thumbnail": "/images/040.png",
+    "title": "Flutter 앱 개발",
+    "instructor": "플러터마스터",
+    "rating": 5,
+    "reviews": 540,
+    "price": "₩36,000"
+  },
+  {
+    "thumbnail": "/images/027.png",
+    "title": "크로스 플랫폼 개발",
+    "instructor": "크로스개발고수",
+    "rating": 4,
+    "reviews": 770,
+    "price": "₩33,000"
+  },
+  {
+    "thumbnail": "/images/001.png",
+    "title": "HTML과 CSS 완벽 가이드",
+    "instructor": "웹디자인초보",
+    "rating": 3,
+    "reviews": 480,
+    "price": "₩10,000"
+  },
+  {
+    "thumbnail": "/images/016.png",
+    "title": "AWS 기초",
+    "instructor": "AWS전문가",
+    "rating": 5,
+    "reviews": 900,
+    "price": "₩43,000"
+  },
+  {
+    "thumbnail": "/images/050.png",
+    "title": "DevOps 문화",
+    "instructor": "데브옵스고수",
+    "rating": 5,
+    "reviews": 640,
+    "price": "₩38,000"
+  },
+  {
+    "thumbnail": "/images/041.png",
+    "title": "React 강의",
+    "instructor": "홍길동",
+    "rating": 4,
+    "reviews": 1,
+    "price": "₩30,000"
+  },
+  {
+    "thumbnail": "/images/042.png",
+    "title": "파이썬 프로그래밍 완벽 가이드",
+    "instructor": "이파이썬",
+    "rating": 5,
+    "reviews": 200,
+    "price": "₩40,000"
+  },
+  {
+    "thumbnail": "/images/043.png",
+    "title": "실전 개발 마스터 클래스",
+    "instructor": "김코딩 전문가",
+    "rating": 3,
+    "reviews": 1111,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/043.png",
+    "title": "JavaScript 강의",
+    "instructor": "이순신",
+    "rating": 2,
+    "reviews": 27,
+    "price": "₩110,000"
+  },
+  {
+    "thumbnail": "/images/044.png",
+    "title": "C++ 기초 강의",
+    "instructor": "박찬호",
+    "rating": 4,
+    "reviews": 57,
+    "price": "₩20,000"
+  },
+  {
+    "thumbnail": "/images/045.png",
+    "title": "데이터 분석 전문가 과정",
+    "instructor": "이데이터",
+    "rating": 5,
+    "reviews": 999,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/046.png",
+    "title": "알고리즘 마스터 클래스",
+    "instructor": "정석",
+    "rating": 4,
+    "reviews": 345,
+    "price": "₩70,000"
+  },
+  {
+    "thumbnail": "/images/047.png",
+    "title": "HTML/CSS 기초",
+    "instructor": "김프론트",
+    "rating": 3,
+    "reviews": 88,
+    "price": "₩10,000"
+  },
+  {
+    "thumbnail": "/images/044.png",
+    "title": "C++ 기초 강의",
+    "instructor": "박찬호",
+    "rating": 4,
+    "reviews": 57,
+    "price": "₩20,000"
+  },
+  {
+    "thumbnail": "/images/045.png",
+    "title": "데이터 분석 전문가 과정",
+    "instructor": "이데이터",
+    "rating": 5,
+    "reviews": 999,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/046.png",
+    "title": "알고리즘 마스터 클래스",
+    "instructor": "정석",
+    "rating": 4,
+    "reviews": 345,
+    "price": "₩70,000"
+  },
+  {
+    "thumbnail": "/images/047.png",
+    "title": "HTML/CSS 기초",
+    "instructor": "김프론트",
+    "rating": 3,
+    "reviews": 88,
+    "price": "₩10,000"
+  },
+  {
+    "thumbnail": "/images/048.png",
+    "title": "Node.js 실전 프로젝트",
+    "instructor": "유노드",
+    "rating": 4,
+    "reviews": 340,
+    "price": "₩80,000"
+  },
+  {
+    "thumbnail": "/images/049.png",
+    "title": "리액트 네이티브 개발",
+    "instructor": "박리액트",
+    "rating": 5,
+    "reviews": 1280,
+    "price": "₩90,000"
+  },
+  {
+    "thumbnail": "/images/050.png",
+    "title": "MySQL 고급 쿼리",
+    "instructor": "이디비",
+    "rating": 4,
+    "reviews": 505,
+    "price": "₩60,000"
+  },
+  {
+    "thumbnail": "/images/007.png",
+    "title": "UX/UI 디자인 마스터 클래스",
+    "instructor": "디자이너",
+    "rating": 5,
+    "reviews": 1000,
+    "price": "₩100,000"
+  },
+  {
+    "thumbnail": "/images/014.png",
+    "title": "Django 웹 개발 입문",
+    "instructor": "장고코딩",
+    "rating": 3,
+    "reviews": 200,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/013.png",
+    "title": "React와 Redux로 프로젝트 만들기",
+    "instructor": "리액트마스터",
+    "rating": 4,
+    "reviews": 760,
+    "price": "₩120,000"
+  },
+  {
+    "thumbnail": "/images/012.png",
+    "title": "웹 보안 기초",
+    "instructor": "보안전문가",
+    "rating": 5,
+    "reviews": 1100,
+    "price": "₩75,000"
+  },
+  {
+    "thumbnail": "/images/011.png",
+    "title": "프로그래밍 기초 강의",
+    "instructor": "초보자",
+    "rating": 2,
+    "reviews": 56,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/042.png",
+    "title": "Django 웹 개발 입문",
+    "instructor": "장고코딩",
+    "rating": 3,
+    "reviews": 200,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/041.png",
+    "title": "React와 Redux로 프로젝트 만들기",
+    "instructor": "리액트마스터",
+    "rating": 4,
+    "reviews": 760,
+    "price": "₩120,000"
+  },
+  {
+    "thumbnail": "/images/040.png",
+    "title": "웹 보안 기초",
+    "instructor": "보안전문가",
+    "rating": 5,
+    "reviews": 1100,
+    "price": "₩75,000"
+  },
+  {
+    "thumbnail": "/images/039.png",
+    "title": "프로그래밍 기초 강의",
+    "instructor": "초보자",
+    "rating": 2,
+    "reviews": 56,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/050.png",
+    "title": "Django 웹 개발 입문",
+    "instructor": "장고코딩",
+    "rating": 3,
+    "reviews": 200,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/049.png",
+    "title": "React와 Redux로 프로젝트 만들기",
+    "instructor": "리액트마스터",
+    "rating": 4,
+    "reviews": 760,
+    "price": "₩120,000"
+  },
+  {
+    "thumbnail": "/images/048.png",
+    "title": "웹 보안 기초",
+    "instructor": "보안전문가",
+    "rating": 5,
+    "reviews": 1100,
+    "price": "₩75,000"
+  },
+  {
+    "thumbnail": "/images/047.png",
+    "title": "프로그래밍 기초 강의",
+    "instructor": "초보자",
+    "rating": 2,
+    "reviews": 56,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/046.png",
+    "title": "Django 웹 개발 입문",
+    "instructor": "장고코딩",
+    "rating": 3,
+    "reviews": 200,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/045.png",
+    "title": "React와 Redux로 프로젝트 만들기",
+    "instructor": "리액트마스터",
+    "rating": 4,
+    "reviews": 760,
+    "price": "₩120,000"
+  },
+  {
+    "thumbnail": "/images/044.png",
+    "title": "웹 보안 기초",
+    "instructor": "보안전문가",
+    "rating": 5,
+    "reviews": 1100,
+    "price": "₩75,000"
+  },
+  {
+    "thumbnail": "/images/043.png",
+    "title": "프로그래밍 기초 강의",
+    "instructor": "초보자",
+    "rating": 2,
+    "reviews": 56,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/038.png",
+    "title": "Django 웹 개발 입문",
+    "instructor": "장고코딩",
+    "rating": 3,
+    "reviews": 200,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/037.png",
+    "title": "React와 Redux로 프로젝트 만들기",
+    "instructor": "리액트마스터",
+    "rating": 4,
+    "reviews": 760,
+    "price": "₩120,000"
+  },
+  {
+    "thumbnail": "/images/036.png",
+    "title": "웹 보안 기초",
+    "instructor": "보안전문가",
+    "rating": 5,
+    "reviews": 1100,
+    "price": "₩75,000"
+  },
+  {
+    "thumbnail": "/images/035.png",
+    "title": "프로그래밍 기초 강의",
+    "instructor": "초보자",
+    "rating": 2,
+    "reviews": 56,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/001.png",
+    "title": "프로그래밍 입문 강의",
+    "instructor": "홍길동",
+    "rating": 4,
+    "reviews": 213,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/002.png",
+    "title": "데이터 분석 마스터",
+    "instructor": "이파이썬",
+    "rating": 5,
+    "reviews": 1256,
+    "price": "₩49,000"
+  },
+  {
+    "thumbnail": "/images/003.png",
+    "title": "웹 개발 초급부터 고급까지",
+    "instructor": "김코딩 전문가",
+    "rating": 3,
+    "reviews": 843,
+    "price": "₩29,000"
+  },
+  {
+    "thumbnail": "/images/004.png",
+    "title": "자바스크립트 핵심",
+    "instructor": "이진호 개발자",
+    "rating": 5,
+    "reviews": 532,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/005.png",
+    "title": "풀스택 개발 워크샵",
+    "instructor": "민수클",
+    "rating": 4,
+    "reviews": 790,
+    "price": "₩19,000"
+  },
+  {
+    "thumbnail": "/images/006.png",
+    "title": "React 완전정복",
+    "instructor": "정수현 코더",
+    "rating": 5,
+    "reviews": 1423,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/007.png",
+    "title": "AI와 머신러닝",
+    "instructor": "박소영 앱 전문가",
+    "rating": 4,
+    "reviews": 342,
+    "price": "₩99,000"
+  },
+  {
+    "thumbnail": "/images/008.png",
+    "title": "Database 디자인과 최적화",
+    "instructor": "최데이터베이스",
+    "rating": 4,
+    "reviews": 215,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/009.png",
+    "title": "웹 접근성과 UX/UI",
+    "instructor": "박접근성",
+    "rating": 3,
+    "reviews": 95,
+    "price": "₩9,000"
+  },
+  {
+    "thumbnail": "/images/010.png",
+    "title": "백엔드 서버 구현",
+    "instructor": "코드스킬",
+    "rating": 5,
+    "reviews": 543,
+    "price": "₩69,000"
+  },
+  {
+    "thumbnail": "/images/011.png",
+    "title": "클라우드 컴퓨팅 입문",
+    "instructor": "홍길동",
+    "rating": 4,
+    "reviews": 674,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/012.png",
+    "title": "파이썬 데이터 분석",
+    "instructor": "이파이썬",
+    "rating": 5,
+    "reviews": 1176,
+    "price": "₩39,000"
+  },
+  {
+    "thumbnail": "/images/013.png",
+    "title": "네트워크의 기초",
+    "instructor": "김코딩 전문가",
+    "rating": 3,
+    "reviews": 310,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/014.png",
+    "title": "하이브리드 앱 개발",
+    "instructor": "이진호 개발자",
+    "rating": 4,
+    "reviews": 223,
+    "price": "₩79,000"
+  },
+  {
+    "thumbnail": "/images/015.png",
+    "title": "HTML과 CSS의 비밀",
+    "instructor": "민수클",
+    "rating": 4,
+    "reviews": 801,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/016.png",
+    "title": "RESTful API 설계",
+    "instructor": "정수현 코더",
+    "rating": 5,
+    "reviews": 1342,
+    "price": "₩49,000"
+  },
+  {
+    "thumbnail": "/images/017.png",
+    "title": "안드로이드 개발 마스터",
+    "instructor": "박소영 앱 전문가",
+    "rating": 3,
+    "reviews": 432,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/018.png",
+    "title": "데이터베이스 관리",
+    "instructor": "최데이터베이스",
+    "rating": 4,
+    "reviews": 178,
+    "price": "₩19,000"
+  },
+  {
+    "thumbnail": "/images/019.png",
+    "title": "웹 접근성과 UI/UX",
+    "instructor": "박접근성",
+    "rating": 5,
+    "reviews": 208,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/020.png",
+    "title": "C++ 프로그래밍 기초",
+    "instructor": "코드스킬",
+    "rating": 3,
+    "reviews": 356,
+    "price": "₩29,000"
+  },
+  {
+    "thumbnail": "/images/014.png",
+    "title": "C++ 기초",
+    "instructor": "김코딩 전문가",
+    "rating": 4,
+    "reviews": 321,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/037.png",
+    "title": "Python 데이터 분석",
+    "instructor": "홍길동",
+    "rating": 5,
+    "reviews": 654,
+    "price": "₩29,000"
+  },
+  {
+    "thumbnail": "/images/004.png",
+    "title": "ReactJS 완전정복",
+    "instructor": "박소영 앱 전문가",
+    "rating": 4,
+    "reviews": 432,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/048.png",
+    "title": "네트워크 기초",
+    "instructor": "최데이터베이스",
+    "rating": 3,
+    "reviews": 213,
+    "price": "₩19,000"
+  },
+  {
+    "thumbnail": "/images/020.png",
+    "title": "HTML과 CSS 디자인",
+    "instructor": "이진호 개발자",
+    "rating": 5,
+    "reviews": 987,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/045.png",
+    "title": "풀스택 개발의 정석",
+    "instructor": "민수클",
+    "rating": 4,
+    "reviews": 842,
+    "price": "₩49,000"
+  },
+  {
+    "thumbnail": "/images/003.png",
+    "title": "Javascript 마스터",
+    "instructor": "정수현 코더",
+    "rating": 5,
+    "reviews": 1423,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/009.png",
+    "title": "머신러닝 기초",
+    "instructor": "코드스킬",
+    "rating": 4,
+    "reviews": 643,
+    "price": "₩59,000"
+  },
+  {
+    "thumbnail": "/images/028.png",
+    "title": "백엔드 서버와 API",
+    "instructor": "김코딩 전문가",
+    "rating": 4,
+    "reviews": 854,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/015.png",
+    "title": "모바일 앱 개발",
+    "instructor": "홍길동",
+    "rating": 5,
+    "reviews": 723,
+    "price": "₩39,000"
+  },
+  {
+    "thumbnail": "/images/050.png",
+    "title": "안드로이드 스튜디오",
+    "instructor": "코드스킬",
+    "rating": 4,
+    "reviews": 458,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/012.png",
+    "title": "클라우드 컴퓨팅",
+    "instructor": "이진호 개발자",
+    "rating": 4,
+    "reviews": 672,
+    "price": "₩99,000"
+  },
+  {
+    "thumbnail": "/images/022.png",
+    "title": "프론트엔드 프로젝트",
+    "instructor": "정수현 코더",
+    "rating": 5,
+    "reviews": 1342,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/001.png",
+    "title": "초보자용 Python",
+    "instructor": "김파이썬",
+    "rating": 4,
+    "reviews": 400,
+    "price": "₩10,000"
+  },
+  {
+    "thumbnail": "/images/015.png",
+    "title": "React 깊이 이해하기",
+    "instructor": "박리액트",
+    "rating": 5,
+    "reviews": 500,
+    "price": "₩25,000"
+  },
+  {
+    "thumbnail": "/images/045.png",
+    "title": "Node.js 마스터 클래스",
+    "instructor": "노드개발자",
+    "rating": 4,
+    "reviews": 320,
+    "price": "₩30,000"
+  },
+  {
+    "thumbnail": "/images/003.png",
+    "title": "알고리즘 문제 풀이",
+    "instructor": "알고리즘마스터",
+    "rating": 5,
+    "reviews": 550,
+    "price": "₩20,000"
+  },
+  {
+    "thumbnail": "/images/025.png",
+    "title": "JavaScript 고급",
+    "instructor": "자바스크립트고수",
+    "rating": 4,
+    "reviews": 450,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/042.png",
+    "title": "HTML/CSS 기초",
+    "instructor": "웹디자이너",
+    "rating": 3,
+    "reviews": 280,
+    "price": "₩8,000"
+  },
+  {
+    "thumbnail": "/images/038.png",
+    "title": "AI와 머신러닝",
+    "instructor": "인공지능박사",
+    "rating": 5,
+    "reviews": 720,
+    "price": "₩40,000"
+  },
+  {
+    "thumbnail": "/images/020.png",
+    "title": "빅데이터 분석",
+    "instructor": "데이터과학자",
+    "rating": 4,
+    "reviews": 600,
+    "price": "₩35,000"
+  },
+  {
+    "thumbnail": "/images/006.png",
+    "title": "UX/UI 디자인",
+    "instructor": "디자인전문가",
+    "rating": 3,
+    "reviews": 340,
+    "price": "₩22,000"
+  },
+  {
+    "thumbnail": "/images/027.png",
+    "title": "소프트웨어 공학",
+    "instructor": "소프트웨어엔지니어",
+    "rating": 5,
+    "reviews": 780,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/008.png",
+    "title": "백엔드 개발",
+    "instructor": "백엔드마스터",
+    "rating": 4,
+    "reviews": 520,
+    "price": "₩40,000"
+  },
+  {
+    "thumbnail": "/images/030.png",
+    "title": "모바일 앱 개발",
+    "instructor": "모바일개발자",
+    "rating": 4,
+    "reviews": 560,
+    "price": "₩45,000"
+  },
+  {
+    "thumbnail": "/images/017.png",
+    "title": "DevOps 실습",
+    "instructor": "오퍼레이션전문가",
+    "rating": 5,
+    "reviews": 400,
+    "price": "₩25,000"
+  },
+  {
+    "thumbnail": "/images/048.png",
+    "title": "데이터 시각화",
+    "instructor": "데이터아티스트",
+    "rating": 4,
+    "reviews": 500,
+    "price": "₩30,000"
+  },
+  {
+    "thumbnail": "/images/005.png",
+    "title": "클라우드 컴퓨팅 심화",
+    "instructor": "클라우드엔지니어",
+    "rating": 5,
+    "reviews": 900,
+    "price": "₩60,000"
+  },
+  {
+    "thumbnail": "/images/019.png",
+    "title": "C++ 프로그래밍",
+    "instructor": "씨플플고수",
+    "rating": 4,
+    "reviews": 450,
+    "price": "₩20,000"
+  },
+  {
+    "thumbnail": "/images/040.png",
+    "title": "Go 언어 마스터하기",
+    "instructor": "고개발자",
+    "rating": 5,
+    "reviews": 480,
+    "price": "₩35,000"
+  },
+  {
+    "thumbnail": "/images/014.png",
+    "title": "게임 개발 입문",
+    "instructor": "게임디자이너",
+    "rating": 4,
+    "reviews": 390,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/033.png",
+    "title": "블록체인 기술",
+    "instructor": "블록체인전문가",
+    "rating": 5,
+    "reviews": 600,
+    "price": "₩45,000"
+  },
+  {
+    "thumbnail": "/images/010.png",
+    "title": "프로그래밍 기초",
+    "instructor": "프로그래머",
+    "rating": 3,
+    "reviews": 280,
+    "price": "₩12,000"
+  },
+  {
+    "thumbnail": "/images/018.png",
+    "title": "Docker 실습",
+    "instructor": "도커전문가",
+    "rating": 5,
+    "reviews": 750,
+    "price": "₩55,000"
+  },
+  {
+    "thumbnail": "/images/046.png",
+    "title": "Java 프로그래밍",
+    "instructor": "자바개발자",
+    "rating": 4,
+    "reviews": 500,
+    "price": "₩25,000"
+  },
+  {
+    "thumbnail": "/images/024.png",
+    "title": "Kubernetes 클러스터",
+    "instructor": "쿠버네티스전문가",
+    "rating": 5,
+    "reviews": 640,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/009.png",
+    "title": "데이터 과학 입문",
+    "instructor": "데이터사이언티스트",
+    "rating": 4,
+    "reviews": 300,
+    "price": "₩18,000"
+  },
+  {
+    "thumbnail": "/images/029.png",
+    "title": "Python 심화",
+    "instructor": "파이썬마스터",
+    "rating": 5,
+    "reviews": 900,
+    "price": "₩35,000"
+  },
+  {
+    "thumbnail": "/images/032.png",
+    "title": "웹 개발 기초",
+    "instructor": "웹마스터",
+    "rating": 4,
+    "reviews": 330,
+    "price": "₩10,000"
+  },
+  {
+    "thumbnail": "/images/003.png",
+    "title": "프론트엔드 완벽 가이드",
+    "instructor": "프론트장인",
+    "rating": 5,
+    "reviews": 1200,
+    "price": "₩60,000"
+  },
+  {
+    "thumbnail": "/images/017.png",
+    "title": "Node.js로 서버 만들기",
+    "instructor": "노드전문가",
+    "rating": 4,
+    "reviews": 450,
+    "price": "₩28,000"
+  },
+  {
+    "thumbnail": "/images/045.png",
+    "title": "데이터베이스 설계",
+    "instructor": "DB마스터",
+    "rating": 5,
+    "reviews": 700,
+    "price": "₩40,000"
+  },
+  {
+    "thumbnail": "/images/014.png",
+    "title": "React와 Redux 마스터",
+    "instructor": "리액트코더",
+    "rating": 4,
+    "reviews": 520,
+    "price": "₩32,000"
+  },
+  {
+    "thumbnail": "/images/041.png",
+    "title": "클라우드 컴퓨팅 입문",
+    "instructor": "클라우드구루",
+    "rating": 4,
+    "reviews": 280,
+    "price": "₩25,000"
+  },
+  {
+    "thumbnail": "/images/011.png",
+    "title": "인공지능 기초",
+    "instructor": "AI마스터",
+    "rating": 5,
+    "reviews": 850,
+    "price": "₩45,000"
+  },
+  {
+    "thumbnail": "/images/038.png",
+    "title": "CSS 그리드와 플렉스",
+    "instructor": "디자인장인",
+    "rating": 4,
+    "reviews": 340,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/050.png",
+    "title": "Go 언어로 배우는 백엔드",
+    "instructor": "고퍼개발자",
+    "rating": 5,
+    "reviews": 420,
+    "price": "₩38,000"
+  },
+  {
+    "thumbnail": "/images/022.png",
+    "title": "Docker로 컨테이너 관리",
+    "instructor": "도커마스터",
+    "rating": 5,
+    "reviews": 610,
+    "price": "₩33,000"
+  },
+  {
+    "thumbnail": "/images/005.png",
+    "title": "기계 학습 A to Z",
+    "instructor": "머신러닝장인",
+    "rating": 5,
+    "reviews": 1100,
+    "price": "₩55,000"
+  },
+  {
+    "thumbnail": "/images/019.png",
+    "title": "Swift로 iOS 앱 개발",
+    "instructor": "스위프트개발자",
+    "rating": 4,
+    "reviews": 280,
+    "price": "₩30,000"
+  },
+  {
+    "thumbnail": "/images/037.png",
+    "title": "마케팅 분석과 데이터",
+    "instructor": "마케팅전문가",
+    "rating": 4,
+    "reviews": 400,
+    "price": "₩22,000"
+  },
+  {
+    "thumbnail": "/images/012.png",
+    "title": "TypeScript 시작하기",
+    "instructor": "타입장인",
+    "rating": 5,
+    "reviews": 310,
+    "price": "₩26,000"
+  },
+  {
+    "thumbnail": "/images/046.png",
+    "title": "풀스택 개발 가이드",
+    "instructor": "풀스택코더",
+    "rating": 5,
+    "reviews": 980,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/034.png",
+    "title": "UX/UI 디자인 심화",
+    "instructor": "UX디자이너",
+    "rating": 4,
+    "reviews": 240,
+    "price": "₩18,000"
+  },
+  {
+    "thumbnail": "/images/021.png",
+    "title": "Java로 배우는 객체지향",
+    "instructor": "자바전문가",
+    "rating": 5,
+    "reviews": 890,
+    "price": "₩42,000"
+  },
+  {
+    "thumbnail": "/images/037.png",
+    "title": "마케팅 분석과 데이터",
+    "instructor": "마케팅전문가",
+    "rating": 4,
+    "reviews": 400,
+    "price": "₩22,000"
+  },
+  {
+    "thumbnail": "/images/012.png",
+    "title": "TypeScript 시작하기",
+    "instructor": "타입장인",
+    "rating": 5,
+    "reviews": 310,
+    "price": "₩26,000"
+  },
+  {
+    "thumbnail": "/images/046.png",
+    "title": "풀스택 개발 가이드",
+    "instructor": "풀스택코더",
+    "rating": 5,
+    "reviews": 980,
+    "price": "₩50,000"
+  },
+  {
+    "thumbnail": "/images/034.png",
+    "title": "UX/UI 디자인 심화",
+    "instructor": "UX디자이너",
+    "rating": 4,
+    "reviews": 240,
+    "price": "₩18,000"
+  },
+  {
+    "thumbnail": "/images/021.png",
+    "title": "Java로 배우는 객체지향",
+    "instructor": "자바전문가",
+    "rating": 5,
+    "reviews": 890,
+    "price": "₩42,000"
+  },
+  {
+    "thumbnail": "/images/005.png",
+    "title": "데이터 시각화 기초",
+    "instructor": "데이터시각화전문가",
+    "rating": 4,
+    "reviews": 530,
+    "price": "₩28,000"
+  },
+  {
+    "thumbnail": "/images/039.png",
+    "title": "React Native 완벽 가이드",
+    "instructor": "리액트네이티브고수",
+    "rating": 5,
+    "reviews": 620,
+    "price": "₩38,000"
+  },
+  {
+    "thumbnail": "/images/002.png",
+    "title": "Python 입문",
+    "instructor": "파이썬초보",
+    "rating": 3,
+    "reviews": 1200,
+    "price": "무료"
+  },
+  {
+    "thumbnail": "/images/017.png",
+    "title": "SEO 마케팅 전략",
+    "instructor": "SEO컨설턴트",
+    "rating": 4,
+    "reviews": 720,
+    "price": "₩29,000"
+  },
+  {
+    "thumbnail": "/images/049.png",
+    "title": "Node.js 기반 서버 개발",
+    "instructor": "노드마스터",
+    "rating": 5,
+    "reviews": 860,
+    "price": "₩40,000"
+  },
+  {
+    "thumbnail": "/images/025.png",
+    "title": "모바일 앱 디자인",
+    "instructor": "디자인마스터",
+    "rating": 4,
+    "reviews": 670,
+    "price": "₩32,000"
+  },
+  {
+    "thumbnail": "/images/011.png",
+    "title": "C++ 심화 프로그래밍",
+    "instructor": "시플플장인",
+    "rating": 5,
+    "reviews": 520,
+    "price": "₩45,000"
+  },
+  {
+    "thumbnail": "/images/043.png",
+    "title": "실전 클라우드 아키텍처",
+    "instructor": "클라우드전문가",
+    "rating": 5,
+    "reviews": 450,
+    "price": "₩55,000"
+  },
+  {
+    "thumbnail": "/images/006.png",
+    "title": "데이터베이스 설계",
+    "instructor": "DB마스터",
+    "rating": 4,
+    "reviews": 890,
+    "price": "₩35,000"
+  },
+  {
+    "thumbnail": "/images/014.png",
+    "title": "기계 학습 초급",
+    "instructor": "머신러닝초보",
+    "rating": 3,
+    "reviews": 400,
+    "price": "₩15,000"
+  },
+  {
+    "thumbnail": "/images/018.png",
+    "title": "블록체인 기본 원리",
+    "instructor": "블록체인고수",
+    "rating": 5,
+    "reviews": 700,
+    "price": "₩48,000"
+  },
+  {
+    "thumbnail": "/images/030.png",
+    "title": "풀스택 Next.js",
+    "instructor": "넥스트장인",
+    "rating": 5,
+    "reviews": 830,
+    "price": "₩52,000"
+  },
+  {
+    "thumbnail": "/images/044.png",
+    "title": "웹 보안 심화",
+    "instructor": "웹보안전문가",
+    "rating": 4,
+    "reviews": 620,
+    "price": "₩37,000"
+  },
+  {
+    "thumbnail": "/images/033.png",
+    "title": "JavaScript 패턴",
+    "instructor": "JS고수",
+    "rating": 4,
+    "reviews": 310,
+    "price": "₩21,000"
+  },
+  {
+    "thumbnail": "/images/040.png",
+    "title": "Flutter 앱 개발",
+    "instructor": "플러터마스터",
+    "rating": 5,
+    "reviews": 540,
+    "price": "₩36,000"
+  },
+  {
+    "thumbnail": "/images/027.png",
+    "title": "크로스 플랫폼 개발",
+    "instructor": "크로스개발고수",
+    "rating": 4,
+    "reviews": 770,
+    "price": "₩33,000"
+  }
+]

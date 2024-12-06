@@ -16,5 +16,6 @@ const CourseList = ( { courses } ) => {
 export default CourseList;
 
 const StyledSearchCourseCardsContainer = styled.div`
-    display:flex;
+    display:grid;
+    grid-template-columns: repeat(4, 1fr); /* 4개의 열로 구성 */
 `;
