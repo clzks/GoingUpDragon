@@ -14,20 +14,31 @@ const CourseDetailMainPanel = ({
   recommendLectureList,
   similarLectureList,
   enrollmentData,
+  refList,
 }) => {
+  const lectureCount = curriculumData.reduce((total, section) => {
+    return total + section.lectures.length;
+  }, 0);
+
   return (
     <StyledCourseMainPanel>
       <StyledLeftPanel>
-        <Curriculum curriculumData={curriculumData}></Curriculum>
-        <LectureInfo description={description}></LectureInfo>
-        <CourseReviewSection></CourseReviewSection>
+        <Curriculum
+          curriculumData={curriculumData}
+          ref={refList.curriculumRef}
+        ></Curriculum>
+        <LectureInfo
+          description={description}
+          ref={refList.infoRef}
+        ></LectureInfo>
+        <CourseReviewSection ref={refList.reviewRef}></CourseReviewSection>
         <InstructorCardList
           lectureList={recommendLectureList}
         ></InstructorCardList>
         <SimilarCardList lectureList={similarLectureList}></SimilarCardList>
       </StyledLeftPanel>
       <StyledRightPanel>
-        <PricingPanel data={enrollmentData}></PricingPanel>
+        <PricingPanel data={enrollmentData} count={lectureCount}></PricingPanel>
       </StyledRightPanel>
     </StyledCourseMainPanel>
   );
@@ -45,6 +56,7 @@ const StyledLeftPanel = styled.div`
 `;
 
 const StyledRightPanel = styled.div`
+  position: relative;
   flex: 1;
 `;
 

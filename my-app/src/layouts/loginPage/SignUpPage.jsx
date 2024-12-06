@@ -7,10 +7,10 @@ import Row from "react-bootstrap/Row";
 import styled from "styled-components";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 // import 필요한 외부 라이브러리와 내부 라이브러리 구분
-import GoogleIcon from "../components/common/icons/GoogleIcon"; // GoogleIcon 컴포넌트 불러오기
-import NaverIcon from "../components/common/icons/NaverIcon"; // NaverIcon 컴포넌트 불러오기
+import GoogleLogo from "../../components/common/icons/GoogleIcon";
+import NaverIcon from "../../components/common/icons/NaverIcon";
 
-const SignupPage = () => {
+const SignUpPage = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -148,8 +148,9 @@ const SignupPage = () => {
       <Row className="mb-3 justify-content-center">
         <Col xs={12} md={6} className="text-center mt-4 mb-1">
           <p>
-            "LECEcampus"의 뉴스레터 및 프로모션 정보 수신에 동의합니다.<br />언제든지
-            수신 거부가 가능합니다.
+            "LECEcampus"의 뉴스레터 및 프로모션 정보 수신에 동의합니다.
+            <br />
+            언제든지 수신 거부가 가능합니다.
           </p>
         </Col>
       </Row>
@@ -163,16 +164,14 @@ const SignupPage = () => {
       </Row>
       <Row className="mb-3 justify-content-center">
         <Col xs={12} md={6} className="text-center mt-4 mb-1">
-          <p>
-            간편 회원가입
-          </p>
+          <p>간편 회원가입</p>
         </Col>
-      </Row>      
+      </Row>
       <Row className="mb-3 justify-content-center">
         <Col xs={12} md={6} className="text-center">
-        <StyledIconWrapper>
+          <StyledIconWrapper>
             {/* 구글 및 네이버 아이콘 추가 */}
-            <GoogleIcon width="48px" height="48px" />
+            <GoogleLogo width="48px" height="48px" />
             <NaverIcon width="48px" height="48px" />
           </StyledIconWrapper>
         </Col>
@@ -181,7 +180,7 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+export default SignUpPage;
 
 // Styled Components
 const StyledLogo = styled.img`
