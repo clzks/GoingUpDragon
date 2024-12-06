@@ -1,3 +1,4 @@
+// component/courseDetailPage/banner/DetailCourseBanner.jsx
 import React from "react";
 import styled from "styled-components";
 import CourseThumnail from "./CourseThumnail";

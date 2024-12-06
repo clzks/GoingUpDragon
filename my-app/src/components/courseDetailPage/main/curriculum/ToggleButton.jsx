@@ -1,3 +1,4 @@
+// components/courseDetailPage/main/curriculum/ToggleButton.jsx
 import React from "react";
 import styled from "styled-components";
 import { FaChevronDown } from "react-icons/fa";

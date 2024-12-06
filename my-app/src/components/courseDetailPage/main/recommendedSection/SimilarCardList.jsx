@@ -1,3 +1,4 @@
+// components/courseDetailPage/main/recommendedSection/SimilarCardList.jsx
 import React from "react";
 import styled from "styled-components";
 import Cards from "../../../common/card/Cards";

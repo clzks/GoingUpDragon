@@ -1,3 +1,4 @@
+// components/courseDetailPage/navigation/CourseNavigation.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { Container } from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
@@ -38,7 +39,7 @@ const CourseNavigation = ({ refList }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [initialOffset, refList]);
 
-  const handleSelect = (eventKey) => {
+  function handleSelect(eventKey) {
     const offset = -50; // 원하는 오프셋 값 (위로 50px)
 
     let targetRef;
@@ -61,7 +62,7 @@ const CourseNavigation = ({ refList }) => {
       const targetPosition = targetRef.current.offsetTop + offset; // 오프셋 적용
       window.scrollTo({ top: targetPosition, behavior: "smooth" });
     }
-  };
+  }
 
   return (
     <StyledNavigationContainer ref={navRef} isSticky={isSticky}>
