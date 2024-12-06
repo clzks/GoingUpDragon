@@ -22,8 +22,8 @@ const MiddleCategoryBox = () => {
   const [selectedSkillTagId, setSelectedSkillTagId] = useState(null);
   const innerContainerRef = useRef(null); // InnerContainer ref
 
-  // Handle skill tag click
-  const handleSkillTagClick = (id) => {
+  // Handle CategoryItem click
+  const handleCategoryClick = (id) => {
     setSelectedSkillTagId(id);
   };
 
@@ -45,11 +45,12 @@ const MiddleCategoryBox = () => {
       <ArrowButtonLeft scrollLeft={scrollLeft} />
       <InnerContainer ref={innerContainerRef}>
         {categories.map((item) => (
-          <CategoryItem key={item.id}>
-            <CategoryIcon
-              onClick={() => handleSkillTagClick(item.id)}
-              isSelected={selectedSkillTagId === item.id}
-            >
+          <CategoryItem
+            key={item.id}
+            onClick={() => handleCategoryClick(item.id)}
+            isSelected={selectedSkillTagId === item.id}
+          >
+            <CategoryIcon isSelected={selectedSkillTagId === item.id}>
               {item.title}
             </CategoryIcon>
           </CategoryItem>
@@ -80,8 +81,6 @@ const InnerContainer = styled.div`
   overflow-x: hidden;
   scroll-behavior: smooth;
   white-space: nowrap; /* 항목이 줄 바꿈 되지 않도록 설정 */
-
-  
 `;
 
 const CategoryItem = styled.div`
@@ -114,7 +113,7 @@ const CategoryItem = styled.div`
 
 const CategoryIcon = styled.div`
   font-size: 16px; /* 텍스트 크기 조정 */
-  transition: color 0.3s ease;
+  transition: font-weight 0.3s ease;
 
   ${({ isSelected }) =>
     isSelected &&
