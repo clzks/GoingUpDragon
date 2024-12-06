@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import styled from "styled-components";
 
 import Accordion from "react-bootstrap/Accordion";
 import CurriculumItem from "./CurriculumItem";
 import ToggleButton from "./ToggleButton";
 
-const Curriculum = ({ curriculumData }) => {
+const Curriculum = forwardRef(({ curriculumData }, ref) => {
   const [isExpanded, setExpanded] = useState(false);
 
   const [activeKey, setActiveKey] = useState([]); // 기본으로 첫 번째 아이템 열기
 
   useEffect(() => {
-    // 닫혀있는 키가 하나라도 있으면 setExpanded(false) 호출
-    const isAnyClosed = curriculumData.some(
-      (_, index) => !activeKey.includes(index.toString())
-    );
+    // 모든 섹션이 열려 있는지 확인하여 isExpanded 업데이트
+    const isAllExpanded =
+      curriculumData.length > 0 && activeKey.length === curriculumData.length;
 
-    if (isAnyClosed) {
-      setExpanded(false); // 닫힌 항목이 있으면 펼쳐진 상태를 false로 설정
-    }
-  }, [activeKey, curriculumData]); // activeKey가 변경될 때마다 검사
+    setExpanded(isAllExpanded);
+  }, [activeKey, curriculumData]);
 
   function handleToggle() {
     setExpanded((prev) => !prev);
@@ -34,7 +31,7 @@ const Curriculum = ({ curriculumData }) => {
   }
 
   return (
-    <StyledCurriculumContainer>
+    <StyledCurriculumContainer ref={ref}>
       <StyledTitleText>커리큘럼</StyledTitleText>
       <ToggleButton
         onClick={handleToggle}
@@ -59,11 +56,12 @@ const Curriculum = ({ curriculumData }) => {
       </StyledCourseAccordion>
     </StyledCurriculumContainer>
   );
-};
+});
 
 const StyledCurriculumContainer = styled.div`
   width: 100%;
   position: relative;
+  margin-top: 150px;
 `;
 
 const StyledTitleText = styled.h2`

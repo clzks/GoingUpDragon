@@ -1,9 +1,9 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styled from "styled-components";
 
-const LectureInfo = ({ description }) => {
+const LectureInfo = forwardRef(({ description }, ref) => {
   return (
-    <div>
+    <div ref={ref}>
       <StyledTitleText>강의 소개</StyledTitleText>
       <StyledMainDescription>{description[0]}</StyledMainDescription>
       <ul>
@@ -16,7 +16,7 @@ const LectureInfo = ({ description }) => {
       <StyledSubDescription>{description[6]}</StyledSubDescription>
     </div>
   );
-};
+});
 
 const StyledMainDescription = styled.div`
   margin-top: 40px;
