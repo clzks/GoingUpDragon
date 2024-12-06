@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useRef } from "react";
 import Layout from "../../components/common/layout/Layout";
 import DetailCourseBanner from "../../components/courseDetailPage/banner/DetailCourseBanner";
 import CourseNavigation from "../../components/courseDetailPage/navigation/CourseNavigation";
-import Curriculum from "../../components/courseDetailPage/main/curriculum/Curriculum";
 import CourseDetailMainPanel from "../../components/courseDetailPage/main/CourseDetailMainPanel";
 
 const CourseDetailLayout = () => {
+  const refList = {
+    curriculumRef: useRef(null),
+    infoRef: useRef(null),
+    reviewRef: useRef(null),
+  };
+
   const lectureInfo = {
     instructor: "이준호",
     mainCategory: "개발 · 프로그래밍",
@@ -31,8 +36,9 @@ const CourseDetailLayout = () => {
     reviews: 133,
     students: 1300,
     price: 33000,
-    duration: -1, // 무제한
+    duration: "무제한",
     difficulty: "쉬움",
+    badge: "발급",
   };
 
   const curriculum = [
@@ -368,13 +374,14 @@ const CourseDetailLayout = () => {
         lectureData={lectureInfo}
         enrollmentData={enrollmentInfo}
       ></DetailCourseBanner>
-      <CourseNavigation></CourseNavigation>
+      <CourseNavigation refList={refList}></CourseNavigation>
       <CourseDetailMainPanel
         curriculumData={curriculum}
         description={lectureInfo.description}
         recommendLectureList={recommendLectureList}
         similarLectureList={similarLectureList}
         enrollmentData={enrollmentInfo}
+        refList={refList}
       ></CourseDetailMainPanel>
     </Layout>
   );
