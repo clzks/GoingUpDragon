@@ -1,12 +1,14 @@
 import React from "react";
 import Layout from "../../../components/common/layout/Layout";
 import styled from "styled-components";
-import Thumbnail from "../QnAThumbnail";
+import QnAHeader from "../../../components/qnAPage/header/QnAHeader";
+import QnAMainConainer from "../../../components/qnAPage/main/QnAMainConainer";
 
 const QnAMainLayout = () => {
   return (
     <Layout>
-      <Thumbnail></Thumbnail>
+      <QnAHeader></QnAHeader>
+      <QnAMainConainer></QnAMainConainer>
     </Layout>
   );
 };
