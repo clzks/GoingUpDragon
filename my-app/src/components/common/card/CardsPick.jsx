@@ -9,9 +9,8 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 // GoingUpDragon/my-app/src/components/common/card
 import CardItem from "./CardItemPick";
 
-const CardsPick = ({ subtitle, cardData }) => {
+const CardsPick = ({ cardData, cardsToShow = 3 }) => {
   const [startIndex, setStartIndex] = useState(0);
-  const cardsToShow = 3;
 
   function handlePrev() {
     setStartIndex((prevIndex) =>
@@ -31,6 +30,7 @@ const CardsPick = ({ subtitle, cardData }) => {
         <StyledCardsSlideButton
           variant="outline-secondary"
           onClick={handlePrev}
+          disabled={startIndex === 0}
         >
           <FaChevronLeft></FaChevronLeft>
         </StyledCardsSlideButton>
@@ -48,6 +48,7 @@ const CardsPick = ({ subtitle, cardData }) => {
         <StyledCardsSlideButton
           variant="outline-secondary"
           onClick={handleNext}
+          disabled={startIndex + cardsToShow >= cardData.length}
         >
           <FaChevronRight></FaChevronRight>
         </StyledCardsSlideButton>

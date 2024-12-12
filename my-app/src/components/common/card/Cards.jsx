@@ -30,6 +30,7 @@ const Cards = ({ cardData, cardsToShow = 4, maxWidth }) => {
         <StyledCardsSlideButton
           variant="outline-secondary"
           onClick={handlePrev}
+          disabled={startIndex === 0}
         >
           <FaChevronLeft></FaChevronLeft>
         </StyledCardsSlideButton>
@@ -52,6 +53,7 @@ const Cards = ({ cardData, cardsToShow = 4, maxWidth }) => {
         <StyledCardsSlideButton
           variant="outline-secondary"
           onClick={handleNext}
+          disabled={startIndex + cardsToShow >= cardData.length}
         >
           <FaChevronRight></FaChevronRight>
         </StyledCardsSlideButton>

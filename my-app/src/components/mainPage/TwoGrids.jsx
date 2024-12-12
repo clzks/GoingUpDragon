@@ -31,6 +31,11 @@ function TwoGrids() {
   const [currentIndex, setCurrentIndex] = useState(0); // 현재 슬라이드 번호
   const sliderRef = useRef(null); // Slider 접근용 Ref
 
+  const getIndex = ( index ) => {
+    console.log(index);
+    sliderRef.current.slickGoTo(index);
+  }
+
   const toggleAutoSlide = () => {
     setAutoSlide((prev) => {
       const newState = !prev;
@@ -88,7 +93,7 @@ function TwoGrids() {
         </StyledControlPanel>
 
         <StyledTagContainer>
-          <TagComponent />
+          <TagComponent onIndex={getIndex} />
         </StyledTagContainer>
       </StyledControlAndTagContainer>
     </StyledContainer>

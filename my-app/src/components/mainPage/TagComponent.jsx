@@ -21,7 +21,7 @@ const tags = [
   "엄마표 코딩 수업 노하우",
 ];
 
-const TagComponent = () => {
+const TagComponent = ( {onIndex} ) => {
   // 모든 태그의 상태를 관리하는 배열 (초기값은 모두 비활성화 상태)
   const [activeTags, setActiveTags] = useState([
     false,
@@ -44,10 +44,12 @@ const TagComponent = () => {
 
   // 특정 태그 클릭 시, 해당 태그만 활성화하고 나머지는 비활성화하는 함수
   function handleTagClick(index) {
+    onIndex(index);
     // 새 배열을 만들어서 상태를 업데이트
     const newActiveTags = Array(activeTags.length).fill(false); // 모든 태그를 비활성화 상태로 초기화
     newActiveTags[index] = true; // 클릭된 태그만 활성화 상태로 설정
     setActiveTags(newActiveTags); // 상태 업데이트
+    
   }
 
   return (

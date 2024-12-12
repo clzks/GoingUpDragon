@@ -1,4 +1,3 @@
-// GoingUpDragon/my-app/src/components/common/card/CardItem.jsx
 import React from "react";
 
 // 외부 라이브러리
@@ -21,7 +20,7 @@ const CardItem = ({
     <StyledCardItem>
       <StyledCardImage variant="top" src={imageUrl} />
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
+        <StyledCardTitle>{title}</StyledCardTitle>
         <StyledCardInstructor>{instructor}</StyledCardInstructor>
         <StyledCardRating>
           <StyledStarIcon className={rating >= 1 ? "filled" : ""} />
@@ -47,7 +46,7 @@ const StyledOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.85); /* 투명한 검은색 배경 */
+  background-color: rgba(0, 0, 0, 0.85);
   color: white;
   display: flex;
   flex-direction: column;
@@ -64,6 +63,8 @@ const StyledCardItem = styled(Card)`
   margin: 1rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
 
   &:hover {
     transform: translateY(-5px);
@@ -77,6 +78,17 @@ const StyledCardItem = styled(Card)`
 const StyledCardImage = styled(Card.Img)`
   height: 200px;
   object-fit: cover;
+`;
+
+const StyledCardTitle = styled(Card.Title)`
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  height: 3.6rem; /* Fix the height of the title area */
+  overflow: hidden; /* Prevents overflow if title is too long */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Truncate the title to 2 lines */
+  -webkit-box-orient: vertical;
 `;
 
 const StyledCardInstructor = styled(Card.Text)`
@@ -110,7 +122,7 @@ const StyledCardPrice = styled(Card.Text)`
   font-size: 1rem;
   font-weight: bold;
   color: #333;
-  margin-top: 0.5rem;
+  margin-top: auto; /* Align price to the bottom */
 `;
 
 const StyledOverlayText = styled.div`

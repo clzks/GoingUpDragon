@@ -9,6 +9,6 @@ import PolicyLayout from "./layouts/policyPage/PolicyLayout";
 import SignUpPage from "./layouts/loginPage/SignUpPage";
 import LoginModal from "./components/common/utilities/LoginModal";
 function App() {
-  return <SearchLayout></SearchLayout>;
+  return <MainLayout></MainLayout>;
 }
 export default App;
