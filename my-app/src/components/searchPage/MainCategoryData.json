@@ -1,0 +1,18 @@
+ [
+    { "id": 1, "icon": "FaRegCopy", "label": "전체" },
+    { "id": 2, "icon": "FaHtml5", "label": "Html5" },
+    { "id": 3, "icon": "FaCss3Alt", "label": "Css3" },
+    { "id": 4, "icon": "FaJsSquare", "label": "JavaScript" },
+    { "id": 5, "icon": "FaPython", "label": "Python" },
+    { "id": 6, "icon": "FaJava", "label": "Java" },
+    { "id": 7, "icon": "FaPhp", "label": "PHP" },
+    { "id": 8, "icon": "FaNode", "label": "Node.js" },
+    { "id": 9, "icon": "FaReact", "label": "React" },
+    { "id": 10, "icon": "FaSwift", "label": "Swift" },
+    { "id": 11, "icon": "FaPython", "label": "Python" },
+    { "id": 12, "icon": "FaJava", "label": "Java" },
+    { "id": 13, "icon": "FaPhp", "label": "PHP" },
+    { "id": 14, "icon": "FaNode", "label": "Node.js" },
+    { "id": 15, "icon": "FaReact", "label": "React" },
+    { "id": 16, "icon": "FaSwift", "label": "Swift" }
+]

@@ -21,6 +21,7 @@ const SkillSearchModal = (props) => {
   ];
 
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [searchText, setSearchText] = useState(""); // 검색 텍스트 상태 추가
 
   // 카테고리 선택 시 선택한 카테고리 저장
   const handleCategoryClick = (category) => {
@@ -48,6 +49,8 @@ const SkillSearchModal = (props) => {
             type="search"
             placeholder="강의검색"
             aria-label="Search"
+            value={searchText} // 입력 값 상태 연결
+            onChange={(e) => setSearchText(e.target.value)} // 입력 이벤트 처리
           />
         </Form>
         {/* 선택된 카테고리들 표시 */}
@@ -70,7 +73,12 @@ const SkillSearchModal = (props) => {
       </Modal.Body>
       <Modal.Footer>
         {/* 초기화 버튼 */}
-        <StyledResetButton>
+        <StyledResetButton
+          onClick={() => {
+            setSelectedCategories([]);
+            setSearchText("");
+          }}
+        >
           <FaSync />
           초기화
         </StyledResetButton>

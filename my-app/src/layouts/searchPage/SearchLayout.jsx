@@ -1,3 +1,4 @@
+// GoingUpDragon\my-app\src\layouts\searchPage\SearchLayout.jsx
 import React, { useRef, useState } from "react";
 
 // 외부 라이브러리
@@ -14,6 +15,9 @@ import ArrowButtonRight from "../../components/common/icons/ArrowButtonRight";
 import ArrowButtonLeft from "../../components/common/icons/ArrowButtonLeft";
 import Footer from "../../components/common/layout/Footer";
 import ScrollTopButton from "../../components/common/utilities/ScrollTopButton";
+import VerticalLine from "../../components/common/icons/VerticalLine";
+
+// GoingUpDragon/my-app/src
 import SearchCategory from "../../components/searchPage/SearchCategory";
 import MainCategoryDatas from "../../components/searchPage/MainCategoryDatas";
 import MiddleCategoryBox from "../../components/searchPage/MiddleCategoryBox";
@@ -22,12 +26,13 @@ import SearchSortOption from "../../components/searchPage/SearchSortOption";
 import SearchFillterParent from "../../components/searchPage/searchFillter/SearchFillterParent";
 import SearchCardDatas from "../../components/searchPage/searchCourseCards/SearchCardDatas";
 
+
 const SearchLayout = () => {
   const [modalShow, setModalShow] = useState(false);
-  const inputRef = useRef(null); // 검색창에 대한 참조 생성
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
-  // 각 카테고리의 스크롤을 위한 ref
-  const searchCategoryRef = useRef(null);
+  const inputRef = useRef(null); // 검색창에 대한 참조 생성
+  const searchCategoryRef = useRef(null); // 각 카테고리의 스크롤을 위한 ref
 
   const handleSearchIconClick = () => {
     if (inputRef.current) {
@@ -57,8 +62,11 @@ const SearchLayout = () => {
             {/* 왼쪽 화살표 */}
             <ArrowButtonLeft scrollLeft={() => scrollLeft(searchCategoryRef)} />
             <StyledScrollableContainer ref={searchCategoryRef}>
-              <SearchCategory onClick={handleSearchIconClick} />
-              <MainCategoryDatas />
+              <StyledCategoryItemContainer>
+                <SearchCategory onClick={handleSearchIconClick} />
+                <VerticalLine height="5rem" /> {/* 수직 구분선 */}
+                <MainCategoryDatas onCategorySelect={setSelectedCategoryId} />
+              </StyledCategoryItemContainer>
             </StyledScrollableContainer>
             {/* 오른쪽 화살표 */}
             <ArrowButtonRight
@@ -71,7 +79,8 @@ const SearchLayout = () => {
       <StyledSection>
         <Container>
           <StyledMiddleCategoryBoxRow>
-            <MiddleCategoryBox />
+            {selectedCategoryId !== 1 && <MiddleCategoryBox />}{" "}
+            {/* 전체는 렌더링 제외 */}
           </StyledMiddleCategoryBoxRow>
         </Container>
       </StyledSection>
@@ -118,9 +127,19 @@ const StyledCategoryContainer = styled.div`
 
 const StyledScrollableContainer = styled.div`
   display: flex;
-  overflow-x: hidden; /* 가로 스크롤을 제거 */
+  align-items: center;
+  overflow-x: auto; /* 스크롤 가능하도록 설정 */
   overflow-y: hidden;
-  gap: 1rem;
+
+  &::-webkit-scrollbar {
+    display: none; /* 스크롤바 숨김 */
+  }
+`;
+
+const StyledCategoryItemContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 3rem;
 `;
 
 const StyledSearchCourseContainer = styled.div`

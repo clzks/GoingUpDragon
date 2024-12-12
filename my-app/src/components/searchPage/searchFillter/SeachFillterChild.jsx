@@ -31,19 +31,21 @@ const CourseOptions = ({ data }) => {
             {showOptions ? <FaChevronUp /> : <FaChevronDown />}
           </StyledToggleIcon>
         </StyledSectionHeader>
-        {showOptions && data.items.map((item) => (
-          <StyledLabelContainer key={item}>
-            <StyledLabel>
-              <StyledCheckbox
-                type="checkbox"
-                name={item}
-                checked={selectedOption === item}
-                onChange={handleCheckboxChange}
-              />
-              {item}
-            </StyledLabel>
-          </StyledLabelContainer>
-        ))}
+        <StyledOptions show={showOptions}>
+          {data.items.map((item) => (
+            <StyledLabelContainer key={item}>
+              <StyledLabel>
+                <StyledCheckbox
+                  type="checkbox"
+                  name={item}
+                  checked={selectedOption === item}
+                  onChange={handleCheckboxChange}
+                />
+                {item}
+              </StyledLabel>
+            </StyledLabelContainer>
+          ))}
+        </StyledOptions>
       </StyledSection>
     </StyledContainer>
   );
@@ -69,11 +71,17 @@ const StyledSectionHeader = styled.div`
 const StyledSectionTitle = styled.h4`
   margin: 0;
   font-size: 20px;
-  font-weight: bold; /* 제목에 bold 스타일 추가 */
+  font-weight: bold;
 `;
 
 const StyledToggleIcon = styled.div`
   font-size: 24px;
+`;
+
+const StyledOptions = styled.div`
+  max-height: ${(props) => (props.show ? "500px" : "0")};
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
 `;
 
 const StyledLabelContainer = styled.div``;

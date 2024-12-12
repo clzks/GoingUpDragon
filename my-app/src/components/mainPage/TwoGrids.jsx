@@ -1,18 +1,17 @@
 // GoingUpDragon/my-app/src/components/mainPage/TwoGrids.jsx
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 
-// 외부 라이브러리
-import { Container, Row, Col, Carousel, Button } from "react-bootstrap";
+// // 외부 라이브러리
+import Slider from "react-slick";
+import styled from "styled-components";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import {
-  BsChevronDoubleLeft,
   BsPause,
   BsPlay,
-  BsChevronDoubleRight,
 } from "react-icons/bs";
-import styled from "styled-components";
 
-// GoingUpDragon/my-app/src/components/mainPage/TagComponent.jsx
-import TagComponent from "./TagComponent";
+// GoingUpDragon/my-app/src/components/mainPage
+import TagComponent from "./TagComponent"; // 태그 컴포넌트 import
 
 const images = [
   "./images/001.png",
@@ -25,178 +24,140 @@ const images = [
   "./images/008.png",
   "./images/009.png",
   "./images/010.png",
-  // 추가 이미지 URL을 여기에 추가하세요.
 ];
 
 function TwoGrids() {
-  // autoSlide 초기값을 true로 설정하여 pause 버튼이 처음에 보이게 함
-  const [index, setIndex] = useState(0);
-  const [autoSlide, setAutoSlide] = useState(true); // 초기값을 true로 설정
-  const slideIntervalRef = useRef(null);
+  const [autoSlide, setAutoSlide] = useState(true); // 자동 슬라이드 상태
+  const [currentIndex, setCurrentIndex] = useState(0); // 현재 슬라이드 번호
+  const sliderRef = useRef(null); // Slider 접근용 Ref
 
-  function handleSelect(selectedIndex) {
-    setIndex(selectedIndex);
-  }
-
-  function handlePrev() {
-    setIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  }
-
-  function handleNext() {
-    setIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
-  }
-
-  function toggleAutoSlide() {
-    setAutoSlide((prev) => !prev);
-  }
-
-  useEffect(() => {
-    if (autoSlide) {
-      slideIntervalRef.current = setInterval(() => {
-        handleNext();
-      }, 3000);
-    } else {
-      if (slideIntervalRef.current) {
-        clearInterval(slideIntervalRef.current);
+  const toggleAutoSlide = () => {
+    setAutoSlide((prev) => {
+      const newState = !prev;
+      if (newState) {
+        // Play 슬라이드
+        sliderRef.current.slickPlay();
+      } else {
+        // Pause 슬라이드
+        sliderRef.current.slickPause();
       }
-    }
+      return newState;
+    });
+  };
 
-    return () => {
-      if (slideIntervalRef.current) {
-        clearInterval(slideIntervalRef.current);
-      }
-    };
-  }, [autoSlide]);
+  // React Slick 설정
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: autoSlide,
+    autoplaySpeed: 3000,
+    beforeChange: (_, next) => setCurrentIndex(next),
+    arrows: false, // 기본 화살표 비활성화
+  };
 
   return (
     <StyledContainer>
-      <Carousel
-        activeIndex={index}
-        onSelect={handleSelect}
-        fade
-        indicators={false}
-      >
-        {images.map((src, idx) => (
-          <Carousel.Item key={idx}>
-            <StyledCarouselContainer>
-              <StyledCarouselImage src={src} alt={`Slide ${idx + 1}`} />
-            </StyledCarouselContainer>
-          </Carousel.Item>
-        ))}
-      </Carousel>
-      <Row>
-        <Col sm={3}>
-          <StyledButtonContainer>
-            <StyledCarouselCounter>{`${index + 1} / ${
-              images.length
-            }`}</StyledCarouselCounter>
-            <StyledCarouselButton
-              variant="outline-secondary"
-              onClick={handlePrev}
-            >
-              <BsChevronDoubleLeft />
-            </StyledCarouselButton>
-            {/* 재생/일시정지 버튼 */}
-            <StyledCarouselButton
-              variant="outline-secondary"
-              onClick={toggleAutoSlide}
-            >
-              {autoSlide ? <BsPause /> : <BsPlay />}
-            </StyledCarouselButton>
-            <StyledCarouselButton
-              variant="outline-secondary"
-              onClick={handleNext}
-            >
-              <BsChevronDoubleRight />
-            </StyledCarouselButton>
-          </StyledButtonContainer>
-        </Col>
-        <Col sm={8}>
+      {/* 캐러셀 영역 */}
+      <StyledCarouselContainer>
+        <Slider ref={sliderRef} {...settings}>
+          {images.map((src, idx) => (
+            <StyledSlide key={idx}>
+              <StyledImage src={src} alt={`Slide ${idx + 1}`} />
+            </StyledSlide>
+          ))}
+        </Slider>
+      </StyledCarouselContainer>
+
+      {/* 버튼과 태그를 포함한 컨트롤 패널 */}
+      <StyledControlAndTagContainer>
+        <StyledControlPanel>
+          <StyledCarouselCounter>
+            {`${currentIndex + 1} / ${images.length}`}
+          </StyledCarouselCounter>
+          <StyledCarouselButton onClick={() => sliderRef.current.slickPrev()}>
+            <FaChevronLeft />
+          </StyledCarouselButton>
+          <StyledCarouselButton onClick={toggleAutoSlide}>
+            {autoSlide ? <BsPause /> : <BsPlay />}
+          </StyledCarouselButton>
+          <StyledCarouselButton onClick={() => sliderRef.current.slickNext()}>
+            <FaChevronRight />
+          </StyledCarouselButton>
+        </StyledControlPanel>
+
+        <StyledTagContainer>
           <TagComponent />
-        </Col>
-      </Row>
+        </StyledTagContainer>
+      </StyledControlAndTagContainer>
     </StyledContainer>
   );
 }
 
 export default TwoGrids;
 
-/* 전체 컨테이너 스타일 */
-const StyledContainer = styled(Container)`
-  /* margin-top: 2rem; */
+// 스타일 컴포넌트
+const StyledContainer = styled.div`
+  margin-top: 2rem;
 `;
 
-/* 캐러셀 이미지 컨테이너 */
-
 const StyledCarouselContainer = styled.div`
+  position: relative;
+  margin-bottom: 2rem;
+`;
+
+const StyledSlide = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 600px;
   overflow: hidden;
-  margin-bottom: 1rem;
-  margin-left: 1rem;
-  position: relative; /* 버튼 컨테이너의 위치를 캐러셀 내에 고정시키기 위해 설정 */
-  margin-top: 1rem;
 `;
 
-const StyledCarouselImage = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-  width: 1220px; // 가로 크기 고정
-  height: 600px; // 세로 크기 고정
-  /* object-fit: cover; 이미지 비율 유지 */
-  transition: transform 0.5s ease-in-out; /* 슬라이드 효과를 부드럽게 */
-  margin-left: 0rem;
+const StyledImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지 비율을 유지하며 div에 맞춤 */
 `;
 
-/* 캐러셀 버튼 컨테이너 스타일 */
-const StyledButtonContainer = styled.div`
+const StyledControlAndTagContainer = styled.div`
+  display: flex;
+  justify-content: center; /* 버튼과 태그를 중앙으로 배치 */
+  align-items: start;
+  gap: 80px; /* 버튼과 태그 사이의 간격 */
+  margin-top: 10px;
+  width: 100%;
+`;
+
+const StyledControlPanel = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 5px;
-  margin-top: 1rem;
-  padding: 5px;
-  border: 2px solid #f0f0f0;
-  border-radius: 50px;
-  background-color: #ffffff;
+  padding: 16px;
+  gap: 10px;
+  position: relative;
+  margin-right: 20px;
 `;
 
-/* 캐러셀 버튼 스타일 */
-const StyledCarouselButton = styled(Button)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  border: 1px solid transparent !important;
-  background-color: transparent;
-  color: gray;
+const StyledCarouselButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 1.5rem;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
-  z-index: 10;
+  color: gray;
 
   &:hover {
-    background-color: #f0f0f0;
-    color: gray;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: none;
-    background-color: #f0f0f0;
-    color: gray;
+    color: black;
   }
 `;
 
-/* 캐러셀 카운터 스타일 */
 const StyledCarouselCounter = styled.span`
-  margin-right: 5px;
   color: gray;
+`;
+
+const StyledTagContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 `;

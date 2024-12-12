@@ -112,5 +112,5 @@ const StyledTagBox = styled.div`
   border-radius: 10px; /* 둥근 모서리 */
   padding: 5px; /* 패딩 추가 */
   background-color: white; /* 배경색 */
-  max-width: 600px; /* 최대 너비 조정 */
+  max-width: 800px; /* 최대 너비 조정 */
 `;

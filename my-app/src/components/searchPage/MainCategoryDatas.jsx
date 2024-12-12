@@ -16,7 +16,7 @@ import {
 } from "react-icons/fa";
 import styled from "styled-components";
 
-const MainCategoryDatas = () => {
+const MainCategoryDatas = ( { onCategorySelect } ) => {
   // 클릭된 아이콘을 추적하는 상태
   const [selectedIconId, setSelectedIconId] = useState(null);
 
@@ -43,6 +43,7 @@ const MainCategoryDatas = () => {
   // 아이콘 클릭 시 선택된 아이콘 상태 변경
   const handleIconClick = (id) => {
     setSelectedIconId(id);
+    onCategorySelect(id);
   };
 
   return (

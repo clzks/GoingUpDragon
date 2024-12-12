@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 
 // 외부 라이브러리
-import { Container, Button } from "react-bootstrap";
 import styled from "styled-components";
+import { Container, Button } from "react-bootstrap";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 // GoingUpDragon/my-app/src/components/common/card
 import CardItem from "./CardItemPick";
@@ -31,7 +32,7 @@ const CardsPick = ({ subtitle, cardData }) => {
           variant="outline-secondary"
           onClick={handlePrev}
         >
-          {"<"}
+          <FaChevronLeft></FaChevronLeft>
         </StyledCardsSlideButton>
         {cardData
           .slice(startIndex, startIndex + cardsToShow)
@@ -48,7 +49,7 @@ const CardsPick = ({ subtitle, cardData }) => {
           variant="outline-secondary"
           onClick={handleNext}
         >
-          {">"}
+          <FaChevronRight></FaChevronRight>
         </StyledCardsSlideButton>
       </StyledCardsWrapper>
     </StyledCardCarouselContainer>
@@ -87,8 +88,14 @@ const StyledCardsSlideButton = styled(Button)`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transition for background and text color */
   margin: 0 1px;
   position: relative;
   top: 200px;
+
+  /* Hover state: Add a color change */
+  &:hover {
+    background-color: #f0f0f0; /* Set hover background color */
+    color: #000; /* Set text color (or icon color) on hover */
+  }
 `;
