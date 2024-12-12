@@ -1,5 +1,9 @@
+// GoingUpDragon/my-app/src/components/searchPage/SearchSortOption.jsx
 import React from "react";
+
+// GoingUpDragon/my-app/src/components
 import SortOption from "../common/utilities/SortOption";
+
 const SearchSortOption = () => {
   const handleDropdownSelect = (value) => {
     console.log(`Selected: ${value}`);

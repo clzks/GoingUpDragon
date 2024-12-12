@@ -1,7 +1,8 @@
+// GoingUpDragon/my-app/src/components/searchPage/SkillSearchModal.jsx
 import React, { useState } from "react";
-import { Form } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+
+// 외부 라이브러리
+import { Form, Button, Modal } from "react-bootstrap";
 import { FaSync } from "react-icons/fa";
 import styled from "styled-components";
 
@@ -68,11 +69,13 @@ const SkillSearchModal = (props) => {
         </CategoryList>
       </Modal.Body>
       <Modal.Footer>
-        <StyledButton>
+        {/* 초기화 버튼 */}
+        <StyledResetButton>
           <FaSync />
           초기화
-        </StyledButton>
-        <Button onClick={props.onHide}>적용</Button>
+        </StyledResetButton>
+        {/* 적용 버튼 */}
+        <StyledApplyButton onClick={props.onHide}>적용</StyledApplyButton>
       </Modal.Footer>
     </Modal>
   );
@@ -80,24 +83,17 @@ const SkillSearchModal = (props) => {
 
 export default SkillSearchModal;
 
-const StyledButton = styled(Button)`
-  display: flex;
-  align-items: center;
-  gap: 8px; /* 아이콘과 텍스트 간 간격 추가 */
-`;
-
 const StyledFormControl = styled(Form.Control)`
   margin-right: 0.5rem;
 
   &:focus {
-    border-color: #7cd0d5 !important; /* 원하는 보더 색상으로 변경 */
+    border-color: #7cd0d5 !important;
     border: 1px solid #7cd0d5;
     box-shadow: none;
-    outline: 3px solid #7cd0d5; /* 원하는 색상으로 변경 */
+    outline: 3px solid #7cd0d5;
   }
 `;
 
-// 선택된 카테고리들 표시
 const SelectedCategories = styled.div`
   margin-top: 10px;
   display: flex;
@@ -106,8 +102,8 @@ const SelectedCategories = styled.div`
 `;
 
 const SelectedCategory = styled.span`
-  background-color: #007bff;
-  color: #fff;
+  background-color: #e6f7ff;
+  color: #000;
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 14px;
@@ -121,17 +117,42 @@ const CategoryList = styled.div`
 `;
 
 const CategoryButton = styled.button`
-  background-color: ${(props) => (props.selected ? "#007bff" : "#f0f0f0")};
-  color: ${(props) => (props.selected ? "#fff" : "#333")};
+  background-color: ${(props) => (props.selected ? "#e6f7ff" : "#f0f0f0")};
+  color: ${(props) => (props.selected ? "#000" : "#333")};
   padding: 8px 16px;
-  border: 1px solid ${(props) => (props.selected ? "#0056b3" : "#ccc")};
+  border: 1px solid ${(props) => (props.selected ? "#e6f7ff" : "#ccc")};
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #e6f7ff;
+    color: #000;
+  }
+`;
+
+const StyledResetButton = styled(Button)`
+  background-color: #e6f7ff;
+  color: #000;
+  border: 1px solid #e6f7ff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover {
+    background-color: #cceeff;
+    color: #000;
+  }
+`;
+
+const StyledApplyButton = styled(Button)`
+  background-color: #e6f7ff;
+  color: #000;
+  border: 1px solid #e6f7ff;
+
+  &:hover {
+    background-color: #cceeff;
+    color: #000;
   }
 `;

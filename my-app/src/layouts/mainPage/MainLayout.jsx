@@ -1,6 +1,11 @@
+// GoingUpDragon/my-app/src/layouts/mainPage/MainLayout.jsx
 import React from "react";
-import Layout from "../../components/common/layout/Layout"; // 레이아웃 컴포넌트 import
-import { Container, Pagination } from "react-bootstrap";
+
+// 외부 라이브러리
+import { Container } from "react-bootstrap";
+
+// GoingUpDragon/my-app/src
+import Layout from "../../components/common/layout/Layout";
 import TwoGrids from "../../components/mainPage/TwoGrids";
 import MainCards from "../../components/mainPage/MainCards";
 import MainCardsPick from "../../components/mainPage/MainCardsPick";

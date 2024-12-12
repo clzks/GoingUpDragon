@@ -1,7 +1,12 @@
 // components/courseDetailPage/main/recommendedSection/InstructorCardList.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/components
 import Cards from "../../../common/card/Cards";
+
 const InstructorCardList = ({ lectureList }) => {
   return (
     <StyledMainCardContainer>

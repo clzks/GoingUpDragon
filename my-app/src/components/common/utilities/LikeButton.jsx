@@ -1,4 +1,7 @@
+// GoingUpDragon/my-app/src/components/common/utilities/LikeButton.jsx
 import React, { useState } from "react";
+
+// 외부 라이브러리
 import { FaThumbsUp, FaRegThumbsUp } from "react-icons/fa";
 
 const LikeButton = ({

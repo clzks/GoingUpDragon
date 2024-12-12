@@ -1,5 +1,10 @@
+// GoingUpDragon/my-app/src/components/common/utilities/tag/SharpTagComponent.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/components/common/utilities/tag
 import TagButton from "./TagButton";
 
 const SharpTagComponent = ({ tags }) => {

@@ -1,7 +1,9 @@
-// components/courseDetailPage/main/curriculum/CurriculumItem.jsx
+// GoingUpDragon/my-app/src/components/courseDetailPage/main/curriculum/CurriculumItem.jsx
 import React from "react";
-import Accordion from "react-bootstrap/Accordion";
+
+// 외부 라이브러리
 import styled from "styled-components";
+import { Accordion } from "react-bootstrap";
 import { FaPlayCircle } from "react-icons/fa";
 
 const CurriculumItem = ({ eventKey, sectionTitle, lectures, number }) => {

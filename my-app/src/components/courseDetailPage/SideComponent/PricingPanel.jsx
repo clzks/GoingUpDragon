@@ -1,10 +1,14 @@
-// components/courseDetailPage/SideComponent/PricingPanel.jsx
+// GoingUpDragon/my-app/src/components/courseDetailPage/SideComponent/PricingPanel.jsx
 import React, { useState, useEffect, useRef } from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
-import { FaHeart } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+
+// GoingUpDragon/my-app/src/components
 import ShareButton from "../../common/utilities/ShareButton";
 import HorizontalLine from "../../common/icons/HorizontalLine";
+
 const PricingPanel = ({ data, count }) => {
   const formatPrice = data.price.toLocaleString();
   const [isLike, setLike] = useState(false);

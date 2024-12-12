@@ -1,6 +1,11 @@
+// GoingUpDragon/my-app/src/components/searchPage/searchCourseCards/SearchCourseCards.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
-import { FaStar } from "react-icons/fa";
+
+// GoingUpDragon/my-app/src/components
+import RatingStarList from "../../common/icons/RatingStarList";
 
 const SearchCourseCards = ({ course }) => {
   return (
@@ -10,16 +15,7 @@ const SearchCourseCards = ({ course }) => {
         <CourseTitle>{course.title}</CourseTitle>
         <InstructorName>{course.instructor}</InstructorName>
         <RatingContainer>
-          {[...Array(5)].map((star, index) => {
-            return (
-              <StarIcon
-                key={index}
-                filled={index < course.rating}
-              >
-                <FaStar />
-              </StarIcon>
-            );
-          })}
+          <RatingStarList rating={course.rating} size="18px" /> {/* 별 렌더링 */}
           <Rating>{course.rating}</Rating>
           <ReviewCount>({course.reviews})</ReviewCount>
         </RatingContainer>
@@ -39,12 +35,23 @@ const CardContainer = styled.div`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 8px;
   height: 320px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  &:hover img {
+    transform: translateY(-10px);
+  }
 `;
 
 const Thumbnail = styled.img`
   width: 100%;
   height: 150px;
   object-fit: cover;
+  transition: transform 0.3s ease;
 `;
 
 const CardContent = styled.div`
@@ -54,15 +61,14 @@ const CardContent = styled.div`
 const CourseTitle = styled.h3`
   font-size: 18px;
   margin: 0 0 6px;
-  line-height: 1.4; /* 줄 간격 */
-  height: 2.8em; /* 2줄의 높이를 고정 (line-height * 2) */
-  overflow: hidden; /* 넘친 텍스트 숨김 */
-  text-overflow: ellipsis; /* 말줄임표 표시 */
-  display: -webkit-box; /* 유연한 박스 */
-  -webkit-line-clamp: 2; /* 2줄로 제한 */
-  -webkit-box-orient: vertical; /* 수직 정렬 */
+  line-height: 1.4;
+  height: 2.8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
-
 
 const InstructorName = styled.p`
   font-size: 14px;
@@ -73,12 +79,6 @@ const RatingContainer = styled.div`
   display: flex;
   align-items: center;
   margin: 0 0 12px;
-`;
-
-const StarIcon = styled.div`
-  color: ${(props) => (props.filled ? "#ffc107" : "#e4e5e9")};
-  font-size: 18px; /* 기존 20px에서 줄임 */
-  margin-right: 4px;
 `;
 
 const Rating = styled.span`

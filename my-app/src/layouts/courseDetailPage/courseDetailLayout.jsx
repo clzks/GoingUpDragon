@@ -1,4 +1,7 @@
+// GoingUpDragon/my-app/src/layouts/courseDetailPage/courseDetailLayout.jsx
 import React, { useRef } from "react";
+
+// GoingUpDragon/my-app/src
 import Layout from "../../components/common/layout/Layout";
 import DetailCourseBanner from "../../components/courseDetailPage/banner/DetailCourseBanner";
 import CourseNavigation from "../../components/courseDetailPage/navigation/CourseNavigation";

@@ -1,4 +1,7 @@
+// GoingUpDragon/my-app/src/components/common/utilities/ShareButton.jsx
 import React from "react";
+
+// 외부 라이브러리
 import { FaLink } from "react-icons/fa";
 import styled from "styled-components";
 

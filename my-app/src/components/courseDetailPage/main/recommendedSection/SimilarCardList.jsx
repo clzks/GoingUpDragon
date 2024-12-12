@@ -1,7 +1,12 @@
-// components/courseDetailPage/main/recommendedSection/SimilarCardList.jsx
+// GoingUpDragon/my-app/src/components/courseDetailPage/main/recommendedSection/SimilarCardList.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/components
 import Cards from "../../../common/card/Cards";
+
 const SimilarCourseList = ({ lectureList }) => {
   return (
     <StyledMainCardContainer>

@@ -1,13 +1,19 @@
-// component/courseDetailPage/banner/DetailCourseBanner.jsx
+// GoingUpDragon/my-app/src/components/courseDetailPage/banner/DetailCourseBanner.jsx
 import React from "react";
-import styled from "styled-components";
-import CourseThumnail from "./CourseThumnail";
+
+// 외부 라이브러리
 import { Container } from "react-bootstrap";
-import RatingStar from "../../common/icons/RatingStar";
+import styled from "styled-components";
 import { FaUser } from "react-icons/fa";
+
+// GoingUpDragon/my-app/src/components/courseDetailPage/banner
+import CourseThumnail from "./CourseThumnail";
+
+// GoingUpDragon/my-app/src/components/common/icons
+import RatingStar from "../../common/icons/RatingStar";
+
+// GoingUpDragon/my-app/src/components
 import SharpTagComponent from "../../common/utilities/tag/SharpTagComponent";
-import CourseNavigation from "../navigation/CourseNavigation";
-import HorizontalLine from "../../common/icons/HorizontalLine";
 
 const DetailCourseBanner = ({ lectureData, enrollmentData }) => {
   const { mainCategory, secondaryCategory, title, keyPoint, tags } =

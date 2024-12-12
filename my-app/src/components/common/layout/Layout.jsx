@@ -1,7 +1,11 @@
-// Layout.js
+// GoingUpDragon/my-app/src/components/common/layout/Layout.jsx
 import React from "react";
+
+// GoingUpDragon/my-app/src/components/common/layout
 import Header from "./Header";
 import Footer from "./Footer";
+
+// GoingUpDragon/my-app/src/components/common
 import ScrollTopButton from "../utilities/ScrollTopButton";
 
 const Layout = ({ children }) => {
