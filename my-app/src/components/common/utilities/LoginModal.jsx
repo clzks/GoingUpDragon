@@ -1,12 +1,12 @@
-// components/common/LoginModal.jsx
+// GoingUpDragon/my-app/src/components/common/utilities/LoginModal.jsx
 import React, { useState } from "react";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Modal from "react-bootstrap/Modal";
-import Row from "react-bootstrap/Row";
+
+// 외부 라이브러리
+import { Col, Container, Modal, Row } from "react-bootstrap";
 import styled from "styled-components";
-// import 필요한 외부 라이브러리와 내부 라이브러리 구분
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+
+// GoingUpDragon/my-app/src/components/common
 import GoogleIcon from "../icons/GoogleIcon";
 import NaverIcon from "../icons/NaverIcon";
 

@@ -1,7 +1,10 @@
-// components/courseDetailPage/main/reviewSection/ReviewSortOption.jsx
+// GoingUpDragon/my-app/src/components/courseDetailPage/main/reviewSection/ReviewSortOption.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
 
+// GoingUpDragon/my-app/src/components/common/utilities
 import SortOption from "../../../common/utilities/SortOption";
 
 const ReviewSortOption = () => {

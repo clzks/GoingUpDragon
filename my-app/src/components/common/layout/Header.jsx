@@ -1,13 +1,11 @@
-// components/common/Header.jsx
+// GoingUpDragon/my-app/src/components/common/layout/Header.jsx
 import React, { useState } from "react";
+
 // 외부 라이브러리
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-//
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/components/common/layout
 import Logo from "./Logo";
 
 const Header = ({ inputRef }) => {

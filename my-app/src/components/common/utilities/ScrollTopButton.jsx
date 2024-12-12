@@ -1,4 +1,7 @@
+// GoingUpDragon/my-app/src/components/common/utilities/ScrollTopButton.jsx
 import React, { useEffect, useState } from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
 
 const ScrollTopButton = () => {

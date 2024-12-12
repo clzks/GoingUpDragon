@@ -1,8 +1,11 @@
-// components/courseDetailPage/navigation/CourseNavigation.jsx
+// GoingUpDragon/my-app/src/components/courseDetailPage/navigation/CourseNavigation.jsx
 import React, { useState, useEffect, useRef } from "react";
-import { Container } from "react-bootstrap";
-import Nav from "react-bootstrap/Nav";
+
+// 외부 라이브러리
+import { Container, Nav } from "react-bootstrap";
 import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/components
 import HorizontalLine from "../../common/icons/HorizontalLine";
 
 const CourseNavigation = ({ refList }) => {

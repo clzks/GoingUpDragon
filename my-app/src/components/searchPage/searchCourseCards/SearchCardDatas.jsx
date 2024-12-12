@@ -1,8 +1,17 @@
+// GoingUpDragon/my-app/src/components/searchPage/searchCourseCards/SearchCardDatas.jsx
 import React, { useState } from "react";
+
+// 외부 라이브러리
+import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/components/searchPage/searchCourseCards
 import CourseList from "./SearchCourseList";
+
+// GoingUpDragon/my-app/src/components/searchPage
 import InstructorList from "../instructorList/InstructorList";
 import SearchPagination from "../searchPagination/SearchPagination";
-import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/components/searchPage/searchCourseCards
 import CourseDataSet from "./CourseDataSet.json";
 
 const SearchCardDatas = () => {

@@ -1,5 +1,7 @@
+// GoingUpDragon/my-app/src/components/searchPage/MainCategoryDatas.jsx
 import React, { useState } from "react";
 
+// 외부 라이브러리
 import {
   FaRegCopy,
   FaHtml5,
@@ -12,7 +14,6 @@ import {
   FaReact,
   FaSwift,
 } from "react-icons/fa";
-
 import styled from "styled-components";
 
 const MainCategoryDatas = () => {

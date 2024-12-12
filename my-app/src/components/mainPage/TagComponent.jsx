@@ -1,10 +1,10 @@
-// src/components/TagComponent.js
+// GoingUpDragon/my-app/src/components/mainPage/TagComponent.jsx
 import React, { useState } from "react";
 
 // 외부 라이브러리
 import styled from "styled-components";
 
-// 내부 컴포넌트들
+// GoingUpDragon/my-app/src/components/mainPage
 import OvalButton from "./OvalButton";
 import ArrowButton from "./ArrowButton";
 

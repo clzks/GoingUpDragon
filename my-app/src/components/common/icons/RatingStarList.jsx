@@ -1,4 +1,7 @@
+// GoingUpDragon/my-app/src/components/common/icons/RatingStarList.jsx
 import React from "react";
+
+// GoingUpDragon/my-app/src/components/common/icons
 import RatingStar from "./RatingStar";
 
 const RatingStarList = ({ rating, size }) => {

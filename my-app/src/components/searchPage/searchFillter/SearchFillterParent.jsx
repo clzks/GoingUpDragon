@@ -1,28 +1,23 @@
+// GoingUpDragon/my-app/src/components/searchPage/searchFillter/SearchFillterParent.jsx
 import React from "react";
-import SeachFillterOptions from "./SeachFillterChild";
+
+// 외부 라이브러리
 import styled from "styled-components";
 
+// GoingUpDragon/my-app/src/components/searchPage/searchFillter
+import SeachFillterOptions from "./SeachFillterChild";
+import SearchFillterDatas from "./SearchFillterDatas.json"; // JSON 데이터 가져오기
+
 const CourseSettings = () => {
-  const data = {
-    difficulties: {
-      title: "난이도",
-      items: ["입문", "중급", "고급"]
-    },
-    classTimes: {
-      title: "강의 시간",
-      items: ["30분", "1시간", "2시간"]
-    },
-    languages: {
-      title: "사용 언어",
-      items: ["한국어", "영어", "일본어"]
-    }
-  };
+  // JSON 데이터에서 필요한 부분만 추출
+  const { difficulties, classTimes, languages } = SearchFillterDatas[0]; 
 
   return (
     <StyledSearchFillterSettingsContainer>
-      <SeachFillterOptions data={data.difficulties} />
-      <SeachFillterOptions data={data.classTimes} />
-      <SeachFillterOptions data={data.languages} />
+      {/* 각 항목을 SeachFillterOptions 컴포넌트에 전달 */}
+      <SeachFillterOptions data={difficulties} />
+      <SeachFillterOptions data={classTimes} />
+      <SeachFillterOptions data={languages} />
     </StyledSearchFillterSettingsContainer>
   );
 };
@@ -30,5 +25,5 @@ const CourseSettings = () => {
 export default CourseSettings;
 
 const StyledSearchFillterSettingsContainer = styled.div`
-  margin-right:16px;
+  margin-right: 16px;
 `;

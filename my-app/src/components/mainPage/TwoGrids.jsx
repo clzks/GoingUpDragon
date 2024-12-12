@@ -1,12 +1,8 @@
-// components/common/TwoGrids.jsx
+// GoingUpDragon/my-app/src/components/mainPage/TwoGrids.jsx
 import React, { useState, useEffect, useRef } from "react";
 
 // 외부 라이브러리
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Carousel from "react-bootstrap/Carousel";
-import { Button } from "react-bootstrap";
+import { Container, Row, Col, Carousel, Button } from "react-bootstrap";
 import {
   BsChevronDoubleLeft,
   BsPause,
@@ -15,7 +11,7 @@ import {
 } from "react-icons/bs";
 import styled from "styled-components";
 
-// 내부 컴포넌트
+// GoingUpDragon/my-app/src/components/mainPage/TagComponent.jsx
 import TagComponent from "./TagComponent";
 
 const images = [

@@ -1,7 +1,10 @@
-// src/components/MainCards.jsx
-// 외부 라이브러리
+// GoingUpDragon/my-app/src/components/mainPage/MainCardsPick.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/components
 import CardsPick from "../common/card/CardsPick";
 
 const MainCardsPick = () => {

@@ -7,15 +7,13 @@ import Row from "react-bootstrap/Row";
 import { Button } from "react-bootstrap";
 import { FaSlidersH } from "react-icons/fa";
 
-// 공통 컴포넌트
+// GoingUpDragon/my-app/src
 import HorizontalLine from "../../components/common/icons/HorizontalLine";
 import Header from "../../components/common/layout/Header";
 import ArrowButtonRight from "../../components/common/icons/ArrowButtonRight";
 import ArrowButtonLeft from "../../components/common/icons/ArrowButtonLeft";
 import Footer from "../../components/common/layout/Footer";
 import ScrollTopButton from "../../components/common/utilities/ScrollTopButton";
-
-// 검색 페이지 컴포넌트
 import SearchCategory from "../../components/searchPage/SearchCategory";
 import MainCategoryDatas from "../../components/searchPage/MainCategoryDatas";
 import MiddleCategoryBox from "../../components/searchPage/MiddleCategoryBox";

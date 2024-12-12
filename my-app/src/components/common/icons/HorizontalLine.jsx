@@ -1,4 +1,7 @@
+// GoingUpDragon/my-app/src/components/common/icons/HorizontalLine.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
 
 function HorizontalLine({ width = "100%", height = "1px", color = "#ccd5ae" }) {

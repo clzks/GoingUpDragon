@@ -1,4 +1,7 @@
+// GoingUpDragon/my-app/src/components/common/icons/RatingStar.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
 import { FaStar, FaRegStar } from "react-icons/fa";
 
