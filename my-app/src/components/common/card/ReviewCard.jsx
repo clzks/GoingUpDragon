@@ -1,7 +1,11 @@
-// src/components/myPage/card/ReviewCard.jsx
+// GoingUpDragon/my-app/src/components/common/card/ReviewCard.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
 import { FaRegThumbsUp } from "react-icons/fa";
+
+// GoingUpDragon/my-app/src/components/common
 import RatingStarList from "../icons/RatingStarList";
 import LikeButton from "../utilities/LikeButton";
 import ShareButton from "../utilities/ShareButton";

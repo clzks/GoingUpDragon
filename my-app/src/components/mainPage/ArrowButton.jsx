@@ -1,7 +1,8 @@
-// src/components/Button/ArrowButton.js
-import { SlArrowUp } from "react-icons/sl"; // SlArrowUp 아이콘 import
-import { SlArrowDown } from "react-icons/sl"; // SlArrowDown 아이콘 import
+// GoingUpDragon/my-app/src/components/mainPage/ArrowButton.jsx
 import React, { useState } from "react";
+
+// 외부 라이브러리
+import { SlArrowUp, SlArrowDown } from "react-icons/sl"; // SlArrowUp, SlArrowDown 아이콘 import
 import styled from "styled-components";
 
 const ArrowButton = ({ onClick }) => {

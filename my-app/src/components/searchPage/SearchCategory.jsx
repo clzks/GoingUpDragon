@@ -1,4 +1,4 @@
-// components/searchPage/SearchCategory.jsx
+// GoingUpDragon/my-app/src/components/searchPage/SearchCategory.jsx
 import React from "react";
 
 // 외부 라이브러리

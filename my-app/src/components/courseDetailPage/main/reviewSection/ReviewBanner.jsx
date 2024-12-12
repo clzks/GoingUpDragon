@@ -1,6 +1,10 @@
-// components/courseDetailPage/main/reviewSection/ReviewBanner.jsx
+// GoingUpDragon/my-app/src/components/courseDetailPage/main/reviewSection/ReviewBanner.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/components
 import RatingStarList from "../../../common/icons/RatingStarList";
 
 const ReviewBanner = () => {

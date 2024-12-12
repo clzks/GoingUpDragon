@@ -1,5 +1,7 @@
-// component/courseDetailPage/banner/CourseThumnail.jsx
+// GoingUpDragon/my-app/src/components/courseDetailPage/banner/CourseThumnail.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
 
 const CourseThumnail = () => {

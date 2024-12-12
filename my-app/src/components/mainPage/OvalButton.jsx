@@ -1,5 +1,7 @@
-// src/components/OvalTagButton.js
+// GoingUpDragon/my-app/src/components/mainPage/OvalButton.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
 
 const OvalButton = ({ isActive, onClick, label }) => {

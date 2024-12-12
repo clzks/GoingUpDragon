@@ -1,4 +1,7 @@
+// GoingUpDragon/my-app/src/components/common/utilities/tag/TagButton.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
 
 const TagButton = ({ tag }) => {

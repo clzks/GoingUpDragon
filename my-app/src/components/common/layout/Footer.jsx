@@ -1,5 +1,7 @@
-// src/components/Footer.js
+// GoingUpDragon/my-app/src/components/common/layout/Footer.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
 

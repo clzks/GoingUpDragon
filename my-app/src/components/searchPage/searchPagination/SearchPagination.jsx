@@ -1,7 +1,9 @@
+// GoingUpDragon/my-app/src/components/searchPage/searchPagination/SearchPagination.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-
 
 const SearchPagination = ({
   totalItems,

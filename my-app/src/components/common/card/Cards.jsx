@@ -1,8 +1,11 @@
-// src/components/Cards.jsx
-// 외부 라이브러리
+// GoingUpDragon/my-app/src/components/common/card/Cards.jsx
 import React, { useState } from "react";
+
+// 외부 라이브러리
 import { Button } from "react-bootstrap";
 import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/components/common/card
 import CardItem from "./CardItem";
 
 const Cards = ({ cardData, cardsToShow = 4, maxWidth }) => {

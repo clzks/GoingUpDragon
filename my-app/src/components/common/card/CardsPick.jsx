@@ -1,8 +1,11 @@
-// src/components/CardsPick.jsx
-// 외부 라이브러리
+// GoingUpDragon/my-app/src/components/common/card/CardsPick.jsx
 import React, { useState } from "react";
+
+// 외부 라이브러리
 import { Container, Button } from "react-bootstrap";
 import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/components/common/card
 import CardItem from "./CardItemPick";
 
 const CardsPick = ({ subtitle, cardData }) => {

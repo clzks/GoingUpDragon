@@ -1,0 +1,16 @@
+[
+  {
+    "difficulties": {
+      "title": "난이도",
+      "items": ["입문", "중급", "고급"]
+    },
+    "classTimes": {
+      "title": "강의 시간",
+      "items": ["30분", "1시간", "2시간"]
+    },
+    "languages": {
+      "title": "사용 언어",
+      "items": ["한국어", "영어", "일본어"]
+    }
+  }
+]

@@ -1,12 +1,18 @@
-// components/courseDetailPage/main/CourseDetailMainPanel.jsx
+// GoingUpDragon/my-app/src/components/courseDetailPage/main/CourseDetailMainPanel.jsx
 import React from "react";
-import Curriculum from "./curriculum/Curriculum";
+
+// 외부 라이브러리
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
+
+// GoingUpDragon/my-app/src/components/courseDetailPage/main
+import Curriculum from "./curriculum/Curriculum";
 import LectureInfo from "./LectureInfo";
 import CourseReviewSection from "./reviewSection/CourseReviewSection";
 import SimilarCardList from "./recommendedSection/SimilarCardList";
 import InstructorCardList from "./recommendedSection/InstructorCardList";
+
+// GoingUpDragon/my-app/src/components/courseDetailPage
 import PricingPanel from "../SideComponent/PricingPanel";
 
 const CourseDetailMainPanel = ({

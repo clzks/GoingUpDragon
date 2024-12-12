@@ -1,5 +1,7 @@
-// components/courseDetailPage/main/curriculum/ToggleButton.jsx
+// GoingUpDragon/my-app/src/components/courseDetailPage/main/curriculum/ToggleButton.jsx
 import React from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
 import { FaChevronDown } from "react-icons/fa";
 import { FaChevronUp } from "react-icons/fa";

@@ -1,4 +1,7 @@
+// GoingUpDragon/my-app/src/components/common/utilities/SortOption.jsx
 import React, { useState } from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
 import { Dropdown } from "react-bootstrap";
 import { FaExchangeAlt } from "react-icons/fa";

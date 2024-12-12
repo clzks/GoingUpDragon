@@ -1,6 +1,11 @@
+// GoingUpDragon/my-app/src/components/searchPage/searchFillter/SeachFillterChild.jsx
 import React, { useState } from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
+
+// GoingUpDragon/my-app/src/components
 import HorizontalLine from "../../common/icons/HorizontalLine";
 
 const CourseOptions = ({ data }) => {

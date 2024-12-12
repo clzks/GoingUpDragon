@@ -1,5 +1,10 @@
+// GoingUpDragon/my-app/src/components/searchPage/MiddleCategoryBox.jsx
 import React, { useState, useRef } from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/components
 import ArrowButtonLeft from "../common/icons/ArrowButtonLeft";
 import ArrowButtonRight from "../common/icons/ArrowButtonRight";
 
@@ -106,8 +111,8 @@ const CategoryItem = styled.div`
   ${({ isSelected }) =>
     isSelected &&
     `
-    background-color: #007bff;
-    color: white;
+    background-color: #e6f7ff;
+    color: black;
   `}
 `;
 

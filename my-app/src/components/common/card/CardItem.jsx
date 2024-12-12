@@ -1,11 +1,10 @@
-// src/components/CardItem.jsx
-// 외부 라이브러리
+// GoingUpDragon/my-app/src/components/common/card/CardItem.jsx
 import React from "react";
-import Card from "react-bootstrap/Card";
+
+// 외부 라이브러리
+import { Card } from "react-bootstrap";
 import { FaStar } from "react-icons/fa";
 import styled from "styled-components";
-
-// 내부 라이브러리
 
 const CardItem = ({
   title,

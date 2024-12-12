@@ -1,10 +1,9 @@
-// src/components/CardItem.jsx
-// 외부 라이브러리
+// GoingUpDragon/my-app/src/components/common/card/CardItemPick.jsx
 import React from "react";
-import Card from "react-bootstrap/Card";
-import styled from "styled-components";
 
-// 내부 라이브러리
+// 외부 라이브러리
+import { Card } from "react-bootstrap";
+import styled from "styled-components";
 
 const CardItemPick = ({ title, instructor, imageUrl }) => {
   return (

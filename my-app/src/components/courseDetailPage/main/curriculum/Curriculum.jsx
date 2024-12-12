@@ -1,8 +1,11 @@
-// components/courseDetailPage/main/curriculum/Curriculum.jsx
+// GoingUpDragon/my-app/src/components/courseDetailPage/main/curriculum/Curriculum.jsx
 import React, { useState, useEffect, forwardRef } from "react";
-import styled from "styled-components";
 
-import Accordion from "react-bootstrap/Accordion";
+// 외부 라이브러리
+import styled from "styled-components";
+import { Accordion } from "react-bootstrap";
+
+// GoingUpDragon/my-app/src/components/courseDetailPage/main/curriculum
 import CurriculumItem from "./CurriculumItem";
 import ToggleButton from "./ToggleButton";
 

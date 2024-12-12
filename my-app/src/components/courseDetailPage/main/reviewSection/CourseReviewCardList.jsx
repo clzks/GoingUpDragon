@@ -1,7 +1,11 @@
-// components/courseDetailPage/main/reviewSection/CourseReviewCardList.jsx
+// GoingUpDragon/my-app/src/components/courseDetailPage/main/reviewSection/CourseReviewCardList.jsx
 import React, { useState } from "react";
-import ReviewCard from "../../../common/card/ReviewCard";
+
+// 외부 라이브러리
 import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/components/common/card/ReviewCard.jsx
+import ReviewCard from "../../../common/card/ReviewCard";
 
 const CourseReviewCardList = ({ count }) => {
   const [visibleCount, setVisibleCount] = useState(5); // 처음에는 5개만 보여줌

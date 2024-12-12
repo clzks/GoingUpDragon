@@ -1,6 +1,10 @@
-// components/courseDetailPage/main/reviewSection/CourseReviewSection.jsx
+// GoingUpDragon/my-app/src/components/courseDetailPage/main/reviewSection/CourseReviewSection.jsx
 import React, { forwardRef } from "react";
+
+// 외부 라이브러리
 import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/components/courseDetailPage/main/reviewSection
 import ReviewSortOption from "./ReviewSortOption";
 import ReviewBanner from "./ReviewBanner";
 import CourseReviewCardList from "./CourseReviewCardList";

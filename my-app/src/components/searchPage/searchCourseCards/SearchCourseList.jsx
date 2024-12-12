@@ -1,6 +1,11 @@
+// GoingUpDragon/my-app/src/components/searchPage/searchCourseCards/SearchCourseList.jsx
 import React from "react";
-import SearchCourseCards from "./SearchCourseCards";
+
+// 외부 라이브러리
 import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/components/searchPage/searchCourseCards
+import SearchCourseCards from "./SearchCourseCards";
 
 const CourseList = ( { courses } ) => {
 

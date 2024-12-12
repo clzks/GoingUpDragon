@@ -1,4 +1,7 @@
+// GoingUpDragon/my-app/src/components/common/icons/ArrowButtonLeft.jsx
 import React from "react";
+
+// 외부 라이브러리
 import { FaChevronLeft } from "react-icons/fa";
 import styled from "styled-components";
 
