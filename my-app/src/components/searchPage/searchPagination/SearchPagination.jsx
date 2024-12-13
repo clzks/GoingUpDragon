@@ -27,50 +27,50 @@ const SearchPagination = ({
     }
   };
 
-    // 페이지 버튼들을 동적으로 계산
-    const getPaginationButtons = () => {
-      const buttons = [];
-      const maxButtons = 5;
-      const sideButtons = 1;
-  
-      if (totalPages <= maxButtons) {
-        for (let i = 1; i <= totalPages; i++) {
-          buttons.push(i);
-        }
-      } else if (currentPage <= sideButtons + 2) {
-        for (let i = 1; i <= 4; i++) {
-          buttons.push(i);
-        }
-        buttons.push("...");
-        buttons.push(totalPages);
-      } else if (currentPage >= totalPages - (sideButtons + 1)) {
-        buttons.push(1);
-        buttons.push("...");
-        for (let i = totalPages - 3; i <= totalPages; i++) {
-          buttons.push(i);
-        }
-      } else {
-        buttons.push(1);
-        buttons.push("...");
-        for (
-          let i = currentPage - sideButtons;
-          i <= currentPage + sideButtons;
-          i++
-        ) {
-          buttons.push(i);
-        }
-        buttons.push("...");
-        buttons.push(totalPages);
+  // 페이지 버튼들을 동적으로 계산
+  const getPaginationButtons = () => {
+    const buttons = [];
+    const maxButtons = 5;
+    const sideButtons = 1;
+
+    if (totalPages <= maxButtons) {
+      for (let i = 1; i <= totalPages; i++) {
+        buttons.push(i);
       }
-  
-      return buttons;
-    };
-  
-    const handlePageChange = (page) => {
-      if (typeof page === "number" && page >= 1 && page <= totalPages) {
-        onPageChange(page);
+    } else if (currentPage <= sideButtons + 2) {
+      for (let i = 1; i <= 4; i++) {
+        buttons.push(i);
       }
-    };
+      buttons.push("...");
+      buttons.push(totalPages);
+    } else if (currentPage >= totalPages - (sideButtons + 1)) {
+      buttons.push(1);
+      buttons.push("...");
+      for (let i = totalPages - 3; i <= totalPages; i++) {
+        buttons.push(i);
+      }
+    } else {
+      buttons.push(1);
+      buttons.push("...");
+      for (
+        let i = currentPage - sideButtons;
+        i <= currentPage + sideButtons;
+        i++
+      ) {
+        buttons.push(i);
+      }
+      buttons.push("...");
+      buttons.push(totalPages);
+    }
+
+    return buttons;
+  };
+
+  const handlePageChange = (page) => {
+    if (typeof page === "number" && page >= 1 && page <= totalPages) {
+      onPageChange(page);
+    }
+  };
 
   return (
     <PaginationContainer>
@@ -85,7 +85,8 @@ const SearchPagination = ({
           key={index}
           onClick={() => handlePageChange(page)}
           isActive={currentPage === page}
-          isEllipsis={page === "..."}>
+          isEllipsis={page === "..."}
+        >
           {page}
         </PageButton>
       ))}
@@ -97,6 +98,7 @@ const SearchPagination = ({
     </PaginationContainer>
   );
 };
+
 const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -115,8 +117,7 @@ const PageButton = styled.button`
   font-weight: bold;
 
   &:hover {
-    background-color: ${({ isActive }) =>
-      isActive ? "#5aa1a4" : "#f5f5f5"};
+    background-color: ${({ isActive }) => (isActive ? "#5aa1a4" : "#f5f5f5")};
     color: #000;
   }
 

@@ -1,3 +1,5 @@
+// GoingUpDragon/my-app/src/components/qnAPage/header/QnAHeader.jsx
+
 import React from "react";
 import HorizontalLine from "../../common/icons/HorizontalLine";
 import styled from "styled-components";

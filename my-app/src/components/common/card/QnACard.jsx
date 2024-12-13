@@ -5,6 +5,7 @@ import React from "react";
 import styled from "styled-components";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
+import { FaRegThumbsUp } from "react-icons/fa";
 
 import HorizontalLine from "../icons/HorizontalLine";
 import SharpTagComponent from "../utilities/tag/SharpTagComponent";
@@ -38,7 +39,7 @@ const QnACard = () => {
         </div>
         <div>
           <StyledLike>
-            <LikeButton></LikeButton>
+            <FaRegThumbsUp></FaRegThumbsUp>
             <span>0</span>
           </StyledLike>
           <StyledView>
@@ -55,7 +56,9 @@ const QnACard = () => {
   );
 };
 
-const StyledCardContainer = styled.div`
+const StyledCardContainer = styled.button`
+  all: unset; /* 기본 버튼 스타일 초기화 */
+  display: block; /* div처럼 블록 요소로 설정 */
   width: 800px;
   height: 270px;
   border: 1px solid rgba(128, 128, 128, 0.5);
@@ -68,7 +71,8 @@ const StyledCardMainPanel = styled.div`
   height: 200px;
 `;
 
-const StyledTitlePanel = styled.h5`
+const StyledTitlePanel = styled.span`
+  height: 60px;
   margin-top: 20px;
   margin-left: 30px;
   margin-right: 30px;
@@ -78,7 +82,9 @@ const StyledTitlePanel = styled.h5`
   text-overflow: ellipsis;
 `;
 
-const StyledContentPanel = styled.h6`
+const StyledContentPanel = styled.span`
+  font-size: 16px;
+  height: 48px;
   display: -webkit-box;
   -webkit-line-clamp: 2; /* 원하는 줄 수로 변경 (예: 3으로 설정하면 3줄) */
   -webkit-box-orient: vertical;
@@ -92,7 +98,7 @@ const StyledContentPanel = styled.h6`
 `;
 
 const StyledSharpTag = styled.div`
-  margin-top: 30px;
+  margin-top: 45px;
   margin-left: -20px; /* 왼쪽으로 20px 이동 */
 `;
 
@@ -114,18 +120,15 @@ const StyledDate = styled.span`
 `;
 
 const StyledLike = styled.span`
-  display: flex;
-  align-items: center;
+  margin-right: 20px;
 `;
 
 const StyledView = styled.span`
-  display: flex;
-  align-items: center;
+  margin-right: 20px;
 `;
 
 const StyledReview = styled.span`
-  display: flex;
-  align-items: center;
+  margin-right: 20px;
 `;
 
 export default QnACard;
