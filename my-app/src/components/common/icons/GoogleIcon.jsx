@@ -1,5 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+// GoingUpDragon/my-app/src/components/common/icons/GoogleIcon.jsx
+import React from 'react';
+import styled from 'styled-components';
 
 const GoogleLogo = ({ width = "48px", height = "48px" }) => (
   <StyledSVG
