@@ -1,42 +1,47 @@
 // GoingUpDragon/my-app/src/components/common/utilities/LoginModal.jsx
-import React, { useState } from "react";
 
-// 외부 라이브러리
-import { Col, Container, Modal, Row } from "react-bootstrap";
-import styled from "styled-components";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+// 외부 라이브러리와 컴포넌트 임포
+import React, { useState } from 'react'; 
+import Col from 'react-bootstrap/Col'; 
+import Container from 'react-bootstrap/Container'; 
+import Modal from 'react-bootstrap/Modal'; 
+import Row from 'react-bootstrap/Row'; 
+import styled from 'styled-components'; 
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; 
 
-// GoingUpDragon/my-app/src/components/common
-import GoogleIcon from "../icons/GoogleIcon";
-import NaverIcon from "../icons/NaverIcon";
+// GoingUpDragon/my-app/src/components/common/layout/Logo.jsx
+import Logo from '../layout/Logo'; 
 
+// GoingUpDragon/my-app/src/components/commonicons/..
+import SocialLoginIcons from '../../common/icons/SocialLoginIcons';
+import FindAndSignUpLinkButtons from '../icons/FindAndSignUpLinkButtons';
+
+// LoginModal 컴포넌트 정의
 const LoginModal = ({ show, onHide }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [loginError, setLoginError] = useState(false);
+  const [email, setEmail] = useState(""); 
+  const [password, setPassword] = useState(""); 
+  const [showPassword, setShowPassword] = useState(false); 
+  const [emailError, setEmailError] = useState(false); 
+  const [loginError, setLoginError] = useState(false); 
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    setEmailError(!/\S+@\S+\.\S+/.test(e.target.value));
+    setEmail(e.target.value); 
+    setEmailError(!/\S+@\S+\.\S+/.test(e.target.value)); 
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    setPassword(e.target.value); 
   };
 
   const handleLogin = () => {
     if (!emailError && email && password) {
-      // 로그인 처리 로직 추가 예정
-      setLoginError(false);
+      setLoginError(false); 
     } else {
-      setLoginError(true);
+      setLoginError(true); 
     }
   };
 
   return (
-    //헤더와 연동 후 아래의 show={true}를 show={show}로 바꾸기
     <Modal
       show={true}
       onHide={onHide}
@@ -45,16 +50,21 @@ const LoginModal = ({ show, onHide }) => {
       <StyledModalHeader closeButton>
         <Modal.Title id="contained-modal-title-vcenter"></Modal.Title>
       </StyledModalHeader>
+
       <Modal.Body>
         <Container>
+          {/* 로고 출력 */}
           <Row className="justify-content-md-center">
             <Col xs={12} md={12}>
-              <StyledLogo src="/images/tplogo.png" alt="Logo" />
+              <LogoWrapper>
+                <Logo />
+              </LogoWrapper>
             </Col>
           </Row>
 
+          {/* 이메일 입력 필드 */}
           <Row className="justify-content-md-center">
-            <StyledCol xs={12} md={12}>
+            <Col xs={12} md={12}>
               <StyledInput
                 type="email"
                 value={email}
@@ -67,11 +77,12 @@ const LoginModal = ({ show, onHide }) => {
                   유효한 이메일 주소를 입력해주세요.
                 </StyledErrorText>
               )}
-            </StyledCol>
+            </Col>
           </Row>
 
+          {/* 비밀번호 입력 필드 */}
           <Row className="justify-content-md-center">
-            <StyledCol xs={12} md={12}>
+            <Col xs={12} md={12}>
               <StyledPasswordWrapper>
                 <StyledInput
                   type={showPassword ? "text" : "password"}
@@ -83,11 +94,12 @@ const LoginModal = ({ show, onHide }) => {
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </StyledEyeIcon>
               </StyledPasswordWrapper>
-            </StyledCol>
+            </Col>
           </Row>
 
+          {/* 로그인 버튼 */}
           <Row className="justify-content-md-center">
-            <StyledCol xs={12} md={12}>
+            <Col xs={12} md={12}>
               <StyledLoginButton onClick={handleLogin}>
                 로그인
               </StyledLoginButton>
@@ -96,33 +108,24 @@ const LoginModal = ({ show, onHide }) => {
                   이메일 또는 비밀번호가 잘못되었습니다.
                 </StyledErrorText>
               )}
-            </StyledCol>
+            </Col>
           </Row>
 
-          <StyledCenterRow>
-            <Col xs={4} md={4}>
-              <StyledLinkButton>ID(e-mail) 찾기</StyledLinkButton>
-            </Col>
-            <Col xs={4} md={4}>
-              <StyledLinkButton>Password 찾기</StyledLinkButton>
-            </Col>
-            <Col xs={4} md={4}>
-              <StyledLinkButton>회원가입</StyledLinkButton>
-            </Col>
-          </StyledCenterRow>
+          {/* 링크 버튼 컴포넌트 추가 */}
+          <FindAndSignUpLinkButtons />
 
+          {/* 간편 로그인 텍스트 */}
           <Row className="justify-content-md-center">
             <Col xs={12} md={6}>
               <StyledSimpleLogin>간편 로그인</StyledSimpleLogin>
             </Col>
           </Row>
 
+          {/* 간편 로그인 아이콘 */}
           <Row className="justify-content-md-center">
             <Col xs={12} md={6}>
               <StyledIconWrapper>
-                {/* 구글 및 네이버 아이콘 추가 */}
-                <GoogleIcon width="48px" height="48px" />
-                <NaverIcon width="48px" height="48px" />
+                <SocialLoginIcons />
               </StyledIconWrapper>
             </Col>
           </Row>
@@ -134,34 +137,48 @@ const LoginModal = ({ show, onHide }) => {
 
 export default LoginModal;
 
-// 모달 헤더 스타일 커스터마이징
+// 로고 스타일 유지
+const LogoWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+`;
+
+// 모달 헤더 스타일
 const StyledModalHeader = styled(Modal.Header)`
-  border-bottom: none; // 하단 테두리를 제거하여 검정 실선 제거
-`;
-
-// Styled Components
-const StyledLogo = styled.img`
-  display: block;
-  margin: 0 auto;
-  width: 150px; /* 원하는 너비로 설정 */
-  height: auto; /* 비율을 유지하며 높이 자동 조정 */
-`;
-
-const StyledInput = styled.input`
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border: ${(props) => (props.hasError ? "2px solid red" : "1px solid #ccc")};
-  &:focus {
-    border: 2px solid ${(props) => (props.hasError ? "red" : "#000")};
+  border-bottom: none;
+  .btn-close {
+    outline: none !important;
+    font-size: 1rem !important;
+    background-color: white !important;
+    box-shadow: none !important;
+    &:hover {
+      transform: scale(1.2) !important;
+    }
   }
 `;
 
+// 이메일 및 비밀번호 입력 필드 스타일
+const StyledInput = styled.input`
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: ${(props) => (props.hasError ? "1px solid red" : "1px solid #ccc")};
+  margin-top: 10px;
+
+  &:focus {
+    border: 1px solid ${(props) => (props.hasError ? "red" : "#B0E8F1")};
+    outline: none;
+  }
+`;
+
+// 비밀번호 입력창 및 아이콘 래퍼 스타일 정의
 const StyledPasswordWrapper = styled.div`
   position: relative;
   margin-top: 10px;
 `;
 
+// 비밀번호 표시/숨기기 아이콘 스타일 정의
 const StyledEyeIcon = styled.div`
   position: absolute;
   top: 50%;
@@ -170,51 +187,43 @@ const StyledEyeIcon = styled.div`
   cursor: pointer;
 `;
 
+// 로그인 버튼 스타일 정의
 const StyledLoginButton = styled.button`
   width: 100%;
   padding: 10px;
-  background-color: purple;
+  background-color: #8a2be2;
   color: white;
   border: none;
   margin-top: 20px;
   cursor: pointer;
+  border-radius: 5px;
+  &:hover {
+    background-color: darkviolet;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
 `;
 
+// 오류 메시지 텍스트 스타일 정의
 const StyledErrorText = styled.p`
   color: red;
   font-size: 0.9em;
   margin-top: 5px;
 `;
 
-const StyledLinkButton = styled.button`
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid green;
-  color: black;
-  margin-top: 20px;
-  cursor: pointer;
-`;
 
+// 간편 로그인 텍스트 스타일 정의
 const StyledSimpleLogin = styled.p`
   text-align: center;
-  font-size: 1.2em;
+  font-size: 1em;
   margin-top: 30px;
-  color: black;
 `;
 
+// 간편 로그인 아이콘 래퍼 스타일 정의
 const StyledIconWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
-`;
-
-const StyledCenterRow = styled(Row)`
-  display: flex;
-  justify-content: center; /* 가로 방향 중앙 정렬 */
-  align-items: center; /* 세로 방향 중앙 정렬 */
-  text-align: center; /* 내부 텍스트 중앙 정렬 */
-`;
-
-const StyledCol = styled(Col)`
-  text-align: center;
 `;

@@ -3,7 +3,6 @@ import React from "react";
 
 // 외부 라이브러리
 import styled from "styled-components";
-
 const GoogleLogo = ({ width = "48px", height = "48px" }) => (
   <StyledSVG
     viewBox="0 0 48 48"
