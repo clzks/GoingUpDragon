@@ -8,7 +8,10 @@ import SearchLayout from "./layouts/searchPage/SearchLayout";
 import PolicyLayout from "./layouts/policyPage/PolicyLayout";
 import SignUpPage from "./layouts/loginPage/SignUpPage";
 import LoginModal from "./components/common/utilities/LoginModal";
+import AnswerLayout from "./layouts/qnAPage/answer/AnswerLayout";
+import QnAMainLayout from "./layouts/qnAPage/main/QnAMainLayout";
+
 function App() {
-  return <MainLayout></MainLayout>;
+  return <QnAMainLayout></QnAMainLayout>;
 }
 export default App;

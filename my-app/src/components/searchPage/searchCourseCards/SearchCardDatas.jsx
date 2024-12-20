@@ -31,20 +31,19 @@ const SearchCardDatas = () => {
   const renderContent = () => {
     const content = [];
     const totalChunks = Math.ceil(currentData.length / 16);
-  
+
     for (let i = 0; i < currentData.length; i += 16) {
       const chunk = currentData.slice(i, i + 16); // 강의 16개씩 분할
       content.push(<CourseList key={`course-${i}`} courses={chunk} />);
-  
+
       // 강사 목록 삽입 (마지막 chunk 이후에는 강사 리스트 추가 안 함)
       if (i + 16 < currentData.length && i / 16 + 1 < totalChunks) {
         content.push(<InstructorList key={`instructors-${i}`} />);
       }
     }
-  
+
     return content;
   };
-  
 
   return (
     <StyledCourseListContainer>
