@@ -1,20 +1,19 @@
 // GoingUpDragon/my-app/src/layouts/signUpPage/SignUpLayout.jsx
-import React, { useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import styled from "styled-components";
 
 // 내부 라이브러리
 // GoingUpDragon/my-app/src/components/signUpPage/..
-import EmailInput from '../../components/signUpPage/EmailInput';
-import PasswordInput from '../../components/signUpPage/PasswordInput';
-import ConfirmPasswordInput from '../../components/signUpPage/ConfirmPasswordInput';
-import SignupButton from '../../components/signUpPage/SignupButton';
-import ErrorMessage from '../../components/common/Message/ErrorMessage';
+import EmailInput from "../../components/signUpPage/EmailInput";
+import PasswordInput from "../../components/signUpPage/PasswordInput";
+import ConfirmPasswordInput from "../../components/signUpPage/ConfirmPasswordInput";
+import SignupButton from "../../components/signUpPage/SignupButton";
+//import ErrorMessage from '../../components/common/Message/ErrorMessage';
 
 // GoingUpDragon/my-app/src/components/commonicons/SocialLoginIcons.jsx
-import SocialLoginIcons from '../../components/common/icons/SocialLoginIcons';
-
-
+import SocialLoginIcons from "../../components/common/icons/SocialLoginIcons";
+import ErrorMessage from "../../components/common/utilities/ErrorMessage";
 
 // 회원가입 페이지 컴포넌트
 const SignupPage = () => {
@@ -85,10 +84,7 @@ const SignupPage = () => {
       {/* 이메일 입력 필드 */}
       <Row className="justify-content-center">
         <Col xs={12} md={6}>
-          <EmailInput
-            value={formData.email}
-            onChange={handleChange}
-          />
+          <EmailInput value={formData.email} onChange={handleChange} />
           <ErrorMessage message={errors.email} />
         </Col>
       </Row>
@@ -140,7 +136,6 @@ const SignupPage = () => {
 
 export default SignupPage;
 
-
 /* 스타일 정의 */
 const StyledContainer = styled(Container)`
   padding-top: 10px;
@@ -151,7 +146,6 @@ const StyledLogo = styled.img`
   height: auto;
   cursor: pointer;
 `;
-
 
 const StyledTitle = styled.h2`
   text-align: center;
