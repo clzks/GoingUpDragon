@@ -15,6 +15,7 @@ import SearchLayout from "./layouts/searchPage/SearchLayout";
 import PolicyLayout from "./layouts/policyPage/PolicyLayout";
 import SignupPage from "./layouts/signUpPage/SignUpLayout";
 import LoginModal from "./components/common/utilities/LoginModal";
+import QnAMainLayout from "./layouts/qnAPage/main/QnAMainLayout";
 
 function App() {
   return (
@@ -43,6 +44,9 @@ function App() {
             <li>
               <Link to="/LoginModal">로그인 페이지</Link>
             </li>
+            <li>
+              <Link to="/QnAMainLayout">QnA 메인 페이지</Link>
+            </li>
           </ul>
         </nav>
         <Routes>
@@ -53,6 +57,7 @@ function App() {
           <Route path="/Policy" element={<PolicyLayout />} />
           <Route path="/SignUp" element={<SignupPage />} />
           <Route path="/LoginModal" element={<LoginModal />} />
+          <Route path="/QnAMainLayout" element={<QnAMainLayout />} />
         </Routes>
       </div>
     </Router>
