@@ -8,6 +8,8 @@ import SearchLayout from "./layouts/searchPage/SearchLayout";
 import PolicyLayout from "./layouts/policyPage/PolicyLayout";
 import SignUpPage from "./layouts/loginPage/SignUpPage";
 import LoginModal from "./components/common/utilities/LoginModal";
+
+
 function App() {
   return <MainLayout></MainLayout>;
 }

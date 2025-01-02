@@ -18,9 +18,10 @@ const Introduction = () => {
 export default Introduction;
 
 const IntroductionWrapper = styled.div`
-  margin-bottom: 20px;
-  background-color: #fff;
+ width: 100%;
+  margin: 20px 0;
   border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
 `;
 
 const Header = styled.div`
