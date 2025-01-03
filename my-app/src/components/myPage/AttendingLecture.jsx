@@ -1,8 +1,6 @@
-// src/components/myPage/AttendingLecture.jsx
-
 import React, { useState } from "react";
 import styled from "styled-components";
-import { myCardItems } from "./card/MyCardsItem"; // MyCardItem에서 정보 가져오기
+import { myCardItems } from "./card/MyCardsItem"; 
 
 const AttendingLecture = () => {
   const [showAll, setShowAll] = useState(false);
@@ -42,9 +40,9 @@ const AttendingLecture = () => {
 
 export default AttendingLecture;
 
-// 스타일 정의
 const LectureWrapper = styled.div`
-  background-color: #fff;
+  width: 100%;
+  margin: 20px 0;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
