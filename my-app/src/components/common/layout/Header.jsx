@@ -8,27 +8,54 @@ import styled from "styled-components";
 // GoingUpDragon/my-app/src/components/common/layout
 import Logo from "./Logo";
 
+// GoingUpDragon/my-app/src/components/common
+import LoginModal from "../utilities/LoginModal";
+
 const Header = ({ inputRef }) => {
   const [searchInput, setSearchInput] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
 
   // 입력값이 변경될 때 상태 업데이트
   function handleInputChange(event) {
     setSearchInput(event.target.value);
   }
 
+  // 로그인 버튼 클릭시 로그인 모달 열림
+  const handleLoginClick = () => {
+    setShowModal(true);
+  };
+
+  // 모달의 x 버튼 클릭시 모달 닫힘
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  // 로그인 성공 시 상태 업데이트
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+    setShowModal(false); // 로그인 후 모달 닫기
+  };
+
+  // 프로필 드롭다운 토글
+  const handleProfileClick = () => {
+    setShowProfileDropdown(!showProfileDropdown);
+  };
+
+  // 로그아웃 처리
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setShowProfileDropdown(false); // 드롭다운 닫기
+  };
+
   return (
-    <header
-      style={{
-        backgroundColor: "#ffffff",
-        padding: "1rem",
-        textAlign: "center",
-      }}
-    >
+    <StyledHeader>
       <Container>
         <Row>
           {/* 로고 및 카테고리 */}
           <Col>
-            <div>
+            <StyledLogoCategoryDiv>
               <StyledHeaderContainer>
                 <Logo></Logo>
                 <StyledNavbarNav>
@@ -100,7 +127,7 @@ const Header = ({ inputRef }) => {
                   </StyledCategoryDropdown>
                 </StyledNavbarNav>
               </StyledHeaderContainer>
-            </div>
+            </StyledLogoCategoryDiv>
           </Col>
 
           {/* 강의 검색창 */}
@@ -124,18 +151,60 @@ const Header = ({ inputRef }) => {
             </StyledForm>
           </StyledCol>
 
-          {/* 로그인 및 회원가입 버튼 */}
-          <StyledCol>
-            <StyledLoginButton variant="outline-success">
-              로그인
-            </StyledLoginButton>
-            <StyledButton variant="outline-success">회원가입</StyledButton>
-          </StyledCol>
+          <StyledLogOutCol>
+            {!isLoggedIn ? (
+              <>
+                {/* 로그인 버튼 */}
+                <StyledLoginButton
+                  variant="outline-success"
+                  onClick={handleLoginClick} // 모달 열기
+                >
+                  로그인
+                </StyledLoginButton>
+                {/* 회원가입 버튼 */}
+                <StyledButton variant="outline-success">회원가입</StyledButton>
+              </>
+            ) : (
+              <StyledLoginCol>
+                <StyledButton variant="outline-success">맞춤강의</StyledButton>
+                <ProfileImage
+                  src="https://via.placeholder.com/40"
+                  alt="프로필"
+                  onClick={handleProfileClick} // 프로필 클릭 시 드롭다운 열기
+                />
+                {showProfileDropdown && (
+                  <DropdownMenu>
+                    <StyledButton
+                      variant="outline-danger"
+                      onClick={handleLogout}
+                    >
+                      로그아웃
+                    </StyledButton>
+                  </DropdownMenu>
+                )}
+              </StyledLoginCol>
+            )}
+          </StyledLogOutCol>
+          <LoginModal
+            show={showModal}
+            onClose={handleCloseModal}
+            onLoginSussess={handleLoginSuccess}
+          ></LoginModal>
         </Row>
       </Container>
-    </header>
+    </StyledHeader>
   );
 };
+
+const StyledHeader = styled.header`
+  background-color: "#000000";
+  padding: "1rem";
+  text-align: "center";
+`;
+
+const StyledLogoCategoryDiv = styled.div`
+
+`;
 
 const StyledHeaderContainer = styled(Container)`
   display: flex;
@@ -162,23 +231,44 @@ const StyledCategoryDropdown = styled.li`
   cursor: pointer;
 `;
 
+
+
+// 내일 강사님한테 물어보기 / 드롭다운의 아래에 위치하게 하고싶음.
+const DropdownMenu = styled.div`
+  position: absolute;
+  top: 280px;
+  right: 120px;
+  background-color: #fff;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+  padding: 10px;
+`;
+
+const ProfileImage = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative; // 드롭다운이 프로필 이미지 위에 표시되도록 설정
+`;
+
 const StyledForm = styled(Form)`
   display: flex;
 `;
 
-const StyledNavDropDownItem = styled.li`
-  // 소분류 아이템
-  padding: 8px 15px;
-  color: #000;
-  text-decoration: none;
-  display: block;
-  transition: background-color 0.3s ease, color 0.3s ease;
+// const StyledNavDropDownItem = styled.li`
+//   // 소분류 아이템
+//   padding: 8px 15px;
+//   color: #000;
+//   text-decoration: none;
+//   display: block;
+//   transition: background-color 0.3s ease, color 0.3s ease;
 
-  &:hover {
-    background-color: #f0f0f0; /* 호버 시 배경색 변경 */
-    color: #000; /* 호버 시 텍스트 색 변경 */
-  }
-`;
+//   &:hover {
+//     background-color: #f0f0f0; /* 호버 시 배경색 변경 */
+//     color: #000; /* 호버 시 텍스트 색 변경 */
+//   }
+// `;
 
 const StyledFirstItem = styled.li`
   position: relative;
@@ -329,4 +419,18 @@ const StyledCol = styled(Col)`
   justify-content: center;
   align-items: center;
 `;
+
+const StyledLogOutCol = styled(Col)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledLoginCol = styled(Col)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+`;
+
 export default Header;
