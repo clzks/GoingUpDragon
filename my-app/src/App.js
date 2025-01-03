@@ -16,6 +16,7 @@ import PolicyLayout from "./layouts/policyPage/PolicyLayout";
 import SignupPage from "./layouts/signUpPage/SignUpLayout";
 import LoginModal from "./components/common/utilities/LoginModal";
 import QnAMainLayout from "./layouts/qnAPage/main/QnAMainLayout";
+import AccountRecoveryTabs from "./layouts/findAccountPage/AccountRecoveryTabs";
 
 function App() {
   return (
@@ -47,6 +48,9 @@ function App() {
             <li>
               <Link to="/QnAMainLayout">QnA 메인 페이지</Link>
             </li>
+            <li>
+              <Link to="/AccountRecoveryTabs">계정 찾기 페이지</Link>
+            </li>
           </ul>
         </nav>
         <Routes>
@@ -58,6 +62,10 @@ function App() {
           <Route path="/SignUp" element={<SignupPage />} />
           <Route path="/LoginModal" element={<LoginModal />} />
           <Route path="/QnAMainLayout" element={<QnAMainLayout />} />
+          <Route
+            path="/AccountRecoveryTabs"
+            element={<AccountRecoveryTabs />}
+          />
         </Routes>
       </div>
     </Router>
