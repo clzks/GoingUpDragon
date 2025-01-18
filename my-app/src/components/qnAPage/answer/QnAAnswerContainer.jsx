@@ -8,11 +8,11 @@ import styled from "styled-components";
 import QnARecommend from "../sideComponent/QnARecommend";
 import QuestionButton from "../sideComponent/QuestionButton";
 
-const QnAAnswerContainer = () => {
+const QnAAnswerContainer = ({ questionInfo }) => {
   return (
     <StyledContainer>
       <StyledLeftPanel>
-        <StyledH2>dd</StyledH2>
+        <StyledTitle>{questionInfo.QuestionInfo.title}</StyledTitle>
       </StyledLeftPanel>
       <StyledRightPanel>
         <QnARecommend></QnARecommend>
@@ -28,6 +28,7 @@ const StyledContainer = styled(Container)`
 
 const StyledLeftPanel = styled.div`
   flex: 2;
+  margin-right: 50px;
 `;
 
 const StyledRightPanel = styled.div`
@@ -35,7 +36,7 @@ const StyledRightPanel = styled.div`
   margin-top: 30px;
 `;
 
-const StyledH2 = styled.h2`
+const StyledTitle = styled.h5`
   margin-top: 20px;
 `;
 
