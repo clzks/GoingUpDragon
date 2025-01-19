@@ -9,7 +9,6 @@ import { FaRegThumbsUp } from "react-icons/fa";
 
 import HorizontalLine from "../icons/HorizontalLine";
 import SharpTagComponent from "../utilities/tag/SharpTagComponent";
-import LikeButton from "../utilities/LikeButton";
 
 const QnACard = () => {
   return (
