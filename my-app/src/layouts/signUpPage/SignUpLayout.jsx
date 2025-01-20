@@ -9,6 +9,7 @@ import EmailInput from "../../components/signUpPage/EmailInput";
 import PasswordInput from "../../components/signUpPage/PasswordInput";
 import ConfirmPasswordInput from "../../components/signUpPage/ConfirmPasswordInput";
 import SignupButton from "../../components/signUpPage/SignupButton";
+import FindIdInput from "../../components/findAccountPage/FindIdInput";
 //import ErrorMessage from '../../components/common/Message/ErrorMessage';
 
 // GoingUpDragon/my-app/src/components/commonicons/SocialLoginIcons.jsx
@@ -114,6 +115,13 @@ const SignupPage = () => {
             onChange={handleChange}
           />
           <ErrorMessage message={errors.confirmPassword} />
+        </Col>
+      </Row>
+
+       {/* 휴대폰 인증 */}
+      <Row className="justify-content-center">
+        <Col xs={12} md={6}>
+          <FindIdInput isSignUp={true}></FindIdInput>
         </Col>
       </Row>
 
