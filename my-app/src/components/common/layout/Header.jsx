@@ -314,6 +314,7 @@ const StyledNavLink = styled.span`
   color: #000;
   transition: color 0.3s;
   cursor: pointer;
+  white-space: nowrap;
 
   &:hover {
     color: #000; /* 호버 시 링크 색 변경 */
