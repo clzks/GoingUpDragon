@@ -1,9 +1,12 @@
 // GoingUpDragon/my-app/src/components/common/layout/Header.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // 외부 라이브러리
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import styled from "styled-components";
+
+// GoingUpDragon/my-app/src/apis/common/
+import { fetchCategories } from "../../../apis/common/categoryApi"; // API 함수 가져오기
 
 // GoingUpDragon/my-app/src/components/common/layout
 import Logo from "./Logo";
@@ -12,10 +15,33 @@ import Logo from "./Logo";
 import LoginModal from "../utilities/LoginModal";
 
 const Header = ({ inputRef }) => {
+  // 카테고리들을 담는 배열 빈 상태로 초기값 설정
+  const [categories, setCategories] = useState([]);
+  // 에러 발생시 에러를 담는 코드 초기값 null
+  const [error, setError] = useState(null);
+
   const [searchInput, setSearchInput] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+
+  // 카테고리 렌더링을 위한 useEffect
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await fetchCategories();
+        setCategories(data);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    
+    loadCategories();
+  }, []);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   // 입력값이 변경될 때 상태 업데이트
   function handleInputChange(event) {
@@ -62,67 +88,25 @@ const Header = ({ inputRef }) => {
                   <StyledCategoryDropdown>
                     <StyledNavLink>카테고리</StyledNavLink>
                     <StyledFirstItemList>
-                      <StyledFirstItem>프로그래밍 언어</StyledFirstItem>
-                      <StyledFirstItem>웹 개발</StyledFirstItem>
-                      <StyledFirstItem>
-                        데이터 과학
-                        <StyledSecondItemList>
-                          <StyledSecondNavItem>
-                            AI/ChatGPT 활용
-                            <StyledThirdItemList>
-                              <StyledThirdItem>ChatGPT</StyledThirdItem>
-                              <StyledThirdItem>Python</StyledThirdItem>
-                              <StyledThirdItem>인공지능(AI)</StyledThirdItem>
-                            </StyledThirdItemList>
-                          </StyledSecondNavItem>
-                        </StyledSecondItemList>
-                      </StyledFirstItem>
-                      <StyledFirstItem>
-                        인공지능
-                        <StyledSecondItemList>
-                          <StyledSecondNavItem>
-                            AI/ChatGPT 활용
-                            <StyledThirdItemList>
-                              <StyledThirdItem>ChatGPT</StyledThirdItem>
-                              <StyledThirdItem>Python</StyledThirdItem>
-                              <StyledThirdItem>인공지능(AI)</StyledThirdItem>
-                            </StyledThirdItemList>
-                          </StyledSecondNavItem>
-                          <StyledSecondNavItem>
-                            딥러닝/머신러닝
-                            <StyledThirdItemList>
-                              <StyledThirdItem>ChatGPT</StyledThirdItem>
-                              <StyledThirdItem>Python</StyledThirdItem>
-                              <StyledThirdItem>인공지능(AI)</StyledThirdItem>
-                            </StyledThirdItemList>
-                          </StyledSecondNavItem>
-                          <StyledSecondNavItem>
-                            컴퓨터 비전
-                            <StyledThirdItemList></StyledThirdItemList>
-                          </StyledSecondNavItem>
-                          <StyledSecondNavItem>
-                            자연어 처리
-                            <StyledThirdItemList>
-                              <StyledThirdItem>ChatGPT</StyledThirdItem>
-                              <StyledThirdItem>Python</StyledThirdItem>
-                              <StyledThirdItem>인공지능(AI)</StyledThirdItem>
-                            </StyledThirdItemList>
-                          </StyledSecondNavItem>
-                          <StyledSecondNavItem>
-                            인공지능 기타
-                            <StyledThirdItemList>
-                              <StyledThirdItem>ChatGPT</StyledThirdItem>
-                              <StyledThirdItem>Python</StyledThirdItem>
-                              <StyledThirdItem>인공지능(AI)</StyledThirdItem>
-                            </StyledThirdItemList>
-                          </StyledSecondNavItem>
-                        </StyledSecondItemList>
-                      </StyledFirstItem>
-                      <StyledFirstItem>클라우드 컴퓨팅</StyledFirstItem>
-                      <StyledFirstItem>게임 개발</StyledFirstItem>
-                      <StyledFirstItem>프론트엔드 디자인</StyledFirstItem>
-                      <StyledFirstItem>백엔드 기술</StyledFirstItem>
-                      <StyledFirstItem>소프트웨어 공학</StyledFirstItem>
+                      {categories.map((category) => (
+                        <StyledFirstItem key={category.categoryId}>
+                          {category.categoryName}
+                          <StyledSecondItemList>
+                            {category.subCategories.map((subCategory) => (
+                              <StyledSecondNavItem key={subCategory.categoryId}>
+                                {subCategory.categoryName}
+                                <StyledThirdItemList>
+                                  {subCategory.tags.map((tag) => (
+                                    <StyledThirdItem key={tag.subjectTagId}>
+                                      {tag.subjectTagName}
+                                    </StyledThirdItem>
+                                  ))}
+                                </StyledThirdItemList>
+                              </StyledSecondNavItem>
+                            ))}
+                          </StyledSecondItemList>
+                        </StyledFirstItem>
+                      ))}
                     </StyledFirstItemList>
                   </StyledCategoryDropdown>
                 </StyledNavbarNav>
@@ -202,9 +186,7 @@ const StyledHeader = styled.header`
   text-align: "center";
 `;
 
-const StyledLogoCategoryDiv = styled.div`
-
-`;
+const StyledLogoCategoryDiv = styled.div``;
 
 const StyledHeaderContainer = styled(Container)`
   display: flex;
@@ -230,8 +212,6 @@ const StyledCategoryDropdown = styled.li`
   list-style: none;
   cursor: pointer;
 `;
-
-
 
 // 내일 강사님한테 물어보기 / 드롭다운의 아래에 위치하게 하고싶음.
 const DropdownMenu = styled.div`
