@@ -1,6 +1,6 @@
 // GoingUpDragon/my-app/src/components/common/utilities/LoginModal.jsx
 
-// 외부 라이브러리와 컴포넌트 임포
+// 외부 라이브러리와 컴포넌트 임포트
 import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -9,30 +9,28 @@ import Row from "react-bootstrap/Row";
 import styled from "styled-components";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-// GoingUpDragon/my-app/src/components/common/layout/Logo.jsx
+// 내부 컴포넌트 임포트
 import Logo from "../layout/Logo";
-
-// GoingUpDragon/my-app/src/components/commonicons/..
 import SocialLoginIcons from "../../common/icons/SocialLoginIcons";
 import FindAndSignUpLinkButtons from "../icons/FindAndSignUpLinkButtons";
+import { login } from "../../../apis/loginPage/LoginApi"; // login API 임포트
 
-// LoginModal 컴포넌트 정의
-const LoginModal = ({ show, onClose, onLoginSussess }) => {
-  const [email, setEmail] = useState(""); // 이메일 초기값
-  const [password, setPassword] = useState(""); // 비밀번호 초기값
+const LoginModal = ({ show, onClose, onLoginSuccess }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [emailError, setEmailError] = useState(false); // 이메일 에러 초기값
-  const [loginError, setLoginError] = useState(false); // 로그인 에러 메시지 초기값
+  const [emailError, setEmailError] = useState(false);
+  const [loginError, setLoginError] = useState('');
 
-  // 이메일 유효성 검사 함수
   const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 기본 이메일 정규식
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
-  // 로그인 버튼 클릭 핸들러
-  const handleLogin = () => {
-    // 이메일 검증
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    
     if (!email) {
       setEmailError(true);
       setLoginError("이메일을 입력해주세요.");
@@ -45,54 +43,37 @@ const LoginModal = ({ show, onClose, onLoginSussess }) => {
       return;
     }
 
-    setEmailError(false); // 이메일이 유효하다면 에러 상태 해제
+    setEmailError(false);
 
-    // 비밀번호 검증
     if (!password) {
       setLoginError("비밀번호를 입력해주세요.");
       return;
     }
 
-    // 모든 조건 만족 시 로그인 성공 처리
-    if(email && password) {
-      setLoginError(""); // 에러 메시지 초기화
-      console.log("로그인 성공!"); // 디버깅용 로그
-      onLoginSussess(); // 성공 콜백 호출
-      onClose?.(); // 모달 닫기
+    try {
+      const data = await login(email, password);
+      if (data.success) {
+        localStorage.setItem('authToken', data.token); // Save the JWT token to localStorage
+        console.log('로그인 성공:', data);
+        onLoginSuccess(data); // Pass data to parent on login success
+        onClose(); // Close modal on success
+      } else {
+        setLoginError(data.message || "로그인 실패: 잘못된 이메일 또는 비밀번호입니다.");
+      }
+    } catch (error) {
+      setError(error.message || '로그인 요청 중 오류 발생');
     }
   };
 
-  // const handleEmailChange = (e) => {
-  //   setEmail(e.target.value);
-  //   setEmailError(!/\S+@\S+\.\S+/.test(e.target.value));
-  // };
-
-  // const handlePasswordChange = (e) => {
-  //   setPassword(e.target.value);
-  // };
-
-  // const handleLogin = () => {
-  //   if (!emailError && email && password) {
-  //     setLoginError(false);
-  //   } else {
-  //     setLoginError(true);
-  //   }
-  // };
-
   return (
-    <Modal
-      show={show}
-      onHide={onClose}
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+    <Modal show={show} onHide={onClose} centered>
       <StyledModalHeader closeButton>
         <Modal.Title id="contained-modal-title-vcenter"></Modal.Title>
       </StyledModalHeader>
 
       <Modal.Body>
         <Container>
-          {/* 로고 출력 */}
+          {/* Logo */}
           <Row className="justify-content-md-center">
             <Col xs={12} md={12}>
               <LogoWrapper>
@@ -101,7 +82,7 @@ const LoginModal = ({ show, onClose, onLoginSussess }) => {
             </Col>
           </Row>
 
-          {/* 이메일 입력 필드 */}
+          {/* Email input */}
           <Row className="justify-content-md-center">
             <Col xs={12} md={12}>
               <StyledInput
@@ -109,18 +90,14 @@ const LoginModal = ({ show, onClose, onLoginSussess }) => {
                 placeholder="이메일을 입력하세요"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                hasError={emailError} // 에러 시 스타일 적용
+                hasError={emailError}
+                required
               />
-              {emailError && (
-                <StyledErrorText>
-                  {emailError}
-                  {/* 유효한 이메일 주소를 입력해주세요. */}
-                </StyledErrorText>
-              )}
+              {emailError && <StyledErrorText>{loginError}</StyledErrorText>}
             </Col>
           </Row>
 
-          {/* 비밀번호 입력 필드 */}
+          {/* Password input */}
           <Row className="justify-content-md-center">
             <Col xs={12} md={12}>
               <StyledPasswordWrapper>
@@ -128,8 +105,8 @@ const LoginModal = ({ show, onClose, onLoginSussess }) => {
                   type={showPassword ? "text" : "password"}
                   placeholder="비밀번호를 입력하세요"
                   value={password}
-                  // onChange={handlePasswordChange}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
                 <StyledEyeIcon onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -138,32 +115,26 @@ const LoginModal = ({ show, onClose, onLoginSussess }) => {
             </Col>
           </Row>
 
-          {/* 로그인 버튼 */}
+          {/* Login button */}
           <Row className="justify-content-md-center">
             <Col xs={12} md={12}>
-              {loginError && <StyledErrorText>{loginError}</StyledErrorText>}
+              {error && <StyledErrorText>{error}</StyledErrorText>}
               <StyledLoginButton onClick={handleLogin}>
                 로그인
               </StyledLoginButton>
-              {/* {loginError && (
-                <StyledErrorText>
-                  이메일 또는 비밀번호가 잘못되었습니다.
-                </StyledErrorText>
-              )} */}
             </Col>
           </Row>
 
-          {/* 링크 버튼 컴포넌트 추가 */}
+          {/* Additional links */}
           <FindAndSignUpLinkButtons />
 
-          {/* 간편 로그인 텍스트 */}
+          {/* Social Login */}
           <Row className="justify-content-md-center">
             <Col xs={12} md={6}>
               <StyledSimpleLogin>간편 로그인</StyledSimpleLogin>
             </Col>
           </Row>
 
-          {/* 간편 로그인 아이콘 */}
           <Row className="justify-content-md-center">
             <Col xs={12} md={6}>
               <StyledIconWrapper>
@@ -179,14 +150,13 @@ const LoginModal = ({ show, onClose, onLoginSussess }) => {
 
 export default LoginModal;
 
-// 로고 스타일 유지
+// 스타일 정의 유지
 const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 1rem;
 `;
 
-// 모달 헤더 스타일
 const StyledModalHeader = styled(Modal.Header)`
   border-bottom: none;
   .btn-close {
@@ -200,27 +170,25 @@ const StyledModalHeader = styled(Modal.Header)`
   }
 `;
 
-// 이메일 및 비밀번호 입력 필드 스타일
 const StyledInput = styled.input`
   width: 100%;
   padding: 10px;
   border-radius: 5px;
-  border: ${(props) => (props.hasError ? "1px solid red" : "1px solid #ccc")};
+  border: ${({ hasError }) => (hasError ? "1px solid red" : "1px solid #ccc")};
   margin-top: 10px;
 
   &:focus {
-    border: 1px solid ${(props) => (props.hasError ? "red" : "#B0E8F1")};
+    border: 1px solid ${({ hasError }) => (hasError ? "red" : "#B0E8F1")};
     outline: none;
   }
 `;
 
-// 비밀번호 입력창 및 아이콘 래퍼 스타일 정의
+
 const StyledPasswordWrapper = styled.div`
   position: relative;
   margin-top: 10px;
 `;
 
-// 비밀번호 표시/숨기기 아이콘 스타일 정의
 const StyledEyeIcon = styled.div`
   position: absolute;
   top: 50%;
@@ -229,7 +197,6 @@ const StyledEyeIcon = styled.div`
   cursor: pointer;
 `;
 
-// 로그인 버튼 스타일 정의
 const StyledLoginButton = styled.button`
   width: 100%;
   padding: 10px;
@@ -248,21 +215,18 @@ const StyledLoginButton = styled.button`
   }
 `;
 
-// 오류 메시지 텍스트 스타일 정의
 const StyledErrorText = styled.p`
   color: red;
   font-size: 0.9em;
   margin-top: 5px;
 `;
 
-// 간편 로그인 텍스트 스타일 정의
 const StyledSimpleLogin = styled.p`
   text-align: center;
   font-size: 1em;
   margin-top: 30px;
 `;
 
-// 간편 로그인 아이콘 래퍼 스타일 정의
 const StyledIconWrapper = styled.div`
   display: flex;
   justify-content: space-around;
