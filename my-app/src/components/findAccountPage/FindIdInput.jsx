@@ -5,7 +5,7 @@ import styled from "styled-components"; // 스타일드 컴포넌트 라이브�
 // GoingUpDragon/my-app/src/components/findAccountPage/..
 import FindIdOutput from "./FindIdOutput"; // 내부 컴포넌트
 
-const FindIdInput = ({ isSignUp = false }) => {
+const FindIdInput = ({ isSignUp = false, onPhoneNumberChange }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isPhoneValid, setIsPhoneValid] = useState(true);
   const [verificationRequested, setVerificationRequested] = useState(false);
@@ -16,6 +16,7 @@ const FindIdInput = ({ isSignUp = false }) => {
     const value = e.target.value;
     if (/^\d*$/.test(value)) {
       setPhoneNumber(value);
+      onPhoneNumberChange(value); // 부모 컴포넌트에 전화번호 전달
     }
   }
 
