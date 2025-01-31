@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 // 외부 라이브러리
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import styled from "styled-components";
+import { useNavigate } from 'react-router-dom';
 
 // GoingUpDragon/my-app/src/apis/common/
 import { fetchCategories } from "../../../apis/common/categoryApi"; // API 함수 가져오기
@@ -20,10 +21,24 @@ const Header = ({ inputRef }) => {
   // 에러 발생시 에러를 담는 코드 초기값 null
   const [error, setError] = useState(null);
 
+  // 검색
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [records, setRecords] = useState([
+    { type: "lecture", text: "JavaScript for Beginners" },
+    { type: "lecture", text: "Advanced React" },
+    // 더 많은 항목들
+  ]);
+
   const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+
+  const navigate = useNavigate();
+
+  const goToSignup = () => {
+    navigate('/SignUp'); // "/signup" 경로로 이동
+  };
 
   // 카테고리 렌더링을 위한 useEffect
   useEffect(() => {
@@ -35,7 +50,7 @@ const Header = ({ inputRef }) => {
         setError(err.message);
       }
     };
-    
+
     loadCategories();
   }, []);
 
@@ -47,6 +62,14 @@ const Header = ({ inputRef }) => {
   function handleInputChange(event) {
     setSearchInput(event.target.value);
   }
+
+  const handleFormFocus = () => {
+    setIsDropdownVisible(true); // 폼 클릭 시 드롭다운 표시
+  };
+
+  const handleFormBlur = () => {
+    setIsDropdownVisible(false); // 포커스가 벗어나면 드롭다운 숨기기
+  };
 
   // 로그인 버튼 클릭시 로그인 모달 열림
   const handleLoginClick = () => {
@@ -124,6 +147,8 @@ const Header = ({ inputRef }) => {
                 aria-label="Search"
                 value={searchInput}
                 onChange={handleInputChange}
+                onFocus={handleFormFocus} // 폼 클릭 시 드롭다운 표시
+                onBlur={handleFormBlur} // 입력란에서 포커스가 벗어나면 드롭다운 숨기기
               ></StyledFormControl>
               <StyledButton
                 type="submit"
@@ -133,6 +158,13 @@ const Header = ({ inputRef }) => {
                 검색
               </StyledButton>
             </StyledForm>
+            <DropdownContainer isVisible={isDropdownVisible}>
+              {records.map((record, index) => (
+                <RecordItem key={index} type={record.type}>
+                  {record.text}
+                </RecordItem>
+              ))}
+            </DropdownContainer>
           </StyledCol>
 
           <StyledLogOutCol>
@@ -146,7 +178,7 @@ const Header = ({ inputRef }) => {
                   로그인
                 </StyledLoginButton>
                 {/* 회원가입 버튼 */}
-                <StyledButton variant="outline-success">회원가입</StyledButton>
+                <StyledButton variant="outline-success" onClick={goToSignup}>회원가입</StyledButton>
               </>
             ) : (
               <StyledLoginCol>
@@ -213,61 +245,6 @@ const StyledCategoryDropdown = styled.li`
   cursor: pointer;
 `;
 
-// 내일 강사님한테 물어보기 / 드롭다운의 아래에 위치하게 하고싶음.
-const DropdownMenu = styled.div`
-  position: absolute;
-  top: 280px;
-  right: 120px;
-  background-color: #fff;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 5;
-  padding: 10px;
-`;
-
-const ProfileImage = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  position: relative; // 드롭다운이 프로필 이미지 위에 표시되도록 설정
-`;
-
-const StyledForm = styled(Form)`
-  display: flex;
-`;
-
-// const StyledNavDropDownItem = styled.li`
-//   // 소분류 아이템
-//   padding: 8px 15px;
-//   color: #000;
-//   text-decoration: none;
-//   display: block;
-//   transition: background-color 0.3s ease, color 0.3s ease;
-
-//   &:hover {
-//     background-color: #f0f0f0; /* 호버 시 배경색 변경 */
-//     color: #000; /* 호버 시 텍스트 색 변경 */
-//   }
-// `;
-
-const StyledFirstItem = styled.li`
-  position: relative;
-  padding: 10px;
-  cursor: pointer;
-  list-style: none; /* 불필요한 점 제거 */
-
-  /* 호버 시 스타일 */
-  &:hover {
-    background-color: #f0f0f0; /* 예시 호버 배경색 */
-    color: #000; /* 호버 시 텍스트 색 변경 */
-  }
-
-  /* 서브메뉴(StyledSecondItemList)가 바로 아래에 있을 때 */
-  &:hover > ul {
-    display: block;
-  }
-`;
-
 const StyledFirstItemList = styled.ul`
   position: absolute;
   top: 100%;
@@ -302,6 +279,24 @@ const StyledNavLink = styled.span`
 
   /* 카테고리 링크에 마우스를 올렸을 때 서브메뉴 표시 */
   &:hover + ${StyledFirstItemList} {
+    display: block;
+  }
+`;
+
+const StyledFirstItem = styled.li`
+  position: relative;
+  padding: 10px;
+  cursor: pointer;
+  list-style: none; /* 불필요한 점 제거 */
+
+  /* 호버 시 스타일 */
+  &:hover {
+    background-color: #f0f0f0; /* 예시 호버 배경색 */
+    color: #000; /* 호버 시 텍스트 색 변경 */
+  }
+
+  /* 서브메뉴(StyledSecondItemList)가 바로 아래에 있을 때 */
+  &:hover > ul {
     display: block;
   }
 `;
@@ -370,6 +365,19 @@ const StyledThirdItem = styled.li`
   }
 `;
 
+const StyledCol = styled(Col)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* 수직 중앙 정렬 */
+  position: relative;
+
+`;
+
+const StyledForm = styled(Form)`
+  display: flex;
+`;
+
 const StyledFormControl = styled(Form.Control)`
   width: 500px !important; /* 원하는 너비로 설정. 나중에 크기 유동적으로 변하게 */
   margin-right: 0.5rem;
@@ -391,14 +399,70 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const StyledLoginButton = styled(StyledButton)`
-  margin-right: 0.5rem;
+const DropdownContainer = styled.div`
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: ${({ isVisible }) => (isVisible ? "block" : "none")};
 `;
 
-const StyledCol = styled(Col)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const RecordItem = styled.div`
+  padding: 0.75rem;
+  cursor: pointer;
+  background-color: ${({ type }) => (type === "lecture" ? "#e7f7fc" : "#fff")};
+  border-radius: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+`;
+
+// 내일 강사님한테 물어보기 / 드롭다운의 아래에 위치하게 하고싶음.
+const DropdownMenu = styled.div`
+  position: absolute;
+  top: 280px;
+  right: 120px;
+  background-color: #fff;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+  padding: 10px;
+`;
+
+const ProfileImage = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative; // 드롭다운이 프로필 이미지 위에 표시되도록 설정
+`;
+
+// const StyledNavDropDownItem = styled.li`
+//   // 소분류 아이템
+//   padding: 8px 15px;
+//   color: #000;
+//   text-decoration: none;
+//   display: block;
+//   transition: background-color 0.3s ease, color 0.3s ease;
+
+//   &:hover {
+//     background-color: #f0f0f0; /* 호버 시 배경색 변경 */
+//     color: #000; /* 호버 시 텍스트 색 변경 */
+//   }
+// `;
+
+const StyledLoginButton = styled(StyledButton)`
+  margin-right: 0.5rem;
 `;
 
 const StyledLogOutCol = styled(Col)`
