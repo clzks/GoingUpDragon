@@ -204,7 +204,7 @@ const Header = ({ inputRef }) => {
           <LoginModal
             show={showModal}
             onClose={handleCloseModal}
-            onLoginSussess={handleLoginSuccess}
+            onLoginSuccess={handleLoginSuccess}
           ></LoginModal>
         </Row>
       </Container>
