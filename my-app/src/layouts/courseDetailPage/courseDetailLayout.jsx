@@ -1,11 +1,12 @@
 // GoingUpDragon/my-app/src/layouts/courseDetailPage/courseDetailLayout.jsx
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 // GoingUpDragon/my-app/src
 import Layout from "../../components/common/layout/Layout";
 import DetailCourseBanner from "../../components/courseDetailPage/banner/DetailCourseBanner";
 import CourseNavigation from "../../components/courseDetailPage/navigation/CourseNavigation";
 import CourseDetailMainPanel from "../../components/courseDetailPage/main/CourseDetailMainPanel";
+import { getCourseReviews } from "../../apis/courseDetailPage/courseDetailApi";
 
 const CourseDetailLayout = () => {
   const refList = {
@@ -13,6 +14,16 @@ const CourseDetailLayout = () => {
     infoRef: useRef(null),
     reviewRef: useRef(null),
   };
+
+  var courseId = 5641;
+
+  const [reviewData, setReviewData] = useState([]);
+
+  useEffect(() => {
+    getCourseReviews(courseId)
+      .then((data) => setReviewData(data))
+      .catch((error) => console.error("리뷰 가져오기 실패:", error));
+  }, [courseId]);
 
   const lectureInfo = {
     instructor: "이준호",
@@ -384,6 +395,7 @@ const CourseDetailLayout = () => {
         recommendLectureList={recommendLectureList}
         similarLectureList={similarLectureList}
         enrollmentData={enrollmentInfo}
+        reviewData={reviewData}
         refList={refList}
       ></CourseDetailMainPanel>
     </Layout>

@@ -10,14 +10,12 @@ import ReviewBanner from "./ReviewBanner";
 import CourseReviewCardList from "./CourseReviewCardList";
 
 const CourseReviewSection = forwardRef(({ reviewData }, ref) => {
-  const reviewCount = 113;
-
   return (
     <StyledReviewContainer ref={ref}>
       <StyledTitleText>수강평</StyledTitleText>
       <ReviewSortOption></ReviewSortOption>
       <ReviewBanner reviewData={reviewData}></ReviewBanner>
-      <CourseReviewCardList count={reviewCount}></CourseReviewCardList>
+      <CourseReviewCardList reviewData={reviewData}></CourseReviewCardList>
     </StyledReviewContainer>
   );
 });

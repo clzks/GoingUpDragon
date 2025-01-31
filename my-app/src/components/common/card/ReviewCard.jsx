@@ -10,19 +10,21 @@ import RatingStarList from "../icons/RatingStarList";
 import LikeButton from "../utilities/LikeButton";
 import ShareButton from "../utilities/ShareButton";
 
-const ReviewCard = ({
-  title = "C++ 프로그래밍",
-  content = "기초부터 고급 개념까지 차근차근 설명한 강의였습니다.",
-  rating = 3.6,
-  date = "2023.10.15",
-  likes = 7,
-  isMyPage = true,
-}) => {
+const ReviewCard = ({ review }) => {
+  var nickName = review.nickName;
+  var content = review.comment;
+  var rating = review.rate;
+  var date = review.createdAt;
+  var reply = review.reply;
+  var replyDate = review.replyCreatedAt;
+  var likes = 7;
+  var isMyPage = false;
+
   return (
     <CardWrapper>
       <Header>
         {isMyPage ? <></> : <ProfileCircle></ProfileCircle>}
-        <LectureTitle>{title}</LectureTitle>
+        <NickName>{nickName}</NickName>
         <ReviewDate>{date}</ReviewDate>
       </Header>
 
@@ -59,7 +61,7 @@ const Header = styled.div`
   gap: 10px;
 `;
 
-const LectureTitle = styled.h3`
+const NickName = styled.h3`
   font-size: 18px;
   font-weight: bold;
 `;
@@ -83,7 +85,7 @@ const RatingNumber = styled.span`
 `;
 
 const ReviewContent = styled.p`
-  font-size: 14px;
+  font-size: 16px;
   color: #444;
   margin-bottom: 10px;
 `;

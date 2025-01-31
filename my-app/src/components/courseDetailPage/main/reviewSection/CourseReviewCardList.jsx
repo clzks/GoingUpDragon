@@ -7,19 +7,23 @@ import styled from "styled-components";
 // GoingUpDragon/my-app/src/components/common/card/ReviewCard.jsx
 import ReviewCard from "../../../common/card/ReviewCard";
 
-const CourseReviewCardList = ({ count }) => {
+const CourseReviewCardList = ({ reviewData }) => {
   const [visibleCount, setVisibleCount] = useState(5); // 처음에는 5개만 보여줌
 
   function handleLoadMore() {
-    setVisibleCount((prev) => Math.min(prev + 5, count)); // 최대 count까지 증가
+    setVisibleCount((prev) => Math.min(prev + 5, reviewData.length)); // 최대 count까지 증가
   }
 
   return (
     <div>
-      {Array.from({ length: visibleCount }).map((_, index) => (
-        <ReviewCard key={index} isMyPage={false} />
-      ))}
-      {visibleCount < count && ( // 모든 카드를 보여줬다면 버튼 숨기기
+      {reviewData.slice(0, visibleCount).map(
+        (
+          review // ✅ reviewData 전달
+        ) => (
+          <ReviewCard key={review.reviewId} review={review} isMyPage={false} />
+        )
+      )}
+      {visibleCount < reviewData.length && (
         <StyledButton onClick={handleLoadMore}>더보기</StyledButton>
       )}
     </div>

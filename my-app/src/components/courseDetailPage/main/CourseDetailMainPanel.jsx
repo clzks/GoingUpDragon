@@ -21,6 +21,7 @@ const CourseDetailMainPanel = ({
   recommendLectureList,
   similarLectureList,
   enrollmentData,
+  reviewData,
   refList,
 }) => {
   function getLectureCount(curriculumData) {
@@ -39,7 +40,10 @@ const CourseDetailMainPanel = ({
           description={description}
           ref={refList.infoRef}
         ></LectureInfo>
-        <CourseReviewSection ref={refList.reviewRef}></CourseReviewSection>
+        <CourseReviewSection
+          reviewData={reviewData}
+          ref={refList.reviewRef}
+        ></CourseReviewSection>
         <InstructorCardList
           lectureList={recommendLectureList}
         ></InstructorCardList>

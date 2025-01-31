@@ -7,17 +7,23 @@ import styled from "styled-components";
 // GoingUpDragon/my-app/src/components
 import RatingStarList from "../../../common/icons/RatingStarList";
 
-const ReviewBanner = () => {
-  const rating = 4.8;
-  const reviewCount = 113;
+const ReviewBanner = ({ reviewData }) => {
+  const calculateAverageRating = (reviews) => {
+    if (reviews.length === 0) return 0; // 리뷰가 없으면 0 반환
+    const sum = reviews.reduce((acc, review) => acc + review.rate, 0);
+    return (sum / reviews.length).toFixed(1); // 소수점 1자리까지 반환
+  };
 
   return (
     <StyledBanner>
-      <StyledRankText>{rating}</StyledRankText>
+      <StyledRankText>{calculateAverageRating(reviewData)}</StyledRankText>
       <StyledRatingStarPanel>
-        <RatingStarList rating={rating} size={"48px"}></RatingStarList>
+        <RatingStarList
+          rating={calculateAverageRating(reviewData)}
+          size={"48px"}
+        ></RatingStarList>
       </StyledRatingStarPanel>
-      <StyledCountPanel>{reviewCount}개의 수강평</StyledCountPanel>
+      <StyledCountPanel>{reviewData.length}개의 수강평</StyledCountPanel>
     </StyledBanner>
   );
 };
