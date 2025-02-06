@@ -12,7 +12,7 @@ const SharpTagComponent = ({ tags }) => {
     <StyledSharpTag>
       <span>#</span>
       {/* tags 배열을 순회하며 TagButton 컴포넌트를 렌더링 */}
-      {tags.map((tag, index) => (
+      {tags?.map((tag, index) => (
         <TagButton key={index} tag={tag} />
       ))}
     </StyledSharpTag>

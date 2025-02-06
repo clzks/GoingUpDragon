@@ -27,7 +27,9 @@ const CardItem = ({
           <span>{rating.toFixed(1)}</span>
           <StyledNumReviews>({numReviews})</StyledNumReviews>
         </StyledCardRating>
-        <StyledCardPrice>{price.toLocaleString()}</StyledCardPrice>
+        <StyledCardPrice>
+          {price === 0 ? "무료" : price.toLocaleString()}
+        </StyledCardPrice>
       </Card.Body>
       <StyledOverlay>
         <StyledOverlayText>{text}</StyledOverlayText>

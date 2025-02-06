@@ -16,6 +16,7 @@ import InstructorCardList from "./recommendedSection/InstructorCardList";
 import PricingPanel from "../SideComponent/PricingPanel";
 
 const CourseDetailMainPanel = ({
+  courseData,
   curriculumData,
   description,
   recommendLectureList,
@@ -45,12 +46,14 @@ const CourseDetailMainPanel = ({
           ref={refList.reviewRef}
         ></CourseReviewSection>
         <InstructorCardList
+          courseData={courseData}
           lectureList={recommendLectureList}
         ></InstructorCardList>
         <SimilarCardList lectureList={similarLectureList}></SimilarCardList>
       </StyledLeftPanel>
       <StyledRightPanel>
         <PricingPanel
+          courseData={courseData}
           data={enrollmentData}
           count={getLectureCount(curriculumData)}
         ></PricingPanel>

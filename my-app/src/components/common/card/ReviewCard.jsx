@@ -1,5 +1,5 @@
 // GoingUpDragon/my-app/src/components/common/card/ReviewCard.jsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // 외부 라이브러리
 import styled from "styled-components";
@@ -9,16 +9,25 @@ import { FaRegThumbsUp } from "react-icons/fa";
 import RatingStarList from "../icons/RatingStarList";
 import LikeButton from "../utilities/LikeButton";
 import ShareButton from "../utilities/ShareButton";
+import { getLikesForReview } from "../../../apis/common/likeApi";
 
 const ReviewCard = ({ review }) => {
+  var reviewId = review.reviewId;
   var nickName = review.nickName;
   var content = review.comment;
   var rating = review.rate;
   var date = review.createdAt;
   var reply = review.reply;
   var replyDate = review.replyCreatedAt;
-  var likes = 7;
   var isMyPage = false;
+
+  const [likeCount, setLikeCount] = useState(0); // ✅ 초기값 설정
+
+  useEffect(() => {
+    getLikesForReview(reviewId)
+      .then((data) => setLikeCount(data.length))
+      .catch((error) => console.error("리뷰 좋아요 가져오기 실패:", error));
+  }, [reviewId, likeCount]); // ✅ 좋아요가 변경될 때만 실행됨
 
   return (
     <CardWrapper>
@@ -38,7 +47,7 @@ const ReviewCard = ({ review }) => {
       <Footer>
         <Recommendation>
           <LikeButton></LikeButton>
-          <Likes>{likes || 0}</Likes>
+          <Likes>{likeCount || 0}</Likes>
           {isMyPage ? <></> : <ShareButton></ShareButton>}
         </Recommendation>
       </Footer>
