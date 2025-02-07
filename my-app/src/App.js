@@ -12,7 +12,6 @@ import LoginModal from "./components/common/utilities/LoginModal";
 
 
 function App() {
-  return <MyPageLayoutInstructor></MyPageLayoutInstructor>;
-  //return <MyPageLayoutStudent></MyPageLayoutStudent>;
+  return <MainLayout></MainLayout>;
 }
 export default App;
