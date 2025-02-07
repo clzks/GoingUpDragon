@@ -20,15 +20,15 @@ const SidebarInstructor = ({ selectedMenu, onMenuSelect }) => {
       <StatsSection>
         <div className="stat-item">
           <div className="stat-label">수강생 수</div>
-          <div className="stat-value">7942</div>
+          <div className="stat-value">820</div>
         </div>
         <div className="stat-item">
           <div className="stat-label">수강평 수</div>
-          <div className="stat-value">79</div>
+          <div className="stat-value">40</div>
         </div>
         <div className="stat-item">
           <div className="stat-label">강의 평점</div>
-          <div className="stat-value">4.9</div>
+          <div className="stat-value">4.6</div>
         </div>
       </StatsSection>
       <Divider />
