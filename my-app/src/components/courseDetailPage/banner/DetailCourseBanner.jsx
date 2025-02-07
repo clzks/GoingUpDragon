@@ -19,7 +19,7 @@ const DetailCourseBanner = ({ lectureData, enrollmentData, courseData }) => {
   const { instructor, rating, reviews, students } = enrollmentData;
 
   const reviewText = ` 수강평 ${courseData?.reviewCount.toLocaleString()}개`;
-  const studentText = ` 수강생 ${students.toLocaleString()}명`; // 천 단위로 , 추가를 위해 toLocaleString 사용
+  const studentText = ` 수강생 ${courseData?.enrollmentCount.toLocaleString()}명`; // 천 단위로 , 추가를 위해 toLocaleString 사용
 
   return (
     <StyledBannerBackground>

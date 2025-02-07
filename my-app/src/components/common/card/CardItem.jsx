@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 // 외부 라이브러리
 import { Card } from "react-bootstrap";
@@ -15,9 +16,13 @@ const CardItem = ({
   imageUrl,
   level,
   tag,
+  courseId,
+  enrollmentCount,
 }) => {
+  const navigate = useNavigate();
+
   return (
-    <StyledCardItem>
+    <StyledCardItem onClick={() => navigate(`/CourseDetail/${courseId}`)}>
       <StyledCardImage variant="top" src={imageUrl} />
       <Card.Body>
         <StyledCardTitle>{title}</StyledCardTitle>
@@ -67,6 +72,7 @@ const StyledCardItem = styled(Card)`
   transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
+  cursor: pointer; /* ✅ 버튼처럼 보이게 설정 */
 
   &:hover {
     transform: translateY(-5px);

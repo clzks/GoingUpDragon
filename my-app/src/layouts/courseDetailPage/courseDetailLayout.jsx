@@ -1,5 +1,6 @@
 // GoingUpDragon/my-app/src/layouts/courseDetailPage/courseDetailLayout.jsx
 import React, { useRef, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 // GoingUpDragon/my-app/src
 import Layout from "../../components/common/layout/Layout";
@@ -16,7 +17,8 @@ const CourseDetailLayout = () => {
     reviewRef: useRef(null),
   };
 
-  var courseId = 5641;
+  //var courseId = 5641;
+  const { courseId } = useParams();
 
   const [reviewData, setReviewData] = useState([]);
   const [courseLike, setCourseLike] = useState([]);
