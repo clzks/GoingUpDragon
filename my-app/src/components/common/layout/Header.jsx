@@ -6,8 +6,9 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
 
-// GoingUpDragon/my-app/src/apis/common/
+// GoingUpDragon/my-app/src/apis/
 import { fetchCategories } from "../../../apis/common/categoryApi"; // API 함수 가져오기
+import { saveSearchQuery } from "../../../apis/searchPage/SearchApi"; // API 함수 import
 
 // GoingUpDragon/my-app/src/components/common/layout
 import Logo from "./Logo";
@@ -98,6 +99,19 @@ const Header = ({ inputRef }) => {
     setShowProfileDropdown(false); // 드롭다운 닫기
   };
 
+  const handleSearchSubmit = async (event) => {
+    event.preventDefault(); // 기본 동작(페이지 새로고침) 방지
+  
+    if (!searchInput.trim()) return; // 빈 값 방지
+  
+    try {
+      await saveSearchQuery(searchInput); // 검색어 저장 API 호출
+      console.log("검색어 저장 성공:", searchInput);
+    } catch (error) {
+      console.error("검색어 저장 실패:", error);
+    }
+  };
+
   return (
     <StyledHeader>
       <Container>
@@ -154,6 +168,7 @@ const Header = ({ inputRef }) => {
                 type="submit"
                 variant="outline-success"
                 disabled={!searchInput.trim()}
+                onClick={handleSearchSubmit} // 버튼 클릭 시 검색어 저장
               >
                 검색
               </StyledButton>
