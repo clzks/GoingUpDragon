@@ -9,8 +9,8 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import ShareButton from "../../common/utilities/ShareButton";
 import HorizontalLine from "../../common/icons/HorizontalLine";
 
-const PricingPanel = ({ data, count }) => {
-  const formatPrice = data.price.toLocaleString();
+const PricingPanel = ({ data, count, courseData }) => {
+  const formatPrice = courseData?.price.toLocaleString();
   const [isLike, setLike] = useState(false);
 
   const [isSticky, setIsSticky] = useState(false); // 고정 여부
@@ -43,7 +43,9 @@ const PricingPanel = ({ data, count }) => {
   }
   return (
     <StyledContainer ref={panelRef} isSticky={isSticky}>
-      <StyledPriceText>{formatPrice}원</StyledPriceText>
+      <StyledPriceText>
+        {courseData?.price === 0 ? "무료" : `${formatPrice}원`}
+      </StyledPriceText>
       <StyledPurchaseButton>수강신청</StyledPurchaseButton>
       <StyledAddCartButton>바구니에 담기</StyledAddCartButton>
       <StyledIconWrapper>
@@ -64,7 +66,7 @@ const PricingPanel = ({ data, count }) => {
         <HorizontalLine></HorizontalLine>
         <StyledInfoRow>
           <StyledLabel>강사</StyledLabel>
-          <StyledContent>{data.instructor}</StyledContent>
+          <StyledContent>{courseData?.instructorName}</StyledContent>
         </StyledInfoRow>
         <StyledInfoRow>
           <StyledLabel>수업 수</StyledLabel>
@@ -80,7 +82,7 @@ const PricingPanel = ({ data, count }) => {
         </StyledInfoRow>
         <StyledInfoRow>
           <StyledLabel>난이도</StyledLabel>
-          <StyledContent>{data.difficulty}</StyledContent>
+          <StyledContent>{courseData?.courseLevel}</StyledContent>
         </StyledInfoRow>
       </StyledInfoSection>
     </StyledContainer>

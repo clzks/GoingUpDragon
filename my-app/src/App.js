@@ -18,10 +18,12 @@ import LoginModal from "./components/common/utilities/LoginModal";
 import QnAMainLayout from "./layouts/qnAPage/main/QnAMainLayout";
 import AccountRecoveryTabs from "./layouts/findAccountPage/AccountRecoveryTabs";
 import AnswerLayout from "./layouts/qnAPage/answer/AnswerLayout";
+import RouteChangeScroll from "./components/common/layout/RouteChangeScroll";
 
 function App() {
   return (
     <Router>
+      <RouteChangeScroll></RouteChangeScroll>
       <div>
         <nav>
           <ul>
@@ -32,7 +34,7 @@ function App() {
               <Link to="/Search">검색 페이지</Link>
             </li>
             <li>
-              <Link to="/CourseDetail">강의 상세 페이지</Link>
+              <Link to="/CourseDetail/5641">강의 상세 페이지</Link>
             </li>
             <li>
               <Link to="/MyPage">마이 페이지</Link>
@@ -60,7 +62,11 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />} />
           <Route path="/Search" element={<SearchLayout />} />
-          <Route path="/CourseDetail" element={<CourseDetailLayout />} />
+          <Route
+            path="/CourseDetail/:courseId"
+            element={<CourseDetailLayout />}
+          />{" "}
+          {/* ✅ 강의 ID 추가 */}
           <Route path="/MyPage" element={<MyPageLayout />} />
           <Route path="/Policy" element={<PolicyLayout />} />
           <Route path="/SignUp" element={<SignupPage />} />
@@ -70,9 +76,8 @@ function App() {
             path="/AccountRecoveryTabs"
             element={<AccountRecoveryTabs />}
           />
-           <Route path="/AnswerLayout" element={<AnswerLayout />} />
+          <Route path="/AnswerLayout" element={<AnswerLayout />} />
         </Routes>
-        
       </div>
     </Router>
   );

@@ -15,35 +15,44 @@ import RatingStar from "../../common/icons/RatingStar";
 // GoingUpDragon/my-app/src/components
 import SharpTagComponent from "../../common/utilities/tag/SharpTagComponent";
 
-const DetailCourseBanner = ({ lectureData, enrollmentData }) => {
-  const { mainCategory, secondaryCategory, title, keyPoint, tags } =
-    lectureData;
+const DetailCourseBanner = ({ lectureData, enrollmentData, courseData }) => {
   const { instructor, rating, reviews, students } = enrollmentData;
 
-  const reviewText = ` 수강평 ${reviews.toLocaleString()}개`;
-  const studentText = ` 수강생 ${students.toLocaleString()}명`; // 천 단위로 , 추가를 위해 toLocaleString 사용
+  const reviewText = ` 수강평 ${courseData?.reviewCount.toLocaleString()}개`;
+  const studentText = ` 수강생 ${courseData?.enrollmentCount.toLocaleString()}명`; // 천 단위로 , 추가를 위해 toLocaleString 사용
 
   return (
     <StyledBannerBackground>
       <StyledBannerContainer>
         <CourseThumnail></CourseThumnail>
         <StyledCategoryTextContainer>
-          <StyledCategoryText>{mainCategory}</StyledCategoryText>/
-          <StyledCategoryText>{secondaryCategory}</StyledCategoryText>
+          <StyledCategoryText>
+            {courseData?.mainCategoryName ?? "메인 카테고리 없음"}
+          </StyledCategoryText>
+          /
+          <StyledCategoryText>
+            {courseData?.subCategoryName ?? "서브 카테고리 없음"}
+          </StyledCategoryText>
         </StyledCategoryTextContainer>
-        <StyledBannerTitle>{title}</StyledBannerTitle>
-        <StyledBannerKeyPoint>{keyPoint}</StyledBannerKeyPoint>
+        <StyledBannerTitle>
+          {courseData?.courseTitle ?? "제목 읽어오지 못함"}
+        </StyledBannerTitle>
+        <StyledBannerKeyPoint>
+          {courseData?.courseDescription}
+        </StyledBannerKeyPoint>
         <StyledEnrollmentContainer>
           <RatingStar></RatingStar>
-          <StyledEnrollmentText>{rating}</StyledEnrollmentText>
+          <StyledEnrollmentText>{courseData?.rate}</StyledEnrollmentText>
           <StyledReviewText>{reviewText}</StyledReviewText>
           <StyledEnrollmentText>{studentText}</StyledEnrollmentText>
         </StyledEnrollmentContainer>
         <StyledEnrollmentContainer>
           <FaUser></FaUser>
-          <StyledReviewText>{instructor}</StyledReviewText>
+          <StyledReviewText>{courseData?.instructorName}</StyledReviewText>
         </StyledEnrollmentContainer>
-        <SharpTagComponent tags={tags}></SharpTagComponent>
+        <SharpTagComponent
+          tags={courseData?.subjectTagNames}
+        ></SharpTagComponent>
       </StyledBannerContainer>
     </StyledBannerBackground>
   );

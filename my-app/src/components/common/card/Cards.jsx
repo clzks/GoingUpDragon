@@ -48,6 +48,8 @@ const Cards = ({ cardData, cardsToShow = 4, maxWidth }) => {
               price={card.price}
               level={card.level}
               tag={card.tag}
+              courseId={card.courseId}
+              enrollmentCount={card.enrollmentCount}
             />
           ))}
         <StyledCardsSlideButton
@@ -104,4 +106,3 @@ const StyledCardsSlideButton = styled(Button)`
     color: #000; /* Set text color (or icon color) on hover */
   }
 `;
-

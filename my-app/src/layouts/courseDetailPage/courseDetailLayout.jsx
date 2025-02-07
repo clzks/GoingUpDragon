@@ -1,5 +1,6 @@
 // GoingUpDragon/my-app/src/layouts/courseDetailPage/courseDetailLayout.jsx
 import React, { useRef, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 // GoingUpDragon/my-app/src
 import Layout from "../../components/common/layout/Layout";
@@ -7,7 +8,8 @@ import DetailCourseBanner from "../../components/courseDetailPage/banner/DetailC
 import CourseNavigation from "../../components/courseDetailPage/navigation/CourseNavigation";
 import CourseDetailMainPanel from "../../components/courseDetailPage/main/CourseDetailMainPanel";
 import { getCourseReviews } from "../../apis/courseDetailPage/courseDetailApi";
-
+import { getLikesForCourse } from "../../apis/common/likeApi";
+import { getCourse } from "../../apis/common/courseApi";
 const CourseDetailLayout = () => {
   const refList = {
     curriculumRef: useRef(null),
@@ -15,14 +17,32 @@ const CourseDetailLayout = () => {
     reviewRef: useRef(null),
   };
 
-  var courseId = 5641;
+  //var courseId = 5641;
+  const { courseId } = useParams();
 
   const [reviewData, setReviewData] = useState([]);
+  const [courseLike, setCourseLike] = useState([]);
+  const [courseData, setCourseData] = useState();
 
   useEffect(() => {
     getCourseReviews(courseId)
       .then((data) => setReviewData(data))
       .catch((error) => console.error("리뷰 가져오기 실패:", error));
+  }, [courseId]);
+
+  useEffect(() => {
+    getLikesForCourse(courseId)
+      .then((data) => setCourseLike(data))
+      .catch((error) => console.error("강의 좋아요 가져오기 실패:", error));
+  }, []); // 해당 id일때 좋아요 표시 유무 사용할듯?
+
+  useEffect(() => {
+    getCourse(courseId)
+      .then((data) => {
+        setCourseData(data);
+        console.log("dd", data);
+      })
+      .catch((error) => console.error("강의 가져오기 실패:", error));
   }, [courseId]);
 
   const lectureInfo = {
@@ -385,11 +405,13 @@ const CourseDetailLayout = () => {
   return (
     <Layout>
       <DetailCourseBanner
+        courseData={courseData}
         lectureData={lectureInfo}
         enrollmentData={enrollmentInfo}
       ></DetailCourseBanner>
       <CourseNavigation refList={refList}></CourseNavigation>
       <CourseDetailMainPanel
+        courseData={courseData}
         curriculumData={curriculum}
         description={lectureInfo.description}
         recommendLectureList={recommendLectureList}
