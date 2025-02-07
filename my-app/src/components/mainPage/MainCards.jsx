@@ -13,6 +13,8 @@ import {
   getCourseListByLevel,
 } from "../../apis/common/courseApi";
 
+import { formatCourseData } from "../common/utilities/CourseUtils";
+
 const MainCards = () => {
   const [highRateCourseList, setHighRateCourseList] = useState([]);
   const [freeCourseList, setFreeCourseList] = useState([]);
@@ -23,21 +25,7 @@ const MainCards = () => {
       .then((data) => {
         console.log("📌 3.5점 이상인 강의 리스트:", data);
 
-        const formattedCourses = data.map((course) => ({
-          title: course.courseTitle,
-          text: course.courseDescription,
-          imageUrl: "", // 필요하면 백엔드에서 추가
-          instructor: course.instructorName,
-          rating: course.rate,
-          numReviews: course.reviewCount,
-          price: course.price,
-          level: course.courseLevel,
-          tag: course.subjectTagNames, // ✅ 배열 그대로 사용
-          courseId: course.courseId,
-          enrollmentCount: course.enrollmentCount,
-        }));
-
-        setHighRateCourseList(formattedCourses); // ✅ 변환된 데이터 저장
+        setHighRateCourseList(formatCourseData(data)); // ✅ 변환된 데이터 저장
       })
       .catch((error) => {
         console.error("🚨 강의 목록 가져오기 실패:", error);
@@ -50,21 +38,7 @@ const MainCards = () => {
       .then((data) => {
         console.log("📌 무료 강의 리스트:", data);
 
-        const formattedCourses = data.map((course) => ({
-          title: course.courseTitle,
-          text: course.courseDescription,
-          imageUrl: "", // 필요하면 백엔드에서 추가
-          instructor: course.instructorName,
-          rating: course.rate,
-          numReviews: course.reviewCount,
-          price: course.price,
-          level: course.courseLevel,
-          tag: course.subjectTagNames, // ✅ 배열 그대로 사용
-          courseId: course.courseId,
-          enrollmentCount: course.enrollmentCount,
-        }));
-
-        setEasyCourseList(formattedCourses); // ✅ 변환된 데이터 저장
+        setEasyCourseList(formatCourseData(data)); // ✅ 변환된 데이터 저장
       })
       .catch((error) => {
         console.error("🚨 강의 목록 가져오기 실패:", error);
@@ -77,21 +51,7 @@ const MainCards = () => {
       .then((data) => {
         console.log("📌 무료 강의 리스트:", data);
 
-        const formattedCourses = data.map((course) => ({
-          title: course.courseTitle,
-          text: course.courseDescription,
-          imageUrl: "", // 필요하면 백엔드에서 추가
-          instructor: course.instructorName,
-          rating: course.rate,
-          numReviews: course.reviewCount,
-          price: course.price,
-          level: course.courseLevel,
-          tag: course.subjectTagNames, // ✅ 배열 그대로 사용
-          courseId: course.courseId,
-          enrollmentCount: course.enrollmentCount,
-        }));
-
-        setFreeCourseList(formattedCourses); // ✅ 변환된 데이터 저장
+        setFreeCourseList(formatCourseData(data)); // ✅ 변환된 데이터 저장
       })
       .catch((error) => {
         console.error("🚨 강의 목록 가져오기 실패:", error);
