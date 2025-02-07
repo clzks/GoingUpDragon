@@ -16,7 +16,7 @@ const Review = () => {
 
   return (
     <ReviewWrapper>
-      <Title>작성한 수강평</Title>
+      <Title>수강평</Title>
       <ReviewList>
         {currentReviews.map((review) => (
           <ReviewCard

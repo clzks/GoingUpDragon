@@ -1,26 +1,27 @@
 import React, { useState } from "react";
 import Layout from "../../components/common/layout/Layout";
 import { Container, Row, Col } from "react-bootstrap";
-import Sidebar from "../../components/myPage/Menu/Sidebar";
-import Home from "../../components/myPage/Menu/Home";
+import SidebarStudent from "../../components/myPage/Menu/SidebarStudent";
+import HomeStudent from "../../components/myPage/Menu/HomeStudent";
 import Dashboard from "../../components/myPage/Menu/Dashboard";
-import MyAllLecture from "../../components/myPage/Menu/MyAllLecture";
+import MyAllLectureStudent from "../../components/myPage/Menu/MyAllLectureStudent";
 import Cart from "../../components/myPage/Menu/Cart";
 import PurchaseHistory from "../../components/myPage/Menu/PurchaseHistory";
 import MyInfo from "../../components/myPage/Menu/MyInfo";
 import Like from "../../components/myPage/Menu/Like";
+import ScrollTopButton from "../../components/common/utilities/ScrollTopButton"
 
-const MyPageLayout = () => {
+const MyPageLayoutStudent = () => {
   const [selectedMenu, setSelectedMenu] = useState("홈");
 
   const renderContent = () => {
     switch (selectedMenu) {
       case "홈":
-        return <Home />;
+        return <HomeStudent />;
       case "대시보드":
         return <Dashboard />;
       case "내 강의":
-        return <MyAllLecture />;
+        return <MyAllLectureStudent />;
       case "좋아요":
         return <Like />;
       case "장바구니":
@@ -30,7 +31,7 @@ const MyPageLayout = () => {
       case "내 정보":
         return <MyInfo />;
       default:
-        return <Home />;
+        return <HomeStudent />;
     }
   };
 
@@ -55,16 +56,17 @@ const MyPageLayout = () => {
       <Container style={styles.container}>
         <Row>
           <Col xs={3} style={styles.sidebar}>
-            <Sidebar selectedMenu={selectedMenu} onMenuSelect={setSelectedMenu} />
+            <SidebarStudent selectedMenu={selectedMenu} onMenuSelect={setSelectedMenu} />
           </Col>
           <Col xs={9} style={styles.content}>
             <Container>{renderContent()}</Container>
           </Col>
         </Row>
       </Container>
+      <ScrollTopButton />
     </Layout>
   );
 };
 
-export default MyPageLayout;
+export default MyPageLayoutStudent;
 

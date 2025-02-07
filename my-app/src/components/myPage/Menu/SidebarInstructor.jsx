@@ -1,32 +1,34 @@
+// SidebarInstructor.jsx
 import React from "react";
 import styled from "styled-components";
 
-const Sidebar = ({ selectedMenu, onMenuSelect }) => {
+const SidebarInstructor = ({ selectedMenu, onMenuSelect }) => {
   const menuItems = [
     { name: "홈" },
-    { name: "대시보드" },
-    { name: "내 강의", number: 4 },
-    { name: "좋아요", number: 4 },
-    { name: "장바구니", number: 3 },
-    { name: "구매내역", number: 3 },
-    { name: "내 정보" },
+    { name: "내 강의", number: 10 },
+    { name: "수강평", number: 40},
+    { name: "Q&A", number: 7},
   ];
 
   return (
     <SidebarWrapper>
       <ProfileSection>
         <img src="https://via.placeholder.com/80" alt="프로필 이미지" />
-        <p className="profile-name">지식의 탐험가</p>
+        <p className="profile-name">선생님토끼</p>
       </ProfileSection>
       <Divider />
       <StatsSection>
         <div className="stat-item">
-          <div className="stat-label">수강평 작성 수</div>
-          <div className="stat-value">-</div>
+          <div className="stat-label">수강생 수</div>
+          <div className="stat-value">7942</div>
         </div>
         <div className="stat-item">
-          <div className="stat-label">평균 평점</div>
-          <div className="stat-value">-</div>
+          <div className="stat-label">수강평 수</div>
+          <div className="stat-value">79</div>
+        </div>
+        <div className="stat-item">
+          <div className="stat-label">강의 평점</div>
+          <div className="stat-value">4.9</div>
         </div>
       </StatsSection>
       <Divider />
@@ -47,36 +49,9 @@ const Sidebar = ({ selectedMenu, onMenuSelect }) => {
   );
 };
 
-export default Sidebar;
+export default SidebarInstructor;
 
-const MenuItem = styled.li`
-  font-size: 14px;
-  padding: 10px 15px;
-  color: #333;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-
-  &:hover {
-    background-color: #e9e9e9;
-    border-radius: 4px;
-  }
-
-  &.active {
-    background-color: #f0f8ff;
-    font-weight: bold;
-    border-left: 4px solid #7cd0d5;
-    padding-left: 11px;
-  }
-
-  .menu-number {
-    margin-left: auto;
-    font-size: 12px;
-    color: #666;
-  }
-`;
-
+// 스타일 정의
 const SidebarWrapper = styled.div`
   width: 250px;
   background-color: #fff;
@@ -146,3 +121,30 @@ const MenuList = styled.ul`
   margin: 10px;
 `;
 
+const MenuItem = styled.li`
+  font-size: 14px;
+  padding: 10px 15px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: #e9e9e9;
+    border-radius: 4px;
+  }
+
+  &.active {
+    background-color: #f0f8ff;
+    font-weight: bold;
+    border-left: 4px solid #7cd0d5;
+    padding-left: 11px;
+  }
+
+  .menu-number {
+    margin-left: auto;
+    font-size: 12px;
+    color: #666;
+  }
+`;

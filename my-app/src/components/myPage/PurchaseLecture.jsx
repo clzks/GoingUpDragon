@@ -1,51 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import Pagination from "../common/utilities/Pagination";
 
 const PurchaseLecture = () => {
-  // 구매내역 데이터 예시
+
   const purchases = [
-    {
-      id: 1,
-      title: "제대로 파는 html css",
-      instructor: "이호준",
-      rating: 4.9,
-      reviews: 77,
-      price: 55000,
-    },
-    {
-      id: 2,
-      title: "제대로 파는 html css",
-      instructor: "이호준",
-      rating: 4.9,
-      reviews: 77,
-      price: 55000,
-    },
-    {
-      id: 3,
-      title: "제대로 파는 html css",
-      instructor: "이호준",
-      rating: 4.9,
-      reviews: 77,
-      price: 55000,
-    },
+    { id: 1, title: "제대로 파는 html css", instructor: "이호준", rating: 4.9, reviews: 77, price: 55000 },
+    { id: 2, title: "프로그래밍 시작하기: 파이썬 입문", instructor: "이호준", rating: 4.8, reviews: 248, price: 33000 },
+    { id: 3, title: "한입 크기로 잘라 먹는 리액트", instructor: "이호준", rating: 3.6, reviews: 13, price: 110000 },
+    { id: 4, title: "두입 크기로 잘라 먹는 리액트 심화", instructor: "이호준", rating: 3.8, reviews: 6, price: 12000 },
+    { id: 5, title: "Vue.js 시작하기", instructor: "이호준", rating: 4.7, reviews: 150, price: 66000 },
+    { id: 6, title: "자바스크립트 완전 정복", instructor: "이호준", rating: 4.5, reviews: 98, price: 44000 },
+    { id: 7, title: "알고리즘 문제 해결 전략", instructor: "이호준", rating: 4.6, reviews: 35, price: 77000 },
+    { id: 8, title: "Next.js로 블로그 만들기", instructor: "이호준", rating: 4.9, reviews: 88, price: 99000 },
   ];
 
-  // 총합 계산
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
+
+  
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentPurchases = purchases.slice(indexOfFirstItem, indexOfLastItem);
+
+  
   const totalPrice = purchases.reduce((sum, purchase) => sum + purchase.price, 0);
+
+  
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <PurchaseWrapper>
       <Header>구매내역</Header>
       <LectureList>
-        {purchases.map((purchase) => (
+        {currentPurchases.map((purchase) => (
           <LectureCard key={purchase.id}>
             <Thumbnail />
             <LectureInfo>
               <LectureTitle>{purchase.title}</LectureTitle>
               <Instructor>{purchase.instructor}</Instructor>
-              <Rating>
-                ★ {purchase.rating} ({purchase.reviews})
-              </Rating>
+              <Rating>★ {purchase.rating} ({purchase.reviews})</Rating>
             </LectureInfo>
             <Price>{purchase.price.toLocaleString()}원</Price>
           </LectureCard>
@@ -55,11 +49,12 @@ const PurchaseLecture = () => {
         <TotalPrice>합계 : {totalPrice.toLocaleString()}원</TotalPrice>
         <RefundButton>환불하기</RefundButton>
       </TotalSection>
-      <PaginationWrapper>
-        <PaginationButton>&lt;</PaginationButton>
-        <PageNumber>1</PageNumber>
-        <PaginationButton>&gt;</PaginationButton>
-      </PaginationWrapper>
+      <Pagination
+        items={purchases}
+        itemsPerPage={itemsPerPage}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </PurchaseWrapper>
   );
 };
@@ -68,9 +63,8 @@ export default PurchaseLecture;
 
 // 스타일 정의
 const PurchaseWrapper = styled.div`
- width: 100%;
+  width: 100%;
   margin: 20px 0;
-  margin-bottom: 20px;
 `;
 
 const Header = styled.h2`
@@ -90,7 +84,7 @@ const LectureCard = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 15px;
-border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 `;
 
 const Thumbnail = styled.div`
@@ -147,28 +141,8 @@ const RefundButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
-`;
-
-const PaginationWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-`;
-
-const PaginationButton = styled.button`
-  padding: 5px 10px;
-  background-color: #f1f1f1;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  cursor: pointer;
 
   &:hover {
-    background-color: #e6e6e6;
+    background-color: #5aa1a4;
   }
-`;
-
-const PageNumber = styled.span`
-  font-size: 14px;
-  font-weight: bold;
 `;

@@ -29,7 +29,7 @@ const SkillTagWrapper = styled.div`
 `;
 
 const Header = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 `;
 
 const Title = styled.h3`

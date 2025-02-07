@@ -1,72 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import Pagination from "../common/utilities/Pagination"; 
 
 const LikeLecture = () => {
   // 강의 데이터 예시
   const lectures = [
-    {
-      id: 1,
-      title: "제대로 파는 html css",
-      instructor: "이호준",
-      rating: 4.9,
-      reviews: 77,
-      price: "55,000원",
-    },
-    {
-      id: 2,
-      title: "프로그래밍 시작하기: 파이썬 입문",
-      instructor: "이호준",
-      rating: 4.8,
-      reviews: 248,
-      price: "33,000원",
-    },
-    {
-      id: 3,
-      title: "한입 크기로 잘라 먹는 리액트",
-      instructor: "이호준",
-      rating: 3.6,
-      reviews: 13,
-      price: "110,000원",
-    },
-    {
-      id: 4,
-      title: "두입 크기로 잘라 먹는 리액트 심화",
-      instructor: "이호준",
-      rating: 3.8,
-      reviews: 6,
-      price: "12,000원",
-    },
+    { id: 1, title: "제대로 파는 html css", instructor: "이호준", rating: 4.9, reviews: 77, price: "55,000원" },
+    { id: 2, title: "프로그래밍 시작하기: 파이썬 입문", instructor: "이호준", rating: 4.8, reviews: 248, price: "33,000원" },
+    { id: 3, title: "한입 크기로 잘라 먹는 리액트", instructor: "이호준", rating: 3.6, reviews: 13, price: "110,000원" },
+    { id: 4, title: "두입 크기로 잘라 먹는 리액트 심화", instructor: "이호준", rating: 3.8, reviews: 6, price: "12,000원" },
+    { id: 5, title: "Vue.js 시작하기", instructor: "이호준", rating: 4.7, reviews: 150, price: "66,000원" },
+    { id: 6, title: "자바스크립트 완전 정복", instructor: "이호준", rating: 4.5, reviews: 98, price: "44,000원" },
+    { id: 7, title: "알고리즘 문제 해결 전략", instructor: "이호준", rating: 4.6, reviews: 35, price: "77,000원" },
+    { id: 8, title: "Next.js로 블로그 만들기", instructor: "이호준", rating: 4.9, reviews: 88, price: "99,000원" },
   ];
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentLectures = lectures.slice(indexOfFirstItem, indexOfLastItem);
+
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <LikeWrapper>
-      <Header>
       <HeaderTitle>좋아요</HeaderTitle>
-        <SortSelect>
-          <option>최신순</option>
-          <option>인기순</option>
-        </SortSelect>
-      </Header>
       <LectureGrid>
-        {lectures.map((lecture) => (
+        {currentLectures.map((lecture) => (
           <LectureCard key={lecture.id}>
             <Thumbnail />
             <LectureInfo>
               <LectureTitle>{lecture.title}</LectureTitle>
               <Instructor>{lecture.instructor}</Instructor>
-              <Rating>
-                ★ {lecture.rating} ({lecture.reviews})
-              </Rating>
+              <Rating>★ {lecture.rating} ({lecture.reviews})</Rating>
               <Price>{lecture.price}</Price>
             </LectureInfo>
           </LectureCard>
         ))}
       </LectureGrid>
-      <PaginationWrapper>
-        <PaginationButton>&lt;</PaginationButton>
-        <PageNumber>1</PageNumber>
-        <PaginationButton>&gt;</PaginationButton>
-      </PaginationWrapper>
+      
+      <Pagination
+        items={lectures}
+        itemsPerPage={itemsPerPage}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </LikeWrapper>
   );
 };
@@ -80,22 +61,10 @@ const LikeWrapper = styled.div`
   margin-bottom: 20px;
 `;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-`;
-
 const HeaderTitle = styled.h2`
+  margin: 20px 0;
   font-size: 25px;
   font-weight: bold;
-`;
-
-const SortSelect = styled.select`
-  padding: 5px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
 `;
 
 const LectureGrid = styled.div`
@@ -143,28 +112,4 @@ const Price = styled.p`
   font-size: 14px;
   font-weight: bold;
   color: #333;
-`;
-
-const PaginationWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-`;
-
-const PaginationButton = styled.button`
-  padding: 5px 10px;
-  background-color: #f1f1f1;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #e6e6e6;
-  }
-`;
-
-const PageNumber = styled.span`
-  font-size: 14px;
-  font-weight: bold;
 `;

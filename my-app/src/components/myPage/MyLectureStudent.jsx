@@ -1,53 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-const MyLecture = () => {
-  // 강의 데이터 예시
+const MyLectureStudent = () => {
+  const [showAll, setShowAll] = useState(false);
+
   const lectures = [
-    {
-      id: 1,
-      title: "React 기초 강의",
-      subtitle: "모바일 프로그래밍",
-      progress: "15/107",
-    },
-    {
-      id: 2,
-      title: "JavaScript 심화 과정",
-      subtitle: "모바일 프로그래밍",
-      progress: "5/7",
-    },
-    {
-      id: 3,
-      title: "HTML & CSS 디자인",
-      subtitle: "모바일 프로그래밍",
-      progress: "34/34",
-    },
-    {
-      id: 4,
-      title: "Python 데이터 분석",
-      subtitle: "모바일 프로그래밍",
-      progress: "12/40",
-    },
+    { id: 1, title: "React 기초 강의", subtitle: "모바일 프로그래밍", progress: "15/107" },
+    { id: 2, title: "JavaScript 심화 과정", subtitle: "모바일 프로그래밍", progress: "5/7" },
+    { id: 3, title: "HTML & CSS 디자인", subtitle: "모바일 프로그래밍", progress: "34/34" },
+    { id: 4, title: "Python 데이터 분석", subtitle: "모바일 프로그래밍", progress: "12/40" },
+    { id: 5, title: "Node.js 기본 개념", subtitle: "웹 프로그래밍", progress: "20/50" },
+    { id: 6, title: "MongoDB 실무 활용", subtitle: "데이터베이스", progress: "8/30" },
+    { id: 7, title: "TypeScript 기초", subtitle: "프론트엔드 개발", progress: "3/10" },
+    { id: 8, title: "Next.js를 활용한 웹 개발", subtitle: "프론트엔드", progress: "10/20" },
+    { id: 9, title: "Django 웹 개발 기초", subtitle: "백엔드 개발", progress: "7/25" },
+    { id: 10, title: "Docker로 배포하기", subtitle: "DevOps", progress: "5/15" },
   ];
+
+  const displayedLectures = showAll ? lectures : lectures.slice(0, 6);
 
   return (
     <LectureWrapper>
       <Header>
-      <HeaderTitle>내 강의</HeaderTitle>
-        <ButtonWrapper>
-          <FilterButton>전체</FilterButton>
-          <FilterButton>학습중</FilterButton>
-          <FilterButton>완강</FilterButton>
-        </ButtonWrapper>
+        <HeaderTitle>내 강의</HeaderTitle>
       </Header>
-      <SortWrapper>
-        <SortSelect>
-          <option>최신 학습순</option>
-          <option>제목순</option>
-        </SortSelect>
-      </SortWrapper>
       <LectureGrid>
-        {lectures.map((lecture) => (
+        {displayedLectures.map((lecture) => (
           <LectureCard key={lecture.id}>
             <Thumbnail />
             <LectureInfo>
@@ -66,20 +44,21 @@ const MyLecture = () => {
           </LectureCard>
         ))}
       </LectureGrid>
-      <PaginationWrapper>
-        <PaginationButton>&lt;</PaginationButton>
-        <PageNumber>1</PageNumber>
-        <PaginationButton>&gt;</PaginationButton>
-      </PaginationWrapper>
+      
+      <ButtonWrapper>
+        <ViewAllButton onClick={() => setShowAll(!showAll)}>
+          {showAll ? "돌아가기 >" : "전체보기 >"}
+        </ViewAllButton>
+      </ButtonWrapper>
     </LectureWrapper>
   );
 };
 
-export default MyLecture;
+export default MyLectureStudent;
 
 // 스타일 정의
 const LectureWrapper = styled.div`
- width: 100%;
+  width: 100%;
   margin: 20px 0;
   margin-bottom: 20px;
 `;
@@ -93,36 +72,6 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-`;
-
-const FilterButton = styled.button`
-  padding: 5px 15px;
-  background-color: #f1f1f1;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  font-size: 15px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #e6e6e6;
-  }
-`;
-
-const SortWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-`;
-
-const SortSelect = styled.select`
-  padding: 5px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
 `;
 
 const LectureGrid = styled.div`
@@ -192,26 +141,19 @@ const DetailButton = styled.button`
   cursor: pointer;
 `;
 
-const PaginationWrapper = styled.div`
+const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
-  gap: 10px;
   margin-top: 20px;
 `;
 
-const PaginationButton = styled.button`
-  padding: 5px 10px;
-  background-color: #f1f1f1;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #e6e6e6;
-  }
-`;
-
-const PageNumber = styled.span`
+const ViewAllButton = styled.button`
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
   font-size: 14px;
   font-weight: bold;
+  cursor: pointer;
 `;

@@ -47,7 +47,6 @@ const LectureWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-bottom: 1px solid #ddd;
 `;
 
 const Header = styled.div`
