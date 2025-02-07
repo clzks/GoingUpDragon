@@ -4,10 +4,12 @@ import React, { useState, useEffect } from "react";
 // 외부 라이브러리
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import styled from "styled-components";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-// GoingUpDragon/my-app/src/apis/common/
+// GoingUpDragon/my-app/src/apis/
 import { fetchCategories } from "../../../apis/common/categoryApi"; // API 함수 가져오기
+import { saveSearchQuery } from "../../../apis/searchPage/SearchApi"; // API 함수 import
+import { fetchSuggestions } from "../../../apis/searchPage/fetchSuggestions"; // API 함수 불러오기
 
 // GoingUpDragon/my-app/src/components/common/layout
 import Logo from "./Logo";
@@ -24,11 +26,7 @@ const Header = ({ inputRef }) => {
   // 검색
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const [records, setRecords] = useState([
-    { type: "lecture", text: "JavaScript for Beginners" },
-    { type: "lecture", text: "Advanced React" },
-    // 더 많은 항목들
-  ]);
+  const [records, setRecords] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -37,7 +35,7 @@ const Header = ({ inputRef }) => {
   const navigate = useNavigate();
 
   const goToSignup = () => {
-    navigate('/SignUp'); // "/signup" 경로로 이동
+    navigate("/SignUp"); // "/signup" 경로로 이동
   };
 
   // 카테고리 렌더링을 위한 useEffect
@@ -50,17 +48,11 @@ const Header = ({ inputRef }) => {
         setError(err.message);
       }
     };
-
     loadCategories();
   }, []);
 
   if (error) {
     return <div>Error: {error}</div>;
-  }
-
-  // 입력값이 변경될 때 상태 업데이트
-  function handleInputChange(event) {
-    setSearchInput(event.target.value);
   }
 
   const handleFormFocus = () => {
@@ -96,6 +88,41 @@ const Header = ({ inputRef }) => {
   const handleLogout = () => {
     setIsLoggedIn(false);
     setShowProfileDropdown(false); // 드롭다운 닫기
+  };
+
+  const handleSearchSubmit = async (event) => {
+    event.preventDefault(); // 기본 동작(페이지 새로고침) 방지
+
+    if (!searchInput.trim()) return; // 빈 값 방지
+
+    try {
+      await saveSearchQuery(searchInput); // 검색어 저장 API 호출
+      console.log("검색어 저장 성공:", searchInput);
+    } catch (error) {
+      console.error("검색어 저장 실패:", error);
+    }
+  };
+
+  //   const handleChange = async (e) => {
+  //     const value = e.target.value;
+  //     setSearchInput(value);
+  //     const results = await fetchSuggestions(value);
+  //     setRecords(results);
+  // };
+
+  // const handleChange = (e) => {
+  //   const value = e.target.value;
+  //   setSearchInput(value);
+  //   fetchSuggestions(value, setRecords);
+  // };
+
+  const handleChange = async (e) => {
+    const value = e.target.value;
+    setSearchInput(value);
+    fetchSuggestions(value, (suggestions) => {
+      console.log("자동완성 데이터:", suggestions); // 콘솔에 데이터 출력
+      setRecords(suggestions);
+    });
   };
 
   return (
@@ -146,7 +173,7 @@ const Header = ({ inputRef }) => {
                 placeholder="강의검색"
                 aria-label="Search"
                 value={searchInput}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 onFocus={handleFormFocus} // 폼 클릭 시 드롭다운 표시
                 onBlur={handleFormBlur} // 입력란에서 포커스가 벗어나면 드롭다운 숨기기
               ></StyledFormControl>
@@ -154,17 +181,27 @@ const Header = ({ inputRef }) => {
                 type="submit"
                 variant="outline-success"
                 disabled={!searchInput.trim()}
+                onClick={handleSearchSubmit} // 버튼 클릭 시 검색어 저장
               >
                 검색
               </StyledButton>
             </StyledForm>
-            <DropdownContainer isVisible={isDropdownVisible}>
-              {records.map((record, index) => (
-                <RecordItem key={index} type={record.type}>
-                  {record.text}
-                </RecordItem>
-              ))}
-            </DropdownContainer>
+            {/* <DropdownContainer isVisible={isDropdownVisible}>
+                {records.map((record) => (
+                  <RecordItem key={record.id}>
+                    {record.searchQuery}
+                  </RecordItem>
+                ))}
+              </DropdownContainer> */}
+            {isDropdownVisible && records.length > 0 && (
+              <DropdownContainer isVisible={isDropdownVisible}>
+                {records.map((record) => (
+                  <RecordItem key={record.id} type={record.type}>
+                    {record}
+                  </RecordItem>
+                ))}
+              </DropdownContainer>
+            )}
           </StyledCol>
 
           <StyledLogOutCol>
@@ -178,7 +215,9 @@ const Header = ({ inputRef }) => {
                   로그인
                 </StyledLoginButton>
                 {/* 회원가입 버튼 */}
-                <StyledButton variant="outline-success" onClick={goToSignup}>회원가입</StyledButton>
+                <StyledButton variant="outline-success" onClick={goToSignup}>
+                  회원가입
+                </StyledButton>
               </>
             ) : (
               <StyledLoginCol>
@@ -371,7 +410,6 @@ const StyledCol = styled(Col)`
   align-items: center;
   justify-content: center; /* 수직 중앙 정렬 */
   position: relative;
-
 `;
 
 const StyledForm = styled(Form)`
