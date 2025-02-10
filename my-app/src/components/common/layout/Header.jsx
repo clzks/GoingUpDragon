@@ -1,10 +1,12 @@
 // GoingUpDragon/my-app/src/components/common/layout/Header.jsx
 import React, { useState, useEffect } from "react";
 
+import { useCart } from '../../common/layout/context/CartContext';
+
 // 외부 라이브러리
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { data, Link, useNavigate } from "react-router-dom";
 import { FaHome, FaChevronRight, FaShoppingCart } from "react-icons/fa";
 
 // GoingUpDragon/my-app/src/apis/
@@ -32,17 +34,10 @@ const Header = ({ inputRef }) => {
   const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-
-  // 초기값 0으로 itemCount 저장
-  const [itemCount, setItemCount] = useState(0);
-
-  // 아이템 카운트 1씩 증가시키는 함수수
-  const addItemToCart = () => {
-    setItemCount((prevCount) => prevCount + 1); // 이전 상태 기반으로 업데이트
-    console.log(itemCount); // 이 값은 아직 업데이트되지 않은 상태
-  };
-
   const navigate = useNavigate();
+
+  const { itemCount } = useCart();
+  const { addItemToCart } = useCart();
 
   const goToSignup = () => {
     navigate("/SignUp"); // "/signup" 경로로 이동
@@ -59,6 +54,7 @@ const Header = ({ inputRef }) => {
       }
     };
     loadCategories();
+
   }, []);
 
   if (error) {
@@ -86,7 +82,8 @@ const Header = ({ inputRef }) => {
   // 로그인 성공 시 상태 업데이트
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
-    setShowModal(false); // 로그인 후 모달 닫기
+    localStorage.setItem("authToken", data.token); // 로그인 후 토큰 저장
+    navigate("/"); // 로그인 후 홈 페이지로 이동
   };
 
   // 프로필 드롭다운 토글
@@ -96,8 +93,10 @@ const Header = ({ inputRef }) => {
 
   // 로그아웃 처리
   const handleLogout = () => {
+    // 로그아웃 시 로컬 스토리지에서 토큰 제거하고 상태 변경
     setIsLoggedIn(false);
-    setShowProfileDropdown(false); // 드롭다운 닫기
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("cartItemCount");  // 장바구니 개수 초기화
   };
 
   const handleSearchSubmit = async (event) => {
@@ -112,19 +111,6 @@ const Header = ({ inputRef }) => {
       console.error("검색어 저장 실패:", error);
     }
   };
-
-  //   const handleChange = async (e) => {
-  //     const value = e.target.value;
-  //     setSearchInput(value);
-  //     const results = await fetchSuggestions(value);
-  //     setRecords(results);
-  // };
-
-  // const handleChange = (e) => {
-  //   const value = e.target.value;
-  //   setSearchInput(value);
-  //   fetchSuggestions(value, setRecords);
-  // };
 
   const handleChange = async (e) => {
     const value = e.target.value;
@@ -236,9 +222,7 @@ const Header = ({ inputRef }) => {
                 <StyledButton variant="outline-success">맞춤강의</StyledButton>
                 <StyledCartWrapper>
                   <StyledCartIcon></StyledCartIcon>
-                  {itemCount > 0 && (
-                    <Badge>{itemCount}</Badge>
-                  )}
+                  {itemCount > 0 && <Badge>{itemCount}</Badge>}
                 </StyledCartWrapper>
                 <ProfileImage
                   src="https://via.placeholder.com/40"
@@ -250,10 +234,10 @@ const Header = ({ inputRef }) => {
                     <button onClick={addItemToCart}>Add to Cart</button>
                     <StyledDropDownMenuNickname to="MyPage">
                       <StyledHomeIcon />
-                      코딩하는 학습자9259
+                      닉네임
                       <StyledArrowIcon />
                     </StyledDropDownMenuNickname>
-                    <StyledDropDownMenuRole>학생</StyledDropDownMenuRole>
+                    <StyledDropDownMenuRole>역할</StyledDropDownMenuRole>
                     <StyledDropDownMenuLogout onClick={handleLogout}>
                       로그아웃
                     </StyledDropDownMenuLogout>
