@@ -1,12 +1,12 @@
 // GoingUpDragon/my-app/src/components/common/layout/Header.jsx
 import React, { useState, useEffect } from "react";
 
-import { useCart } from '../../common/layout/context/CartContext';
+import { useCart } from "../../common/layout/context/CartContext";
 
 // 외부 라이브러리
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import styled from "styled-components";
-import { data, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHome, FaChevronRight, FaShoppingCart } from "react-icons/fa";
 
 // GoingUpDragon/my-app/src/apis/
@@ -39,6 +39,8 @@ const Header = ({ inputRef }) => {
   const { itemCount } = useCart();
   const { addItemToCart } = useCart();
 
+  const [user, setUser] = useState(null);
+
   const goToSignup = () => {
     navigate("/SignUp"); // "/signup" 경로로 이동
   };
@@ -55,6 +57,17 @@ const Header = ({ inputRef }) => {
     };
     loadCategories();
 
+    // 페이지 로드 시 로컬 스토리지에서 로그인 상태 확인
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      // 토큰이 있으면 로그인 상태로 간주하고, user 정보를 가져오기
+      const savedUser = {
+        nickname: localStorage.getItem("userNickname"),
+        role: localStorage.getItem("userRole"),
+      };
+      setIsLoggedIn(true);
+      setUser(savedUser);
+    }
   }, []);
 
   if (error) {
@@ -80,10 +93,15 @@ const Header = ({ inputRef }) => {
   };
 
   // 로그인 성공 시 상태 업데이트
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (data) => {
     setIsLoggedIn(true);
     localStorage.setItem("authToken", data.token); // 로그인 후 토큰 저장
-    navigate("/"); // 로그인 후 홈 페이지로 이동
+    localStorage.setItem("userNickname", data.nickname); // 닉네임 저장
+    localStorage.setItem("userRole", data.role); // 역할 저장
+    setUser({
+      nickname: data.nickname,
+      role: data.role,
+    });
   };
 
   // 프로필 드롭다운 토글
@@ -96,7 +114,9 @@ const Header = ({ inputRef }) => {
     // 로그아웃 시 로컬 스토리지에서 토큰 제거하고 상태 변경
     setIsLoggedIn(false);
     localStorage.removeItem("authToken");
-    localStorage.removeItem("cartItemCount");  // 장바구니 개수 초기화
+    localStorage.removeItem("userNickname");
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("cartItemCount"); // 장바구니 개수 초기화
   };
 
   const handleSearchSubmit = async (event) => {
@@ -234,10 +254,10 @@ const Header = ({ inputRef }) => {
                     <button onClick={addItemToCart}>Add to Cart</button>
                     <StyledDropDownMenuNickname to="MyPage">
                       <StyledHomeIcon />
-                      닉네임
+                      {user.nickname}
                       <StyledArrowIcon />
                     </StyledDropDownMenuNickname>
-                    <StyledDropDownMenuRole>역할</StyledDropDownMenuRole>
+                    <StyledDropDownMenuRole>{user.role}</StyledDropDownMenuRole>
                     <StyledDropDownMenuLogout onClick={handleLogout}>
                       로그아웃
                     </StyledDropDownMenuLogout>
