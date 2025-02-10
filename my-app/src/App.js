@@ -20,8 +20,12 @@ import AccountRecoveryTabs from "./layouts/findAccountPage/AccountRecoveryTabs";
 import AnswerLayout from "./layouts/qnAPage/answer/AnswerLayout";
 import RouteChangeScroll from "./components/common/layout/RouteChangeScroll";
 
+// 장바구니 상태 유지를 위한 context
+import { CartProvider } from "../src/components/common/layout/context/CartContext.jsx";
+
 function App() {
   return (
+    <CartProvider>
     <Router>
       <RouteChangeScroll></RouteChangeScroll>
       <div>
@@ -80,6 +84,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </CartProvider>
   );
 }
 export default App;

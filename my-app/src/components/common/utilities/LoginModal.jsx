@@ -22,6 +22,7 @@ const LoginModal = ({ show, onClose, onLoginSuccess }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [loginError, setLoginError] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -30,16 +31,19 @@ const LoginModal = ({ show, onClose, onLoginSuccess }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    
+    setIsLoading(true); // 로딩 시작
+
     if (!email) {
       setEmailError(true);
       setLoginError("이메일을 입력해주세요.");
+      setIsLoading(false); // 로딩 끝
       return;
     }
 
     if (!validateEmail(email)) {
       setEmailError(true);
       setLoginError("유효하지 않은 이메일 형식입니다.");
+      setIsLoading(false); // 로딩 끝
       return;
     }
 
@@ -47,6 +51,7 @@ const LoginModal = ({ show, onClose, onLoginSuccess }) => {
 
     if (!password) {
       setLoginError("비밀번호를 입력해주세요.");
+      setIsLoading(false); // 로딩 끝
       return;
     }
 
@@ -54,7 +59,6 @@ const LoginModal = ({ show, onClose, onLoginSuccess }) => {
       const data = await login(email, password);
       if (data.success) {
         localStorage.setItem('authToken', data.token); // Save the JWT token to localStorage
-        console.log('로그인 성공:', data);
         onLoginSuccess(data); // Pass data to parent on login success
         onClose(); // Close modal on success
       } else {
@@ -62,6 +66,8 @@ const LoginModal = ({ show, onClose, onLoginSuccess }) => {
       }
     } catch (error) {
       setError(error.message || '로그인 요청 중 오류 발생');
+    } finally {
+      setIsLoading(false); // 로딩 끝
     }
   };
 
@@ -119,8 +125,11 @@ const LoginModal = ({ show, onClose, onLoginSuccess }) => {
           <Row className="justify-content-md-center">
             <Col xs={12} md={12}>
               {error && <StyledErrorText>{error}</StyledErrorText>}
-              <StyledLoginButton onClick={handleLogin}>
-                로그인
+              <StyledLoginButton
+                onClick={handleLogin}
+                disabled={isLoading} // 로그인 중 비활성화
+              >
+                {isLoading ? "로그인 중..." : "로그인"} {/* 로딩 중 텍스트 변경 */}
               </StyledLoginButton>
             </Col>
           </Row>
@@ -183,7 +192,6 @@ const StyledInput = styled.input`
   }
 `;
 
-
 const StyledPasswordWrapper = styled.div`
   position: relative;
   margin-top: 10px;
@@ -212,6 +220,11 @@ const StyledLoginButton = styled.button`
   &:focus {
     outline: none;
     box-shadow: none;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
   }
 `;
 

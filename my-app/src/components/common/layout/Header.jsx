@@ -1,10 +1,13 @@
 // GoingUpDragon/my-app/src/components/common/layout/Header.jsx
 import React, { useState, useEffect } from "react";
 
+import { useCart } from "../../common/layout/context/CartContext";
+
 // 외부 라이브러리
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FaHome, FaChevronRight, FaShoppingCart } from "react-icons/fa";
 
 // GoingUpDragon/my-app/src/apis/
 import { fetchCategories } from "../../../apis/common/categoryApi"; // API 함수 가져오기
@@ -31,8 +34,12 @@ const Header = ({ inputRef }) => {
   const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-
   const navigate = useNavigate();
+
+  const { itemCount } = useCart();
+  const { addItemToCart } = useCart();
+
+  const [user, setUser] = useState(null);
 
   const goToSignup = () => {
     navigate("/SignUp"); // "/signup" 경로로 이동
@@ -49,6 +56,18 @@ const Header = ({ inputRef }) => {
       }
     };
     loadCategories();
+
+    // 페이지 로드 시 로컬 스토리지에서 로그인 상태 확인
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      // 토큰이 있으면 로그인 상태로 간주하고, user 정보를 가져오기
+      const savedUser = {
+        nickname: localStorage.getItem("userNickname"),
+        role: localStorage.getItem("userRole"),
+      };
+      setIsLoggedIn(true);
+      setUser(savedUser);
+    }
   }, []);
 
   if (error) {
@@ -74,9 +93,15 @@ const Header = ({ inputRef }) => {
   };
 
   // 로그인 성공 시 상태 업데이트
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (data) => {
     setIsLoggedIn(true);
-    setShowModal(false); // 로그인 후 모달 닫기
+    localStorage.setItem("authToken", data.token); // 로그인 후 토큰 저장
+    localStorage.setItem("userNickname", data.nickname); // 닉네임 저장
+    localStorage.setItem("userRole", data.role); // 역할 저장
+    setUser({
+      nickname: data.nickname,
+      role: data.role,
+    });
   };
 
   // 프로필 드롭다운 토글
@@ -86,8 +111,12 @@ const Header = ({ inputRef }) => {
 
   // 로그아웃 처리
   const handleLogout = () => {
+    // 로그아웃 시 로컬 스토리지에서 토큰 제거하고 상태 변경
     setIsLoggedIn(false);
-    setShowProfileDropdown(false); // 드롭다운 닫기
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userNickname");
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("cartItemCount"); // 장바구니 개수 초기화
   };
 
   const handleSearchSubmit = async (event) => {
@@ -102,19 +131,6 @@ const Header = ({ inputRef }) => {
       console.error("검색어 저장 실패:", error);
     }
   };
-
-  //   const handleChange = async (e) => {
-  //     const value = e.target.value;
-  //     setSearchInput(value);
-  //     const results = await fetchSuggestions(value);
-  //     setRecords(results);
-  // };
-
-  // const handleChange = (e) => {
-  //   const value = e.target.value;
-  //   setSearchInput(value);
-  //   fetchSuggestions(value, setRecords);
-  // };
 
   const handleChange = async (e) => {
     const value = e.target.value;
@@ -133,7 +149,9 @@ const Header = ({ inputRef }) => {
           <Col>
             <StyledLogoCategoryDiv>
               <StyledHeaderContainer>
-                <Logo></Logo>
+                <Link to="/">
+                  <Logo></Logo>
+                </Link>
                 <StyledNavbarNav>
                   <StyledCategoryDropdown>
                     <StyledNavLink>카테고리</StyledNavLink>
@@ -222,6 +240,10 @@ const Header = ({ inputRef }) => {
             ) : (
               <StyledLoginCol>
                 <StyledButton variant="outline-success">맞춤강의</StyledButton>
+                <StyledCartWrapper>
+                  <StyledCartIcon></StyledCartIcon>
+                  {itemCount > 0 && <Badge>{itemCount}</Badge>}
+                </StyledCartWrapper>
                 <ProfileImage
                   src="https://via.placeholder.com/40"
                   alt="프로필"
@@ -229,12 +251,16 @@ const Header = ({ inputRef }) => {
                 />
                 {showProfileDropdown && (
                   <DropdownMenu>
-                    <StyledButton
-                      variant="outline-danger"
-                      onClick={handleLogout}
-                    >
+                    <button onClick={addItemToCart}>Add to Cart</button>
+                    <StyledDropDownMenuNickname to="MyPage">
+                      <StyledHomeIcon />
+                      {user.nickname}
+                      <StyledArrowIcon />
+                    </StyledDropDownMenuNickname>
+                    <StyledDropDownMenuRole>{user.role}</StyledDropDownMenuRole>
+                    <StyledDropDownMenuLogout onClick={handleLogout}>
                       로그아웃
-                    </StyledButton>
+                    </StyledDropDownMenuLogout>
                   </DropdownMenu>
                 )}
               </StyledLoginCol>
@@ -467,14 +493,90 @@ const RecordItem = styled.div`
 `;
 
 // 내일 강사님한테 물어보기 / 드롭다운의 아래에 위치하게 하고싶음.
+// const DropdownMenu = styled.div`
+//   position: absolute;
+//   top: 280px;
+//   right: 120px;
+//   background-color: #fff;
+//   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+//   z-index: 5;
+//   padding: 10px;
+// `;
+
 const DropdownMenu = styled.div`
   position: absolute;
-  top: 280px;
-  right: 120px;
+  top: 330px; // 프로필 이미지 아래에 위치하도록 조정합니다.
+  right: 150px; // 프로필 이미지의 오른쪽 경계에 맞추도록 조정합니다.
   background-color: #fff;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 5;
   padding: 10px;
+`;
+
+const StyledCartWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+const StyledCartIcon = styled(FaShoppingCart)`
+  margin-left: 16px;
+  margin-right: 16px;
+  font-size: 24px;
+  color: #000;
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+`;
+
+const Badge = styled.span`
+  position: absolute;
+  top: -8px;
+  right: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  background-color: red;
+  border-radius: 50%;
+  z-index: 10;
+`;
+
+const StyledHomeIcon = styled(FaHome)`
+  margin-right: 8px;
+`;
+
+const StyledDropDownMenuNickname = styled(Link)`
+  display: flex;
+  align-items: center;
+  text-decoration: none; // 링크 기본 밑줄 제거
+  color: #000000;
+
+  &:hover {
+    text-decoration: underline; // 호버 시 텍스트에 밑줄을 추가합니다.
+  }
+`;
+
+const StyledArrowIcon = styled(FaChevronRight)`
+  margin-left: 8px;
+`;
+
+const StyledDropDownMenuRole = styled.div`
+  margin-top: 10px;
+`;
+
+const StyledDropDownMenuLogout = styled.div`
+  margin-top: 50px;
+  cursor: pointer;
+  color: #808080; // 처음에 연한 회색으로 설정
+
+  &:hover {
+    color: black; // 호버 시 검정색으로 변경
+  }
 `;
 
 const ProfileImage = styled.img`
