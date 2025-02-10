@@ -66,3 +66,35 @@ export const getCourseListByLevel = async (
     return []; // ✅ 에러 시 빈 배열 반환
   }
 };
+
+export const getCoursesByFilterAndSort = async ({
+  mainCategory = 0,
+  subCategory = 0,
+  level = "모두",
+  language = "모두",
+  timeFilter = null,
+  selectedTags = [],
+  sortBy = "latest",
+  size = 32,
+  offset = 0,
+}) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/filtered`, {
+      params: {
+        mainCategory,
+        subCategory,
+        level,
+        language,
+        timeFilter,
+        selectedTags: selectedTags.length > 0 ? selectedTags.join(",") : null, // 리스트를 문자열로 변환
+        sortBy,
+        size,
+        offset,
+      },
+    });
+    return response.data; // 받은 데이터 반환
+  } catch (error) {
+    console.error("Error fetching courses:", error);
+    return null;
+  }
+};

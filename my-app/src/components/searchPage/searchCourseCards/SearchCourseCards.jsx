@@ -10,14 +10,15 @@ import RatingStarList from "../../common/icons/RatingStarList";
 const SearchCourseCards = ({ course }) => {
   return (
     <CardContainer>
-      <Thumbnail src={course.thumbnail} alt={`${course.title} 썸네일`} />
+      <Thumbnail src={course.imageUrl} alt={`${course.title} 썸네일`} />
       <CardContent>
         <CourseTitle>{course.title}</CourseTitle>
         <InstructorName>{course.instructor}</InstructorName>
         <RatingContainer>
-          <RatingStarList rating={course.rating} size="18px" /> {/* 별 렌더링 */}
+          <RatingStarList rating={course.rating} size="18px" />{" "}
+          {/* 별 렌더링 */}
           <Rating>{course.rating}</Rating>
-          <ReviewCount>({course.reviews})</ReviewCount>
+          <ReviewCount>({course.numReviews})</ReviewCount>
         </RatingContainer>
         <Price>{course.price}</Price>
       </CardContent>
