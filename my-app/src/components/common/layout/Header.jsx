@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 // 외부 라이브러리
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FaHome, FaChevronRight, FaShoppingCart } from "react-icons/fa";
 
 // GoingUpDragon/my-app/src/apis/
 import { fetchCategories } from "../../../apis/common/categoryApi"; // API 함수 가져오기
@@ -31,6 +32,15 @@ const Header = ({ inputRef }) => {
   const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+
+  // 초기값 0으로 itemCount 저장
+  const [itemCount, setItemCount] = useState(0);
+
+  // 아이템 카운트 1씩 증가시키는 함수수
+  const addItemToCart = () => {
+    setItemCount((prevCount) => prevCount + 1); // 이전 상태 기반으로 업데이트
+    console.log(itemCount); // 이 값은 아직 업데이트되지 않은 상태
+  };
 
   const navigate = useNavigate();
 
@@ -133,7 +143,9 @@ const Header = ({ inputRef }) => {
           <Col>
             <StyledLogoCategoryDiv>
               <StyledHeaderContainer>
-                <Logo></Logo>
+                <Link to="/">
+                  <Logo></Logo>
+                </Link>
                 <StyledNavbarNav>
                   <StyledCategoryDropdown>
                     <StyledNavLink>카테고리</StyledNavLink>
@@ -222,6 +234,12 @@ const Header = ({ inputRef }) => {
             ) : (
               <StyledLoginCol>
                 <StyledButton variant="outline-success">맞춤강의</StyledButton>
+                <StyledCartWrapper>
+                  <StyledCartIcon></StyledCartIcon>
+                  {itemCount > 0 && (
+                    <Badge>{itemCount}</Badge>
+                  )}
+                </StyledCartWrapper>
                 <ProfileImage
                   src="https://via.placeholder.com/40"
                   alt="프로필"
@@ -229,12 +247,16 @@ const Header = ({ inputRef }) => {
                 />
                 {showProfileDropdown && (
                   <DropdownMenu>
-                    <StyledButton
-                      variant="outline-danger"
-                      onClick={handleLogout}
-                    >
+                    <button onClick={addItemToCart}>Add to Cart</button>
+                    <StyledDropDownMenuNickname to="MyPage">
+                      <StyledHomeIcon />
+                      코딩하는 학습자9259
+                      <StyledArrowIcon />
+                    </StyledDropDownMenuNickname>
+                    <StyledDropDownMenuRole>학생</StyledDropDownMenuRole>
+                    <StyledDropDownMenuLogout onClick={handleLogout}>
                       로그아웃
-                    </StyledButton>
+                    </StyledDropDownMenuLogout>
                   </DropdownMenu>
                 )}
               </StyledLoginCol>
@@ -467,14 +489,90 @@ const RecordItem = styled.div`
 `;
 
 // 내일 강사님한테 물어보기 / 드롭다운의 아래에 위치하게 하고싶음.
+// const DropdownMenu = styled.div`
+//   position: absolute;
+//   top: 280px;
+//   right: 120px;
+//   background-color: #fff;
+//   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+//   z-index: 5;
+//   padding: 10px;
+// `;
+
 const DropdownMenu = styled.div`
   position: absolute;
-  top: 280px;
-  right: 120px;
+  top: 330px; // 프로필 이미지 아래에 위치하도록 조정합니다.
+  right: 150px; // 프로필 이미지의 오른쪽 경계에 맞추도록 조정합니다.
   background-color: #fff;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 5;
   padding: 10px;
+`;
+
+const StyledCartWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+const StyledCartIcon = styled(FaShoppingCart)`
+  margin-left: 16px;
+  margin-right: 16px;
+  font-size: 24px;
+  color: #000;
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+`;
+
+const Badge = styled.span`
+  position: absolute;
+  top: -8px;
+  right: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  background-color: red;
+  border-radius: 50%;
+  z-index: 10;
+`;
+
+const StyledHomeIcon = styled(FaHome)`
+  margin-right: 8px;
+`;
+
+const StyledDropDownMenuNickname = styled(Link)`
+  display: flex;
+  align-items: center;
+  text-decoration: none; // 링크 기본 밑줄 제거
+  color: #000000;
+
+  &:hover {
+    text-decoration: underline; // 호버 시 텍스트에 밑줄을 추가합니다.
+  }
+`;
+
+const StyledArrowIcon = styled(FaChevronRight)`
+  margin-left: 8px;
+`;
+
+const StyledDropDownMenuRole = styled.div`
+  margin-top: 10px;
+`;
+
+const StyledDropDownMenuLogout = styled.div`
+  margin-top: 50px;
+  cursor: pointer;
+  color: #808080; // 처음에 연한 회색으로 설정
+
+  &:hover {
+    color: black; // 호버 시 검정색으로 변경
+  }
 `;
 
 const ProfileImage = styled.img`
