@@ -19,19 +19,19 @@ import styled from "styled-components";
 
 // 아이콘 순서를 유지하는 배열
 const MainCategoryDatas1 = [
-  { id: 1, icon: <FaRegCopy />, label: "전체" }, // "전체"는 고정
-  { id: 2, icon: <FaHtml5 />, label: "" },
-  { id: 3, icon: <FaCss3Alt />, label: "" },
-  { id: 4, icon: <FaJsSquare />, label: "" },
-  { id: 5, icon: <FaPython />, label: "" },
-  { id: 6, icon: <FaJava />, label: "" },
-  { id: 7, icon: <FaPhp />, label: "" },
-  { id: 8, icon: <FaNode />, label: "" },
-  { id: 9, icon: <FaReact />, label: "" },
-  { id: 10, icon: <FaSwift />, label: "" },
+  { id: 0, icon: <FaRegCopy />, label: "전체" }, // "전체"는 고정
+  { id: 1, icon: <FaHtml5 />, label: "" },
+  { id: 2, icon: <FaCss3Alt />, label: "" },
+  { id: 3, icon: <FaJsSquare />, label: "" },
+  { id: 4, icon: <FaPython />, label: "" },
+  { id: 5, icon: <FaJava />, label: "" },
+  { id: 6, icon: <FaPhp />, label: "" },
+  { id: 7, icon: <FaNode />, label: "" },
+  { id: 8, icon: <FaReact />, label: "" },
+  { id: 9, icon: <FaSwift />, label: "" },
 ];
 
-const MainCategoryDatas = ({ onCategorySelect }) => {
+const MainCategoryDatas = ({ onCategorySelect, onSubCategorySelect }) => {
   const [categories, setCategories] = useState([]);
   // 클릭된 아이콘을 추적하는 상태
   const [selectedIconId, setSelectedIconId] = useState(null);
@@ -42,6 +42,7 @@ const MainCategoryDatas = ({ onCategorySelect }) => {
       try {
         const data = await fetchCategories();
         setCategories(data); // 가져온 데이터 상태에 저장
+        console.log(categories);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
@@ -60,7 +61,11 @@ const MainCategoryDatas = ({ onCategorySelect }) => {
   // 아이콘 클릭 시 선택된 아이콘 상태 변경
   const handleIconClick = (id) => {
     setSelectedIconId(id);
-    onCategorySelect(id);
+    const selectedCategory = categories.find((category) => category.categoryId === id);
+    console.log("Selected Category:", selectedCategory);
+    onCategorySelect(id); // 상위 카테고리 선택
+    console.log("Subcategories:", selectedCategory?.subCategories);
+    onSubCategorySelect(selectedCategory?.subCategories || []); // 해당 서브 카테고리 데이터 전달
   };
 
   return (
@@ -142,7 +147,7 @@ const IconButton = styled.button`
 
 const StyledSpanSearch = styled.span`
   font-size: 1rem;
-  white-space: nowrap;
+   white-space: nowrap;
 `;
 
 const StyledIcon = styled.div`

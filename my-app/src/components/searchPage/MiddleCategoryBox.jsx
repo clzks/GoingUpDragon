@@ -8,28 +8,13 @@ import styled from "styled-components";
 import ArrowButtonLeft from "../common/icons/ArrowButtonLeft";
 import ArrowButtonRight from "../common/icons/ArrowButtonRight";
 
-const categories = [
-  { id: 1, title: "전체" },
-  { id: 2, title: "html" },
-  { id: 3, title: "css" },
-  { id: 4, title: "JavaScript" },
-  { id: 5, title: "React" },
-  { id: 6, title: "Java" },
-  { id: 7, title: "PHP" },
-  { id: 8, title: "node.js" },
-  { id: 9, title: "전체" },
-  { id: 10, title: "html" },
-  { id: 11, title: "css" },
-  { id: 12, title: "css" },
-];
-
-const MiddleCategoryBox = () => {
-  const [selectedSkillTagId, setSelectedSkillTagId] = useState(null);
+const MiddleCategoryBox = ({ subCategories }) => {
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const innerContainerRef = useRef(null); // InnerContainer ref
 
   // Handle CategoryItem click
   const handleCategoryClick = (id) => {
-    setSelectedSkillTagId(id);
+    setSelectedCategoryId(id);
   };
 
   // Scroll functions to move 1 item at a time
@@ -49,17 +34,19 @@ const MiddleCategoryBox = () => {
     <OuterContainer>
       <ArrowButtonLeft scrollLeft={scrollLeft} />
       <InnerContainer ref={innerContainerRef}>
-        {categories.map((item) => (
-          <CategoryItem
-            key={item.id}
-            onClick={() => handleCategoryClick(item.id)}
-            isSelected={selectedSkillTagId === item.id}
-          >
-            <CategoryIcon isSelected={selectedSkillTagId === item.id}>
-              {item.title}
-            </CategoryIcon>
-          </CategoryItem>
-        ))}
+        {subCategories.length > 0 ? (
+          subCategories.map((item) => (
+            <CategoryItem
+              key={item.categoryId}
+              onClick={() => handleCategoryClick(item.categoryId)}
+              isSelected={selectedCategoryId === item.categoryId}
+            >
+              <CategoryIcon>{item.categoryName}</CategoryIcon>
+            </CategoryItem>
+          ))
+        ) : (
+          <div>서브 카테고리가 없습니다.</div>
+        )}
       </InnerContainer>
       <ArrowButtonRight scrollRight={scrollRight} />
     </OuterContainer>
@@ -98,8 +85,8 @@ const CategoryItem = styled.div`
   background-color: #f9f9f9;
   cursor: pointer;
   transition: background-color 0.3s;
-  min-width: 100px; /* 각 항목의 너비를 고정 */
-  max-width: 100px; /* 항목이 커지지 않도록 제한 */
+  min-width: 200px; /* 각 항목의 너비를 고정 */
+  max-width: 300px; /* 항목이 커지지 않도록 제한 */
   text-align: center; /* 텍스트 가운데 정렬 */
   overflow: hidden; /* 텍스트가 넘칠 경우 숨기기 */
   text-overflow: ellipsis; /* 텍스트가 넘치면 '...' 표시 */
@@ -113,11 +100,13 @@ const CategoryItem = styled.div`
     `
     background-color: #e6f7ff;
     color: black;
+    font-weight: bold;
   `}
 `;
 
 const CategoryIcon = styled.div`
   font-size: 16px; /* 텍스트 크기 조정 */
+  
   transition: font-weight 0.3s ease;
 
   ${({ isSelected }) =>
