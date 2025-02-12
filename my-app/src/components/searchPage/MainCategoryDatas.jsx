@@ -1,5 +1,6 @@
 // GoingUpDragon/my-app/src/components/searchPage/MainCategoryDatas.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { fetchCategories } from "../../apis/common/categoryApi"; // API 호출 함수 가져오기
 
 // 외부 라이브러리
 import {
@@ -16,39 +17,60 @@ import {
 } from "react-icons/fa";
 import styled from "styled-components";
 
-const MainCategoryDatas = ( { onCategorySelect } ) => {
+// 아이콘 순서를 유지하는 배열
+const MainCategoryDatas1 = [
+  { id: 0, icon: <FaRegCopy />, label: "전체" }, // "전체"는 고정
+  { id: 1, icon: <FaHtml5 />, label: "" },
+  { id: 2, icon: <FaCss3Alt />, label: "" },
+  { id: 3, icon: <FaJsSquare />, label: "" },
+  { id: 4, icon: <FaPython />, label: "" },
+  { id: 5, icon: <FaJava />, label: "" },
+  { id: 6, icon: <FaPhp />, label: "" },
+  { id: 7, icon: <FaNode />, label: "" },
+  { id: 8, icon: <FaReact />, label: "" },
+  { id: 9, icon: <FaSwift />, label: "" },
+];
+
+const MainCategoryDatas = ({ onCategorySelect, onSubCategorySelect }) => {
+  const [categories, setCategories] = useState([]);
   // 클릭된 아이콘을 추적하는 상태
   const [selectedIconId, setSelectedIconId] = useState(null);
 
-  // 대분류 카테고리 데이터들
-  const MainCategoryDatas = [
-    { id: 1, icon: <FaRegCopy />, label: "전체" },
-    { id: 2, icon: <FaHtml5 />, label: "Html5" },
-    { id: 3, icon: <FaCss3Alt />, label: "Css3" },
-    { id: 4, icon: <FaJsSquare />, label: "JavaScript" },
-    { id: 5, icon: <FaPython />, label: "Python" },
-    { id: 6, icon: <FaJava />, label: "Java" },
-    { id: 7, icon: <FaPhp />, label: "PHP" },
-    { id: 8, icon: <FaNode />, label: "Node.js" },
-    { id: 9, icon: <FaReact />, label: "React" },
-    { id: 10, icon: <FaSwift />, label: "Swift" },
-    { id: 11, icon: <FaPython />, label: "Python" },
-    { id: 12, icon: <FaJava />, label: "Java" },
-    { id: 13, icon: <FaPhp />, label: "PHP" },
-    { id: 14, icon: <FaNode />, label: "Node.js" },
-    { id: 15, icon: <FaReact />, label: "React" },
-    { id: 16, icon: <FaSwift />, label: "Swift" },
-  ];
+  // API에서 카테고리 데이터 가져오기
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await fetchCategories();
+        setCategories(data); // 가져온 데이터 상태에 저장
+        console.log(categories);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    loadCategories();
+  }, []);
+
+  // 기존 배열에 API에서 가져온 라벨 값만 적용 (아이콘 순서 유지)
+  const combinedCategories = MainCategoryDatas1.map((item, index) => ({
+    ...item,
+    label:
+      index === 0 ? "전체" : categories[index - 1]?.categoryName || "기본값",
+  }));
 
   // 아이콘 클릭 시 선택된 아이콘 상태 변경
   const handleIconClick = (id) => {
     setSelectedIconId(id);
-    onCategorySelect(id);
+    const selectedCategory = categories.find((category) => category.categoryId === id);
+    console.log("Selected Category:", selectedCategory);
+    onCategorySelect(id); // 상위 카테고리 선택
+    console.log("Subcategories:", selectedCategory?.subCategories);
+    onSubCategorySelect(selectedCategory?.subCategories || []); // 해당 서브 카테고리 데이터 전달
   };
 
   return (
     <StyledStack>
-      {MainCategoryDatas.map((item) => (
+      {combinedCategories.map((item) => (
         <StyledIconLabelCenter key={item.id}>
           <IconButton
             onClick={() => handleIconClick(item.id)} // 클릭 시 상태 변경
@@ -125,6 +147,7 @@ const IconButton = styled.button`
 
 const StyledSpanSearch = styled.span`
   font-size: 1rem;
+   white-space: nowrap;
 `;
 
 const StyledIcon = styled.div`

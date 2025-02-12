@@ -26,13 +26,21 @@ import SearchSortOption from "../../components/searchPage/SearchSortOption";
 import SearchFillterParent from "../../components/searchPage/searchFillter/SearchFillterParent";
 import SearchCardDatas from "../../components/searchPage/searchCourseCards/SearchCardDatas";
 
-
 const SearchLayout = () => {
   const [modalShow, setModalShow] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+  const [subCategories, setSubCategories] = useState([]);
 
   const inputRef = useRef(null); // 검색창에 대한 참조 생성
   const searchCategoryRef = useRef(null); // 각 카테고리의 스크롤을 위한 ref
+
+  const handleCategorySelect = (categoryId) => {
+    setSelectedCategoryId(categoryId);
+  };
+
+  const handleSubCategorySelect = (subCategories) => {
+    setSubCategories(subCategories); // 서브 카테고리 데이터를 상태에 저장
+  };
 
   const handleSearchIconClick = () => {
     if (inputRef.current) {
@@ -65,7 +73,8 @@ const SearchLayout = () => {
               <StyledCategoryItemContainer>
                 <SearchCategory onClick={handleSearchIconClick} />
                 <VerticalLine height="5rem" /> {/* 수직 구분선 */}
-                <MainCategoryDatas onCategorySelect={setSelectedCategoryId} />
+                <MainCategoryDatas onCategorySelect={handleCategorySelect} onSubCategorySelect={handleSubCategorySelect} />
+                
               </StyledCategoryItemContainer>
             </StyledScrollableContainer>
             {/* 오른쪽 화살표 */}
@@ -79,7 +88,7 @@ const SearchLayout = () => {
       <StyledSection>
         <Container>
           <StyledMiddleCategoryBoxRow>
-            {selectedCategoryId !== 1 && <MiddleCategoryBox />}{" "}
+            {selectedCategoryId && <MiddleCategoryBox subCategories={subCategories} />}{" "}
             {/* 전체는 렌더링 제외 */}
           </StyledMiddleCategoryBoxRow>
         </Container>
