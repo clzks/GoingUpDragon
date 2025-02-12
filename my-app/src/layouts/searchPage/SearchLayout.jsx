@@ -91,10 +91,13 @@ const SearchLayout = () => {
       <StyledSection>
         <Container>
           <StyledMiddleCategoryBoxRow>
-			{selectedCategoryId !== 0 && selectedCategoryId && (
-              <MiddleCategoryBox subCategories={subCategories} 
-				  onSubCategoryChange={setSelectedSubCategoryId} />
-            )}{" "}            {/* 전체는 렌더링 제외 */}
+            {selectedCategoryId !== 0 && selectedCategoryId && (
+              <MiddleCategoryBox
+                subCategories={subCategories}
+                onSubCategoryChange={setSelectedSubCategoryId}
+              />
+            )}{" "}
+            {/* 전체는 렌더링 제외 */}
           </StyledMiddleCategoryBoxRow>
         </Container>
       </StyledSection>

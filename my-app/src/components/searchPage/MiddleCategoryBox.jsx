@@ -8,7 +8,10 @@ import styled from "styled-components";
 import ArrowButtonLeft from "../common/icons/ArrowButtonLeft";
 import ArrowButtonRight from "../common/icons/ArrowButtonRight";
 
-const MiddleCategoryBox = ({ subCategories, onSubCategoryChange }) => {
+const MiddleCategoryBox = ({
+  subCategories,
+  onSubCategoryChange,
+}) => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const innerContainerRef = useRef(null); // InnerContainer ref
 
