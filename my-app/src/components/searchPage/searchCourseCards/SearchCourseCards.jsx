@@ -1,5 +1,6 @@
 // GoingUpDragon/my-app/src/components/searchPage/searchCourseCards/SearchCourseCards.jsx
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 // 외부 라이브러리
 import styled from "styled-components";
@@ -8,8 +9,10 @@ import styled from "styled-components";
 import RatingStarList from "../../common/icons/RatingStarList";
 
 const SearchCourseCards = ({ course }) => {
+  const navigate = useNavigate();
+
   return (
-    <CardContainer>
+    <CardContainer onClick={() => navigate(`/CourseDetail/${course.courseId}`)}>
       <Thumbnail src={course.imageUrl} alt={`${course.title} 썸네일`} />
       <CardContent>
         <CourseTitle>{course.title}</CourseTitle>
@@ -38,6 +41,7 @@ const CardContainer = styled.div`
   height: 320px;
   position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer; /* ✅ 버튼처럼 보이게 설정 */
 
   &:hover {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);

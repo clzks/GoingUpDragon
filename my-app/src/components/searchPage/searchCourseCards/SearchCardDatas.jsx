@@ -28,7 +28,7 @@ const SearchCardDatas = () => {
   const [sortBy, setSortBy] = useState("latest");
 
   // 페이지네이션을 구현할때 보통 라이브러리를 사용하거나 아니면 useState 데이터값을 저장했다 사용.
-  const ITEMS_PER_PAGE = 32; // 한 페이지당 표시할 아이템 수
+  //const ITEMS_PER_PAGE = 32; // 한 페이지당 표시할 아이템 수
   const [currentPage, setCurrentPage] = useState(1);
   const [courses, setCourses] = useState([]); // 강의 리스트
   const [totalCourses, setTotalCourses] = useState(0); // 전체 강의 개수
@@ -55,7 +55,7 @@ const SearchCardDatas = () => {
       selectedTags,
       sortBy,
       size,
-      offset: currentPage * size, // ✅ 페이징 적용
+      offset: (currentPage - 1) * size, // ✅ 페이징 적용
     })
       .then((data) => {
         console.log("📌 필터 적용된 강의 리스트:", data);
@@ -92,7 +92,7 @@ const SearchCardDatas = () => {
   // 데이터 렌더링 함수
   const renderContent = () => {
     const content = [];
-    const totalChunks = Math.ceil(totalCourses / 16);
+    //const totalChunks = Math.ceil(totalCourses / 16);
 
     for (let i = 0; i < totalCourses; i += 16) {
       const chunk = courses.slice(i, i + 16); // 강의 16개씩 분할
@@ -112,7 +112,7 @@ const SearchCardDatas = () => {
       {loading ? <p>⏳ 로딩 중...</p> : content}
       <SearchPagination
         totalItems={totalCourses}
-        itemsPerPage={ITEMS_PER_PAGE}
+        itemsPerPage={size}
         currentPage={currentPage}
         onPageChange={handlePageChange}
       />
