@@ -8,13 +8,14 @@ import styled from "styled-components";
 import ArrowButtonLeft from "../common/icons/ArrowButtonLeft";
 import ArrowButtonRight from "../common/icons/ArrowButtonRight";
 
-const MiddleCategoryBox = ({ subCategories }) => {
+const MiddleCategoryBox = ({ subCategories, onSubCategoryChange }) => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const innerContainerRef = useRef(null); // InnerContainer ref
 
   // Handle CategoryItem click
   const handleCategoryClick = (id) => {
     setSelectedCategoryId(id);
+    onSubCategoryChange(id);
   };
 
   // Scroll functions to move 1 item at a time
@@ -106,7 +107,7 @@ const CategoryItem = styled.div`
 
 const CategoryIcon = styled.div`
   font-size: 16px; /* 텍스트 크기 조정 */
-  
+
   transition: font-weight 0.3s ease;
 
   ${({ isSelected }) =>

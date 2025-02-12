@@ -17,10 +17,8 @@ import SearchPagination from "../searchPagination/SearchPagination";
 import { getCoursesByFilterAndSort } from "../../../apis/common/courseApi";
 import { formatCourseData } from "../../common/utilities/CourseUtils";
 
-const SearchCardDatas = () => {
+const SearchCardDatas = ({ mainCategory, subCategory }) => {
   // 동적으로 관리할 필터, 정렬 데이터
-  const [mainCategory, setMainCategory] = useState(0);
-  const [subCategory, setSubCategory] = useState(0);
   const [level, setLevel] = useState("모두");
   const [language, setLanguage] = useState("모두");
   const [timeFilter, setTimeFilter] = useState(null);

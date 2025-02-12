@@ -30,6 +30,7 @@ const SearchLayout = () => {
   const [modalShow, setModalShow] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [subCategories, setSubCategories] = useState([]);
+  const [selectedSubCategoryId, setSelectedSubCategoryId] = useState(null);
 
   const inputRef = useRef(null); // 검색창에 대한 참조 생성
   const searchCategoryRef = useRef(null); // 각 카테고리의 스크롤을 위한 ref
@@ -73,8 +74,10 @@ const SearchLayout = () => {
               <StyledCategoryItemContainer>
                 <SearchCategory onClick={handleSearchIconClick} />
                 <VerticalLine height="5rem" /> {/* 수직 구분선 */}
-                <MainCategoryDatas onCategorySelect={handleCategorySelect} onSubCategorySelect={handleSubCategorySelect} />
-                
+                <MainCategoryDatas
+                  onCategorySelect={handleCategorySelect}
+                  onSubCategorySelect={handleSubCategorySelect}
+                />
               </StyledCategoryItemContainer>
             </StyledScrollableContainer>
             {/* 오른쪽 화살표 */}
@@ -88,7 +91,12 @@ const SearchLayout = () => {
       <StyledSection>
         <Container>
           <StyledMiddleCategoryBoxRow>
-            {selectedCategoryId && <MiddleCategoryBox subCategories={subCategories} />}{" "}
+            {selectedCategoryId && (
+              <MiddleCategoryBox
+                subCategories={subCategories}
+                onSubCategoryChange={setSelectedSubCategoryId}
+              />
+            )}{" "}
             {/* 전체는 렌더링 제외 */}
           </StyledMiddleCategoryBoxRow>
         </Container>
@@ -114,7 +122,10 @@ const SearchLayout = () => {
           <StyledSearchCourseContainer>
             <SearchFillterParent></SearchFillterParent>
             <StyledInstructorCoursesContainer>
-              <SearchCardDatas></SearchCardDatas>
+              <SearchCardDatas
+                mainCategory={selectedCategoryId}
+                subCategory={selectedSubCategoryId}
+              ></SearchCardDatas>
             </StyledInstructorCoursesContainer>
           </StyledSearchCourseContainer>
         </Container>
