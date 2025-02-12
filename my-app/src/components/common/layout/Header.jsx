@@ -13,6 +13,8 @@ import { FaHome, FaChevronRight, FaShoppingCart } from "react-icons/fa";
 import { fetchCategories } from "../../../apis/common/categoryApi"; // API 함수 가져오기
 import { saveSearchQuery } from "../../../apis/searchPage/SearchApi"; // API 함수 import
 import { fetchSuggestions } from "../../../apis/searchPage/fetchSuggestions"; // API 함수 불러오기
+import { logout } from "../../../apis/common/LogoutApi"; // 로그아웃 API 함수 임포트
+
 
 // GoingUpDragon/my-app/src/components/common/layout
 import Logo from "./Logo";
@@ -110,13 +112,28 @@ const Header = ({ inputRef }) => {
   };
 
   // 로그아웃 처리
-  const handleLogout = () => {
-    // 로그아웃 시 로컬 스토리지에서 토큰 제거하고 상태 변경
-    setIsLoggedIn(false);
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("userNickname");
-    localStorage.removeItem("userRole");
-    localStorage.removeItem("cartItemCount"); // 장바구니 개수 초기화
+  // const handleLogout = () => {
+  //   // 로그아웃 시 로컬 스토리지에서 토큰 제거하고 상태 변경
+  //   setIsLoggedIn(false);
+  //   localStorage.removeItem("authToken");
+  //   localStorage.removeItem("userNickname");
+  //   localStorage.removeItem("userRole");
+  //   localStorage.removeItem("cartItemCount"); // 장바구니 개수 초기화
+  // };
+
+  const handleLogout = async () => {
+    const success = await logout();
+    if (success) {
+        // 로그아웃 성공 시 상태 및 로컬 스토리지 초기화
+        setIsLoggedIn(false);
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("userNickname");
+        localStorage.removeItem("userRole");
+        localStorage.removeItem("cartItemCount"); // 장바구니 개수 초기화
+        // window.location.href = "/"; // 로그인 페이지로 이동
+    } else {
+        alert("로그아웃 실패");
+    }
   };
 
   const handleSearchSubmit = async (event) => {
