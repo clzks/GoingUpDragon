@@ -73,8 +73,10 @@ const SearchLayout = () => {
               <StyledCategoryItemContainer>
                 <SearchCategory onClick={handleSearchIconClick} />
                 <VerticalLine height="5rem" /> {/* 수직 구분선 */}
-                <MainCategoryDatas onCategorySelect={handleCategorySelect} onSubCategorySelect={handleSubCategorySelect} />
-                
+                <MainCategoryDatas
+                  onCategorySelect={handleCategorySelect}
+                  onSubCategorySelect={handleSubCategorySelect}
+                />
               </StyledCategoryItemContainer>
             </StyledScrollableContainer>
             {/* 오른쪽 화살표 */}
@@ -88,7 +90,9 @@ const SearchLayout = () => {
       <StyledSection>
         <Container>
           <StyledMiddleCategoryBoxRow>
-            {selectedCategoryId && <MiddleCategoryBox subCategories={subCategories} />}{" "}
+            {selectedCategoryId !== 0 && selectedCategoryId && (
+              <MiddleCategoryBox subCategories={subCategories} />
+            )}{" "}
             {/* 전체는 렌더링 제외 */}
           </StyledMiddleCategoryBoxRow>
         </Container>
