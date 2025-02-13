@@ -42,7 +42,7 @@ const MainCategoryDatas = ({ onCategorySelect, onSubCategorySelect }) => {
       try {
         const data = await fetchCategories();
         setCategories(data); // 가져온 데이터 상태에 저장
-        console.log(categories);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
@@ -58,16 +58,21 @@ const MainCategoryDatas = ({ onCategorySelect, onSubCategorySelect }) => {
       index === 0 ? "전체" : categories[index - 1]?.categoryName || "기본값",
   }));
 
-  // 아이콘 클릭 시 선택된 아이콘 상태 변경
   const handleIconClick = (id) => {
     setSelectedIconId(id);
     const selectedCategory = categories.find(
       (category) => category.categoryId === id
     );
     console.log("Selected Category:", selectedCategory);
-    onCategorySelect(id); // 상위 카테고리 선택
-    console.log("Subcategories:", selectedCategory?.subCategories);
-    onSubCategorySelect(selectedCategory?.subCategories || []); // 해당 서브 카테고리 데이터 전달
+
+    // 서브 카테고리 앞에 '전체' 추가
+    const updatedSubCategories = [
+      { categoryId: 0, categoryName: "전체" },
+      ...(selectedCategory?.subCategories || []),
+    ];
+
+    onCategorySelect(id);
+    onSubCategorySelect(updatedSubCategories); // 업데이트된 서브 카테고리 전달
   };
 
   return (

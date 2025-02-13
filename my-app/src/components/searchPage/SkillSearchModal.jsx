@@ -1,27 +1,17 @@
 // GoingUpDragon/my-app/src/components/searchPage/SkillSearchModal.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // 외부 라이브러리
 import { Form, Button, Modal } from "react-bootstrap";
 import { FaSync } from "react-icons/fa";
 import styled from "styled-components";
 
-const SkillSearchModal = (props) => {
-  const categories = [
-    "JavaScript",
-    "Python",
-    "Java",
-    "React",
-    "Node.js",
-    "PHP",
-    "Ruby",
-    "Swift",
-    "HTML5",
-    "CSS3",
-  ];
+import { fetchCategories } from "../../apis/common/categoryApi"; // API 호출 함수 가져오기
 
+const SkillSearchModal = (props) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [searchText, setSearchText] = useState(""); // 검색 텍스트 상태 추가
+  const [tags, setTags] = useState([]);
 
   // 카테고리 선택 시 선택한 카테고리 저장
   const handleCategoryClick = (category) => {
@@ -32,6 +22,27 @@ const SkillSearchModal = (props) => {
         : [...prevCategories, category]
     );
   };
+
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await fetchCategories();
+        const tagNames = data.flatMap((category) =>
+          category.subCategories.flatMap((subCategory) =>
+            subCategory.tags.map((tag) => tag.subjectTagName)
+          )
+        );
+        // 중복 제거
+        const uniqueTagNames = [...new Set(tagNames)];
+        setTags(uniqueTagNames); // 가져온 데이터 상태에 저장
+        console.log(uniqueTagNames);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    loadCategories();
+  }, []);
 
   return (
     <Modal
@@ -47,7 +58,7 @@ const SkillSearchModal = (props) => {
         <Form>
           <StyledFormControl
             type="search"
-            placeholder="강의검색"
+            placeholder="기술검색"
             aria-label="Search"
             value={searchText} // 입력 값 상태 연결
             onChange={(e) => setSearchText(e.target.value)} // 입력 이벤트 처리
@@ -60,15 +71,19 @@ const SkillSearchModal = (props) => {
           ))}
         </SelectedCategories>
         <CategoryList>
-          {categories.map((category) => (
-            <CategoryButton
-              key={category}
-              onClick={() => handleCategoryClick(category)}
-              selected={selectedCategories.includes(category)}
-            >
-              {category}
-            </CategoryButton>
-          ))}
+          {tags
+            .filter((category) =>
+              category.toLowerCase().includes(searchText.toLowerCase())
+            ) // 필터링 로직 추가
+            .map((category) => (
+              <CategoryButton
+                key={category}
+                onClick={() => handleCategoryClick(category)}
+                selected={selectedCategories.includes(category)}
+              >
+                {category}
+              </CategoryButton>
+            ))}
         </CategoryList>
       </Modal.Body>
       <Modal.Footer>
