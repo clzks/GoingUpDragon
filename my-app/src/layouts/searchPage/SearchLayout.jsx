@@ -58,6 +58,12 @@ const SearchLayout = () => {
   };
 
   useEffect(() => {
+    
+    // // 첫 번째 서브 카테고리를 기본 선택
+    // if (subCategories.length > 0) {
+    //   setSelectedCategoryId(subCategories[0].categoryId);
+    // }
+
     const mainCategory = searchParams.get("mainCategory");
     const subCategory = searchParams.get("subCategory");
     const subjectTags = searchParams.getAll("subjectTags"); // ✅ 배열로 가져옴
@@ -93,6 +99,8 @@ const SearchLayout = () => {
       ref.current.scrollBy({ left: 200, behavior: "smooth" }); // 오른쪽으로 스크롤
     }
   };
+
+  console.log("subCategory", subCategories);
 
   return (
     <>
@@ -146,6 +154,8 @@ const SearchLayout = () => {
           <SkillSearchModal
             show={modalShow}
             onHide={() => setModalShow(false)}
+            selectedSubCategoryId={selectedSubCategoryId}
+            selectedCategoryId={selectedCategoryId}
           />
           <SearchSortOption
             handleDropdownSelect={setSelectedCourseFilter}

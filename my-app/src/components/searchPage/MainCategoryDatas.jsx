@@ -14,6 +14,8 @@ import {
   FaNode,
   FaReact,
   FaSwift,
+  FaDatabase,
+  FaGitAlt
 } from "react-icons/fa";
 import styled from "styled-components";
 
@@ -29,6 +31,8 @@ const MainCategoryDatas1 = [
   { id: 7, icon: <FaNode />, label: "" },
   { id: 8, icon: <FaReact />, label: "" },
   { id: 9, icon: <FaSwift />, label: "" },
+  { id: 10, icon: <FaDatabase />, label: "" },
+  { id: 11, icon: <FaGitAlt />, label: "" },
 ];
 
 const MainCategoryDatas = ({ onCategorySelect, onSubCategorySelect }) => {

@@ -23,27 +23,91 @@ const SkillSearchModal = (props) => {
     );
   };
 
+  // useEffect(() => {
+  //   const loadCategories = async () => {
+  //     try {
+  //       const data = await fetchCategories();
+  //       const tagNames = data.flatMap((category) =>
+  //         category.subCategories.flatMap((subCategory) =>
+  //           subCategory.tags.map((tag) => tag.subjectTagName)
+  //         )
+  //       );
+  // // 중복 제거
+  // const uniqueTagNames = [...new Set(tagNames)];
+  // setTags(uniqueTagNames); // 가져온 데이터 상태에 저장
+  // console.log(uniqueTagNames);
+  //     } catch (error) {
+  //       console.error("Error fetching categories:", error);
+  //     }
+  //   };
+
+  //   loadCategories();
+  // }, []);
+
   useEffect(() => {
     const loadCategories = async () => {
       try {
         const data = await fetchCategories();
-        const tagNames = data.flatMap((category) =>
-          category.subCategories.flatMap((subCategory) =>
-            subCategory.tags.map((tag) => tag.subjectTagName)
-          )
-        );
-        // 중복 제거
-        const uniqueTagNames = [...new Set(tagNames)];
-        setTags(uniqueTagNames); // 가져온 데이터 상태에 저장
-        console.log(uniqueTagNames);
+        console.log("data:", data);
+
+        if (
+          props.selectedCategoryId === 0 &&
+          props.selectedSubCategoryId === 0
+        ) {
+          const tagNames = data.flatMap((category) =>
+            category.subCategories.flatMap((subCategory) =>
+              subCategory.tags.map((tag) => tag.subjectTagName)
+            )
+          );
+          // 중복 제거
+          const uniqueTagNames = [...new Set(tagNames)];
+          setTags(uniqueTagNames); // 가져온 데이터 상태에 저장
+          console.log(uniqueTagNames);
+          return;
+        }
+
+        if (props.selectedSubCategoryId === 0) {
+          const a = data.filter(
+            (item) => item.categoryId === props.selectedCategoryId
+          );
+          // console.log("a:", a);
+          const tagNames = a.flatMap((category) =>
+            category.subCategories.flatMap((subCategory) =>
+              subCategory.tags.map((tag) => tag.subjectTagName)
+            )
+          );
+          // 중복 제거
+          const uniqueTagNames = [...new Set(tagNames)];
+          setTags(uniqueTagNames); // 가져온 데이터 상태에 저장
+          console.log(uniqueTagNames);
+        } else {
+          const filteredTags = data
+            // .filter((category) => category.categoryId === props.selectedCategoryId) // categoryId 필터링
+            .flatMap((category) =>
+              category.subCategories
+                .filter(
+                  (subCategory) =>
+                    subCategory.categoryId === props.selectedSubCategoryId
+                ) // selectedSubCategoryId 필터링
+                .flatMap((subCategory) =>
+                  subCategory.tags.map((tag) => tag.subjectTagName)
+                )
+            );
+          console.log("filteredTags", filteredTags);
+          // 중복 제거
+          const uniqueTagNames = [...new Set(filteredTags)];
+          setTags(uniqueTagNames); // 가져온 데이터 상태에 저장
+          console.log(uniqueTagNames);
+        }
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
     };
 
     loadCategories();
-  }, []);
+  }, [props.selectedCategoryId, props.selectedSubCategoryId]);
 
+  console.log("props.selectedCategoryId : ", props.selectedCategoryId);
   return (
     <Modal
       {...props}
