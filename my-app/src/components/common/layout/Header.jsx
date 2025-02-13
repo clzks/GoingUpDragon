@@ -15,7 +15,6 @@ import { saveSearchQuery } from "../../../apis/searchPage/SearchApi"; // API 함
 import { fetchSuggestions } from "../../../apis/searchPage/fetchSuggestions"; // API 함수 불러오기
 import { logout } from "../../../apis/common/LogoutApi"; // 로그아웃 API 함수 임포트
 
-
 // GoingUpDragon/my-app/src/components/common/layout
 import Logo from "./Logo";
 
@@ -124,15 +123,15 @@ const Header = ({ inputRef }) => {
   const handleLogout = async () => {
     const success = await logout();
     if (success) {
-        // 로그아웃 성공 시 상태 및 로컬 스토리지 초기화
-        setIsLoggedIn(false);
-        localStorage.removeItem("authToken");
-        localStorage.removeItem("userNickname");
-        localStorage.removeItem("userRole");
-        localStorage.removeItem("cartItemCount"); // 장바구니 개수 초기화
-        // window.location.href = "/"; // 로그인 페이지로 이동
+      // 로그아웃 성공 시 상태 및 로컬 스토리지 초기화
+      setIsLoggedIn(false);
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("userNickname");
+      localStorage.removeItem("userRole");
+      localStorage.removeItem("cartItemCount"); // 장바구니 개수 초기화
+      // window.location.href = "/"; // 로그인 페이지로 이동
     } else {
-        alert("로그아웃 실패");
+      alert("로그아웃 실패");
     }
   };
 
@@ -174,15 +173,42 @@ const Header = ({ inputRef }) => {
                     <StyledNavLink>카테고리</StyledNavLink>
                     <StyledFirstItemList>
                       {categories.map((category) => (
-                        <StyledFirstItem key={category.categoryId}>
+                        <StyledFirstItem
+                          key={category.categoryId}
+                          onClick={() =>
+                            navigate(
+                              `/Search/?mainCategory=${category?.categoryId}`
+                            )
+                          }
+                        >
                           {category.categoryName}
                           <StyledSecondItemList>
                             {category.subCategories.map((subCategory) => (
-                              <StyledSecondNavItem key={subCategory.categoryId}>
+                              <StyledSecondNavItem
+                                key={subCategory.categoryId}
+                                onClick={(event) => {
+                                  {
+                                    event.stopPropagation();
+                                    navigate(
+                                      `/Search/?mainCategory=${category?.categoryId}&subCategory=${subCategory?.categoryId}`
+                                    );
+                                  }
+                                }}
+                              >
                                 {subCategory.categoryName}
                                 <StyledThirdItemList>
                                   {subCategory.tags.map((tag) => (
-                                    <StyledThirdItem key={tag.subjectTagId}>
+                                    <StyledThirdItem
+                                      key={tag.subjectTagId}
+                                      onClick={(event) => {
+                                        {
+                                          event.stopPropagation();
+                                          navigate(
+                                            `/Search/?mainCategory=${category?.categoryId}&subCategory=${subCategory?.categoryId}&subjectTags=${tag?.subjectTagId}`
+                                          );
+                                        }
+                                      }}
+                                    >
                                       {tag.subjectTagName}
                                     </StyledThirdItem>
                                   ))}

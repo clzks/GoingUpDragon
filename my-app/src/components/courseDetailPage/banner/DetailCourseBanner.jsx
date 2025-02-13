@@ -63,6 +63,9 @@ const DetailCourseBanner = ({ courseData }) => {
         </StyledEnrollmentContainer>
         <SharpTagComponent
           tags={courseData?.subjectTagNames}
+          tagIds={courseData?.subjectTagIds}
+          mainCategory={courseData?.mainCategoryId}
+          subCategory={courseData?.subCategoryId}
         ></SharpTagComponent>
       </StyledBannerContainer>
     </StyledBannerBackground>

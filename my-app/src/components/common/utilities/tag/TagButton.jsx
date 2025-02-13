@@ -2,8 +2,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const TagButton = ({ tag, margin }) => {
-  return <StyledTagButton margin={margin}>{tag}</StyledTagButton>;
+const TagButton = ({ tag, margin, onClick }) => {
+  return (
+    <StyledTagButton margin={margin} onClick={onClick}>
+      {tag}
+    </StyledTagButton>
+  );
 };
 
 const StyledTagButton = styled.button`

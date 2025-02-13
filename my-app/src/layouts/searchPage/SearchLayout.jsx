@@ -60,14 +60,20 @@ const SearchLayout = () => {
   useEffect(() => {
     const mainCategory = searchParams.get("mainCategory");
     const subCategory = searchParams.get("subCategory");
+    const subjectTags = searchParams.getAll("subjectTags"); // ✅ 배열로 가져옴
+
     console.log(
       "searchLayout UseEffect - mainCategory:",
       mainCategory,
       "subCategory:",
-      subCategory
+      subCategory,
+      "subjectTags:",
+      subjectTags
     );
+
     setSelectedCategoryId(mainCategory);
     setSelectedSubCategoryId(subCategory);
+    setSelectedTagList(subjectTags); // ✅ 상태 업데이트
   }, [searchParams]);
 
   const handleSearchIconClick = () => {

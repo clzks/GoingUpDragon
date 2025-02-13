@@ -78,7 +78,9 @@ const SearchCardDatas = ({
           "🚀 API 마무리 - mainCategory:",
           mainCategory,
           "subCategory:",
-          subCategory
+          subCategory,
+          "subjectTags",
+          selectedTags
         );
       });
   }, [
