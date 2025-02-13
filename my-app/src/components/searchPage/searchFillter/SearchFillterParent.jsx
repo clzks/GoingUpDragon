@@ -8,16 +8,25 @@ import styled from "styled-components";
 import SeachFillterOptions from "./SeachFillterChild";
 import SearchFillterDatas from "./SearchFillterDatas.json"; // JSON 데이터 가져오기
 
-const CourseSettings = () => {
+const CourseSettings = ({ onSelect }) => {
   // JSON 데이터에서 필요한 부분만 추출
-  const { difficulties, classTimes, languages } = SearchFillterDatas[0]; 
+  const { difficulties, classTimes, languages } = SearchFillterDatas[0];
 
   return (
     <StyledSearchFillterSettingsContainer>
       {/* 각 항목을 SeachFillterOptions 컴포넌트에 전달 */}
-      <SeachFillterOptions data={difficulties} />
-      <SeachFillterOptions data={classTimes} />
-      <SeachFillterOptions data={languages} />
+      <SeachFillterOptions
+        data={{ ...difficulties, key: "level" }}
+        onSelect={onSelect}
+      />
+      <SeachFillterOptions
+        data={{ ...classTimes, key: "time" }}
+        onSelect={onSelect}
+      />
+      <SeachFillterOptions
+        data={{ ...languages, key: "language" }}
+        onSelect={onSelect}
+      />
     </StyledSearchFillterSettingsContainer>
   );
 };

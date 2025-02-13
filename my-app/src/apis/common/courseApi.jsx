@@ -68,8 +68,8 @@ export const getCourseListByLevel = async (
 };
 
 export const getCoursesByFilterAndSort = async ({
-  mainCategory = 0,
-  subCategory = 0,
+  mainCategory,
+  subCategory,
   level = "모두",
   language = "모두",
   timeFilter = null,

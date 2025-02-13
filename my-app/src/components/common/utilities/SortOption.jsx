@@ -13,7 +13,26 @@ const SortOption = ({ options, defaultOption, onSelect }) => {
   const handleSelect = (eventKey) => {
     setSelectedItem(eventKey);
     setActiveItem(eventKey); // 클릭된 아이템을 활성화
-    if (onSelect) onSelect(eventKey); // 선택 이벤트 전달
+
+    let transformedValue = eventKey; // 기본적으로 선택된 값을 유지
+
+    // 한글 → 영문 변환
+    if (eventKey === "최신순") {
+      transformedValue = "latest";
+    } else if (eventKey === "인기순") {
+      transformedValue = "popularity";
+    } else if (eventKey === "평점순") {
+      transformedValue = "rating";
+    } else if (eventKey === "좋아요순") {
+      transformedValue = "likes";
+    }
+
+    // 부모 컴포넌트로 변환된 값 전달
+    if (onSelect) {
+      onSelect(transformedValue);
+    }
+
+    console.log("📌 SortOption에서 변환된 값:", transformedValue); // 값 확인
   };
 
   return (

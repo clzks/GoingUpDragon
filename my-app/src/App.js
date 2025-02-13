@@ -26,64 +26,64 @@ import { CartProvider } from "../src/components/common/layout/context/CartContex
 function App() {
   return (
     <CartProvider>
-    <Router>
-      <RouteChangeScroll></RouteChangeScroll>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">메인 페이지</Link>
-            </li>
-            <li>
-              <Link to="/Search">검색 페이지</Link>
-            </li>
-            <li>
-              <Link to="/CourseDetail/5641">강의 상세 페이지</Link>
-            </li>
-            <li>
-              <Link to="/MyPage">마이 페이지</Link>
-            </li>
-            <li>
-              <Link to="/Policy">약관 페이지</Link>
-            </li>
-            <li>
-              <Link to="/SignUp">회원가입 페이지</Link>
-            </li>
-            <li>
-              <Link to="/LoginModal">로그인 페이지</Link>
-            </li>
-            <li>
-              <Link to="/QnAMainLayout">QnA 메인 페이지</Link>
-            </li>
-            <li>
-              <Link to="/AccountRecoveryTabs">계정 찾기 페이지</Link>
-            </li>
-            <li>
-              <Link to="/AnswerLayout">QnA 답변 페이지</Link>
-            </li>
-          </ul>
-        </nav>
-        <Routes>
-          <Route path="/" element={<MainLayout />} />
-          <Route path="/Search" element={<SearchLayout />} />
-          <Route
-            path="/CourseDetail/:courseId"
-            element={<CourseDetailLayout />}
-          />{" "}
-          {/* ✅ 강의 ID 추가 */}
-          <Route path="/MyPage" element={<MyPageLayout />} />
-          <Route path="/Policy" element={<PolicyLayout />} />
-          <Route path="/SignUp" element={<SignupPage />} />
-          <Route path="/LoginModal" element={<LoginModal />} />
-          <Route path="/QnAMainLayout" element={<QnAMainLayout />} />
-          <Route
-            path="/AccountRecoveryTabs"
-            element={<AccountRecoveryTabs />}
-          />
-          <Route path="/AnswerLayout" element={<AnswerLayout />} />
-        </Routes>
-      </div>
-    </Router>
+      <Router>
+        <RouteChangeScroll></RouteChangeScroll>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">메인 페이지</Link>
+              </li>
+              <li>
+                <Link to="/Search/?mainCategory=0">검색 페이지</Link>
+              </li>
+              <li>
+                <Link to="/CourseDetail/5641">강의 상세 페이지</Link>
+              </li>
+              <li>
+                <Link to="/MyPage">마이 페이지</Link>
+              </li>
+              <li>
+                <Link to="/Policy">약관 페이지</Link>
+              </li>
+              <li>
+                <Link to="/SignUp">회원가입 페이지</Link>
+              </li>
+              <li>
+                <Link to="/LoginModal">로그인 페이지</Link>
+              </li>
+              <li>
+                <Link to="/QnAMainLayout">QnA 메인 페이지</Link>
+              </li>
+              <li>
+                <Link to="/AccountRecoveryTabs">계정 찾기 페이지</Link>
+              </li>
+              <li>
+                <Link to="/AnswerLayout">QnA 답변 페이지</Link>
+              </li>
+            </ul>
+          </nav>
+          <Routes>
+            <Route path="/" element={<MainLayout />} />
+            <Route path="/Search" element={<SearchLayout />} />
+            <Route
+              path="/CourseDetail/:courseId"
+              element={<CourseDetailLayout />}
+            />{" "}
+            {/* ✅ 강의 ID 추가 */}
+            <Route path="/MyPage" element={<MyPageLayout />} />
+            <Route path="/Policy" element={<PolicyLayout />} />
+            <Route path="/SignUp" element={<SignupPage />} />
+            <Route path="/LoginModal" element={<LoginModal />} />
+            <Route path="/QnAMainLayout" element={<QnAMainLayout />} />
+            <Route
+              path="/AccountRecoveryTabs"
+              element={<AccountRecoveryTabs />}
+            />
+            <Route path="/AnswerLayout" element={<AnswerLayout />} />
+          </Routes>
+        </div>
+      </Router>
     </CartProvider>
   );
 }

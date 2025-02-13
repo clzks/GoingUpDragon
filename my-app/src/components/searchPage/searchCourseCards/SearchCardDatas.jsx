@@ -1,5 +1,5 @@
 // GoingUpDragon/my-app/src/components/searchPage/searchCourseCards/SearchCardDatas.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 // 외부 라이브러리
 import styled from "styled-components";
@@ -17,13 +17,17 @@ import SearchPagination from "../searchPagination/SearchPagination";
 import { getCoursesByFilterAndSort } from "../../../apis/common/courseApi";
 import { formatCourseData } from "../../common/utilities/CourseUtils";
 
-const SearchCardDatas = ({ mainCategory, subCategory }) => {
+const SearchCardDatas = ({
+  mainCategory,
+  subCategory,
+  sortBy,
+  level,
+  language,
+  timeFilter,
+}) => {
   // 동적으로 관리할 필터, 정렬 데이터
-  const [level, setLevel] = useState("모두");
-  const [language, setLanguage] = useState("모두");
-  const [timeFilter, setTimeFilter] = useState(null);
   const [selectedTags, setSelectedTags] = useState([]);
-  const [sortBy, setSortBy] = useState("latest");
+  const isFirstRender = useRef(true);
 
   // 페이지네이션을 구현할때 보통 라이브러리를 사용하거나 아니면 useState 데이터값을 저장했다 사용.
   //const ITEMS_PER_PAGE = 32; // 한 페이지당 표시할 아이템 수
@@ -40,9 +44,13 @@ const SearchCardDatas = ({ mainCategory, subCategory }) => {
   // const endIdx = startIdx + size;
   // //const currentData = CourseDataSet.slice(startIdx, endIdx);
 
-  // ✅ 기존 방식 유지: instructorId가 있을 때만 실행
   useEffect(() => {
-    setLoading(true); // ✅ 로딩 시작
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return; // 첫 번째 실행 막음
+    }
+
+    setLoading(true);
 
     getCoursesByFilterAndSort({
       mainCategory,
@@ -53,21 +61,29 @@ const SearchCardDatas = ({ mainCategory, subCategory }) => {
       selectedTags,
       sortBy,
       size,
-      offset: (currentPage - 1) * size, // ✅ 페이징 적용
+      offset: (currentPage - 1) * size,
     })
       .then((data) => {
         console.log("📌 필터 적용된 강의 리스트:", data);
-        setCourses(formatCourseData(data?.content)); // ✅ 강의 리스트 저장
-        setTotalCourses(data?.totalElements || 0); // ✅ 전체 강의 개수 저장
+        setCourses(formatCourseData(data?.content));
+        setTotalCourses(data?.totalElements || 0);
       })
       .catch((error) => {
         console.error("🚨 강의 목록 가져오기 실패:", error);
-        setCourses([]); // ✅ 에러 시 빈 배열 설정
+        setCourses([]);
       })
-      .finally(() => setLoading(false)); // ✅ 로딩 끝;
+      .finally(() => {
+        setLoading(false);
+        console.log(
+          "🚀 API 마무리 - mainCategory:",
+          mainCategory,
+          "subCategory:",
+          subCategory
+        );
+      });
   }, [
     mainCategory,
-    subCategory,
+    subCategory, // ✅ subCategory 변경 시 API 호출 보장
     level,
     language,
     timeFilter,
@@ -75,7 +91,7 @@ const SearchCardDatas = ({ mainCategory, subCategory }) => {
     sortBy,
     currentPage,
     size,
-  ]); // ✅ 필터 값 변경 시 API 다시 호출
+  ]);
 
   useEffect(() => {
     if (!loading && courses.length > 0) {

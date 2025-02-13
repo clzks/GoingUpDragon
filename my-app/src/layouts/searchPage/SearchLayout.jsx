@@ -1,5 +1,6 @@
 // GoingUpDragon\my-app\src\layouts\searchPage\SearchLayout.jsx
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 // 외부 라이브러리
 import styled from "styled-components";
@@ -27,21 +28,47 @@ import SearchFillterParent from "../../components/searchPage/searchFillter/Searc
 import SearchCardDatas from "../../components/searchPage/searchCourseCards/SearchCardDatas";
 
 const SearchLayout = () => {
+  const [searchParams] = useSearchParams();
   const [modalShow, setModalShow] = useState(false);
-  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(0);
   const [subCategories, setSubCategories] = useState([]);
-  const [selectedSubCategoryId, setSelectedSubCategoryId] = useState(null);
+  const [selectedSubCategoryId, setSelectedSubCategoryId] = useState(0);
+  const [selectedTagList, setSelectedTagList] = useState([]);
+  const [filters, setFilters] = useState({
+    level: "모두",
+    time: null,
+    language: "모두",
+  });
+  const [selectedCourseFilter, setSelectedCourseFilter] = useState("latest");
 
   const inputRef = useRef(null); // 검색창에 대한 참조 생성
   const searchCategoryRef = useRef(null); // 각 카테고리의 스크롤을 위한 ref
 
   const handleCategorySelect = (categoryId) => {
     setSelectedCategoryId(categoryId);
+    setSelectedSubCategoryId(0);
   };
 
   const handleSubCategorySelect = (subCategories) => {
     setSubCategories(subCategories); // 서브 카테고리 데이터를 상태에 저장
   };
+
+  const handleFilterChange = (key, value) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+  };
+
+  useEffect(() => {
+    const mainCategory = searchParams.get("mainCategory");
+    const subCategory = searchParams.get("subCategory");
+    console.log(
+      "searchLayout UseEffect - mainCategory:",
+      mainCategory,
+      "subCategory:",
+      subCategory
+    );
+    setSelectedCategoryId(mainCategory);
+    setSelectedSubCategoryId(subCategory);
+  }, [searchParams]);
 
   const handleSearchIconClick = () => {
     if (inputRef.current) {
@@ -91,10 +118,13 @@ const SearchLayout = () => {
       <StyledSection>
         <Container>
           <StyledMiddleCategoryBoxRow>
-			{selectedCategoryId !== 0 && selectedCategoryId && (
-              <MiddleCategoryBox subCategories={subCategories} 
-				  onSubCategoryChange={setSelectedSubCategoryId} />
-            )}{" "}            {/* 전체는 렌더링 제외 */}
+            {selectedCategoryId !== 0 && selectedCategoryId && (
+              <MiddleCategoryBox
+                subCategories={subCategories}
+                onSubCategoryChange={setSelectedSubCategoryId}
+              />
+            )}{" "}
+            {/* 전체는 렌더링 제외 */}
           </StyledMiddleCategoryBoxRow>
         </Container>
       </StyledSection>
@@ -111,17 +141,26 @@ const SearchLayout = () => {
             show={modalShow}
             onHide={() => setModalShow(false)}
           />
-          <SearchSortOption />
+          <SearchSortOption
+            handleDropdownSelect={setSelectedCourseFilter}
+          ></SearchSortOption>
         </StyledFilltersContainer>
       </StyledSection>
       <StyledSection>
         <Container>
           <StyledSearchCourseContainer>
-            <SearchFillterParent></SearchFillterParent>
+            <SearchFillterParent
+              onSelect={handleFilterChange}
+            ></SearchFillterParent>
             <StyledInstructorCoursesContainer>
               <SearchCardDatas
                 mainCategory={selectedCategoryId}
                 subCategory={selectedSubCategoryId}
+                level={filters.level}
+                timeFilter={filters.time}
+                language={filters.language}
+                sortBy={selectedCourseFilter}
+                selectedTags={selectedTagList}
               ></SearchCardDatas>
             </StyledInstructorCoursesContainer>
           </StyledSearchCourseContainer>

@@ -4,10 +4,8 @@ import React from "react";
 // GoingUpDragon/my-app/src/components
 import SortOption from "../common/utilities/SortOption";
 
-const SearchSortOption = () => {
-  const handleDropdownSelect = (value) => {
-    console.log(`Selected: ${value}`);
-  };
+const SearchSortOption = ({ handleDropdownSelect }) => {
+  //
   return (
     <>
       <div>

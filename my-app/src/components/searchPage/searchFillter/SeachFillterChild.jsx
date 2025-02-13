@@ -1,4 +1,3 @@
-// GoingUpDragon/my-app/src/components/searchPage/searchFillter/SeachFillterChild.jsx
 import React, { useState } from "react";
 
 // 외부 라이브러리
@@ -8,13 +7,38 @@ import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 // GoingUpDragon/my-app/src/components
 import HorizontalLine from "../../common/icons/HorizontalLine";
 
-const CourseOptions = ({ data }) => {
-  const [selectedOption, setSelectedOption] = useState("");
+const CourseOptions = ({ data, onSelect }) => {
+  const [selectedOption, setSelectedOption] = useState(""); // ✅ 문자열로 변경 (하나만 선택 가능)
   const [showOptions, setShowOptions] = useState(true);
 
   const handleCheckboxChange = (event) => {
     const { name } = event.target;
-    setSelectedOption((prevOption) => (prevOption === name ? "" : name));
+
+    let newValue = selectedOption === name ? "" : name; // ✅ 같은 값이면 해제, 아니면 변경
+    setSelectedOption(newValue);
+
+    // ✅ 기본값 설정
+    let selectedValue = "모두";
+
+    // ✅ 강의 시간 필터일 경우 → `null` 반환
+    if (data.key === "time") {
+      selectedValue =
+        newValue === "1 ~ 10시간"
+          ? "short"
+          : newValue === "10 ~ 40시간"
+          ? "medium"
+          : newValue === "40 ~ 70시간"
+          ? "long"
+          : null; // 모두 해제되면 null
+    }
+    // ✅ level / language 필터일 경우 → "모두" 반환
+    else if (newValue) {
+      selectedValue = newValue;
+    }
+
+    if (onSelect) {
+      onSelect(data.key, selectedValue);
+    }
   };
 
   const toggleOptions = () => {
@@ -38,7 +62,7 @@ const CourseOptions = ({ data }) => {
                 <StyledCheckbox
                   type="checkbox"
                   name={item}
-                  checked={selectedOption === item}
+                  checked={selectedOption === item} // ✅ 하나만 선택되도록 수정
                   onChange={handleCheckboxChange}
                 />
                 {item}

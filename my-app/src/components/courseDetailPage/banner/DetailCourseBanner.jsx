@@ -1,5 +1,6 @@
 // GoingUpDragon/my-app/src/components/courseDetailPage/banner/DetailCourseBanner.jsx
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 // 외부 라이브러리
 import { Container } from "react-bootstrap";
@@ -15,8 +16,8 @@ import RatingStar from "../../common/icons/RatingStar";
 // GoingUpDragon/my-app/src/components
 import SharpTagComponent from "../../common/utilities/tag/SharpTagComponent";
 
-const DetailCourseBanner = ({ lectureData, enrollmentData, courseData }) => {
-  const { instructor, rating, reviews, students } = enrollmentData;
+const DetailCourseBanner = ({ courseData }) => {
+  const navigate = useNavigate();
 
   const reviewText = ` 수강평 ${courseData?.reviewCount.toLocaleString()}개`;
   const studentText = ` 수강생 ${courseData?.enrollmentCount.toLocaleString()}명`; // 천 단위로 , 추가를 위해 toLocaleString 사용
@@ -26,11 +27,21 @@ const DetailCourseBanner = ({ lectureData, enrollmentData, courseData }) => {
       <StyledBannerContainer>
         <CourseThumnail></CourseThumnail>
         <StyledCategoryTextContainer>
-          <StyledCategoryText>
+          <StyledCategoryText
+            onClick={() =>
+              navigate(`/Search/?mainCategory=${courseData?.mainCategoryId}`)
+            }
+          >
             {courseData?.mainCategoryName ?? "메인 카테고리 없음"}
           </StyledCategoryText>
           /
-          <StyledCategoryText>
+          <StyledCategoryText
+            onClick={() =>
+              navigate(
+                `/Search/?mainCategory=${courseData?.mainCategoryId}&subCategory=${courseData?.subCategoryId}`
+              )
+            }
+          >
             {courseData?.subCategoryName ?? "서브 카테고리 없음"}
           </StyledCategoryText>
         </StyledCategoryTextContainer>
