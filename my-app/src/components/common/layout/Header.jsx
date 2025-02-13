@@ -45,7 +45,7 @@ const Header = ({ inputRef }) => {
   const goToSignup = () => {
     navigate("/SignUp"); // "/signup" 경로로 이동
   };
-
+  
   // 카테고리 렌더링을 위한 useEffect
   useEffect(() => {
     const loadCategories = async () => {
@@ -65,6 +65,7 @@ const Header = ({ inputRef }) => {
       const savedUser = {
         nickname: localStorage.getItem("userNickname"),
         role: localStorage.getItem("userRole"),
+        infoId: localStorage.getItem("userInfoId")
       };
       setIsLoggedIn(true);
       setUser(savedUser);
@@ -99,9 +100,11 @@ const Header = ({ inputRef }) => {
     localStorage.setItem("authToken", data.token); // 로그인 후 토큰 저장
     localStorage.setItem("userNickname", data.nickname); // 닉네임 저장
     localStorage.setItem("userRole", data.role); // 역할 저장
+    localStorage.setItem("userInfoId", data.infoId); // info_id(고유 식별값) 저장
     setUser({
       nickname: data.nickname,
       role: data.role,
+      infoId: data.infoId
     });
   };
 
@@ -128,6 +131,7 @@ const Header = ({ inputRef }) => {
       localStorage.removeItem("authToken");
       localStorage.removeItem("userNickname");
       localStorage.removeItem("userRole");
+      localStorage.removeItem("userInfoId");
       localStorage.removeItem("cartItemCount"); // 장바구니 개수 초기화
       // window.location.href = "/"; // 로그인 페이지로 이동
     } else {
@@ -156,6 +160,8 @@ const Header = ({ inputRef }) => {
       setRecords(suggestions);
     });
   };
+
+  console.log("user ->", user);
 
   return (
     <StyledHeader>
@@ -295,7 +301,12 @@ const Header = ({ inputRef }) => {
                 {showProfileDropdown && (
                   <DropdownMenu>
                     <button onClick={addItemToCart}>Add to Cart</button>
-                    <StyledDropDownMenuNickname to="MyPage">
+                    {/* <StyledDropDownMenuNickname to="/MyPage">
+                      <StyledHomeIcon />
+                      {user.nickname}
+                      <StyledArrowIcon /> */}
+
+                      <StyledDropDownMenuNickname to={`/MyPage/${user.infoId}`}>
                       <StyledHomeIcon />
                       {user.nickname}
                       <StyledArrowIcon />
