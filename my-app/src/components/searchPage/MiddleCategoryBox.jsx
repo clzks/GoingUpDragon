@@ -21,13 +21,13 @@ const MiddleCategoryBox = ({
     }
   }, [subCategories]); // 서브 카테고리가 변경될 때 실행
 
-  // Handle CategoryItem click
+  // 카테고리 클릭 시 id 값 전달
   const handleCategoryClick = (id) => {
     setSelectedCategoryId(id);
     onSubCategoryChange(id);
   };
 
-  // Scroll functions to move 1 item at a time
+  // 좌우 200씩 이동하는 스크롤롤
   const scrollLeft = () => {
     if (innerContainerRef.current) {
       innerContainerRef.current.scrollBy({ left: -200, behavior: "smooth" });

@@ -57,8 +57,8 @@ const MainCategoryDatas = ({ onCategorySelect, onSubCategorySelect }) => {
     label:
       index === 0 ? "전체" : categories[index - 1]?.categoryName || "기본값",
   }));
-
-  // 아이콘 클릭 시 선택된 아이콘 상태 변경
+  
+    // 아이콘 클릭 시 선택된 아이콘 상태 변경
   // const handleIconClick = (id) => {
   //   setSelectedIconId(id);
   //   const selectedCategory = categories.find((category) => category.categoryId === id);
