@@ -1,104 +1,82 @@
-// GoingUpDragon/my-app/src/components/searchPage/SkillSearchModal.jsx
 import React, { useState, useEffect } from "react";
-
-// 외부 라이브러리
 import { Form, Button, Modal } from "react-bootstrap";
 import { FaSync } from "react-icons/fa";
 import styled from "styled-components";
-
-import { fetchCategories } from "../../apis/common/categoryApi"; // API 호출 함수 가져오기
+import { fetchCategories } from "../../apis/common/categoryApi";
 
 const SkillSearchModal = (props) => {
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [searchText, setSearchText] = useState(""); // 검색 텍스트 상태 추가
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [searchText, setSearchText] = useState("");
   const [tags, setTags] = useState([]);
 
-  // 카테고리 선택 시 선택한 카테고리 저장
-  const handleCategoryClick = (category) => {
-    // 카테고리가 이미 선택되었으면 제거하고, 아니면 추가
-    setSelectedCategories((prevCategories) =>
-      prevCategories.includes(category)
-        ? prevCategories.filter((item) => item !== category)
-        : [...prevCategories, category]
-    );
+  const handleCategoryClick = (tag) => {
+    setSelectedTags((prevTags) => {
+      const exists = prevTags.some((item) => item.id === tag.id);
+      return exists
+        ? prevTags.filter((item) => item.id !== tag.id)
+        : [...prevTags, tag];
+    });
   };
-
-  // useEffect(() => {
-  //   const loadCategories = async () => {
-  //     try {
-  //       const data = await fetchCategories();
-  //       const tagNames = data.flatMap((category) =>
-  //         category.subCategories.flatMap((subCategory) =>
-  //           subCategory.tags.map((tag) => tag.subjectTagName)
-  //         )
-  //       );
-  // // 중복 제거
-  // const uniqueTagNames = [...new Set(tagNames)];
-  // setTags(uniqueTagNames); // 가져온 데이터 상태에 저장
-  // console.log(uniqueTagNames);
-  //     } catch (error) {
-  //       console.error("Error fetching categories:", error);
-  //     }
-  //   };
-
-  //   loadCategories();
-  // }, []);
 
   useEffect(() => {
     const loadCategories = async () => {
       try {
         const data = await fetchCategories();
-        console.log("data:", data);
+        let extractedTags = [];
 
         if (
           props.selectedCategoryId === 0 &&
           props.selectedSubCategoryId === 0
         ) {
-          const tagNames = data.flatMap((category) =>
-            category.subCategories.flatMap((subCategory) =>
-              subCategory.tags.map((tag) => tag.subjectTagName)
+          extractedTags = data
+            .flatMap((category) =>
+              category.subCategories.flatMap((subCategory) =>
+                subCategory.tags.map((tag) =>
+                  tag && tag.subjectTagName
+                    ? { id: tag.subjectTagId, name: tag.subjectTagName }
+                    : null
+                )
+              )
             )
-          );
-          // 중복 제거
-          const uniqueTagNames = [...new Set(tagNames)];
-          setTags(uniqueTagNames); // 가져온 데이터 상태에 저장
-          console.log(uniqueTagNames);
-          return;
-        }
-
-        if (props.selectedSubCategoryId === 0) {
-          const a = data.filter(
-            (item) => item.categoryId === props.selectedCategoryId
-          );
-          // console.log("a:", a);
-          const tagNames = a.flatMap((category) =>
-            category.subCategories.flatMap((subCategory) =>
-              subCategory.tags.map((tag) => tag.subjectTagName)
+            .filter(Boolean);
+        } else if (props.selectedSubCategoryId === 0) {
+          extractedTags = data
+            .filter(
+              (category) => category.categoryId === props.selectedCategoryId
             )
-          );
-          // 중복 제거
-          const uniqueTagNames = [...new Set(tagNames)];
-          setTags(uniqueTagNames); // 가져온 데이터 상태에 저장
-          console.log(uniqueTagNames);
+            .flatMap((category) =>
+              category.subCategories.flatMap((subCategory) =>
+                subCategory.tags.map((tag) =>
+                  tag && tag.subjectTagName
+                    ? { id: tag.subjectTagId, name: tag.subjectTagName }
+                    : null
+                )
+              )
+            )
+            .filter(Boolean);
         } else {
-          const filteredTags = data
-            // .filter((category) => category.categoryId === props.selectedCategoryId) // categoryId 필터링
+          extractedTags = data
             .flatMap((category) =>
               category.subCategories
                 .filter(
                   (subCategory) =>
                     subCategory.categoryId === props.selectedSubCategoryId
-                ) // selectedSubCategoryId 필터링
-                .flatMap((subCategory) =>
-                  subCategory.tags.map((tag) => tag.subjectTagName)
                 )
-            );
-          console.log("filteredTags", filteredTags);
-          // 중복 제거
-          const uniqueTagNames = [...new Set(filteredTags)];
-          setTags(uniqueTagNames); // 가져온 데이터 상태에 저장
-          console.log(uniqueTagNames);
+                .flatMap((subCategory) =>
+                  subCategory.tags.map((tag) =>
+                    tag && tag.subjectTagName
+                      ? { id: tag.subjectTagId, name: tag.subjectTagName }
+                      : null
+                  )
+                )
+            )
+            .filter(Boolean);
         }
+
+        const uniqueTags = Array.from(
+          new Map(extractedTags.map((tag) => [tag.id, tag])).values()
+        );
+        setTags(uniqueTags);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
@@ -107,7 +85,6 @@ const SkillSearchModal = (props) => {
     loadCategories();
   }, [props.selectedCategoryId, props.selectedSubCategoryId]);
 
-  console.log("props.selectedCategoryId : ", props.selectedCategoryId);
   return (
     <Modal
       {...props}
@@ -124,45 +101,48 @@ const SkillSearchModal = (props) => {
             type="search"
             placeholder="기술검색"
             aria-label="Search"
-            value={searchText} // 입력 값 상태 연결
-            onChange={(e) => setSearchText(e.target.value)} // 입력 이벤트 처리
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
           />
         </Form>
-        {/* 선택된 카테고리들 표시 */}
-        <SelectedCategories>
-          {selectedCategories.map((category) => (
-            <SelectedCategory key={category}>{category}</SelectedCategory>
+        <SelectedTagsContainer>
+          {selectedTags.map((tag) => (
+            <SelectedCategory key={tag.id}>{tag.name}</SelectedCategory>
           ))}
-        </SelectedCategories>
+        </SelectedTagsContainer>
         <CategoryList>
           {tags
-            .filter((category) =>
-              category.toLowerCase().includes(searchText.toLowerCase())
-            ) // 필터링 로직 추가
-            .map((category) => (
+            .filter((tag) =>
+              tag?.name?.toLowerCase().includes(searchText.toLowerCase())
+            )
+            .map((tag) => (
               <CategoryButton
-                key={category}
-                onClick={() => handleCategoryClick(category)}
-                selected={selectedCategories.includes(category)}
+                key={tag.id}
+                onClick={() => handleCategoryClick(tag)}
+                selected={selectedTags.some((item) => item.id === tag.id)}
               >
-                {category}
+                {tag.name}
               </CategoryButton>
             ))}
         </CategoryList>
       </Modal.Body>
       <Modal.Footer>
-        {/* 초기화 버튼 */}
         <StyledResetButton
           onClick={() => {
-            setSelectedCategories([]);
+            setSelectedTags([]);
             setSearchText("");
           }}
         >
-          <FaSync />
-          초기화
+          <FaSync /> 초기화
         </StyledResetButton>
-        {/* 적용 버튼 */}
-        <StyledApplyButton onClick={props.onHide}>적용</StyledApplyButton>
+        <StyledApplyButton
+          onClick={() => {
+            props.onHide();
+            props.selectedTags(selectedTags.map((tag) => tag.id));
+          }}
+        >
+          적용
+        </StyledApplyButton>
       </Modal.Footer>
     </Modal>
   );
@@ -172,7 +152,6 @@ export default SkillSearchModal;
 
 const StyledFormControl = styled(Form.Control)`
   margin-right: 0.5rem;
-
   &:focus {
     border-color: #7cd0d5 !important;
     border: 1px solid #7cd0d5;
@@ -181,7 +160,7 @@ const StyledFormControl = styled(Form.Control)`
   }
 `;
 
-const SelectedCategories = styled.div`
+const SelectedTagsContainer = styled.div`
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
