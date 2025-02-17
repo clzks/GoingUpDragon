@@ -1,15 +1,16 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import Layout from "../../components/common/layout/Layout";
 import { Container, Row, Col } from "react-bootstrap";
-import SidebarStudent from "../../components/myPage/Menu/SidebarStudent";
-import HomeStudent from "../../components/myPage/Menu/HomeStudent";
-import Dashboard from "../../components/myPage/Menu/Dashboard";
-import MyAllLectureStudent from "../../components/myPage/Menu/MyAllLectureStudent";
-import Cart from "../../components/myPage/Menu/Cart";
-import PurchaseHistory from "../../components/myPage/Menu/PurchaseHistory";
-import MyInfo from "../../components/myPage/Menu/MyInfo";
-import Like from "../../components/myPage/Menu/Like";
-import ScrollTopButton from "../../components/common/utilities/ScrollTopButton"
+import SidebarStudent from "../../components/myPage/Sidebar/SidebarStudent";
+import HomeStudent from "../../components/myPage/Student/HomeStudent";
+import Dashboard from "../../components/myPage/Student/Dashboard";
+import MyAllLectureStudent from "../../components/myPage/Student/MyAllLectureStudent";
+import Cart from "../../components/myPage/Student/Cart";
+import PurchaseHistory from "../../components/myPage/Student/PurchaseHistory";
+import MyInfo from "../../components/myPage/Student/MyInfo";
+import Like from "../../components/myPage/Student/Like";
+import ScrollTopButton from "../../components/common/utilities/ScrollTopButton";
 
 const MyPageLayoutStudent = () => {
   const [selectedMenu, setSelectedMenu] = useState("홈");
@@ -35,34 +36,18 @@ const MyPageLayoutStudent = () => {
     }
   };
 
-  // 스타일 정의
-  const styles = {
-    container: {
-      minHeight: "100vh",
-      display: "flex",
-      flexDirection: "column",
-    },
-    content: {
-      flex: 1,
-      overflowY: "auto",
-    },
-    sidebar: {
-      padding: 0,
-    },
-  };
-
   return (
     <Layout>
-      <Container style={styles.container}>
+      <StyledContainer>
         <Row>
-          <Col xs={3} style={styles.sidebar}>
+          <StyledSidebar xs={3}>
             <SidebarStudent selectedMenu={selectedMenu} onMenuSelect={setSelectedMenu} />
-          </Col>
-          <Col xs={9} style={styles.content}>
+          </StyledSidebar>
+          <StyledContent xs={9}>
             <Container>{renderContent()}</Container>
-          </Col>
+          </StyledContent>
         </Row>
-      </Container>
+      </StyledContainer>
       <ScrollTopButton />
     </Layout>
   );
@@ -70,3 +55,18 @@ const MyPageLayoutStudent = () => {
 
 export default MyPageLayoutStudent;
 
+// 스타일 정의
+const StyledContainer = styled(Container)`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledContent = styled(Col)`
+  flex: 1;
+  overflow-y: auto;
+`;
+
+const StyledSidebar = styled(Col)`
+  padding: 0;
+`;

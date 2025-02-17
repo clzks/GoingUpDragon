@@ -2,7 +2,7 @@ import React from "react";
 import Introduction from "../Introduction";
 import Review from "../Review";
 import MyLectureInstructor from "../MyLectureInstructor";
-import QnA from "./QnA";
+import QnA from "../QnA";
 import styled from "styled-components";
 
 const HomeInstructor = () => {
@@ -21,6 +21,7 @@ const HomeInstructor = () => {
 
 export default HomeInstructor;
 
+// 스타일 정의
 const Divider = styled.div`
   width: 100%;
   height: 1px;

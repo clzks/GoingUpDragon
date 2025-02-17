@@ -1,23 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const BasicInfo = () => {
-  const [email, setEmail] = useState("example@example.com");
-  const [password, setPassword] = useState("*******");
-  const [phone, setPhone] = useState("010-1234-5678");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState(""); 
+  const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(true); 
 
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handlePasswordChange = (e) => setPassword(e.target.value);
-  const handlePhoneChange = (e) => setPhone(e.target.value);
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get("/api/user/basic-info"); 
+        setEmail(response.data.email);
+        setPhone(response.data.phone);
+      } catch (error) {
+        console.error("사용자 정보를 불러오는데 실패했습니다:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const handleSave = () => {
-    alert("저장되었습니다.");
+    fetchUserInfo();
+  }, []);
+
+  const handleSave = async () => {
+    try {
+      await axios.put("/api/user/basic-info", {
+        email,
+        phone,
+        password: password ? password : undefined, 
+      });
+      alert("저장되었습니다.");
+    } catch (error) {
+      console.error("정보 저장 실패:", error);
+      alert("저장에 실패했습니다.");
+    }
   };
 
   const handleCancel = () => {
-    alert("변경사항이 취소되었습니다.");
-    // 취소 시 기존 데이터로 복원 로직 추가 가능
+    window.location.reload(); 
   };
+
+  if (loading) {
+    return <LoadingText>사용자 정보를 불러오는 중...</LoadingText>;
+  }
 
   return (
     <BasicInfoWrapper>
@@ -28,16 +55,16 @@ const BasicInfo = () => {
           <Input
             type="email"
             value={email}
-            onChange={handleEmailChange}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="example@example.com"
           />
         </Label>
         <Label>
-          비밀번호
+          비밀번호 (변경 시 입력)
           <Input
             type="password"
             value={password}
-            onChange={handlePasswordChange}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="비밀번호를 입력하세요"
           />
         </Label>
@@ -46,7 +73,7 @@ const BasicInfo = () => {
           <Input
             type="tel"
             value={phone}
-            onChange={handlePhoneChange}
+            onChange={(e) => setPhone(e.target.value)}
             placeholder="전화번호를 입력하세요"
           />
         </Label>
@@ -63,7 +90,7 @@ export default BasicInfo;
 
 // 스타일 정의
 const BasicInfoWrapper = styled.div`
-   width: 100%;
+  width: 100%;
   margin: 20px 0;
   margin-bottom: 20px;
 `;
@@ -83,11 +110,6 @@ const Form = styled.div`
 const Label = styled.label`
   font-size: 14px;
   color: #333;
-
-  span {
-    color: red;
-    margin-left: 5px;
-  }
 `;
 
 const Input = styled.input`
@@ -99,7 +121,7 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-color: #7a57d1;
+    border-color: #7cd0d5;
   }
 `;
 
@@ -136,4 +158,11 @@ const SaveButton = styled.button`
   &:hover {
     background-color: #5bb0b8;
   }
+`;
+
+const LoadingText = styled.div`
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin: 20px 0;
 `;

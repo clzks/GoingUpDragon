@@ -18,6 +18,7 @@ const HomeStudent = () => {
 
 export default HomeStudent;
 
+// 스타일 정의
 const Divider = styled.div`
   width: 100%;
   height: 1px;

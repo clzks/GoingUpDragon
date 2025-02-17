@@ -1,5 +1,3 @@
-// src/components/myPage/card/LatelyLectureCardItem.jsx
-
 export const latelyLectureCardItems = [
     {
       id: 1,

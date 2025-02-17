@@ -1,34 +1,56 @@
-// SidebarInstructor.jsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
-const SidebarInstructor = ({ selectedMenu, onMenuSelect }) => {
+const SidebarStudent = ({ selectedMenu, onMenuSelect }) => {
+  const [nickname, setNickname] = useState("불러오는 중...");
+  const [reviewCount, setReviewCount] = useState(0);
+  const [averageRating, setAverageRating] = useState(0.0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get("/api/user/info");
+        setNickname(response.data.nickname);
+        setReviewCount(response.data.reviewCount);
+        setAverageRating(response.data.averageRating);
+      } catch (error) {
+        console.error("사용자 정보를 불러오지 못했습니다:", error);
+        setNickname("닉네임 없음");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserInfo();
+  }, []);
+
   const menuItems = [
     { name: "홈" },
-    { name: "내 강의", number: 10 },
-    { name: "수강평", number: 40},
-    { name: "Q&A", number: 7},
+    { name: "대시보드" },
+    { name: "내 강의" },
+    { name: "좋아요" },
+    { name: "장바구니" },
+    { name: "구매내역" },
+    { name: "내 정보" },
   ];
 
   return (
     <SidebarWrapper>
       <ProfileSection>
         <img src="https://via.placeholder.com/80" alt="프로필 이미지" />
-        <p className="profile-name">선생님토끼</p>
+        <p className="profile-name">{loading ? "로딩 중..." : nickname}</p>
       </ProfileSection>
       <Divider />
       <StatsSection>
         <div className="stat-item">
-          <div className="stat-label">수강생 수</div>
-          <div className="stat-value">820</div>
+          <div className="stat-label">수강평 작성 수</div>
+          <div className="stat-value">{reviewCount}</div>
         </div>
         <div className="stat-item">
-          <div className="stat-label">수강평 수</div>
-          <div className="stat-value">40</div>
-        </div>
-        <div className="stat-item">
-          <div className="stat-label">강의 평점</div>
-          <div className="stat-value">4.6</div>
+          <div className="stat-label">평균 평점</div>
+          <div className="stat-value">{averageRating.toFixed(1)}</div>
         </div>
       </StatsSection>
       <Divider />
@@ -44,12 +66,11 @@ const SidebarInstructor = ({ selectedMenu, onMenuSelect }) => {
           </MenuItem>
         ))}
       </MenuList>
-      <VerticalDivider />
     </SidebarWrapper>
   );
 };
 
-export default SidebarInstructor;
+export default SidebarStudent;
 
 // 스타일 정의
 const SidebarWrapper = styled.div`
@@ -58,20 +79,6 @@ const SidebarWrapper = styled.div`
   padding: 20px;
   height: 100%;
   position: relative;
-`;
-
-const Divider = styled.div`
-  border-bottom: 1px solid #ddd;
-  margin: 20px 0;
-`;
-
-const VerticalDivider = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 1px;
-  background-color: #ddd;
-  height: 100%;
 `;
 
 const ProfileSection = styled.div`
@@ -90,6 +97,11 @@ const ProfileSection = styled.div`
     font-weight: bold;
     font-size: 16px;
   }
+`;
+
+const Divider = styled.div`
+  border-bottom: 1px solid #ddd;
+  margin: 20px 0;
 `;
 
 const StatsSection = styled.div`

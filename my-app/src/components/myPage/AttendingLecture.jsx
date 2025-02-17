@@ -1,22 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { myCardItems } from "./card/MyCardsItem"; 
+import axios from "axios";
 
 const AttendingLecture = () => {
+  const [lectures, setLectures] = useState([]); 
+  const [loading, setLoading] = useState(true); 
   const [showAll, setShowAll] = useState(false);
 
-  const displayedLectures = showAll ? myCardItems : myCardItems.slice(0, 8);
+
+  useEffect(() => {
+    const fetchLectures = async () => {
+      try {
+        const response = await axios.get("/api/student/attending-lectures"); 
+        setLectures(response.data);
+      } catch (error) {
+        console.error("수강 중인 강의 데이터를 불러오는데 실패했습니다:", error);
+      } finally {
+        setLoading(false); 
+      }
+    };
+
+    fetchLectures();
+  }, []);
+
+  if (loading) {
+    return <LoadingText>강의 데이터를 불러오는 중...</LoadingText>;
+  }
+
+  const displayedLectures = showAll ? lectures : lectures.slice(0, 8);
 
   return (
     <LectureWrapper>
       <Header>
         <Title>수강 중인 강의</Title>
-        <TotalCount>전체 {myCardItems.length}개</TotalCount>
+        <TotalCount>전체 {lectures.length}개</TotalCount>
       </Header>
       <LectureGrid>
         {displayedLectures.map((lecture) => (
           <LectureCard key={lecture.id}>
-            <Thumbnail>{lecture.thumbnail}</Thumbnail>
+            <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
             <LectureTitle>{lecture.title}</LectureTitle>
             <ProgressWrapper>
               <ProgressBar
@@ -40,10 +62,10 @@ const AttendingLecture = () => {
 
 export default AttendingLecture;
 
+// 스타일 정의
 const LectureWrapper = styled.div`
   width: 100%;
   margin: 20px 0;
-  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,15 +104,10 @@ const LectureCard = styled.div`
   align-items: center;
 `;
 
-const Thumbnail = styled.div`
+const Thumbnail = styled.img`
   width: 100%;
   height: 100px;
-  background-color: #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  margin-bottom: 10px;
+  object-fit: cover;
   border-radius: 4px;
 `;
 
@@ -139,4 +156,11 @@ const ViewAllButton = styled.button`
   cursor: pointer;
   align-self: center;
   margin-bottom: 20px;
+`;
+
+const LoadingText = styled.div`
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin: 20px 0;
 `;

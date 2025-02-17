@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import Layout from "../../components/common/layout/Layout";
-import SidebarInstructor from "../../components/myPage/Menu/SidebarInstructor";
+import SidebarInstructor from "../../components/myPage/Sidebar/SidebarInstructor";
 import { Container, Row, Col } from "react-bootstrap";
-import HomeInstructor from "../../components/myPage/Menu/HomeInstructor";
-import ReviewInstructor from "../../components/myPage/Menu/ReviewInstructor";
-import MyAllLectureInstructor from "../../components/myPage/Menu/MyAllLectureInstructor";
-import QnA from "../../components/myPage/Menu/QnA";
+import HomeInstructor from "../../components/myPage/Instructor/HomeInstructor";
+import ReviewInstructor from "../../components/myPage/Instructor/ReviewInstructor";
+import MyAllLectureInstructor from "../../components/myPage/Instructor/MyAllLectureInstructor";
+import QnA from "../../components/myPage/QnA";
 import ScrollTopButton from "../../components/common/utilities/ScrollTopButton";
 
 const MyPageLayoutInstructor = () => {
@@ -26,41 +27,41 @@ const MyPageLayoutInstructor = () => {
     }
   };
 
-  // 스타일 정의
-  const styles = {
-    container: {
-      minHeight: "100vh",
-      display: "flex",
-      flexDirection: "column",
-      position: "relative",
-    },
-    content: {
-      flex: 1,
-      overflowY: "auto",
-    },
-    sidebar: {
-      padding: 0,
-    },
-  };
-
   return (
     <Layout>
-      <Container style={styles.container}>
+      <StyledContainer>
         <Row>
-          <Col xs={3} style={styles.sidebar}>
+          <StyledSidebar xs={3}>
             <SidebarInstructor
               selectedMenu={selectedMenu}
               onMenuSelect={setSelectedMenu}
             />
-          </Col>
-          <Col xs={9} style={styles.content}>
+          </StyledSidebar>
+          <StyledContent xs={9}>
             <Container>{renderContent()}</Container>
-          </Col>
+          </StyledContent>
         </Row>
-      </Container>
+      </StyledContainer>
       <ScrollTopButton />
     </Layout>
   );
 };
 
 export default MyPageLayoutInstructor;
+
+// 스타일 정의
+const StyledContainer = styled(Container)`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;
+
+const StyledContent = styled(Col)`
+  flex: 1;
+  overflow-y: auto;
+`;
+
+const StyledSidebar = styled(Col)`
+  padding: 0;
+`;

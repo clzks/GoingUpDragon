@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import ReviewCard from "../common/card/ReviewCard";
-import { reviewItems } from "./card/ReviewCardItem";
+import { reviewItems } from "./Item/ReviewCardItem";
 import Pagination from "../common/utilities/Pagination"; 
 
 const Review = () => {
@@ -41,6 +41,7 @@ const Review = () => {
 
 export default Review;
 
+// 스타일 정의
 const ReviewWrapper = styled.div`
   margin-bottom: 20px;
   display: flex;

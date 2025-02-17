@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Pagination from "../common/utilities/Pagination"; 
 
 const LikeLecture = () => {
-  // 강의 데이터 예시
+ 
   const lectures = [
     { id: 1, title: "제대로 파는 html css", instructor: "이호준", rating: 4.9, reviews: 77, price: "55,000원" },
     { id: 2, title: "프로그래밍 시작하기: 파이썬 입문", instructor: "이호준", rating: 4.8, reviews: 248, price: "33,000원" },
