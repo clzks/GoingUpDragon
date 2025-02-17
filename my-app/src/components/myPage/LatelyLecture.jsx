@@ -91,6 +91,7 @@ const LectureWrapper = styled.div`
 
 const Header = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 `;
@@ -98,29 +99,29 @@ const Header = styled.div`
 const Title = styled.h2`
   font-size: 25px;
   font-weight: bold;
-  margin-right: 20px;
 `;
 
 const TotalCount = styled.span`
   font-size: 14px;
   color: #7cd0d5;
+  text-align: right;
 `;
 
 const Slider = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between; 
+  justify-content: space-between;
   position: relative;
   width: 100%;
 `;
 
 const SlideContainer = styled.div`
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
   gap: 16px;
-  width: 100%; 
-  height: 260px; 
+  width: 100%;
+  height: 150px;
 `;
 
 const LectureCard = styled.div`

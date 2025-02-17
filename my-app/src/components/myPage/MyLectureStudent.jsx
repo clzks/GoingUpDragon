@@ -1,55 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const MyLectureStudent = () => {
+  const [lectures, setLectures] = useState([]);
   const [showAll, setShowAll] = useState(false);
+  const [loading, setLoading] = useState(true); 
 
-  const lectures = [
-    { id: 1, title: "React 기초 강의", subtitle: "모바일 프로그래밍", progress: "15/107" },
-    { id: 2, title: "JavaScript 심화 과정", subtitle: "모바일 프로그래밍", progress: "5/7" },
-    { id: 3, title: "HTML & CSS 디자인", subtitle: "모바일 프로그래밍", progress: "34/34" },
-    { id: 4, title: "Python 데이터 분석", subtitle: "모바일 프로그래밍", progress: "12/40" },
-    { id: 5, title: "Node.js 기본 개념", subtitle: "웹 프로그래밍", progress: "20/50" },
-    { id: 6, title: "MongoDB 실무 활용", subtitle: "데이터베이스", progress: "8/30" },
-    { id: 7, title: "TypeScript 기초", subtitle: "프론트엔드 개발", progress: "3/10" },
-    { id: 8, title: "Next.js를 활용한 웹 개발", subtitle: "프론트엔드", progress: "10/20" },
-    { id: 9, title: "Django 웹 개발 기초", subtitle: "백엔드 개발", progress: "7/25" },
-    { id: 10, title: "Docker로 배포하기", subtitle: "DevOps", progress: "5/15" },
-  ];
+  useEffect(() => {
+    const fetchLectures = async () => {
+      try {
+        const response = await axios.get("/api/student/lectures");
+        setLectures(response.data);
+      } catch (error) {
+        console.error("강의 데이터를 불러오지 못했습니다:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLectures();
+  }, []);
 
   const displayedLectures = showAll ? lectures : lectures.slice(0, 6);
+
+  if (loading) {
+    return <LoadingText>강의 데이터를 불러오는 중...</LoadingText>;
+  }
 
   return (
     <LectureWrapper>
       <Header>
         <HeaderTitle>내 강의</HeaderTitle>
       </Header>
-      <LectureGrid>
-        {displayedLectures.map((lecture) => (
-          <LectureCard key={lecture.id}>
-            <Thumbnail />
-            <LectureInfo>
-              <LectureTitle>{lecture.title}</LectureTitle>
-              <Subtitle>{lecture.subtitle}</Subtitle>
-              <ProgressBar>
-                <Progress
-                  progress={(parseInt(lecture.progress.split("/")[0]) /
-                    parseInt(lecture.progress.split("/")[1])) *
-                    100}
-                />
-              </ProgressBar>
-              <ProgressText>{lecture.progress}</ProgressText>
-            </LectureInfo>
-            <DetailButton>상세 보기</DetailButton>
-          </LectureCard>
-        ))}
+
+      <LectureGrid hasLectures={lectures.length > 0}>
+        {lectures.length > 0 ? (
+          displayedLectures.map((lecture) => (
+            <LectureCard key={lecture.id}>
+              <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
+              <LectureInfo>
+                <LectureTitle>{lecture.title}</LectureTitle>
+                <Subtitle>{lecture.subtitle}</Subtitle>
+                <ProgressBar>
+                  <Progress
+                    progress={
+                      (parseInt(lecture.progress.split("/")[0]) /
+                        parseInt(lecture.progress.split("/")[1])) *
+                      100
+                    }
+                  />
+                </ProgressBar>
+                <ProgressText>{lecture.progress}</ProgressText>
+              </LectureInfo>
+              <DetailButton>상세 보기</DetailButton>
+            </LectureCard>
+          ))
+        ) : (
+          <NoLectureText>수강 중인 강의가 없습니다.</NoLectureText>
+        )}
       </LectureGrid>
-      
-      <ButtonWrapper>
-        <ViewAllButton onClick={() => setShowAll(!showAll)}>
-          {showAll ? "돌아가기 >" : "전체보기 >"}
-        </ViewAllButton>
-      </ButtonWrapper>
+
+      {lectures.length > 0 && (
+        <ButtonWrapper>
+          <ViewAllButton onClick={() => setShowAll(!showAll)}>
+            {showAll ? "돌아가기 >" : "전체보기 >"}
+          </ViewAllButton>
+        </ButtonWrapper>
+      )}
     </LectureWrapper>
   );
 };
@@ -63,15 +81,15 @@ const LectureWrapper = styled.div`
   margin-bottom: 20px;
 `;
 
-const HeaderTitle = styled.h2`
-  font-size: 25px;
-  font-weight: bold;
-`;
-
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const HeaderTitle = styled.h2`
+  font-size: 25px;
+  font-weight: bold;
 `;
 
 const LectureGrid = styled.div`
@@ -79,6 +97,10 @@ const LectureGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin-top: 20px;
+  min-height: ${({ hasLectures }) => (hasLectures ? "auto" : "150px")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const LectureCard = styled.div`
@@ -88,10 +110,10 @@ const LectureCard = styled.div`
   padding: 15px;
 `;
 
-const Thumbnail = styled.div`
+const Thumbnail = styled.img`
   width: 100%;
   height: 100px;
-  background-color: #ccc;
+  object-fit: cover;
   border-radius: 8px;
 `;
 
@@ -156,4 +178,18 @@ const ViewAllButton = styled.button`
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
+`;
+
+const LoadingText = styled.div`
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin: 20px 0;
+`;
+
+const NoLectureText = styled.div`
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+  width: 100%;
 `;

@@ -7,7 +7,6 @@ const AttendingLecture = () => {
   const [loading, setLoading] = useState(true); 
   const [showAll, setShowAll] = useState(false);
 
-
   useEffect(() => {
     const fetchLectures = async () => {
       try {
@@ -36,26 +35,31 @@ const AttendingLecture = () => {
         <TotalCount>전체 {lectures.length}개</TotalCount>
       </Header>
       <LectureGrid>
-        {displayedLectures.map((lecture) => (
-          <LectureCard key={lecture.id}>
-            <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
-            <LectureTitle>{lecture.title}</LectureTitle>
-            <ProgressWrapper>
-              <ProgressBar
-                progress={
-                  (parseInt(lecture.progress.split("/")[0]) /
-                    parseInt(lecture.progress.split("/")[1])) *
-                  100
-                }
-              />
-              <ProgressText>{lecture.progress}</ProgressText>
-            </ProgressWrapper>
-          </LectureCard>
-        ))}
+        {lectures.length > 0 ? (
+          displayedLectures.map((lecture) => (
+            <LectureCard key={lecture.id}>
+              <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
+              <LectureTitle>{lecture.title}</LectureTitle>
+              <ProgressWrapper>
+                <ProgressBar
+                  progress={(
+                    (parseInt(lecture.progress.split("/")[0]) / 
+                      parseInt(lecture.progress.split("/")[1])) * 100
+                  )}
+                />
+                <ProgressText>{lecture.progress}</ProgressText>
+              </ProgressWrapper>
+            </LectureCard>
+          ))
+        ) : (
+          <NoLectureText>현재 수강 중인 강의가 없습니다.</NoLectureText>
+        )}
       </LectureGrid>
-      <ViewAllButton onClick={() => setShowAll(!showAll)}>
-        {showAll ? "돌아가기 >" : "전체보기 >"}
-      </ViewAllButton>
+      {lectures.length > 8 && (
+        <ViewAllButton onClick={() => setShowAll(!showAll)}>
+          {showAll ? "돌아가기 >" : "전체보기 >"}
+        </ViewAllButton>
+      )}
     </LectureWrapper>
   );
 };
@@ -73,6 +77,7 @@ const LectureWrapper = styled.div`
 
 const Header = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 `;
@@ -80,19 +85,22 @@ const Header = styled.div`
 const Title = styled.h2`
   font-size: 25px;
   font-weight: bold;
-  margin-right: 20px;
 `;
 
 const TotalCount = styled.span`
   font-size: 14px;
   color: #7cd0d5;
+  text-align: right;
 `;
 
 const LectureGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 20px;
+  min-height: 150px;
+  text-align: center;
 `;
 
 const LectureCard = styled.div`
@@ -133,7 +141,7 @@ const ProgressBar = styled.div`
     content: "";
     display: block;
     height: 100%;
-    width: ${({ progress }) => progress}%;
+    width: ${({ progress }) => progress}% ;
     background-color: #7cd0d5;
     transition: width 0.3s ease-in-out;
   }
@@ -163,4 +171,15 @@ const LoadingText = styled.div`
   font-size: 16px;
   color: #666;
   margin: 20px 0;
+`;
+
+const NoLectureText = styled.div`
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

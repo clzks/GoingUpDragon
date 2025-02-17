@@ -6,6 +6,7 @@ const SidebarInstructor = ({ selectedMenu, onMenuSelect }) => {
   const [nickname, setNickname] = useState("불러오는 중...");
   const [lectureCount, setLectureCount] = useState(0);
   const [reviewCount, setReviewCount] = useState(0);
+  const [qnaCount, setQnaCount] = useState(0); // ✅ QnA 개수 추가
   const [averageRating, setAverageRating] = useState(0.0);
   const [loading, setLoading] = useState(true);
 
@@ -16,6 +17,7 @@ const SidebarInstructor = ({ selectedMenu, onMenuSelect }) => {
         setNickname(response.data.nickname);
         setLectureCount(response.data.lectureCount);
         setReviewCount(response.data.reviewCount);
+        setQnaCount(response.data.qnaCount); // ✅ QnA 개수 가져오기
         setAverageRating(response.data.averageRating);
       } catch (error) {
         console.error("강사 정보를 불러오지 못했습니다:", error);
@@ -32,7 +34,7 @@ const SidebarInstructor = ({ selectedMenu, onMenuSelect }) => {
     { name: "홈" },
     { name: "내 강의", number: lectureCount },
     { name: "수강평", number: reviewCount },
-    { name: "Q&A", number: 7 },
+    { name: "Q&A", number: qnaCount }, // ✅ QnA 개수를 적용
   ];
 
   return (
@@ -75,7 +77,7 @@ const SidebarInstructor = ({ selectedMenu, onMenuSelect }) => {
 
 export default SidebarInstructor;
 
-// 스타일 정의
+// 스타일 정의 (변경 없음)
 const SidebarWrapper = styled.div`
   width: 250px;
   background-color: #fff;
@@ -161,7 +163,7 @@ const MenuItem = styled.li`
   .menu-number {
     font-size: 12px;
     color: #666;
-    min-width: 20px;
+    min-width: 35px;
     text-align: right;
   }
 `;

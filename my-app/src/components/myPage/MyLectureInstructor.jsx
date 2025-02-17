@@ -1,23 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const MyLectureInstructor = () => {
+  const [lectures, setLectures] = useState([]);
   const [showAll, setShowAll] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const lectures = [
-    { id: 1, title: "React 기초 강의", price: "55,000원", rating: 4.9, reviews: 77 },
-    { id: 2, title: "JavaScript 심화 과정", price: "33,000원", rating: 4.8, reviews: 248 },
-    { id: 3, title: "HTML & CSS 디자인", price: "110,000원", rating: 3.6, reviews: 13 },
-    { id: 4, title: "Python 데이터 분석", price: "12,000원", rating: 3.8, reviews: 6 },
-    { id: 5, title: "Node.js 기본 개념", price: "77,000원", rating: 4.6, reviews: 35 },
-    { id: 6, title: "MongoDB 실무 활용", price: "99,000원", rating: 4.9, reviews: 88 },
-    { id: 7, title: "TypeScript 기초", price: "66,000원", rating: 4.7, reviews: 150 },
-    { id: 8, title: "Next.js를 활용한 웹 개발", price: "44,000원", rating: 4.5, reviews: 98 },
-    { id: 9, title: "Django 웹 개발 기초", price: "77,000원", rating: 5.0, reviews: 28 },
-    { id: 10, title: "Docker로 배포하기", price: "55,000원", rating: 4.9, reviews: 77 },
-  ];
+  useEffect(() => {
+    const fetchLectures = async () => {
+      try {
+        const response = await axios.get("/api/instructor/lectures");
+        setLectures(response.data);
+      } catch (error) {
+        console.error("강의 데이터를 불러오지 못했습니다:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLectures();
+  }, []);
 
   const displayedLectures = showAll ? lectures : lectures.slice(0, 6);
+
+  if (loading) {
+    return <LoadingText>강의 데이터를 불러오는 중...</LoadingText>;
+  }
 
   return (
     <LectureWrapper>
@@ -27,24 +36,31 @@ const MyLectureInstructor = () => {
           전체 <TotalHighlight>{lectures.length}개</TotalHighlight>
         </TotalCount>
       </Header>
-      <LectureGrid>
-        {displayedLectures.map((lecture) => (
-          <LectureCard key={lecture.id}>
-            <Thumbnail />
-            <LectureInfo>
-              <LectureTitle>{lecture.title}</LectureTitle>
-              <Rating>⭐ {lecture.rating} ({lecture.reviews})</Rating>
-              <Price>{lecture.price}</Price>
-            </LectureInfo>
-          </LectureCard>
-        ))}
+
+      <LectureGrid hasLectures={lectures.length > 0}>
+        {lectures.length > 0 ? (
+          displayedLectures.map((lecture) => (
+            <LectureCard key={lecture.id}>
+              <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
+              <LectureInfo>
+                <LectureTitle>{lecture.title}</LectureTitle>
+                <Rating>⭐ {lecture.rating} ({lecture.reviews})</Rating>
+                <Price>{lecture.price.toLocaleString()}원</Price>
+              </LectureInfo>
+            </LectureCard>
+          ))
+        ) : (
+          <NoLectureText>등록된 강의가 없습니다.</NoLectureText>
+        )}
       </LectureGrid>
 
-      <ButtonWrapper>
-        <ViewAllButton onClick={() => setShowAll(!showAll)}>
-          {showAll ? "돌아가기 >" : "전체보기 >"}
-        </ViewAllButton>
-      </ButtonWrapper>
+      {lectures.length > 0 && (
+        <ButtonWrapper>
+          <ViewAllButton onClick={() => setShowAll(!showAll)}>
+            {showAll ? "돌아가기 >" : "전체보기 >"}
+          </ViewAllButton>
+        </ButtonWrapper>
+      )}
     </LectureWrapper>
   );
 };
@@ -85,6 +101,10 @@ const LectureGrid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   margin-top: 20px;
+  min-height: ${({ hasLectures }) => (hasLectures ? "auto" : "150px")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const LectureCard = styled.div`
@@ -95,10 +115,10 @@ const LectureCard = styled.div`
   align-items: flex-start;
 `;
 
-const Thumbnail = styled.div`
+const Thumbnail = styled.img`
   width: 100%;
   height: 100px;
-  background-color: #ccc;
+  object-fit: cover;
   border-radius: 8px;
 `;
 
@@ -149,4 +169,18 @@ const ViewAllButton = styled.button`
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
+`;
+
+const LoadingText = styled.div`
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin: 20px 0;
+`;
+
+const NoLectureText = styled.div`
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+  width: 100%;
 `;

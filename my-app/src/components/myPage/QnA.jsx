@@ -1,11 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Pagination from "../common/utilities/Pagination";
-import { qnaItems } from "./Item/QnAItem";
+import axios from "axios";
 
 const QnA = () => {
+  const [qnaItems, setQnaItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
   const itemsPerPage = 5;
+
+  useEffect(() => {
+    const fetchQnA = async () => {
+      try {
+        const response = await axios.get("/api/user/qna");
+        setQnaItems(response.data);
+      } catch (error) {
+        console.error("Q&A 데이터를 불러오지 못했습니다:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchQnA();
+  }, []);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -13,35 +30,45 @@ const QnA = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = qnaItems.slice(indexOfFirstItem, indexOfLastItem);
 
+  if (loading) {
+    return <LoadingText>Q&A 데이터를 불러오는 중...</LoadingText>;
+  }
+
   return (
     <QnAWrapper>
       <Header>Q&A</Header>
       <QuestionList>
-        {currentItems.map((question) => (
-          <QuestionCard key={question.id}>
-            <QuestionHeader>
-              <Title>{question.title}</Title>
-              <Info>
-                <Tags>
-                  {question.tags.map((tag, index) => (
-                    <Tag key={index}>{tag}</Tag>
-                  ))}
-                </Tags>
-                <Meta>{question.date} · 조회 {question.views} · 댓글 {question.replies}</Meta>
-              </Info>
-            </QuestionHeader>
-            <Content>{question.content}</Content>
-          </QuestionCard>
-        ))}
+        {qnaItems.length > 0 ? (
+          currentItems.map((question) => (
+            <QuestionCard key={question.id}>
+              <QuestionHeader>
+                <Title>{question.title}</Title>
+                <Info>
+                  <Tags>
+                    {question.tags.map((tag, index) => (
+                      <Tag key={index}>{tag}</Tag>
+                    ))}
+                  </Tags>
+                  <Meta>{question.date} · 조회 {question.views} · 댓글 {question.replies}</Meta>
+                </Info>
+              </QuestionHeader>
+              <Content>{question.content}</Content>
+            </QuestionCard>
+          ))
+        ) : (
+          <NoQnAText>등록된 Q&A가 없습니다.</NoQnAText>
+        )}
       </QuestionList>
-      <PaginationWrapper>
-        <Pagination
-          items={qnaItems}
-          itemsPerPage={itemsPerPage}
-          paginate={paginate}
-          currentPage={currentPage}
-        />
-      </PaginationWrapper>
+      {qnaItems.length > 0 && (
+        <PaginationWrapper>
+          <Pagination
+            items={qnaItems}
+            itemsPerPage={itemsPerPage}
+            paginate={paginate}
+            currentPage={currentPage}
+          />
+        </PaginationWrapper>
+      )}
     </QnAWrapper>
   );
 };
@@ -56,7 +83,7 @@ const QnAWrapper = styled.div`
   justify-content: center;
   background-color: #fff;
   width: 100%;
-  margin: 20px 0;
+  margin: 40px 0;
 `;
 
 const Header = styled.h1`
@@ -128,4 +155,18 @@ const Content = styled.p`
 
 const PaginationWrapper = styled.div`
   margin-top: 20px;
+`;
+
+const LoadingText = styled.div`
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin: 20px 0;
+`;
+
+const NoQnAText = styled.div`
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+  margin: 20px 0;
 `;

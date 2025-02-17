@@ -1,64 +1,79 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Pagination from "../common/utilities/Pagination"; 
+import Pagination from "../common/utilities/Pagination";
+import axios from "axios";
 
 const CartLecture = () => {
-
-  const lectures = [
-    { id: 1, title: "제대로 파는 html css", instructor: "이호준", rating: 4.9, reviews: 77, price: 55000 },
-    { id: 2, title: "프로그래밍 시작하기: 파이썬 입문", instructor: "이호준", rating: 4.8, reviews: 248, price: 33000 },
-    { id: 3, title: "한입 크기로 잘라 먹는 리액트", instructor: "이호준", rating: 3.6, reviews: 13, price: 110000 },
-    { id: 4, title: "두입 크기로 잘라 먹는 리액트 심화", instructor: "이호준", rating: 3.8, reviews: 6, price: 12000 },
-    { id: 5, title: "Vue.js 시작하기", instructor: "이호준", rating: 4.7, reviews: 150, price: 66000 },
-    { id: 6, title: "자바스크립트 완전 정복", instructor: "이호준", rating: 4.5, reviews: 98, price: 44000 },
-    { id: 7, title: "알고리즘 문제 해결 전략", instructor: "이호준", rating: 4.6, reviews: 35, price: 77000 },
-    { id: 8, title: "Next.js로 블로그 만들기", instructor: "이호준", rating: 4.9, reviews: 88, price: 99000 },
-  ];
-
+  const [lectures, setLectures] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
 
+  useEffect(() => {
+    const fetchCartLectures = async () => {
+      try {
+        const response = await axios.get("/api/student/cart-lectures");
+        setLectures(response.data);
+      } catch (error) {
+        console.error("장바구니 강의 데이터를 불러오는 데 실패했습니다:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCartLectures();
+  }, []);
+
+  if (loading) {
+    return <LoadingText>강의 데이터를 불러오는 중...</LoadingText>;
+  }
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentLectures = lectures.slice(indexOfFirstItem, indexOfLastItem);
 
-
   const totalPrice = lectures.reduce((sum, lecture) => sum + lecture.price, 0);
-
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <CartWrapper>
-      <Header>장바구니</Header>
-      <LectureList>
-        {currentLectures.map((lecture) => (
-          <LectureCard key={lecture.id}>
-            <Thumbnail />
-            <LectureInfo>
-              <LectureTitle>{lecture.title}</LectureTitle>
-              <Instructor>{lecture.instructor}</Instructor>
-              <Rating>★ {lecture.rating} ({lecture.reviews})</Rating>
-            </LectureInfo>
-            <Price>{lecture.price.toLocaleString()}원</Price>
-          </LectureCard>
-        ))}
-      </LectureList>
+      <HeaderContainer>
+        <HeaderTitle>장바구니</HeaderTitle>
+        <TotalCount>전체 {lectures.length}개</TotalCount>
+      </HeaderContainer>
 
+      {lectures.length > 0 ? (
+        <>
+          <LectureList>
+            {currentLectures.map((lecture) => (
+              <LectureCard key={lecture.id}>
+                <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
+                <LectureInfo>
+                  <LectureTitle>{lecture.title}</LectureTitle>
+                  <Instructor>{lecture.instructor}</Instructor>
+                  <Rating>★ {lecture.rating} ({lecture.reviews})</Rating>
+                </LectureInfo>
+                <Price>{lecture.price.toLocaleString()}원</Price>
+              </LectureCard>
+            ))}
+          </LectureList>
 
-      <TotalSection>
-        <TotalPrice>합계 : {totalPrice.toLocaleString()}원</TotalPrice>
-        <PurchaseButton>구매하기</PurchaseButton>
-      </TotalSection>
+          <TotalSection>
+            <TotalPrice>합계 : {totalPrice.toLocaleString()}원</TotalPrice>
+            <PurchaseButton>구매하기</PurchaseButton>
+          </TotalSection>
 
- 
-      <Pagination
-        items={lectures}
-        itemsPerPage={itemsPerPage}
-        paginate={paginate}
-        currentPage={currentPage}
-      />
+          <PaginationWrapper>
+            <Pagination
+              items={lectures}
+              itemsPerPage={itemsPerPage}
+              paginate={setCurrentPage}
+              currentPage={currentPage}
+            />
+          </PaginationWrapper>
+        </>
+      ) : (
+        <NoLectureText>장바구니에 담긴 강의가 없습니다.</NoLectureText>
+      )}
     </CartWrapper>
   );
 };
@@ -71,10 +86,22 @@ const CartWrapper = styled.div`
   margin: 20px 0;
 `;
 
-const Header = styled.h2`
+const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const HeaderTitle = styled.h2`
   font-size: 25px;
   font-weight: bold;
-  margin-bottom: 20px;
+`;
+
+const TotalCount = styled.span`
+  font-size: 14px;
+  color: #7cd0d5;
+  text-align: right;
 `;
 
 const LectureList = styled.div`
@@ -91,10 +118,10 @@ const LectureCard = styled.div`
   border-bottom: 1px solid #ddd;
 `;
 
-const Thumbnail = styled.div`
+const Thumbnail = styled.img`
   width: 80px;
   height: 80px;
-  background-color: #ccc;
+  object-fit: cover;
   border-radius: 8px;
 `;
 
@@ -149,4 +176,26 @@ const PurchaseButton = styled.button`
   &:hover {
     background-color: #5aa1a4;
   }
+`;
+
+const PaginationWrapper = styled.div`
+  margin-top: 20px;
+`;
+
+const LoadingText = styled.div`
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin: 20px 0;
+`;
+
+const NoLectureText = styled.div`
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
