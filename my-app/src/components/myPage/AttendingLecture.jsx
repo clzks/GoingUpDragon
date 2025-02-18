@@ -1,57 +1,83 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { myCardItems } from "./card/MyCardsItem"; 
+import axios from "axios";
 
 const AttendingLecture = () => {
+  const [lectures, setLectures] = useState([]); 
+  const [loading, setLoading] = useState(true); 
   const [showAll, setShowAll] = useState(false);
 
-  const displayedLectures = showAll ? myCardItems : myCardItems.slice(0, 8);
+  useEffect(() => {
+    const fetchLectures = async () => {
+      try {
+        const response = await axios.get("/api/student/attending-lectures"); 
+        setLectures(response.data);
+      } catch (error) {
+        console.error("수강 중인 강의 데이터를 불러오는데 실패했습니다:", error);
+      } finally {
+        setLoading(false); 
+      }
+    };
+
+    fetchLectures();
+  }, []);
+
+  if (loading) {
+    return <LoadingText>강의 데이터를 불러오는 중...</LoadingText>;
+  }
+
+  const displayedLectures = showAll ? lectures : lectures.slice(0, 8);
 
   return (
     <LectureWrapper>
       <Header>
         <Title>수강 중인 강의</Title>
-        <TotalCount>전체 {myCardItems.length}개</TotalCount>
+        <TotalCount>전체 {lectures.length}개</TotalCount>
       </Header>
       <LectureGrid>
-        {displayedLectures.map((lecture) => (
-          <LectureCard key={lecture.id}>
-            <Thumbnail>{lecture.thumbnail}</Thumbnail>
-            <LectureTitle>{lecture.title}</LectureTitle>
-            <ProgressWrapper>
-              <ProgressBar
-                progress={
-                  (parseInt(lecture.progress.split("/")[0]) /
-                    parseInt(lecture.progress.split("/")[1])) *
-                  100
-                }
-              />
-              <ProgressText>{lecture.progress}</ProgressText>
-            </ProgressWrapper>
-          </LectureCard>
-        ))}
+        {lectures.length > 0 ? (
+          displayedLectures.map((lecture) => (
+            <LectureCard key={lecture.id}>
+              <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
+              <LectureTitle>{lecture.title}</LectureTitle>
+              <ProgressWrapper>
+                <ProgressBar
+                  progress={(
+                    (parseInt(lecture.progress.split("/")[0]) / 
+                      parseInt(lecture.progress.split("/")[1])) * 100
+                  )}
+                />
+                <ProgressText>{lecture.progress}</ProgressText>
+              </ProgressWrapper>
+            </LectureCard>
+          ))
+        ) : (
+          <NoLectureText>현재 수강 중인 강의가 없습니다.</NoLectureText>
+        )}
       </LectureGrid>
-      <ViewAllButton onClick={() => setShowAll(!showAll)}>
-        {showAll ? "돌아가기 >" : "전체보기 >"}
-      </ViewAllButton>
+      {lectures.length > 8 && (
+        <ViewAllButton onClick={() => setShowAll(!showAll)}>
+          {showAll ? "돌아가기 >" : "전체보기 >"}
+        </ViewAllButton>
+      )}
     </LectureWrapper>
   );
 };
 
 export default AttendingLecture;
 
+// 스타일 정의
 const LectureWrapper = styled.div`
   width: 100%;
   margin: 20px 0;
-  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-bottom: 1px solid #ddd;
 `;
 
 const Header = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 `;
@@ -59,19 +85,22 @@ const Header = styled.div`
 const Title = styled.h2`
   font-size: 25px;
   font-weight: bold;
-  margin-right: 20px;
 `;
 
 const TotalCount = styled.span`
   font-size: 14px;
   color: #7cd0d5;
+  text-align: right;
 `;
 
 const LectureGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 20px;
+  min-height: 150px;
+  text-align: center;
 `;
 
 const LectureCard = styled.div`
@@ -83,15 +112,10 @@ const LectureCard = styled.div`
   align-items: center;
 `;
 
-const Thumbnail = styled.div`
+const Thumbnail = styled.img`
   width: 100%;
   height: 100px;
-  background-color: #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  margin-bottom: 10px;
+  object-fit: cover;
   border-radius: 4px;
 `;
 
@@ -117,7 +141,7 @@ const ProgressBar = styled.div`
     content: "";
     display: block;
     height: 100%;
-    width: ${({ progress }) => progress}%;
+    width: ${({ progress }) => progress}% ;
     background-color: #7cd0d5;
     transition: width 0.3s ease-in-out;
   }
@@ -140,4 +164,22 @@ const ViewAllButton = styled.button`
   cursor: pointer;
   align-self: center;
   margin-bottom: 20px;
+`;
+
+const LoadingText = styled.div`
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin: 20px 0;
+`;
+
+const NoLectureText = styled.div`
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

@@ -62,6 +62,8 @@ const CardWrapper = styled.div`
   padding: 15px 20px;
   border-bottom: 1px solid #ddd;
   margin: 0 20px;
+  &:last-child {
+    border-bottom: none;
 `;
 
 const Header = styled.div`
