@@ -15,9 +15,10 @@ import {
   FaReact,
   FaSwift,
   FaDatabase,
-  FaGitAlt
+  FaGitAlt,
 } from "react-icons/fa";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom"; // ✅ useNavigate 가져오기
 
 // 아이콘 순서를 유지하는 배열
 const MainCategoryDatas1 = [
@@ -36,6 +37,7 @@ const MainCategoryDatas1 = [
 ];
 
 const MainCategoryDatas = ({ onCategorySelect, onSubCategorySelect }) => {
+  const navigate = useNavigate(); // ✅ useNavigate 훅 사용
   const [categories, setCategories] = useState([]);
   // 클릭된 아이콘을 추적하는 상태
   const [selectedIconId, setSelectedIconId] = useState(null);
@@ -64,6 +66,10 @@ const MainCategoryDatas = ({ onCategorySelect, onSubCategorySelect }) => {
 
   const handleIconClick = (id) => {
     setSelectedIconId(id);
+
+    // ✅ 클릭한 아이콘의 id에 따라 URL 이동
+    navigate(`/Search/?mainCategory=${id}`);
+
     const selectedCategory = categories.find(
       (category) => category.categoryId === id
     );
