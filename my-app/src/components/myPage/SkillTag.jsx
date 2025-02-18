@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const SkillTag = () => {
-  // 스킬 태그 데이터
-  const skills = ["html", "css", "JavaScript", "React"];
+  const [skills, setSkills] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const response = await axios.get("/api/user/skills"); 
+        setSkills(response.data);
+      } catch (error) {
+        console.error("스킬 태그를 불러오는데 실패했습니다:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSkills();
+  }, []);
+
+  if (loading) {
+    return <LoadingText>스킬 태그를 불러오는 중...</LoadingText>;
+  }
 
   return (
     <SkillTagWrapper>
@@ -11,9 +31,11 @@ const SkillTag = () => {
         <Title>스킬태그</Title>
       </Header>
       <TagList>
-        {skills.map((skill, index) => (
-          <Tag key={index}>{skill}</Tag>
-        ))}
+        {skills.length > 0 ? (
+          skills.map((skill, index) => <Tag key={index}>{skill}</Tag>)
+        ) : (
+          <NoSkillsText>등록된 스킬 태그가 없습니다.</NoSkillsText>
+        )}
       </TagList>
     </SkillTagWrapper>
   );
@@ -21,15 +43,15 @@ const SkillTag = () => {
 
 export default SkillTag;
 
-// Styled-components 스타일 정의
+// 스타일 정의
 const SkillTagWrapper = styled.div`
- width: 100%;
+  width: 100%;
   margin: 20px 0;
   margin-bottom: 20px;
 `;
 
 const Header = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 `;
 
 const Title = styled.h3`
@@ -56,4 +78,18 @@ const Tag = styled.div`
   &:hover {
     background-color: #e6e6e6;
   }
+`;
+
+const NoSkillsText = styled.div`
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+  width: 100%;
+`;
+
+const LoadingText = styled.div`
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin: 20px 0;
 `;

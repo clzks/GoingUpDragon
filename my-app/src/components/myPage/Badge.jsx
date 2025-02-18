@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const Badge = () => {
-  const badges = [
-    { id: 1, icon: "/path/to/badge1.png", name: "Badge 1" },
-    { id: 2, icon: "/path/to/badge2.png", name: "Badge 2" },
-  ];
+  const [badges, setBadges] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBadges = async () => {
+      try {
+        const response = await axios.get("/api/user/badges");
+        setBadges(response.data);
+      } catch (error) {
+        console.error("뱃지 데이터를 불러오는데 실패했습니다:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBadges();
+  }, []);
+
+  if (loading) {
+    return <LoadingText>뱃지 데이터를 불러오는 중...</LoadingText>;
+  }
 
   return (
     <BadgeWrapper>
@@ -13,35 +31,41 @@ const Badge = () => {
         <Title>뱃지</Title>
         <Total>전체 {badges.length}개</Total>
       </Header>
-      <BadgeList>
-        {badges.map((badge) => (
-          <BadgeItem key={badge.id}>
-            <BadgeIcon src={badge.icon} alt={badge.name} />
-          </BadgeItem>
-        ))}
-      </BadgeList>
-      <Footer>
-        <ViewAll>전체보기 &gt;</ViewAll>
-      </Footer>
+      {badges.length > 0 ? (
+        <BadgeList>
+          {badges.map((badge) => (
+            <BadgeItem key={badge.id}>
+              <BadgeIcon src={badge.icon} alt={badge.name} />
+            </BadgeItem>
+          ))}
+        </BadgeList>
+      ) : (
+        <NoBadges>획득한 뱃지가 없습니다.</NoBadges>
+      )}
     </BadgeWrapper>
   );
 };
 
 export default Badge;
 
-// Styled-components 스타일 정의
+// 스타일 정의
 const BadgeWrapper = styled.div`
-   width: 100%;
+  width: 100%;
   margin: 20px 0;
   border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  width: 100%;
+  margin-bottom: 20px;
 `;
 
 const Title = styled.h3`
@@ -56,8 +80,8 @@ const Total = styled.span`
 
 const BadgeList = styled.div`
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 15px;
+  margin-bottom: 30px;
 `;
 
 const BadgeItem = styled.div`
@@ -76,19 +100,19 @@ const BadgeIcon = styled.img`
   height: 40px;
 `;
 
-const Footer = styled.div`
+const NoBadges = styled.div`
+  font-size: 14px;
+  color: #888;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
 `;
 
-const ViewAll = styled.span`
- background-color: #ffffff;
-  color: #000000;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  align-self: center;
-  margin-bottom: 20px;
+const LoadingText = styled.div`
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin: 20px 0;
 `;

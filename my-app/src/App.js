@@ -10,7 +10,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 // GoingUpDragon\my-app\src
 import MainLayout from "./layouts/mainPage/MainLayout";
 import CourseDetailLayout from "./layouts/courseDetailPage/courseDetailLayout";
-import MyPageLayout from "./layouts/myPage/MyPageLayout";
+import MyPageLayoutStudent from "./layouts/myPage/MyPageLayoutStudent";
+import MyPageLayoutInstructor from "./layouts/myPage/MyPageLayoutInstructor";
 import SearchLayout from "./layouts/searchPage/SearchLayout";
 import PolicyLayout from "./layouts/policyPage/PolicyLayout";
 import SignupPage from "./layouts/signUpPage/SignUpLayout";
@@ -72,7 +73,7 @@ function App() {
             />{" "}
             {/* ✅ 강의 ID 추가 */}
             {/* <Route path="/MyPage" element={<MyPageLayout />} /> */}
-            <Route path="/MyPage/:infoId" element={<MyPageLayout />} />
+            <Route path="/MyPage/:infoId" element={<MyPageLayoutStudent />} />
             <Route path="/Policy" element={<PolicyLayout />} />
             <Route path="/SignUp" element={<SignupPage />} />
             <Route path="/LoginModal" element={<LoginModal />} />

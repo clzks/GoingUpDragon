@@ -1,40 +1,75 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { latelyLectureCardItems } from "./card/LatelyLectureCardItem";
+import axios from "axios";
 
 const LatelyLecture = () => {
+  const [lectures, setLectures] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLatelyLectures = async () => {
+      try {
+        const response = await axios.get("/api/user/lately-lectures");
+        setLectures(response.data);
+      } catch (error) {
+        console.error("최근 학습 강의를 불러오는데 실패했습니다:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLatelyLectures();
+  }, []);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === latelyLectureCardItems.length - 1 ? 0 : prevIndex + 1
+      prevIndex + 4 >= lectures.length ? 0 : prevIndex + 1
     );
   };
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? latelyLectureCardItems.length - 1 : prevIndex - 1
+      prevIndex === 0 ? lectures.length - 4 : prevIndex - 1
     );
   };
 
+  if (loading) {
+    return <LoadingText>최근 학습 강의를 불러오는 중...</LoadingText>;
+  }
+
   return (
     <LectureWrapper>
-      <Title>최근 학습 강의</Title>
+      <Header>
+        <Title>최근 학습 강의</Title>
+        <TotalCount>전체 {lectures.length}개</TotalCount>
+      </Header>
       <Slider>
         <ArrowButton onClick={prevSlide}>
           <FaChevronLeft />
         </ArrowButton>
         <SlideContainer>
-          {latelyLectureCardItems.slice(currentIndex, currentIndex + 4).map((lecture) => (
-            <LectureCard key={lecture.id}>
-              <Thumbnail>
-                <img src={lecture.thumbnail} alt="썸네일" />
-              </Thumbnail>
-              <LectureTitle>{lecture.title}</LectureTitle>
-              <LectureProgress>{lecture.progress}</LectureProgress>
-            </LectureCard>
-          ))}
+          {lectures.length > 0 ? (
+            lectures.slice(currentIndex, currentIndex + 4).map((lecture) => (
+              <LectureCard key={lecture.id}>
+                <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
+                <LectureTitle>{lecture.title}</LectureTitle>
+                <ProgressWrapper>
+                  <ProgressBar
+                    progress={
+                      (parseInt(lecture.progress.split("/")[0]) /
+                        parseInt(lecture.progress.split("/")[1])) *
+                      100
+                    }
+                  />
+                  <ProgressText>{lecture.progress}</ProgressText>
+                </ProgressWrapper>
+              </LectureCard>
+            ))
+          ) : (
+            <NoLectureText>최근 학습한 강의가 없습니다.</NoLectureText>
+          )}
         </SlideContainer>
         <ArrowButton onClick={nextSlide}>
           <FaChevronRight />
@@ -54,55 +89,93 @@ const LectureWrapper = styled.div`
   margin-bottom: 20px;
 `;
 
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
 const Title = styled.h2`
   font-size: 25px;
   font-weight: bold;
-  margin-bottom: 20px;
+`;
+
+const TotalCount = styled.span`
+  font-size: 14px;
+  color: #7cd0d5;
+  text-align: right;
 `;
 
 const Slider = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   position: relative;
+  width: 100%;
 `;
 
 const SlideContainer = styled.div`
   display: flex;
-  gap: 15px;
-  overflow: hidden;
-  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  height: 150px;
 `;
 
 const LectureCard = styled.div`
-  flex: 0 0 auto;
-  width: 150px;
-  text-align: center;
+  width: 200px;
+  height: 240px;
   padding: 10px;
-  margin-bottom: 40px;
+  background-color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 4px;
+  border: none;
 `;
 
-const Thumbnail = styled.div`
+const Thumbnail = styled.img`
   width: 100%;
-  height: 90px;
-  margin-bottom: 10px;
-  background-color: #ccc;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 5px;
-  }
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
 `;
 
 const LectureTitle = styled.div`
   font-size: 14px;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 `;
 
-const LectureProgress = styled.div`
+const ProgressWrapper = styled.div`
+  width: 100%;
+`;
+
+const ProgressBar = styled.div`
+  height: 8px;
+  border-radius: 4px;
+  background-color: #e0e0e0;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 5px;
+
+  &:after {
+    content: "";
+    display: block;
+    height: 100%;
+    width: ${({ progress }) => progress}%;
+    background-color: #7cd0d5;
+    transition: width 0.3s ease-in-out;
+  }
+`;
+
+const ProgressText = styled.div`
   font-size: 12px;
   color: #666;
+  text-align: right;
 `;
 
 const ArrowButton = styled.button`
@@ -117,4 +190,22 @@ const ArrowButton = styled.button`
   &:hover {
     color: #000;
   }
+`;
+
+const LoadingText = styled.div`
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin: 20px 0;
+`;
+
+const NoLectureText = styled.div`
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
