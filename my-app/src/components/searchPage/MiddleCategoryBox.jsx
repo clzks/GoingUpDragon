@@ -1,5 +1,5 @@
 // GoingUpDragon/my-app/src/components/searchPage/MiddleCategoryBox.jsx
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 // 외부 라이브러리
 import styled from "styled-components";
@@ -11,6 +11,12 @@ import ArrowButtonRight from "../common/icons/ArrowButtonRight";
 const MiddleCategoryBox = ({ subCategories, onSubCategoryChange }) => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const innerContainerRef = useRef(null); // InnerContainer ref
+
+  useEffect(() => {
+    if (subCategories.length > 0) {
+      setSelectedCategoryId(subCategories[0].categoryId); // 첫 번째 서브 카테고리를 기본 선택
+    }
+  }, [subCategories]); // 서브 카테고리가 변경될 때 실행
 
   // 카테고리 클릭 시 id 값 전달
   const handleCategoryClick = (id) => {
