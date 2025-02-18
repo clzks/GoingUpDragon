@@ -41,6 +41,18 @@ const PricingPanel = ({ data, count, courseData }) => {
   function likeButtonClickHandler() {
     setLike((prev) => !prev);
   }
+
+  function formatDuration(seconds) {
+    const hours = Math.floor(seconds / 3600); // 1시간 = 3600초
+    const minutes = Math.floor((seconds % 3600) / 60); // 남은 초를 60으로 나눠 분으로 변환
+
+    if (minutes > 0) {
+      return `${hours}시간 ${minutes}분`;
+    } else {
+      return `${hours}시간`;
+    }
+  }
+
   return (
     <StyledContainer ref={panelRef} isSticky={isSticky}>
       <StyledPriceText>
@@ -70,7 +82,10 @@ const PricingPanel = ({ data, count, courseData }) => {
         </StyledInfoRow>
         <StyledInfoRow>
           <StyledLabel>수업 수</StyledLabel>
-          <StyledContent>{count}</StyledContent>
+          <StyledContent>
+            {count}
+            <StyledSpan> ({formatDuration(courseData?.duration)})</StyledSpan>
+          </StyledContent>
         </StyledInfoRow>
         <StyledInfoRow>
           <StyledLabel>수강기한</StyledLabel>
@@ -84,6 +99,10 @@ const PricingPanel = ({ data, count, courseData }) => {
           <StyledLabel>난이도</StyledLabel>
           <StyledContent>{courseData?.courseLevel}</StyledContent>
         </StyledInfoRow>
+        <StyledInfoRow>
+          <StyledLabel>사용언어</StyledLabel>
+          <StyledContent>{courseData?.courseLanguage}</StyledContent>
+        </StyledInfoRow>
       </StyledInfoSection>
     </StyledContainer>
   );
@@ -91,7 +110,7 @@ const PricingPanel = ({ data, count, courseData }) => {
 
 const StyledContainer = styled.div`
   width: 400px;
-  height: 560px;
+  height: 580px;
   border: 1px solid #cccccc;
   background-color: white;
   display: flex;
@@ -181,12 +200,25 @@ const StyledLabel = styled.div`
   font-weight: bold; /* 라벨 강조 */
   text-align: left; /* 왼쪽 정렬 */
   color: gray;
+  font-size: 90%;
 `;
 
 const StyledContent = styled.div`
   flex: 1; /* 남은 공간을 차지 */
   text-align: left; /* 왼쪽 정렬 */
   font-weight: bold;
+  font-size: 90%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 최대 2줄까지 표시 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; /* 줄바꿈을 허용해야 함 */
+  word-break: break-word; /* 단어가 길 경우 줄바꿈 */
+`;
+
+const StyledSpan = styled.span`
+  color: gray;
 `;
 
 export default PricingPanel;
