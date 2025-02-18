@@ -58,29 +58,23 @@ const SearchLayout = () => {
   };
 
   useEffect(() => {
-    
-    // // 첫 번째 서브 카테고리를 기본 선택
-    // if (subCategories.length > 0) {
-    //   setSelectedCategoryId(subCategories[0].categoryId);
-    // }
-
     const mainCategory = searchParams.get("mainCategory");
     const subCategory = searchParams.get("subCategory");
-    const subjectTags = searchParams.getAll("subjectTags"); // ✅ 배열로 가져옴
+    const subjectTags = searchParams.getAll("subjectTags");
 
-    console.log(
-      "searchLayout UseEffect - mainCategory:",
-      mainCategory,
-      "subCategory:",
-      subCategory,
-      "subjectTags:",
-      subjectTags
-    );
+    console.log("📌 searchParams.getAll('subjectTags'):", subjectTags);
 
     setSelectedCategoryId(mainCategory);
     setSelectedSubCategoryId(subCategory);
-    setSelectedTagList(subjectTags); // ✅ 상태 업데이트
+    setSelectedTagList(subjectTags);
+
+    console.log("✅ Updated selectedTagList:", selectedTagList);
   }, [searchParams]);
+
+  // ✅ 업데이트된 selectedTagList를 따로 감지
+  useEffect(() => {
+    console.log("✅ 최종 업데이트된 selectedTagList:", selectedTagList);
+  }, [selectedTagList]);
 
   const handleSearchIconClick = () => {
     if (inputRef.current) {
@@ -100,7 +94,7 @@ const SearchLayout = () => {
     }
   };
 
-  console.log("subCategory", subCategories);
+  //console.log("subCategory", subCategories);
 
   return (
     <>
@@ -154,6 +148,7 @@ const SearchLayout = () => {
           <SkillSearchModal
             show={modalShow}
             onHide={() => setModalShow(false)}
+            selectedTags={setSelectedTagList}
             selectedSubCategoryId={selectedSubCategoryId}
             selectedCategoryId={selectedCategoryId}
           />

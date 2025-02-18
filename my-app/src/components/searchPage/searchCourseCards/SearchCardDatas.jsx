@@ -24,9 +24,10 @@ const SearchCardDatas = ({
   level,
   language,
   timeFilter,
+  selectedTags,
 }) => {
   // 동적으로 관리할 필터, 정렬 데이터
-  const [selectedTags, setSelectedTags] = useState([]);
+  //const [selectedTags, setSelectedTags] = useState([]);
   const isFirstRender = useRef(true);
 
   // 페이지네이션을 구현할때 보통 라이브러리를 사용하거나 아니면 useState 데이터값을 저장했다 사용.
@@ -38,11 +39,6 @@ const SearchCardDatas = ({
 
   const [loading, setLoading] = useState(true);
   const [content, setContent] = useState([]);
-
-  // // 현재 페이지에 표시할 데이터 계산
-  // const startIdx = (currentPage - 1) * size;
-  // const endIdx = startIdx + size;
-  // //const currentData = CourseDataSet.slice(startIdx, endIdx);
 
   useEffect(() => {
     if (isFirstRender.current) {
