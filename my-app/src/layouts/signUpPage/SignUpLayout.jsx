@@ -44,15 +44,14 @@ const SignupPage = () => {
   // 폼 제출 처리
   const handleSubmit = async () => {
     try {
-      await signup(formData.email, formData.password, formData.phoneNumber); // phoneNumber 전달
-      alert("회원가입 성공!");
+      const response = await signup(formData.email, formData.password, formData.phoneNumber);
+      alert(response.message);  // 서버에서 받은 message 사용
       window.location.href = "/"; // 회원가입 성공 후 메인 페이지로 리다이렉트
     } catch (error) {
-      alert("회원가입 실패: " + error.message);
+      alert("회원가입 실패: " + error.message); // 오류 메시지 알림
     }
   };
   
-
   return (
     <StyledContainer>
       {/* 로고 섹션 */}
