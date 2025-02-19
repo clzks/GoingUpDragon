@@ -77,10 +77,6 @@ function App() {
             {/* ✅ 강의 ID 추가 */}
             {/* <Route path="/MyPage" element={<MyPageLayout />} /> */}
             <Route path="/MyPage/:infoId" element={<MyPageLayoutStudent />} />
-            <Route
-              path="/MyPage/:infoId"
-              element={<MyPageLayoutInstructor />}
-            />
             <Route path="/Policy" element={<PolicyLayout />} />
             <Route path="/SignUp" element={<SignupPage />} />
             <Route path="/LoginModal" element={<LoginModal />} />
