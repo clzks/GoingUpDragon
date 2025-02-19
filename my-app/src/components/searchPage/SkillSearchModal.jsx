@@ -21,13 +21,15 @@ const SkillSearchModal = (props) => {
   useEffect(() => {
     const loadCategories = async () => {
       try {
+        // console.log("props", props);
         const data = await fetchCategories();
         let extractedTags = [];
-
+        // console.log("data = ", data);
         if (
-          props.selectedCategoryId === 0 &&
-          props.selectedSubCategoryId === 0
+          props.selectedCategoryId == 0 &&
+          !props.selectedSubCategoryId
         ) {
+          // console.log("1");
           extractedTags = data
             .flatMap((category) =>
               category.subCategories.flatMap((subCategory) =>
@@ -39,10 +41,12 @@ const SkillSearchModal = (props) => {
               )
             )
             .filter(Boolean);
-        } else if (props.selectedSubCategoryId === 0) {
+            console.log("extg = ", extractedTags);
+        } else if (!props.selectedSubCategoryId ) {
+          // console.log("2");
           extractedTags = data
             .filter(
-              (category) => category.categoryId === props.selectedCategoryId
+              (category) => category.categoryId == props.selectedCategoryId
             )
             .flatMap((category) =>
               category.subCategories.flatMap((subCategory) =>
@@ -54,7 +58,9 @@ const SkillSearchModal = (props) => {
               )
             )
             .filter(Boolean);
+            // console.log("extg2 ", extractedTags);
         } else {
+          // console.log("3");
           extractedTags = data
             .flatMap((category) =>
               category.subCategories
@@ -77,6 +83,7 @@ const SkillSearchModal = (props) => {
           new Map(extractedTags.map((tag) => [tag.id, tag])).values()
         );
         setTags(uniqueTags);
+        // console.log("utg = ", uniqueTags);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
