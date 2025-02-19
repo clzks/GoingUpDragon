@@ -191,7 +191,7 @@ import {
   FaGitAlt,
 } from "react-icons/fa";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom"; // ✅ useNavigate 가져오기
+import { useNavigate, useLocation } from "react-router-dom"; // ✅ useNavigate 가져오기
 
 // 아이콘 순서를 유지하는 배열
 const MainCategoryDatas1 = [
@@ -211,6 +211,7 @@ const MainCategoryDatas1 = [
 
 const MainCategoryDatas = ({ onCategorySelect, onSubCategorySelect }) => {
   const navigate = useNavigate(); // ✅ useNavigate 훅 사용
+  const location = useLocation();
   const [categories, setCategories] = useState([]);
   // 클릭된 아이콘을 추적하는 상태
   const [selectedIconId, setSelectedIconId] = useState(null);
@@ -229,6 +230,13 @@ const MainCategoryDatas = ({ onCategorySelect, onSubCategorySelect }) => {
 
     loadCategories();
   }, []);
+
+  useEffect(() => {
+    // URL에서 mainCategory 값을 추출하여 selectedIconId 상태 업데이트
+    const queryParams = new URLSearchParams(location.search);
+    const mainCategoryId = Number(queryParams.get("mainCategory")); // 숫자로 변환
+    setSelectedIconId(mainCategoryId || 0); // 기본값 0 (전체)
+  }, [location.search]); // URL 변경될 때마다 실행
 
   // 기존 배열에 API에서 가져온 라벨 값만 적용 (아이콘 순서 유지)
   const combinedCategories = MainCategoryDatas1.map((item, index) => ({
