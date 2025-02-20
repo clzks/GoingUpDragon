@@ -1,6 +1,7 @@
 // GoingUpDragon/my-app/src/components/qnAPage/sideComponent/QnARecommendCard.jsx
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 // 외부 라이브러리
 import styled from "styled-components";
@@ -8,25 +9,38 @@ import HorizontalLine from "../../common/icons/HorizontalLine";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { FaRegThumbsUp } from "react-icons/fa";
+import timeAgo from "../../common/utilities/TimeAgo";
 
-const QnARecommendCard = ({ isLast = false }) => {
+const QnARecommendCard = ({ isLast = false, qnaData }) => {
+  const navigate = useNavigate();
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "날짜 없음"; // null 체크
+    const date = new Date(dateString);
+    return date
+      .toLocaleDateString("ko-KR", {
+        year: "2-digit",
+        month: "2-digit",
+        day: "2-digit",
+      })
+      .replace(/\. /g, ".")
+      .replace(/\.$/, "");
+  };
+
   return (
-    <StyledCardContainer>
-      <StyledCardTitle>
-        마우스 오버 이벤트가 특정 영역 안에서만 이루어 졌으면 좋겠습니다. 마우스
-        오버 이벤트가 특정 영역 안에서만 이루어 졌으면 좋겠습니다.
-      </StyledCardTitle>
+    <StyledCardContainer onClick={() => navigate(`/qna/${qnaData?.qnaId}`)}>
+      <StyledCardTitle>{qnaData.title}</StyledCardTitle>
       <StyledCardFooter>
         <div>
-          <StyledCardDate>YY.MM.NN</StyledCardDate>
+          <StyledCardDate>{formatDate(qnaData.createAt)}</StyledCardDate>
         </div>
         <div>
           <StyledThumbUp></StyledThumbUp>
-          <span>100</span>
+          <span>{qnaData.qnaLike}</span>
           <StyledEye></StyledEye>
-          <span>90</span>
+          <span>{qnaData.viewCount}</span>
           <StyledComment></StyledComment>
-          <span>37</span>
+          <span>{qnaData.replyCount}</span>
         </div>
       </StyledCardFooter>
       {isLast ? <></> : <HorizontalLine></HorizontalLine>}
@@ -44,12 +58,16 @@ const StyledCardContainer = styled.button`
 const StyledCardTitle = styled.div`
   height: 48px;
   font-size: 16px;
-  display: -webkit-box; /* Flexbox처럼 동작 */
-  -webkit-box-orient: vertical; /* 수직 정렬 방향 */
-  -webkit-line-clamp: 2; /* 2줄로 제한 */
-  overflow: hidden; /* 넘치는 내용 숨김 */
-  text-overflow: ellipsis; /* 생략부호(...) 처리 */
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-bottom: 12px;
+  display: block; /* 기본적으로 block 설정 */
+
+  @supports (-webkit-line-clamp: 2) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
 `;
 
 const StyledCardFooter = styled.div`

@@ -1,6 +1,6 @@
 // GoingUpDragon/my-app/src/components/common/card/QnACard.jsx
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 // 외부 라이브러리
 import styled from "styled-components";
 import { FaRegCommentAlt } from "react-icons/fa";
@@ -9,45 +9,41 @@ import { FaRegThumbsUp } from "react-icons/fa";
 
 import HorizontalLine from "../icons/HorizontalLine";
 import SharpTagComponent from "../utilities/tag/SharpTagComponent";
+import timeAgo from "../utilities/TimeAgo";
 
-const QnACard = () => {
+const QnACard = ({ data }) => {
+  const navigate = useNavigate();
+
   return (
-    <StyledCardContainer>
+    <StyledCardContainer onClick={() => navigate(`/qna/${data?.qnaId}`)}>
       <StyledCardMainPanel>
-        <StyledTitlePanel>
-          HTML에서 이미지를 가운데 정렬 하는 방법은??
-        </StyledTitlePanel>
-        <StyledContentPanel>
-          HTML을 사용해서 웹페이지에 이미지를 삽입했는데, 이 이미지를 화면
-          중앙에 배치하고 싶습니다. CSS의 text-align 속성을 시도해 보았지만
-          제대로 출력되지 않는 현상이 발생하고 있습니다. 이런 경우는 어떻게 하면
-          좋을까요?
-        </StyledContentPanel>
+        <StyledTitlePanel>{data?.title}</StyledTitlePanel>
+        <StyledContentPanel>{data?.main}</StyledContentPanel>
         <StyledSharpTag>
           <SharpTagComponent
-            tags={["HTML", "CSS", "이미지 정렬"]}
+          // tags={["HTML", "CSS", "이미지 정렬"]}
           ></SharpTagComponent>
         </StyledSharpTag>
       </StyledCardMainPanel>
       <HorizontalLine></HorizontalLine>
       <StyledCardFooter>
         <div>
-          <StyledId>id</StyledId>
+          <StyledId>{data?.studentName}</StyledId>
           <span>·</span>
-          <StyledDate>n주 전</StyledDate>
+          <StyledDate>{timeAgo(data?.createAt)}</StyledDate>
         </div>
         <div>
           <StyledLike>
             <FaRegThumbsUp></FaRegThumbsUp>
-            <span>0</span>
+            <span>{data?.qnaLike}</span>
           </StyledLike>
           <StyledView>
             <FaEye></FaEye>
-            <span>10</span>
+            <span>{data?.viewCount}</span>
           </StyledView>
           <StyledReview>
             <FaRegCommentAlt></FaRegCommentAlt>
-            <span>0</span>
+            <span>{data?.replyCount}</span>
           </StyledReview>
         </div>
       </StyledCardFooter>
@@ -112,10 +108,12 @@ const StyledCardFooter = styled.div`
 const StyledId = styled.span`
   margin-left: 30px;
   margin-right: 10px;
+  font-size: 16px;
 `;
 
 const StyledDate = styled.span`
   margin-left: 10px;
+  font-size: 16px;
 `;
 
 const StyledLike = styled.span`

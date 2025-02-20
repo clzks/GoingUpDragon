@@ -4,14 +4,15 @@ import React, { useState, useEffect, useRef } from "react";
 // 외부 라이브러리
 import { Container, Nav } from "react-bootstrap";
 import styled from "styled-components";
-
+import { useNavigate } from "react-router-dom";
 // GoingUpDragon/my-app/src/components
 import HorizontalLine from "../../common/icons/HorizontalLine";
 
-const CourseNavigation = ({ refList }) => {
+const CourseNavigation = ({ refList, courseId }) => {
   const [isSticky, setIsSticky] = useState(false);
   const [activeKey, setActiveKey] = useState(null); // 활성화된 항목 상태
   const navRef = useRef(null);
+  const navigate = useNavigate();
   const [initialOffset, setInitialOffset] = useState(0);
 
   useEffect(() => {
@@ -81,7 +82,12 @@ const CourseNavigation = ({ refList }) => {
             <StyledNavLink eventKey="link-3">수강평</StyledNavLink>
           </Nav.Item>
           <Nav.Item>
-            <StyledNavLink eventKey="link-4">Q&A</StyledNavLink>
+            <StyledNavLink
+              eventKey="link-4"
+              onClick={() => navigate(`/qna/course/${courseId}`)}
+            >
+              Q&A
+            </StyledNavLink>
           </Nav.Item>
         </Nav>
       </StyledNavigationBar>

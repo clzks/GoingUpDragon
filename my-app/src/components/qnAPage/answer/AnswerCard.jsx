@@ -6,23 +6,21 @@ import LikeButton from "../../common/utilities/LikeButton";
 import styled from "styled-components";
 import HorizontalLine from "../../common/icons/HorizontalLine";
 
-const AnswerCard = ({ answerInfo, timeStamp }) => {
+const AnswerCard = ({ reply, timeStamp }) => {
   return (
     <div>
       <StyledHeader>
         <StyledLikePanel>
-          <LikeButton size = "20px"></LikeButton>
-          <StyledLikes>123</StyledLikes>
+          <LikeButton size="20px"></LikeButton>
+          <StyledLikes>{reply.qnaLike}</StyledLikes>
         </StyledLikePanel>
         <DummyProfile></DummyProfile>
         <NameTimePanel>
-          <StyledNickName>{answerInfo.nickName}</StyledNickName>
+          <StyledNickName>{reply?.studentName}</StyledNickName>
           <StyledTimeDisplay>{timeStamp}</StyledTimeDisplay>
         </NameTimePanel>
       </StyledHeader>
-      <StyledAnswer>
-        {answerInfo.answer}
-      </StyledAnswer>
+      <StyledAnswer>{reply?.main}</StyledAnswer>
       <HorizontalLine></HorizontalLine>
     </div>
   );
@@ -52,7 +50,7 @@ const DummyProfile = styled.div`
   height: 40px; /* 동그라미의 세로 크기 */
   background-color: gray; /* 회색 배경 */
   border-radius: 50%; /* 완전한 원으로 만들기 */
-  margin-left : 10px;
+  margin-left: 10px;
 `;
 
 const NameTimePanel = styled.div`
@@ -65,17 +63,17 @@ const NameTimePanel = styled.div`
 
 const StyledNickName = styled.span`
   font-size: 18px;
-  font-weight : 600;
+  font-weight: 600;
 `;
 
 const StyledTimeDisplay = styled.span`
   font-size: 16px;
-  color : gray;
+  color: gray;
 `;
 
 const StyledAnswer = styled.div`
   margin-top: 30px;
-  margin-left : 25px;
+  margin-left: 25px;
   size: 18px;
   font-weight: 600;
   margin-bottom: 50px;

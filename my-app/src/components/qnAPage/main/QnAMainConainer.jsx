@@ -11,7 +11,7 @@ import QuestionButton from "../sideComponent/QuestionButton";
 
 const ReviewData = new Array(113).fill(0);
 
-const QnAMainConainer = () => {
+const QnAMainConainer = ({ qnaData, sideQnAList }) => {
   const IsMain = true;
 
   const ITEMS_PER_PAGE = 8; // 한 페이지당 표시할 아이템 수
@@ -28,18 +28,18 @@ const QnAMainConainer = () => {
   return (
     <StyledContainer>
       <StyledLeftPanel>
-        {currentData.map((item, index) => (
-          <QnACard key={index}></QnACard>
+        {qnaData.map((item, index) => (
+          <QnACard key={index} data={item}></QnACard>
         ))}
         <Pagination
-          totalItems={ReviewData.length}
+          totalItems={qnaData.length}
           itemsPerPage={ITEMS_PER_PAGE}
           currentPage={currentPage}
           onPageChange={handlePageChange}
         ></Pagination>
       </StyledLeftPanel>
       <StyledRightPanel>
-        <QnARecommend isMain={IsMain}></QnARecommend>
+        <QnARecommend isMain={IsMain} sideQnAList={sideQnAList}></QnARecommend>
         <QuestionButton></QuestionButton>
       </StyledRightPanel>
     </StyledContainer>

@@ -57,13 +57,13 @@ function App() {
                 <Link to="/LoginModal">로그인 페이지</Link>
               </li>
               <li>
-                <Link to="/QnAMainLayout">QnA 메인 페이지</Link>
+                <Link to="/qna/course/500">QnA 메인 페이지</Link>
               </li>
               <li>
                 <Link to="/AccountRecoveryTabs">계정 찾기 페이지</Link>
               </li>
               <li>
-                <Link to="/AnswerLayout">QnA 답변 페이지</Link>
+                <Link to="/qna/1">QnA 답변 페이지</Link>
               </li>
             </ul>
           </nav>
@@ -80,12 +80,12 @@ function App() {
             <Route path="/Policy" element={<PolicyLayout />} />
             <Route path="/SignUp" element={<SignupPage />} />
             <Route path="/LoginModal" element={<LoginModal />} />
-            <Route path="/QnAMainLayout" element={<QnAMainLayout />} />
+            <Route path="/qna/course/:courseId" element={<QnAMainLayout />} />
             <Route
               path="/AccountRecoveryTabs"
               element={<AccountRecoveryTabs />}
             />
-            <Route path="/AnswerLayout" element={<AnswerLayout />} />
+            <Route path="/qna/:qnaId" element={<AnswerLayout />} />
           </Routes>
         </div>
       </Router>

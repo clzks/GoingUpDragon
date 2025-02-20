@@ -12,7 +12,7 @@ import { Container } from "react-bootstrap";
 import styled from "styled-components";
 import { FaEye } from "react-icons/fa";
 
-const QnAAnswerContainer = ({ questionInfo }) => {
+const QnAAnswerContainer = ({ qnaData, replyData, sideQnAList }) => {
   function formatTimeStamp(timeStamp) {
     const date = new Date(timeStamp);
     const formattedDate = `${date.getFullYear() % 100}.${String(
@@ -24,52 +24,65 @@ const QnAAnswerContainer = ({ questionInfo }) => {
     return `${formattedDate} ${formattedTime} 작성`;
   }
 
+  console.log("가져온 추천강의 데이터 : ", sideQnAList);
+
   return (
     <StyledContainer>
       <StyledLeftPanel>
-        <StyledTitle>{questionInfo.QuestionInfo.title}</StyledTitle>
+        <StyledTitle>{qnaData?.title}</StyledTitle>
         <StyledSecondPanel>
           <DummyProfile></DummyProfile>
-          <StyledNickName>{questionInfo.userInfo.nickName}</StyledNickName>
+          <StyledNickName>{qnaData?.studentName}</StyledNickName>
           <StyledQuestionCount>
-            작성한 질문 수 {questionInfo.userInfo.questionCount}
+            작성한 질문 수 {qnaData?.studentQnACount}
           </StyledQuestionCount>
         </StyledSecondPanel>
         <StyledThirdPanel>
-          {questionInfo.AnswerInfo.length > 0 && (
+          {replyData?.length > 0 && (
             <StyledResolvedMark>✓ 해결된 질문</StyledResolvedMark>
           )}
           <StyledTimeDisplay>
-            {formatTimeStamp(questionInfo.userInfo.timeStamp)}
+            {formatTimeStamp(qnaData?.createAt)}
           </StyledTimeDisplay>
           <StyledEye></StyledEye>
-          <StyledViewCount>{questionInfo.QuestionInfo.views}</StyledViewCount>
+          <StyledViewCount>{qnaData?.viewCount}</StyledViewCount>
         </StyledThirdPanel>
         <StyledFourthPanel>
           <LikeButton size="20px"></LikeButton>
-          <StyledLikes>{questionInfo.QuestionInfo.likes}</StyledLikes>
+          <StyledLikes>{qnaData?.qnaLike}</StyledLikes>
         </StyledFourthPanel>
-        <StyledMain>{questionInfo.QuestionInfo.main}</StyledMain>
-        {questionInfo.QuestionInfo.tags.map((item, index) => (
-          <TagButton
-            key={index}
-            tag={item}
-            margin="0px 20px 50px 10px"
-          ></TagButton>
-        ))}
+        <StyledMain>{qnaData?.main}</StyledMain>
+        <>
+          {qnaData?.tag1 && (
+            <TagButton tag={qnaData.tag1} margin="0px 20px 50px 10px" />
+          )}
+          {qnaData?.tag2 && (
+            <TagButton tag={qnaData.tag2} margin="0px 20px 50px 10px" />
+          )}
+          {qnaData?.tag3 && (
+            <TagButton tag={qnaData.tag3} margin="0px 20px 50px 10px" />
+          )}
+        </>
+
         <HorizontalLine></HorizontalLine>
         <StyledAnswerCountContainer>
           <span>답변</span>
-          <StyledAnswerCount>
-            {questionInfo.AnswerInfo.length}
-          </StyledAnswerCount>
+          <StyledAnswerCount>{replyData?.length}</StyledAnswerCount>
         </StyledAnswerCountContainer>
-        {questionInfo.AnswerInfo.map((item, index) => (
-             <AnswerCard answerInfo = {item} timeStamp={formatTimeStamp(item.timeStamp)}></AnswerCard>
-        ))}
+        {Array.isArray(replyData) ? (
+          replyData.map((item, index) => (
+            <AnswerCard
+              key={index}
+              reply={item}
+              timeStamp={formatTimeStamp(item.createAt)}
+            />
+          ))
+        ) : (
+          <p>답변이 없습니다.</p>
+        )}
       </StyledLeftPanel>
       <StyledRightPanel>
-        <QnARecommend></QnARecommend>
+        <QnARecommend isMain={false} sideQnAList={sideQnAList}></QnARecommend>
         <QuestionButton></QuestionButton>
       </StyledRightPanel>
     </StyledContainer>
@@ -174,7 +187,7 @@ const StyledAnswerCountContainer = styled.div`
 `;
 
 const StyledAnswerCount = styled.span`
-  margin-left : 20px;
+  margin-left: 20px;
   color: #4fadbb;
 `;
 

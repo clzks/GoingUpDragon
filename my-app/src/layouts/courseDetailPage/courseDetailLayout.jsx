@@ -409,7 +409,10 @@ const CourseDetailLayout = () => {
         lectureData={lectureInfo}
         enrollmentData={enrollmentInfo}
       ></DetailCourseBanner>
-      <CourseNavigation refList={refList}></CourseNavigation>
+      <CourseNavigation
+        refList={refList}
+        courseId={courseId}
+      ></CourseNavigation>
       <CourseDetailMainPanel
         courseData={courseData}
         curriculumData={curriculum}
