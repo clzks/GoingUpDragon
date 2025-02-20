@@ -72,6 +72,14 @@ const Header = ({ inputRef }) => {
     }
   }, []);
 
+  useEffect(() => {
+    // localStorage에서 showLogin 플래그 확인
+    if (localStorage.getItem("showLogin") === "true") {
+      setShowModal(true);
+      localStorage.removeItem("showLogin"); // 한 번만 실행되도록 제거
+    }
+  }, []);
+
   if (error) {
     return <div>Error: {error}</div>;
   }

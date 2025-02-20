@@ -44,14 +44,21 @@ const SignupPage = () => {
   // 폼 제출 처리
   const handleSubmit = async () => {
     try {
-      await signup(formData.email, formData.password, formData.phoneNumber); // phoneNumber 전달
-      alert("회원가입 성공!");
+      const response = await signup(
+        formData.email,
+        formData.password,
+        formData.phoneNumber
+      );
+      alert(response.message); // 서버에서 받은 message 사용
+
+      // 회원가입 성공 후 localStorage에 로그인 모달을 띄우도록 설정
+      localStorage.setItem("showLogin", "true");
+      
       window.location.href = "/"; // 회원가입 성공 후 메인 페이지로 리다이렉트
     } catch (error) {
-      alert("회원가입 실패: " + error.message);
+      alert("회원가입 실패: " + error.message); // 오류 메시지 알림
     }
   };
-  
 
   return (
     <StyledContainer>
@@ -117,7 +124,10 @@ const SignupPage = () => {
       {/* 휴대폰 인증 */}
       <Row className="justify-content-center">
         <Col xs={12} md={6}>
-          <FindIdInput isSignUp={true} onPhoneNumberChange={handlePhoneNumberChange} />
+          <FindIdInput
+            isSignUp={true}
+            onPhoneNumberChange={handlePhoneNumberChange}
+          />
         </Col>
       </Row>
 
