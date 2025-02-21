@@ -10,7 +10,7 @@ const MyLectureInstructor = () => {
   useEffect(() => {
     const fetchLectures = async () => {
       try {
-        const response = await axios.get("/api/instructor/lectures");
+        const response = await axios.get("/api/instructor/lectures"); // 실제 API 호출
         setLectures(response.data);
       } catch (error) {
         console.error("강의 데이터를 불러오지 못했습니다:", error);
@@ -22,7 +22,7 @@ const MyLectureInstructor = () => {
     fetchLectures();
   }, []);
 
-  const displayedLectures = showAll ? lectures : lectures.slice(0, 6);
+  const displayedLectures = showAll ? lectures : lectures.slice(0, 4);
 
   if (loading) {
     return <LoadingText>강의 데이터를 불러오는 중...</LoadingText>;
@@ -54,7 +54,7 @@ const MyLectureInstructor = () => {
         )}
       </LectureGrid>
 
-      {lectures.length > 0 && (
+      {lectures.length > 4 && (
         <ButtonWrapper>
           <ViewAllButton onClick={() => setShowAll(!showAll)}>
             {showAll ? "돌아가기 >" : "전체보기 >"}
@@ -66,6 +66,7 @@ const MyLectureInstructor = () => {
 };
 
 export default MyLectureInstructor;
+
 
 // 스타일 정의
 const LectureWrapper = styled.div`
@@ -102,9 +103,7 @@ const LectureGrid = styled.div`
   gap: 20px;
   margin-top: 20px;
   min-height: ${({ hasLectures }) => (hasLectures ? "auto" : "150px")};
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-items: start;
 `;
 
 const LectureCard = styled.div`
@@ -112,14 +111,22 @@ const LectureCard = styled.div`
   flex-direction: column;
   gap: 10px;
   padding: 15px;
-  align-items: flex-start;
+  align-items: center;
+  width: 220px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: center;
 `;
 
 const Thumbnail = styled.img`
-  width: 100%;
-  height: 100px;
+  width: 190px;  
+  height: 120px; 
   object-fit: cover;
   border-radius: 8px;
+  display: block;
+  margin: 0 auto;
 `;
 
 const LectureInfo = styled.div`

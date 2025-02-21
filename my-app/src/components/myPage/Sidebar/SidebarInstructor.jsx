@@ -6,7 +6,7 @@ const SidebarInstructor = ({ selectedMenu, onMenuSelect }) => {
   const [nickname, setNickname] = useState("불러오는 중...");
   const [lectureCount, setLectureCount] = useState(0);
   const [reviewCount, setReviewCount] = useState(0);
-  const [qnaCount, setQnaCount] = useState(0); // ✅ QnA 개수 추가
+  const [qnaCount, setQnaCount] = useState(0); 
   const [averageRating, setAverageRating] = useState(0.0);
   const [loading, setLoading] = useState(true);
 
@@ -17,7 +17,7 @@ const SidebarInstructor = ({ selectedMenu, onMenuSelect }) => {
         setNickname(response.data.nickname);
         setLectureCount(response.data.lectureCount);
         setReviewCount(response.data.reviewCount);
-        setQnaCount(response.data.qnaCount); // ✅ QnA 개수 가져오기
+        setQnaCount(response.data.qnaCount); 
         setAverageRating(response.data.averageRating);
       } catch (error) {
         console.error("강사 정보를 불러오지 못했습니다:", error);
