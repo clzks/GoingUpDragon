@@ -9,7 +9,7 @@ const MyLectureInstructor = ({ courseList }) => {
     ? Array.isArray(courseList)
       ? courseList
       : []
-    : courseList?.slice(0, 6) || [];
+    : courseList?.slice(0, 4) || [];
 
   return (
     <LectureWrapper>
@@ -168,4 +168,3 @@ const NoLectureText = styled.div`
   color: #888;
   width: 100%;
 `;
-
