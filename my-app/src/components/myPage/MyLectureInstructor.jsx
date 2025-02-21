@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 
 const MyLectureInstructor = ({ courseList }) => {
   const [showAll, setShowAll] = useState(false);
@@ -53,7 +52,7 @@ const MyLectureInstructor = ({ courseList }) => {
 
 export default MyLectureInstructor;
 
-// 스타일 정의
+// 스타일 컴포넌트 (팀원 코드 적용)
 const LectureWrapper = styled.div`
   width: 100%;
   margin: 20px 0;
@@ -88,9 +87,7 @@ const LectureGrid = styled.div`
   gap: 20px;
   margin-top: 20px;
   min-height: ${({ hasLectures }) => (hasLectures ? "auto" : "150px")};
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-items: start;
 `;
 
 const LectureCard = styled.div`
@@ -98,14 +95,22 @@ const LectureCard = styled.div`
   flex-direction: column;
   gap: 10px;
   padding: 15px;
-  align-items: flex-start;
+  align-items: center;
+  width: 220px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: center;
 `;
 
 const Thumbnail = styled.img`
-  width: 100%;
-  height: 100px;
+  width: 190px;
+  height: 120px;
   object-fit: cover;
   border-radius: 8px;
+  display: block;
+  margin: 0 auto;
 `;
 
 const LectureInfo = styled.div`
@@ -157,16 +162,10 @@ const ViewAllButton = styled.button`
   cursor: pointer;
 `;
 
-const LoadingText = styled.div`
-  text-align: center;
-  font-size: 16px;
-  color: #666;
-  margin: 20px 0;
-`;
-
 const NoLectureText = styled.div`
   text-align: center;
   font-size: 14px;
   color: #888;
   width: 100%;
 `;
+
