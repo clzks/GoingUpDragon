@@ -2,49 +2,35 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const MyLectureInstructor = () => {
-  const [lectures, setLectures] = useState([]);
+const MyLectureInstructor = ({ courseList }) => {
   const [showAll, setShowAll] = useState(false);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchLectures = async () => {
-      try {
-        const response = await axios.get("/api/instructor/lectures");
-        setLectures(response.data);
-      } catch (error) {
-        console.error("강의 데이터를 불러오지 못했습니다:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchLectures();
-  }, []);
-
-  const displayedLectures = showAll ? lectures : lectures.slice(0, 6);
-
-  if (loading) {
-    return <LoadingText>강의 데이터를 불러오는 중...</LoadingText>;
-  }
+  console.log("MyLectureInstructor의 courseList :", courseList);
+  const displayedLectures = showAll
+    ? Array.isArray(courseList)
+      ? courseList
+      : []
+    : courseList?.slice(0, 6) || [];
 
   return (
     <LectureWrapper>
       <Header>
         <HeaderTitle>강의</HeaderTitle>
         <TotalCount>
-          전체 <TotalHighlight>{lectures.length}개</TotalHighlight>
+          전체 <TotalHighlight>{courseList?.length}개</TotalHighlight>
         </TotalCount>
       </Header>
 
-      <LectureGrid hasLectures={lectures.length > 0}>
-        {lectures.length > 0 ? (
+      <LectureGrid hasLectures={courseList?.length > 0}>
+        {courseList?.length > 0 ? (
           displayedLectures.map((lecture) => (
-            <LectureCard key={lecture.id}>
-              <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
+            <LectureCard key={lecture.courseId}>
+              <Thumbnail src={lecture.thumbnail} alt={lecture.courseTitle} />
               <LectureInfo>
-                <LectureTitle>{lecture.title}</LectureTitle>
-                <Rating>⭐ {lecture.rating} ({lecture.reviews})</Rating>
+                <LectureTitle>{lecture.courseTitle}</LectureTitle>
+                <Rating>
+                  ⭐ {lecture.rate} ({lecture.reviewCount})
+                </Rating>
                 <Price>{lecture.price.toLocaleString()}원</Price>
               </LectureInfo>
             </LectureCard>
@@ -54,7 +40,7 @@ const MyLectureInstructor = () => {
         )}
       </LectureGrid>
 
-      {lectures.length > 0 && (
+      {courseList?.length > 0 && (
         <ButtonWrapper>
           <ViewAllButton onClick={() => setShowAll(!showAll)}>
             {showAll ? "돌아가기 >" : "전체보기 >"}

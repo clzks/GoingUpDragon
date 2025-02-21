@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Layout from "../../components/common/layout/Layout";
 import SidebarInstructor from "../../components/myPage/Sidebar/SidebarInstructor";
@@ -8,24 +9,92 @@ import ReviewInstructor from "../../components/myPage/Instructor/ReviewInstructo
 import MyAllLectureInstructor from "../../components/myPage/Instructor/MyAllLectureInstructor";
 import QnA from "../../components/myPage/QnA";
 import ScrollTopButton from "../../components/common/utilities/ScrollTopButton";
+import { getInstructorMyPageInfo } from "../../apis/myPage/myPageApi";
 
 const MyPageLayoutInstructor = () => {
   const [selectedMenu, setSelectedMenu] = useState("홈");
+  const { infoId } = useParams();
+  const [myPageData, setMyPageData] = useState(null); // ✅ 초기값 `null`로 설정
+  const [loading, setLoading] = useState(true); // ✅ 로딩 상태 추가
 
-  const renderContent = () => {
-    switch (selectedMenu) {
-      case "홈":
-        return <HomeInstructor />;
-      case "내 강의":
-        return <MyAllLectureInstructor />;
-      case "수강평":
-        return <ReviewInstructor />;
-      case "Q&A":
-        return <QnA />;
-      default:
-        return <HomeInstructor />;
-    }
-  };
+  useEffect(() => {
+    if (!infoId) return;
+
+    setLoading(true); // ✅ 데이터 요청 전 로딩 시작
+    getInstructorMyPageInfo(infoId)
+      .then((data) => {
+        console.log(data);
+        setMyPageData(data);
+      })
+      .catch((error) => {
+        console.error(
+          "마이페이지 데이터 가져오기 실패: MyPageLayoutInstructor",
+          error
+        );
+      })
+      .finally(() => {
+        setLoading(false); // ✅ 데이터 요청 완료 후 로딩 종료
+      });
+  }, [infoId]);
+
+  const componentMap = useMemo(
+    () => ({
+      홈: <HomeInstructor myPageData={myPageData} />,
+      "내 강의": (
+        <MyAllLectureInstructor courseList={myPageData?.courseList || []} />
+      ),
+      수강평: <ReviewInstructor reviewList={myPageData?.reviewList || []} />,
+      "Q&A": <QnA qnAList={myPageData?.qnAList || []} />,
+    }),
+    [myPageData]
+  );
+
+  // ✅ 로딩 중이면 표시
+  if (loading) {
+    return (
+      <Layout>
+        <StyledContainer>
+          <Row>
+            <StyledSidebar xs={3}>
+              <SidebarInstructor
+                selectedMenu={selectedMenu}
+                onMenuSelect={setSelectedMenu}
+              />
+            </StyledSidebar>
+            <StyledContent xs={9}>
+              <Container>
+                <LoadingText>로딩 중...</LoadingText> {/* ✅ 로딩 중 표시 */}
+              </Container>
+            </StyledContent>
+          </Row>
+        </StyledContainer>
+      </Layout>
+    );
+  }
+
+  // ✅ 데이터가 없을 때 예외 처리
+  if (!myPageData) {
+    return (
+      <Layout>
+        <StyledContainer>
+          <Row>
+            <StyledSidebar xs={3}>
+              <SidebarInstructor
+                selectedMenu={selectedMenu}
+                onMenuSelect={setSelectedMenu}
+              />
+            </StyledSidebar>
+            <StyledContent xs={9}>
+              <Container>
+                <ErrorText>데이터를 불러올 수 없습니다.</ErrorText>{" "}
+                {/* ✅ 에러 표시 */}
+              </Container>
+            </StyledContent>
+          </Row>
+        </StyledContainer>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -33,12 +102,15 @@ const MyPageLayoutInstructor = () => {
         <Row>
           <StyledSidebar xs={3}>
             <SidebarInstructor
+              myPageData={myPageData}
               selectedMenu={selectedMenu}
               onMenuSelect={setSelectedMenu}
             />
           </StyledSidebar>
           <StyledContent xs={9}>
-            <Container>{renderContent()}</Container>
+            <Container>
+              {componentMap[selectedMenu] || componentMap["홈"]}
+            </Container>
           </StyledContent>
         </Row>
       </StyledContainer>
@@ -64,4 +136,21 @@ const StyledContent = styled(Col)`
 
 const StyledSidebar = styled(Col)`
   padding: 0;
+`;
+
+// ✅ 로딩 및 에러 메시지 스타일 추가
+const LoadingText = styled.div`
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 50px;
+`;
+
+const ErrorText = styled.div`
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: red;
+  margin-top: 50px;
 `;

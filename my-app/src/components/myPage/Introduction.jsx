@@ -2,25 +2,10 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const Introduction = () => {
-  const [introduction, setIntroduction] = useState("");
+const Introduction = ({ myPageData }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchIntroduction = async () => {
-      try {
-        const response = await axios.get("/api/user/introduction");
-        setIntroduction(response.data.introduction);
-      } catch (error) {
-        console.error("소개글을 불러오는데 실패했습니다:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchIntroduction();
-  }, []);
+  const [introduction, setIntroduction] = useState("");
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -29,7 +14,7 @@ const Introduction = () => {
   const handleSave = async () => {
     try {
       await axios.put("/api/user/introduction", { introduction });
-      setIsEditing(false); 
+      setIsEditing(false);
       alert("소개글이 저장되었습니다.");
     } catch (error) {
       console.error("소개글 저장 실패:", error);
@@ -40,10 +25,6 @@ const Introduction = () => {
   const handleChange = (e) => {
     setIntroduction(e.target.value);
   };
-
-  if (loading) {
-    return <LoadingText>소개글을 불러오는 중...</LoadingText>;
-  }
 
   return (
     <IntroductionWrapper>
@@ -58,7 +39,7 @@ const Introduction = () => {
       {isEditing ? (
         <Textarea value={introduction} onChange={handleChange} />
       ) : (
-        <Content>{introduction || "소개글이 비어 있어요."}</Content>
+        <Content>{myPageData?.bio || "소개글이 비어 있어요."}</Content>
       )}
     </IntroductionWrapper>
   );
@@ -113,7 +94,7 @@ const Content = styled.div`
   font-size: 14px;
   color: #666;
   min-height: 200px;
-  white-space: pre-wrap; 
+  white-space: pre-wrap;
 `;
 
 const Textarea = styled.textarea`

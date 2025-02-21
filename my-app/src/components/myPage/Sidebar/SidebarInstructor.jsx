@@ -2,74 +2,76 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const SidebarInstructor = ({ selectedMenu, onMenuSelect }) => {
-  const [nickname, setNickname] = useState("불러오는 중...");
-  const [lectureCount, setLectureCount] = useState(0);
-  const [reviewCount, setReviewCount] = useState(0);
-  const [qnaCount, setQnaCount] = useState(0); // ✅ QnA 개수 추가
-  const [averageRating, setAverageRating] = useState(0.0);
-  const [loading, setLoading] = useState(true);
+const SidebarInstructor = ({ selectedMenu, onMenuSelect, myPageData }) => {
+  // const [nickname, setNickname] = useState("불러오는 중...");
+  // const [lectureCount, setLectureCount] = useState(0);
+  // const [reviewCount, setReviewCount] = useState(0);
+  // const [qnaCount, setQnaCount] = useState(0); // ✅ QnA 개수 추가
+  // const [averageRating, setAverageRating] = useState(0.0);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchInstructorInfo = async () => {
-      try {
-        const response = await axios.get("/api/instructor/info");
-        setNickname(response.data.nickname);
-        setLectureCount(response.data.lectureCount);
-        setReviewCount(response.data.reviewCount);
-        setQnaCount(response.data.qnaCount); // ✅ QnA 개수 가져오기
-        setAverageRating(response.data.averageRating);
-      } catch (error) {
-        console.error("강사 정보를 불러오지 못했습니다:", error);
-        setNickname("닉네임 없음");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const getAverageRate = (reviewList) => {
+    if (!reviewList || reviewList.length === 0) return 0; // 예외 처리 (리스트가 없을 경우 0 반환)
 
-    fetchInstructorInfo();
-  }, []);
-
-  const menuItems = [
-    { name: "홈" },
-    { name: "내 강의", number: lectureCount },
-    { name: "수강평", number: reviewCount },
-    { name: "Q&A", number: qnaCount }, // ✅ QnA 개수를 적용
-  ];
+    const totalRate = reviewList.reduce((sum, review) => sum + review.rate, 0);
+    return (totalRate / reviewList.length).toFixed(1); // 소수점 2자리까지 반환
+  };
 
   return (
     <SidebarWrapper>
       <ProfileSection>
         <img src="https://via.placeholder.com/80" alt="프로필 이미지" />
-        <p className="profile-name">{loading ? "로딩 중..." : nickname}</p>
+        <p className="profile-name">{myPageData?.nickName}</p>
       </ProfileSection>
       <Divider />
       <StatsSection>
         <div className="stat-item">
           <div className="stat-label">강의 개수</div>
-          <div className="stat-value">{lectureCount}</div>
+          <div className="stat-value">{myPageData?.courseList.length}</div>
         </div>
         <div className="stat-item">
           <div className="stat-label">수강평 개수</div>
-          <div className="stat-value">{reviewCount}</div>
+          <div className="stat-value">{myPageData?.reviewList.length}</div>
         </div>
         <div className="stat-item">
           <div className="stat-label">평균 평점</div>
-          <div className="stat-value">{averageRating.toFixed(1)}</div>
+          <div className="stat-value">
+            {getAverageRate(myPageData?.reviewList)}
+          </div>
         </div>
       </StatsSection>
       <Divider />
       <MenuList>
-        {menuItems.map((item, index) => (
-          <MenuItem
-            key={index}
-            onClick={() => onMenuSelect(item.name)}
-            className={selectedMenu === item.name ? "active" : ""}
-          >
-            <span>{item.name}</span>
-            <span className="menu-number">{item.number}</span>
-          </MenuItem>
-        ))}
+        <MenuItem
+          onClick={() => onMenuSelect("홈")}
+          className={selectedMenu === "홈" ? "active" : ""}
+        >
+          <span>홈</span>
+        </MenuItem>
+
+        <MenuItem
+          onClick={() => onMenuSelect("내 강의")}
+          className={selectedMenu === "내 강의" ? "active" : ""}
+        >
+          <span>내 강의</span>
+          <span className="menu-number">{myPageData?.courseList.length}</span>
+        </MenuItem>
+
+        <MenuItem
+          onClick={() => onMenuSelect("수강평")}
+          className={selectedMenu === "수강평" ? "active" : ""}
+        >
+          <span>수강평</span>
+          <span className="menu-number">{myPageData?.reviewList.length}</span>
+        </MenuItem>
+
+        <MenuItem
+          onClick={() => onMenuSelect("Q&A")}
+          className={selectedMenu === "Q&A" ? "active" : ""}
+        >
+          <span>Q&A</span>
+          <span className="menu-number">{myPageData?.qnAList.length}</span>
+        </MenuItem>
       </MenuList>
     </SidebarWrapper>
   );

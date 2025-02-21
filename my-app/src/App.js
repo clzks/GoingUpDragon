@@ -42,10 +42,10 @@ function App() {
                 <Link to="/CourseDetail/5641">강의 상세 페이지</Link>
               </li>
               <li>
-                <Link to="/MyPage/:infoId">마이 페이지</Link>
+                <Link to="/myPage/student/:infoId">마이 페이지</Link>
               </li>
               <li>
-                <Link to="/MyPage/:infoId">강사 마이 페이지</Link>
+                <Link to="/myPage/instructor/501">강사 마이 페이지</Link>
               </li>
               <li>
                 <Link to="/Policy">약관 페이지</Link>
@@ -76,7 +76,14 @@ function App() {
             />{" "}
             {/* ✅ 강의 ID 추가 */}
             {/* <Route path="/MyPage" element={<MyPageLayout />} /> */}
-            <Route path="/MyPage/:infoId" element={<MyPageLayoutStudent />} />
+            <Route
+              path="/myPage/student/:infoId"
+              element={<MyPageLayoutStudent />}
+            />
+            <Route
+              path="/myPage/instructor/:infoId"
+              element={<MyPageLayoutInstructor />}
+            />
             <Route path="/Policy" element={<PolicyLayout />} />
             <Route path="/SignUp" element={<SignupPage />} />
             <Route path="/LoginModal" element={<LoginModal />} />

@@ -4,59 +4,51 @@ import ReviewCard from "../common/card/ReviewCard";
 import Pagination from "../common/utilities/Pagination";
 import axios from "axios";
 
-const Review = () => {
-  const [reviews, setReviews] = useState([]);
+const Review = ({ reviewList }) => {
+  //const [reviews, setReviews] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
   const reviewsPerPage = 5;
 
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await axios.get("/api/user/reviews");
-        setReviews(response.data);
-      } catch (error) {
-        console.error("수강평 데이터를 불러오지 못했습니다:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchReviews = async () => {
+  //     try {
+  //       const response = await axios.get("/api/user/reviews");
+  //       setReviews(response.data);
+  //     } catch (error) {
+  //       console.error("수강평 데이터를 불러오지 못했습니다:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchReviews();
-  }, []);
+  //   fetchReviews();
+  // }, []);
 
   const indexOfLastReview = currentPage * reviewsPerPage;
   const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
-  const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
+  const currentReviews = reviewList?.slice(
+    indexOfFirstReview,
+    indexOfLastReview
+  );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  if (loading) {
-    return <LoadingText>수강평 데이터를 불러오는 중...</LoadingText>;
-  }
 
   return (
     <ReviewWrapper>
       <Title>수강평</Title>
       <ReviewList>
-        {reviews.length > 0 ? (
+        {reviewList?.length > 0 ? (
           currentReviews.map((review) => (
-            <ReviewCard
-              key={review.id}
-              title={review.title}
-              content={review.content}
-              rating={review.rating}
-              date={review.date}
-              likes={review.likes}
-            />
+            <ReviewCard key={review.reviewId} review={review}></ReviewCard>
           ))
         ) : (
           <NoReviewText>등록된 수강평이 없습니다.</NoReviewText>
         )}
       </ReviewList>
-      {reviews.length > 0 && (
+      {reviewList?.length > 0 && (
         <Pagination
-          items={reviews}
+          items={reviewList}
           itemsPerPage={reviewsPerPage}
           paginate={paginate}
           currentPage={currentPage}

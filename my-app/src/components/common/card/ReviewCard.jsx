@@ -12,13 +12,13 @@ import ShareButton from "../utilities/ShareButton";
 import { getLikesForReview } from "../../../apis/common/likeApi";
 
 const ReviewCard = ({ review }) => {
-  var reviewId = review.reviewId;
-  var nickName = review.nickName;
-  var content = review.comment;
-  var rating = review.rate;
-  var date = review.createdAt;
-  var reply = review.reply;
-  var replyDate = review.replyCreatedAt;
+  var reviewId = review?.reviewId;
+  var nickName = review?.nickName;
+  var content = review?.comment;
+  var rating = review?.rate;
+  var date = review?.createdAt;
+  var reply = review?.reply;
+  var replyDate = review?.replyCreatedAt;
   var isMyPage = false;
 
   const [likeCount, setLikeCount] = useState(0); // ✅ 초기값 설정

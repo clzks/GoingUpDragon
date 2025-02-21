@@ -1,11 +1,10 @@
 import React from "react";
 import MyLectureInstructor from "../MyLectureInstructor";
 
-
-const MyAllLectureInstructor = () => {
+const MyAllLectureInstructor = ({ courseList }) => {
   return (
     <>
-    <MyLectureInstructor />
+      <MyLectureInstructor courseList={courseList} />
     </>
   );
 };
