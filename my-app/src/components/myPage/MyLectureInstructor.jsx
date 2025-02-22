@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const MyLectureInstructor = ({ courseList }) => {
+const MyLectureInstructor = ({ courseList, isHome }) => {
   const [showAll, setShowAll] = useState(false);
+  const [courseData, setCourseData] = useState([]);
 
   console.log("MyLectureInstructor의 courseList :", courseList);
   const displayedLectures = showAll
@@ -10,6 +11,18 @@ const MyLectureInstructor = ({ courseList }) => {
       ? courseList
       : []
     : courseList?.slice(0, 4) || [];
+
+  useEffect = (() => {
+    if(isHome === true && courseList !== undefined)
+    {
+      setCourseData(courseList);
+    }
+    else
+    {
+      // 추가로 param을 통해 백엔드에서 불러와야함
+    }
+  }, [isHome]);
+  
 
   return (
     <LectureWrapper>

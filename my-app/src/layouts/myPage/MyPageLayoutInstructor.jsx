@@ -9,22 +9,23 @@ import ReviewInstructor from "../../components/myPage/Instructor/ReviewInstructo
 import MyAllLectureInstructor from "../../components/myPage/Instructor/MyAllLectureInstructor";
 import QnA from "../../components/myPage/QnA";
 import ScrollTopButton from "../../components/common/utilities/ScrollTopButton";
-import { getInstructorMyPageInfo } from "../../apis/myPage/myPageApi";
+import { getInstructorMyPageSampleInfo } from "../../apis/myPage/myPageApi";
 
 const MyPageLayoutInstructor = () => {
   const [selectedMenu, setSelectedMenu] = useState("홈");
   const { infoId } = useParams();
-  const [myPageData, setMyPageData] = useState(null); // ✅ 초기값 `null`로 설정
+  //const [myPageData, setMyPageData] = useState(null); // ✅ 초기값 `null`로 설정
+  const [sampleData, setSamepleData] = useState(null);
   const [loading, setLoading] = useState(true); // ✅ 로딩 상태 추가
 
   useEffect(() => {
     if (!infoId) return;
 
     setLoading(true); // ✅ 데이터 요청 전 로딩 시작
-    getInstructorMyPageInfo(infoId)
+    getInstructorMyPageSampleInfo(infoId)
       .then((data) => {
         console.log(data);
-        setMyPageData(data);
+        setSamepleData(data);
       })
       .catch((error) => {
         console.error(
@@ -39,14 +40,14 @@ const MyPageLayoutInstructor = () => {
 
   const componentMap = useMemo(
     () => ({
-      홈: <HomeInstructor myPageData={myPageData} />,
+      홈: <HomeInstructor myPageData={sampleData} isHome={true}/>,
       "내 강의": (
-        <MyAllLectureInstructor courseList={myPageData?.courseList || []} />
+        <MyAllLectureInstructor courseList={sampleData?.courseList || []} isHome={false} />
       ),
-      수강평: <ReviewInstructor reviewList={myPageData?.reviewList || []} />,
-      "Q&A": <QnA qnAList={myPageData?.qnAList || []} />,
+      수강평: <ReviewInstructor reviewList={sampleData?.reviewList || []} isHome={false}/>,
+      "Q&A": <QnA qnAList={sampleData?.qnAList || []} isHome={false}/>,
     }),
-    [myPageData]
+    [sampleData]
   );
 
   // ✅ 로딩 중이면 표시
@@ -73,7 +74,7 @@ const MyPageLayoutInstructor = () => {
   }
 
   // ✅ 데이터가 없을 때 예외 처리
-  if (!myPageData) {
+  if (!sampleData) {
     return (
       <Layout>
         <StyledContainer>
@@ -102,7 +103,7 @@ const MyPageLayoutInstructor = () => {
         <Row>
           <StyledSidebar xs={3}>
             <SidebarInstructor
-              myPageData={myPageData}
+              myPageData={sampleData}
               selectedMenu={selectedMenu}
               onMenuSelect={setSelectedMenu}
             />

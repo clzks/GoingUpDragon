@@ -5,18 +5,18 @@ import MyLectureInstructor from "../MyLectureInstructor";
 import QnA from "../QnA";
 import styled from "styled-components";
 
-const HomeInstructor = ({ myPageData }) => {
+const HomeInstructor = ({ myPageData, isHome }) => {
   return (
     <>
       <Introduction myPageData={myPageData}></Introduction>
       <Divider></Divider>
       <MyLectureInstructor
-        courseList={myPageData?.courseList}
+        courseList={myPageData?.courseList} isHome={isHome}
       ></MyLectureInstructor>
       <Divider></Divider>
-      <Review reviewList={myPageData?.reviewList}></Review>
+      <Review reviewList={myPageData?.reviewList} isHome={isHome}></Review>
       <Divider></Divider>
-      <QnA qnAList={myPageData?.qnAList}></QnA>
+      <QnA qnAList={myPageData?.qnAList} isHome={isHome}></QnA>
     </>
   );
 };
