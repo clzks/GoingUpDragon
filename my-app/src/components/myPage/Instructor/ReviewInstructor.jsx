@@ -1,10 +1,10 @@
 import React from "react";
 import Review from "../Review";
 
-const ReviewInstructor = ({ reviewList }) => {
+const ReviewInstructor = ({ reviewList, isHome }) => {
   return (
     <>
-      <Review reviewList={reviewList} />
+      <Review reviewList={reviewList} isHome={isHome}/>
     </>
   );
 };

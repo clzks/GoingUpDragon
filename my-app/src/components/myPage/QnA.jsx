@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Pagination from "../common/utilities/Pagination";
 import axios from "axios";
 
-const QnA = ({ qnAList }) => {
+const QnA = ({ qnAList, isHome }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 

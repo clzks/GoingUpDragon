@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { getCourseList } from "../../apis/common/courseApi";
+import { useParams } from "react-router-dom";
 
 const MyLectureInstructor = ({ courseList, isHome }) => {
   const [showAll, setShowAll] = useState(false);
   const [courseData, setCourseData] = useState([]);
+  const { instructorId } = useParams();
 
   console.log("MyLectureInstructor의 courseList :", courseList);
   const displayedLectures = showAll
@@ -12,17 +15,17 @@ const MyLectureInstructor = ({ courseList, isHome }) => {
       : []
     : courseList?.slice(0, 4) || [];
 
-  useEffect = (() => {
-    if(isHome === true && courseList !== undefined)
-    {
+  useEffect(() => {
+    if (isHome === true && courseList !== undefined) {
       setCourseData(courseList);
-    }
-    else
-    {
-      // 추가로 param을 통해 백엔드에서 불러와야함
+    } else {
+      if (instructorId) {
+        getCourseList(instructorId)
+          .then((data) => setCourseData(data))
+          .catch((error) => console.error("강사 강의 가져오기 실패:", error));
+      }
     }
   }, [isHome]);
-  
 
   return (
     <LectureWrapper>
