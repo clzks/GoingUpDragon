@@ -98,3 +98,13 @@ export const getCoursesByFilterAndSort = async ({
     return null;
   }
 };
+
+export const getInstructorCoursesCount = async (instructorId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/count/${instructorId}`);
+    return response.data; // 강의 개수 반환
+  } catch (error) {
+    console.error("Error fetching instructor course count:", error);
+    return 0; // 에러 발생 시 기본값 0 반환
+  }
+};

@@ -42,7 +42,7 @@ function App() {
                 <Link to="/CourseDetail/5641">강의 상세 페이지</Link>
               </li>
               <li>
-                <Link to="/myPage/student/:infoId">마이 페이지</Link>
+                <Link to="/myPage/student/2000">마이 페이지</Link>
               </li>
               <li>
                 <Link to="/myPage/instructor/501">강사 마이 페이지</Link>

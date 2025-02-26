@@ -59,7 +59,13 @@ const DetailCourseBanner = ({ courseData }) => {
         </StyledEnrollmentContainer>
         <StyledEnrollmentContainer>
           <FaUser></FaUser>
-          <StyledReviewText>{courseData?.instructorName}</StyledReviewText>
+          <StyledReviewText
+            onClick={() =>
+              navigate(`/myPage/instructor/${courseData?.instructorId}`)
+            }
+          >
+            {courseData?.instructorName}
+          </StyledReviewText>
         </StyledEnrollmentContainer>
         <SharpTagComponent
           tags={courseData?.subjectTagNames}

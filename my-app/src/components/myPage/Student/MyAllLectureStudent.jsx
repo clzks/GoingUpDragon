@@ -1,11 +1,10 @@
 import React from "react";
 import MyLectureStudent from "../MyLectureStudent";
 
-
-const MyAllLectureStudent = () => {
+const MyAllLectureStudent = ({ lectures }) => {
   return (
     <>
-    <MyLectureStudent />
+      <MyLectureStudent lectures={lectures} />
     </>
   );
 };

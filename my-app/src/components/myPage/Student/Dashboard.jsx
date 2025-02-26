@@ -3,14 +3,12 @@ import LatelyLecture from "../LatelyLecture";
 import Badge from "../Badge";
 import SkillTag from "../SkillTag";
 
-
-
-const Dashboard = () => {
+const Dashboard = ({ skills }) => {
   return (
     <>
-    <LatelyLecture />
-    <Badge />
-    <SkillTag />
+      <LatelyLecture />
+      <Badge />
+      <SkillTag skills={skills} />
     </>
   );
 };

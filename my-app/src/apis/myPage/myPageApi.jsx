@@ -27,3 +27,15 @@ export const getInstructorMyPageSampleInfo = async (infoId) => {
     );
   }
 };
+
+export const getStudentMyPageInfo = async (infoId) => {
+  try {
+    const response = await axios.get(
+      `${API_BASE_URL}/myPage/student/${infoId}`
+    );
+    return response.data; // MyPageStudentDTO 반환
+  } catch (error) {
+    console.error("Error fetching student mypage data:", error);
+    throw error;
+  }
+};

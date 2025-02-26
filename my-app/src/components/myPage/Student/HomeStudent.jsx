@@ -4,14 +4,14 @@ import AttendingLecture from "../AttendingLecture";
 import Review from "../Review";
 import styled from "styled-components";
 
-const HomeStudent = () => {
+const HomeStudent = ({ myPageData, lectures, reviewList }) => {
   return (
     <>
-      <Introduction />
+      <Introduction myPageData={myPageData} />
       <Divider />
-      <AttendingLecture />
+      <AttendingLecture lectures={lectures} />
       <Divider />
-      <Review />
+      <Review isHome={true} reviewList={reviewList} />
     </>
   );
 };

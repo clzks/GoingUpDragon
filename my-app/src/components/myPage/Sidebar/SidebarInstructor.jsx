@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const SidebarInstructor = ({ selectedMenu, onMenuSelect, myPageData }) => {
+const SidebarInstructor = ({
+  selectedMenu,
+  onMenuSelect,
+  myPageData,
+  courseCount,
+  qnACount,
+  reviewCount,
+  rate,
+}) => {
   // const [nickname, setNickname] = useState("불러오는 중...");
   // const [lectureCount, setLectureCount] = useState(0);
   // const [reviewCount, setReviewCount] = useState(0);
@@ -10,11 +18,11 @@ const SidebarInstructor = ({ selectedMenu, onMenuSelect, myPageData }) => {
   // const [averageRating, setAverageRating] = useState(0.0);
   // const [loading, setLoading] = useState(true);
 
-  const getAverageRate = (reviewList) => {
-    if (!reviewList || reviewList.length === 0) return 0; // 예외 처리 (리스트가 없을 경우 0 반환)
-
-    const totalRate = reviewList.reduce((sum, review) => sum + review.rate, 0);
-    return (totalRate / reviewList.length).toFixed(1); // 소수점 2자리까지 반환
+  const formatRate = (rate) => {
+    if (typeof rate !== "number" || isNaN(rate)) {
+      return 0; // 유효하지 않은 값이면 0 반환
+    }
+    return Math.round(rate * 10) / 10; // 소수점 첫째 자리까지 반올림
   };
 
   return (
@@ -27,17 +35,15 @@ const SidebarInstructor = ({ selectedMenu, onMenuSelect, myPageData }) => {
       <StatsSection>
         <div className="stat-item">
           <div className="stat-label">강의 개수</div>
-          <div className="stat-value">{myPageData?.courseList.length}</div>
+          <div className="stat-value">{courseCount}</div>
         </div>
         <div className="stat-item">
           <div className="stat-label">수강평 개수</div>
-          <div className="stat-value">{myPageData?.reviewList.length}</div>
+          <div className="stat-value">{reviewCount}</div>
         </div>
         <div className="stat-item">
           <div className="stat-label">평균 평점</div>
-          <div className="stat-value">
-            {getAverageRate(myPageData?.reviewList)}
-          </div>
+          <div className="stat-value">{formatRate(rate)}</div>
         </div>
       </StatsSection>
       <Divider />
@@ -50,11 +56,11 @@ const SidebarInstructor = ({ selectedMenu, onMenuSelect, myPageData }) => {
         </MenuItem>
 
         <MenuItem
-          onClick={() => onMenuSelect("내 강의")}
-          className={selectedMenu === "내 강의" ? "active" : ""}
+          onClick={() => onMenuSelect("강의")}
+          className={selectedMenu === "강의" ? "active" : ""}
         >
-          <span>내 강의</span>
-          <span className="menu-number">{myPageData?.courseList.length}</span>
+          <span>강의</span>
+          <span className="menu-number">{courseCount}</span>
         </MenuItem>
 
         <MenuItem
@@ -62,7 +68,7 @@ const SidebarInstructor = ({ selectedMenu, onMenuSelect, myPageData }) => {
           className={selectedMenu === "수강평" ? "active" : ""}
         >
           <span>수강평</span>
-          <span className="menu-number">{myPageData?.reviewList.length}</span>
+          <span className="menu-number">{reviewCount}</span>
         </MenuItem>
 
         <MenuItem
@@ -70,7 +76,7 @@ const SidebarInstructor = ({ selectedMenu, onMenuSelect, myPageData }) => {
           className={selectedMenu === "Q&A" ? "active" : ""}
         >
           <span>Q&A</span>
-          <span className="menu-number">{myPageData?.qnAList.length}</span>
+          <span className="menu-number">{qnACount}</span>
         </MenuItem>
       </MenuList>
     </SidebarWrapper>

@@ -3,51 +3,58 @@ import styled from "styled-components";
 import Pagination from "../common/utilities/Pagination";
 import axios from "axios";
 
-const LikeLecture = () => {
-  const [lectures, setLectures] = useState([]); 
-  const [loading, setLoading] = useState(true);
+const LikeLecture = ({ lectures }) => {
+  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
 
-  useEffect(() => {
-    const fetchLikedLectures = async () => {
-      try {
-        const response = await axios.get("/api/student/liked-lectures"); 
-        setLectures(response.data);
-      } catch (error) {
-        console.error("좋아요 한 강의 데이터를 불러오는 데 실패했습니다:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchLikedLectures = async () => {
+  //     try {
+  //       const response = await axios.get("/api/student/liked-lectures");
+  //       setLectures(response.data);
+  //     } catch (error) {
+  //       console.error(
+  //         "좋아요 한 강의 데이터를 불러오는 데 실패했습니다:",
+  //         error
+  //       );
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchLikedLectures();
-  }, []);
+  //   fetchLikedLectures();
+  // }, []);
 
-  if (loading) {
-    return <LoadingText>좋아요 한 강의 데이터를 불러오는 중...</LoadingText>;
-  }
+  // if (loading) {
+  //   return <LoadingText>좋아요 한 강의 데이터를 불러오는 중...</LoadingText>;
+  // }
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentLectures = lectures.slice(indexOfFirstItem, indexOfLastItem);
+  const currentLectures = (lectures || [])?.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   return (
     <LikeWrapper>
       <Header>
         <HeaderTitle>좋아요</HeaderTitle>
-        <TotalCount>전체 {lectures.length}개</TotalCount>
+        <TotalCount>전체 {lectures?.length}개</TotalCount>
       </Header>
-      {lectures.length > 0 ? (
+      {lectures?.length > 0 ? (
         <>
           <LectureGrid>
             {currentLectures.map((lecture) => (
               <LectureCard key={lecture.id}>
-                <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
+                <Thumbnail src={lecture.thumbnail} alt={lecture.courseTitle} />
                 <LectureInfo>
-                  <LectureTitle>{lecture.title}</LectureTitle>
-                  <Instructor>{lecture.instructor}</Instructor>
-                  <Rating>★ {lecture.rating} ({lecture.reviews})</Rating>
+                  <LectureTitle>{lecture.courseTitle}</LectureTitle>
+                  <Instructor>{lecture.instructorName}</Instructor>
+                  <Rating>
+                    ★ {lecture.rate} ({lecture.reviewCount})
+                  </Rating>
                   <Price>{lecture.price}</Price>
                 </LectureInfo>
               </LectureCard>

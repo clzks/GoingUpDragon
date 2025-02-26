@@ -2,28 +2,25 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const SkillTag = () => {
-  const [skills, setSkills] = useState([]); 
-  const [loading, setLoading] = useState(true); 
+const SkillTag = ({ skills }) => {
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchSkills = async () => {
-      try {
-        const response = await axios.get("/api/user/skills"); 
-        setSkills(response.data);
-      } catch (error) {
-        console.error("스킬 태그를 불러오는데 실패했습니다:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchSkills = async () => {
+  //     try {
+  //       const response = await axios.get("/api/user/skills");
+  //       setSkills(response.data);
+  //     } catch (error) {
+  //       console.error("스킬 태그를 불러오는데 실패했습니다:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchSkills();
-  }, []);
+  //   fetchSkills();
+  // }, []);
 
-  if (loading) {
-    return <LoadingText>스킬 태그를 불러오는 중...</LoadingText>;
-  }
+  console.log("스킬s :", skills);
 
   return (
     <SkillTagWrapper>
@@ -31,8 +28,8 @@ const SkillTag = () => {
         <Title>스킬태그</Title>
       </Header>
       <TagList>
-        {skills.length > 0 ? (
-          skills.map((skill, index) => <Tag key={index}>{skill}</Tag>)
+        {skills?.length > 0 ? (
+          skills?.map((skill, index) => <Tag key={index}>{skill}</Tag>)
         ) : (
           <NoSkillsText>등록된 스킬 태그가 없습니다.</NoSkillsText>
         )}

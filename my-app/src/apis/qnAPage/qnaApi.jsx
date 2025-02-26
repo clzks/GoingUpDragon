@@ -63,3 +63,27 @@ export const getReplyList = async (qnaId) => {
     throw new Error(error.response?.data?.message || "QnA 답변 조회 실패");
   }
 };
+
+export const getInstructorQnACount = async (instructorId) => {
+  try {
+    const response = await axios.get(
+      `${API_BASE_URL}/qna/count/instructor/${instructorId}`
+    );
+    return response.data; // QnA 개수 반환
+  } catch (error) {
+    console.error("QnA 개수 가져오기 실패:", error);
+    return 0; // 에러 발생 시 기본값 0 반환
+  }
+};
+
+export const getQnAByinstructorId = async (instructorId) => {
+  try {
+    const response = await axios.get(
+      `${API_BASE_URL}/qna/instructor/${instructorId}`
+    );
+    return response.data; // QnA 리스트 반환
+  } catch (error) {
+    console.error("❌ 강사 QnA 가져오기 실패:", error);
+    return []; // 에러 발생 시 빈 배열 반환
+  }
+};

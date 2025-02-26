@@ -2,29 +2,35 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const SidebarStudent = ({ selectedMenu, onMenuSelect }) => {
-  const [nickname, setNickname] = useState("불러오는 중...");
-  const [reviewCount, setReviewCount] = useState(0);
-  const [averageRating, setAverageRating] = useState(0.0);
-  const [loading, setLoading] = useState(true);
+const SidebarStudent = ({
+  selectedMenu,
+  onMenuSelect,
+  nickName,
+  reviewCount,
+  averageRating,
+}) => {
+  // const [nickname, setNickname] = useState("불러오는 중...");
+  // const [reviewCount, setReviewCount] = useState(0);
+  // const [averageRating, setAverageRating] = useState(0.0);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      try {
-        const response = await axios.get("/api/user/info");
-        setNickname(response.data.nickname);
-        setReviewCount(response.data.reviewCount);
-        setAverageRating(response.data.averageRating);
-      } catch (error) {
-        console.error("사용자 정보를 불러오지 못했습니다:", error);
-        setNickname("닉네임 없음");
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchUserInfo = async () => {
+  //     try {
+  //       const response = await axios.get("/api/user/info");
+  //       setNickname(response.data.nickname);
+  //       setReviewCount(response.data.reviewCount);
+  //       setAverageRating(response.data.averageRating);
+  //     } catch (error) {
+  //       console.error("사용자 정보를 불러오지 못했습니다:", error);
+  //       setNickname("닉네임 없음");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchUserInfo();
-  }, []);
+  //   fetchUserInfo();
+  // }, []);
 
   const menuItems = [
     { name: "홈" },
@@ -40,7 +46,7 @@ const SidebarStudent = ({ selectedMenu, onMenuSelect }) => {
     <SidebarWrapper>
       <ProfileSection>
         <img src="https://via.placeholder.com/80" alt="프로필 이미지" />
-        <p className="profile-name">{loading ? "로딩 중..." : nickname}</p>
+        <p className="profile-name">{loading ? "로딩 중..." : nickName}</p>
       </ProfileSection>
       <Divider />
       <StatsSection>
@@ -50,7 +56,7 @@ const SidebarStudent = ({ selectedMenu, onMenuSelect }) => {
         </div>
         <div className="stat-item">
           <div className="stat-label">평균 평점</div>
-          <div className="stat-value">{averageRating.toFixed(1)}</div>
+          <div className="stat-value">{averageRating?.toFixed(1)}</div>
         </div>
       </StatsSection>
       <Divider />

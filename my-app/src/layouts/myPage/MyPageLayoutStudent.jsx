@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Layout from "../../components/common/layout/Layout";
 import { Container, Row, Col } from "react-bootstrap";
@@ -11,20 +12,42 @@ import PurchaseHistory from "../../components/myPage/Student/PurchaseHistory";
 import MyInfo from "../../components/myPage/Student/MyInfo";
 import Like from "../../components/myPage/Student/Like";
 import ScrollTopButton from "../../components/common/utilities/ScrollTopButton";
+import { getStudentMyPageInfo } from "../../apis/myPage/myPageApi";
 
 const MyPageLayoutStudent = () => {
   const [selectedMenu, setSelectedMenu] = useState("홈");
+  const { infoId } = useParams();
+  const [myPageData, setMyPageData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getStudentMyPageInfo(infoId);
+        setMyPageData(data);
+      } catch (error) {
+        console.error("마이페이지 데이터를 불러오는 중 오류 발생:", error);
+      }
+    };
+
+    fetchData();
+  }, [infoId]);
 
   const renderContent = () => {
     switch (selectedMenu) {
       case "홈":
-        return <HomeStudent />;
+        return (
+          <HomeStudent
+            myPageData={myPageData}
+            lectures={myPageData?.courseList}
+            reviewList={myPageData?.reviewList}
+          />
+        );
       case "대시보드":
-        return <Dashboard />;
+        return <Dashboard skills={myPageData?.subjectTagList} />;
       case "내 강의":
-        return <MyAllLectureStudent />;
+        return <MyAllLectureStudent lectures={myPageData?.courseList} />;
       case "좋아요":
-        return <Like />;
+        return <Like lectures={myPageData?.courseList} />;
       case "장바구니":
         return <Cart />;
       case "구매내역":
@@ -41,7 +64,13 @@ const MyPageLayoutStudent = () => {
       <StyledContainer>
         <Row>
           <StyledSidebar xs={3}>
-            <SidebarStudent selectedMenu={selectedMenu} onMenuSelect={setSelectedMenu} />
+            <SidebarStudent
+              selectedMenu={selectedMenu}
+              onMenuSelect={setSelectedMenu}
+              nickName={myPageData?.nickName}
+              reviewCount={myPageData?.reviewCount}
+              averageRating={myPageData?.rate}
+            />
           </StyledSidebar>
           <StyledContent xs={9}>
             <Container>{renderContent()}</Container>

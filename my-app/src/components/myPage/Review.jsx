@@ -1,58 +1,72 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import ReviewCard from "../common/card/ReviewCard";
 import Pagination from "../common/utilities/Pagination";
-import axios from "axios";
+import { getInstructorReviews } from "../../apis/courseDetailPage/courseDetailApi";
 
-const Review = ({ reviewList }) => {
-  //const [reviews, setReviews] = useState([]);
+const Review = ({ reviewList, isHome }) => {
+  const [reviews, setReviews] = useState(reviewList || []);
+  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  //const [loading, setLoading] = useState(true);
   const reviewsPerPage = 5;
+  const { infoId } = useParams();
 
-  // useEffect(() => {
-  //   const fetchReviews = async () => {
-  //     try {
-  //       const response = await axios.get("/api/user/reviews");
-  //       setReviews(response.data);
-  //     } catch (error) {
-  //       console.error("수강평 데이터를 불러오지 못했습니다:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+  console.log("리뷰리스트 :", reviews);
 
-  //   fetchReviews();
-  // }, []);
+  useEffect(() => {
+    if (isHome) {
+      setReviews(reviewList);
+    } else {
+      if (infoId) {
+        setLoading(true);
+        getInstructorReviews(infoId)
+          .then((data) => {
+            console.log("✅ 강사 리뷰 불러오기 성공:", data);
+            setReviews(data || []); // 데이터가 없을 경우 빈 배열로 설정
+          })
+          .catch((error) => {
+            console.error("강사 리뷰 가져오기 실패:", error);
+            setReviews([]); // 오류 발생 시 빈 배열 설정
+          })
+          .finally(() => setLoading(false)); // 로딩 종료
+      }
+    }
+  }, [isHome, infoId, reviewList]);
 
   const indexOfLastReview = currentPage * reviewsPerPage;
   const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
-  const currentReviews = reviewList?.slice(
-    indexOfFirstReview,
-    indexOfLastReview
-  );
+  const currentReviews = Array.isArray(reviews)
+    ? reviews?.slice(indexOfFirstReview, indexOfLastReview)
+    : [];
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <ReviewWrapper>
       <Title>수강평</Title>
-      <ReviewList>
-        {reviewList?.length > 0 ? (
-          currentReviews.map((review) => (
-            <ReviewCard key={review.reviewId} review={review}></ReviewCard>
-          ))
-        ) : (
-          <NoReviewText>등록된 수강평이 없습니다.</NoReviewText>
-        )}
-      </ReviewList>
-      {reviewList?.length > 0 && (
-        <Pagination
-          items={reviewList}
-          itemsPerPage={reviewsPerPage}
-          paginate={paginate}
-          currentPage={currentPage}
-        />
+      {loading ? (
+        <LoadingText>수강평 불러오는 중...</LoadingText>
+      ) : (
+        <>
+          <ReviewList>
+            {reviews?.length > 0 ? (
+              currentReviews.map((review) => (
+                <ReviewCard key={review.reviewId} review={review} />
+              ))
+            ) : (
+              <NoReviewText>등록된 수강평이 없습니다.</NoReviewText>
+            )}
+          </ReviewList>
+          {reviews?.length > 5 && (
+            <Pagination
+              items={reviews}
+              itemsPerPage={reviewsPerPage}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          )}
+        </>
       )}
     </ReviewWrapper>
   );

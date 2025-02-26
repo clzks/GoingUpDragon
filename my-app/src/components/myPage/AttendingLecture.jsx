@@ -2,52 +2,29 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const AttendingLecture = () => {
-  const [lectures, setLectures] = useState([]); 
-  const [loading, setLoading] = useState(true); 
+const AttendingLecture = ({ lectures }) => {
   const [showAll, setShowAll] = useState(false);
 
-  useEffect(() => {
-    const fetchLectures = async () => {
-      try {
-        const response = await axios.get("/api/student/attending-lectures"); 
-        setLectures(response.data);
-      } catch (error) {
-        console.error("수강 중인 강의 데이터를 불러오는데 실패했습니다:", error);
-      } finally {
-        setLoading(false); 
-      }
-    };
-
-    fetchLectures();
-  }, []);
-
-  if (loading) {
-    return <LoadingText>강의 데이터를 불러오는 중...</LoadingText>;
-  }
-
-  const displayedLectures = showAll ? lectures : lectures.slice(0, 8);
+  const displayedLectures = showAll
+    ? lectures || []
+    : lectures?.slice(0, 8) || [];
 
   return (
     <LectureWrapper>
       <Header>
         <Title>수강 중인 강의</Title>
-        <TotalCount>전체 {lectures.length}개</TotalCount>
+        <TotalCount>전체 {lectures?.length}개</TotalCount>
       </Header>
       <LectureGrid>
-        {lectures.length > 0 ? (
+        {lectures?.length > 0 ? (
           displayedLectures.map((lecture) => (
             <LectureCard key={lecture.id}>
               <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
-              <LectureTitle>{lecture.title}</LectureTitle>
+              <LectureTitle>{lecture.courseTitle}</LectureTitle>
               <ProgressWrapper>
-                <ProgressBar
-                  progress={(
-                    (parseInt(lecture.progress.split("/")[0]) / 
-                      parseInt(lecture.progress.split("/")[1])) * 100
-                  )}
-                />
-                <ProgressText>{lecture.progress}</ProgressText>
+                <ProgressBar progress={100} /> {/* 진행률을 항상 50%로 설정 */}
+                <ProgressText>100% 완료</ProgressText>{" "}
+                {/* 텍스트도 50%로 설정 */}
               </ProgressWrapper>
             </LectureCard>
           ))
@@ -55,7 +32,7 @@ const AttendingLecture = () => {
           <NoLectureText>현재 수강 중인 강의가 없습니다.</NoLectureText>
         )}
       </LectureGrid>
-      {lectures.length > 8 && (
+      {lectures?.length > 8 && (
         <ViewAllButton onClick={() => setShowAll(!showAll)}>
           {showAll ? "돌아가기 >" : "전체보기 >"}
         </ViewAllButton>
@@ -141,7 +118,7 @@ const ProgressBar = styled.div`
     content: "";
     display: block;
     height: 100%;
-    width: ${({ progress }) => progress}% ;
+    width: ${({ progress }) => progress}%;
     background-color: #7cd0d5;
     transition: width 0.3s ease-in-out;
   }

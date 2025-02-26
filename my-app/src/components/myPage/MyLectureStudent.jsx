@@ -2,27 +2,28 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const MyLectureStudent = () => {
-  const [lectures, setLectures] = useState([]);
+const MyLectureStudent = ({ lectures }) => {
   const [showAll, setShowAll] = useState(false);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchLectures = async () => {
-      try {
-        const response = await axios.get("/api/student/lectures");
-        setLectures(response.data);
-      } catch (error) {
-        console.error("강의 데이터를 불러오지 못했습니다:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchLectures = async () => {
+  //     try {
+  //       const response = await axios.get("/api/student/lectures");
+  //       setLectures(response.data);
+  //     } catch (error) {
+  //       console.error("강의 데이터를 불러오지 못했습니다:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchLectures();
-  }, []);
+  //   fetchLectures();
+  // }, []);
 
-  const displayedLectures = showAll ? lectures : lectures.slice(0, 6);
+  const displayedLectures = showAll
+    ? lectures || []
+    : lectures?.slice(0, 6) || [];
 
   if (loading) {
     return <LoadingText>강의 데이터를 불러오는 중...</LoadingText>;
@@ -34,24 +35,27 @@ const MyLectureStudent = () => {
         <HeaderTitle>내 강의</HeaderTitle>
       </Header>
 
-      <LectureGrid hasLectures={lectures.length > 0}>
-        {lectures.length > 0 ? (
+      <LectureGrid hasLectures={lectures?.length > 0}>
+        {lectures?.length > 0 ? (
           displayedLectures.map((lecture) => (
             <LectureCard key={lecture.id}>
               <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
               <LectureInfo>
-                <LectureTitle>{lecture.title}</LectureTitle>
-                <Subtitle>{lecture.subtitle}</Subtitle>
+                <LectureTitle>{lecture.courseTitle}</LectureTitle>
+                <Subtitle>{lecture.courseDescription}</Subtitle>
                 <ProgressBar>
                   <Progress
                     progress={
-                      (parseInt(lecture.progress.split("/")[0]) /
-                        parseInt(lecture.progress.split("/")[1])) *
-                      100
+                      lecture.progress
+                        ? (parseInt(lecture.progress.split("/")[0]) /
+                            parseInt(lecture.progress.split("/")[1])) *
+                          100
+                        : 100 // progress가 없으면 50%로 처리
                     }
                   />
                 </ProgressBar>
-                <ProgressText>{lecture.progress}</ProgressText>
+                <ProgressText>{lecture.progress || "100% 완료"}</ProgressText>{" "}
+                {/* progress가 없으면 50%로 텍스트 처리 */}
               </LectureInfo>
               <DetailButton>상세 보기</DetailButton>
             </LectureCard>
@@ -61,7 +65,7 @@ const MyLectureStudent = () => {
         )}
       </LectureGrid>
 
-      {lectures.length > 0 && (
+      {lectures?.length > 0 && (
         <ButtonWrapper>
           <ViewAllButton onClick={() => setShowAll(!showAll)}>
             {showAll ? "돌아가기 >" : "전체보기 >"}

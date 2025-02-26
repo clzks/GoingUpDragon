@@ -4,7 +4,6 @@ import axios from "axios";
 
 const Introduction = ({ myPageData }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [introduction, setIntroduction] = useState("");
 
   const handleEditClick = () => {

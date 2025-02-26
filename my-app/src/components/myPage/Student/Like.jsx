@@ -1,10 +1,10 @@
 import React from "react";
 import LikeLecture from "../LikeLecture";
 
-const Like = () => {
+const Like = ({ lectures }) => {
   return (
     <>
-      <LikeLecture />
+      <LikeLecture lectures={lectures} />
     </>
   );
 };

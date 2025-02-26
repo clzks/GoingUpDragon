@@ -1,65 +1,101 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Pagination from "../common/utilities/Pagination";
-import axios from "axios";
+import { getQnAByinstructorId } from "../../apis/qnAPage/qnaApi";
 
 const QnA = ({ qnAList, isHome }) => {
+  const [qnaData, setQnAData] = useState(qnAList || []); // 데이터를 저장할 상태
+  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
+  const navigate = useNavigate();
+  const { infoId } = useParams(); // URL에서 infoId 가져오기
 
+  // ✅ QnA 데이터 가져오기
+  useEffect(() => {
+    if (!isHome && infoId) {
+      setLoading(true);
+      getQnAByinstructorId(infoId)
+        .then((data) => {
+          console.log("✅ 강사 QnA 불러오기 성공:", data);
+          setQnAData(Array.isArray(data) ? data : []);
+        })
+        .catch((error) => {
+          console.error("❌ 강사 QnA 가져오기 실패:", error);
+          setQnAData([]); // 오류 발생 시 빈 배열 처리
+        })
+        .finally(() => setLoading(false));
+    } else {
+      setQnAData(qnAList || []);
+    }
+  }, [isHome, infoId, qnAList]);
+
+  // ✅ 페이지네이션 처리 (qnaData를 기준으로 해야 함)
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = qnAList?.slice(indexOfFirstItem, indexOfLastItem);
-
-  const navigate = useNavigate();
+  const currentItems = Array.isArray(qnaData)
+    ? qnaData.slice(indexOfFirstItem, indexOfLastItem)
+    : [];
 
   return (
     <QnAWrapper>
       <Header>Q&A</Header>
-      <QuestionList>
-        {qnAList?.length > 0 ? (
-          currentItems.map((question) => {
-            const tags = [question.tag1, question.tag2, question.tag3].filter(
-              (tag) => tag !== null
-            );
-            return (
-              <QuestionCard
-                key={question.qnaId}
-                onClick={() => navigate(`/qna/${question?.qnaId}`)}
-              >
-                <QuestionHeader>
-                  <Title>{question.title || "제목 없음"}</Title>
-                  <Info>
-                    <Tags>
-                      {tags.map((tag, index) => (
-                        <Tag key={index}>{tag}</Tag>
-                      ))}
-                    </Tags>
-                    <Meta>
-                      {question.createAt} · 조회 {question.viewCount} · 댓글{" "}
-                      {question.replyCount}
-                    </Meta>
-                  </Info>
-                </QuestionHeader>
-                <Content>{question.main}</Content>
-              </QuestionCard>
-            );
-          })
-        ) : (
-          <NoQnAText>등록된 Q&A가 없습니다.</NoQnAText>
-        )}
-      </QuestionList>
-      {qnAList?.length > 0 && (
-        <PaginationWrapper>
-          <Pagination
-            items={qnAList}
-            itemsPerPage={itemsPerPage}
-            paginate={paginate}
-            currentPage={currentPage}
-          />
-        </PaginationWrapper>
+
+      {/* ✅ 로딩 중이면 로딩 메시지 표시 */}
+      {loading ? (
+        <LoadingText>Q&A 불러오는 중...</LoadingText>
+      ) : (
+        <>
+          <QuestionList>
+            {qnaData.length > 0 ? (
+              currentItems.map((question) => {
+                const tags = [
+                  question.tag1,
+                  question.tag2,
+                  question.tag3,
+                ].filter((tag) => tag !== null);
+                return (
+                  <QuestionCard
+                    key={question.qnaId}
+                    onClick={() => navigate(`/qna/${question?.qnaId}`)}
+                  >
+                    <QuestionHeader>
+                      <Title>{question.title || "제목 없음"}</Title>
+                      <Info>
+                        <Tags>
+                          {tags.map((tag, index) => (
+                            <Tag key={index}>{tag}</Tag>
+                          ))}
+                        </Tags>
+                        <Meta>
+                          {question.createAt} · 조회 {question.viewCount} · 댓글{" "}
+                          {question.replyCount}
+                        </Meta>
+                      </Info>
+                    </QuestionHeader>
+                    <Content>{question.main}</Content>
+                  </QuestionCard>
+                );
+              })
+            ) : (
+              <NoQnAText>등록된 Q&A가 없습니다.</NoQnAText>
+            )}
+          </QuestionList>
+
+          {/* ✅ 페이지네이션을 qnaData 기준으로 적용 */}
+          {!isHome && qnaData.length > 0 && (
+            <PaginationWrapper>
+              <Pagination
+                items={qnaData}
+                itemsPerPage={itemsPerPage}
+                paginate={paginate}
+                currentPage={currentPage}
+              />
+            </PaginationWrapper>
+          )}
+        </>
       )}
     </QnAWrapper>
   );

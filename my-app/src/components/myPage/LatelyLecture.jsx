@@ -6,32 +6,32 @@ import axios from "axios";
 const LatelyLecture = () => {
   const [lectures, setLectures] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchLatelyLectures = async () => {
-      try {
-        const response = await axios.get("/api/user/lately-lectures");
-        setLectures(response.data);
-      } catch (error) {
-        console.error("최근 학습 강의를 불러오는데 실패했습니다:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchLatelyLectures = async () => {
+  //     try {
+  //       const response = await axios.get("/api/user/lately-lectures");
+  //       setLectures(response.data);
+  //     } catch (error) {
+  //       console.error("최근 학습 강의를 불러오는데 실패했습니다:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchLatelyLectures();
-  }, []);
+  //   fetchLatelyLectures();
+  // }, []);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex + 4 >= lectures.length ? 0 : prevIndex + 1
+      prevIndex + 4 >= lectures?.length ? 0 : prevIndex + 1
     );
   };
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? lectures.length - 4 : prevIndex - 1
+      prevIndex === 0 ? lectures?.length - 4 : prevIndex - 1
     );
   };
 
