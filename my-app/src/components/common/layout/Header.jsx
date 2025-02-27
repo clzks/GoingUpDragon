@@ -43,7 +43,6 @@ const Header = ({ inputRef, onSearchData }) => {
 
   const [user, setUser] = useState(null);
 
-
   const goToSignup = () => {
     navigate("/SignUp"); // "/signup" 경로로 이동
   };
@@ -67,7 +66,7 @@ const Header = ({ inputRef, onSearchData }) => {
       const savedUser = {
         nickname: localStorage.getItem("userNickname"),
         role: localStorage.getItem("userRole"),
-        infoId: localStorage.getItem("userInfoId")
+        infoId: localStorage.getItem("userInfoId"),
       };
       setIsLoggedIn(true);
       setUser(savedUser);
@@ -121,7 +120,7 @@ const Header = ({ inputRef, onSearchData }) => {
     setUser({
       nickname: data.nickname,
       role: data.role,
-      infoId: data.infoId
+      infoId: data.infoId,
     });
   };
 
@@ -159,8 +158,7 @@ const Header = ({ inputRef, onSearchData }) => {
   const handleSearchSubmit = async (event) => {
     event.preventDefault(); // 기본 동작(페이지 새로고침) 방지
 
-    if (!searchInput.trim()) 
-      return; // 빈 값 방지
+    if (!searchInput.trim()) return; // 빈 값 방지
 
     try {
       await saveSearchQuery(searchInput); // 검색어 저장 API 호출
@@ -173,7 +171,6 @@ const Header = ({ inputRef, onSearchData }) => {
 
       // searchQuery 쿼리 파라미터를 URL에 추가하여 검색 페이지로 이동
       navigate(`/Search?searchQuery=${searchInput}`); // searchQuery 쿼리 파라미터로 검색어 전달
-
     } catch (error) {
       console.error("검색어 저장 실패:", error);
     }
@@ -343,7 +340,9 @@ const Header = ({ inputRef, onSearchData }) => {
                       {user.nickname}
                       <StyledArrowIcon /> */}
 
-                    <StyledDropDownMenuNickname to={`/MyPage/${user.infoId}`}>
+                    <StyledDropDownMenuNickname
+                      to={`/MyPage/student/${user.infoId}`}
+                    >
                       <StyledHomeIcon />
                       {user.nickname}
                       <StyledArrowIcon />

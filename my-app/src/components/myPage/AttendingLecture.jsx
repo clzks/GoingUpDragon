@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
 const AttendingLecture = ({ lectures }) => {
   const [showAll, setShowAll] = useState(false);
+  const navigate = useNavigate();
 
   const displayedLectures = showAll
     ? lectures || []
@@ -18,7 +20,10 @@ const AttendingLecture = ({ lectures }) => {
       <LectureGrid>
         {lectures?.length > 0 ? (
           displayedLectures.map((lecture) => (
-            <LectureCard key={lecture.id}>
+            <LectureCard
+              key={lecture.id}
+              onClick={() => navigate(`/CourseDetail/${lecture.courseId}`)}
+            >
               <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
               <LectureTitle>{lecture.courseTitle}</LectureTitle>
               <ProgressWrapper>
@@ -91,15 +96,15 @@ const LectureCard = styled.div`
   flex-basis: calc(25% - 16px);
   min-width: 220px;
   max-width: 250px;
+  cursor: pointer;
 `;
 
 const Thumbnail = styled.img`
-  width: 100%; 
-  aspect-ratio: 16 / 9; 
+  width: 100%;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border-radius: 4px;
 `;
-
 
 const LectureTitle = styled.div`
   font-size: 16px;
@@ -124,7 +129,7 @@ const ProgressBar = styled.div`
     content: "";
     display: block;
     height: 100%;
-    width: ${({ progress }) => progress}% ;
+    width: ${({ progress }) => progress}%;
     background-color: #7cd0d5;
     transition: width 0.3s ease-in-out;
   }

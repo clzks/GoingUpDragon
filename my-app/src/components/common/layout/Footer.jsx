@@ -1,11 +1,13 @@
 // GoingUpDragon/my-app/src/components/common/layout/Footer.jsx
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 // 외부 라이브러리
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
 
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <StyledFooter>
       <StyledFooterContainer>
@@ -13,8 +15,9 @@ const Footer = () => {
           src={`${process.env.PUBLIC_URL}/images/tplogo2.png`}
           alt="Footer Logo"
         ></StyledFooterLogo>
-        <span>개인정보처리방침</span>
-        <span>이용약관</span>
+        <StyledPersonalInfo onClick={() => navigate("/Policy")}>
+          이용 정책
+        </StyledPersonalInfo>
         <span>이메일: showlee00@gmail.com</span>
         <span>사업자번호: 123-45-67890</span>
       </StyledFooterContainer>
@@ -39,6 +42,17 @@ const StyledFooterContainer = styled(Container)`
 const StyledFooterLogo = styled.img`
   width: 150px; /* 이미지 크기 조정 */
   height: auto; /* 비율 유지 */
+`;
+
+const StyledPersonalInfo = styled.span`
+  cursor: pointer;
+  color: black;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: blue; /* 호버 시 색 변경 */
+    text-decoration: underline; /* 밑줄 */
+  }
 `;
 
 export default Footer;

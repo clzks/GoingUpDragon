@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Pagination from "../common/utilities/Pagination";
 import axios from "axios";
 
 const LikeLecture = ({ lectures }) => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
+
+  const formatPrice = (price) => {
+    return price === 0
+      ? "무료"
+      : new Intl.NumberFormat("ko-KR").format(price) + "원";
+  };
 
   // useEffect(() => {
   //   const fetchLikedLectures = async () => {
@@ -47,7 +55,10 @@ const LikeLecture = ({ lectures }) => {
         <>
           <LectureGrid>
             {currentLectures.map((lecture) => (
-              <LectureCard key={lecture.id}>
+              <LectureCard
+                key={lecture.id}
+                onClick={() => navigate(`/CourseDetail/${lecture.courseId}`)}
+              >
                 <Thumbnail src={lecture.thumbnail} alt={lecture.courseTitle} />
                 <LectureInfo>
                   <LectureTitle>{lecture.courseTitle}</LectureTitle>
@@ -55,7 +66,7 @@ const LikeLecture = ({ lectures }) => {
                   <Rating>
                     ★ {lecture.rate} ({lecture.reviewCount})
                   </Rating>
-                  <Price>{lecture.price}</Price>
+                  <Price>{formatPrice(lecture.price)}</Price>
                 </LectureInfo>
               </LectureCard>
             ))}
@@ -115,6 +126,7 @@ const LectureCard = styled.div`
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #fff;
+  cursor: pointer;
 `;
 
 const Thumbnail = styled.img`

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
 const MyLectureStudent = ({ lectures }) => {
   const [showAll, setShowAll] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   // useEffect(() => {
   //   const fetchLectures = async () => {
   //     try {
@@ -57,7 +58,11 @@ const MyLectureStudent = ({ lectures }) => {
                 <ProgressText>{lecture.progress || "100% 완료"}</ProgressText>{" "}
                 {/* progress가 없으면 50%로 텍스트 처리 */}
               </LectureInfo>
-              <DetailButton>상세 보기</DetailButton>
+              <DetailButton
+                onClick={() => navigate(`/CourseDetail/${lecture.courseId}`)}
+              >
+                상세 보기
+              </DetailButton>
             </LectureCard>
           ))
         ) : (

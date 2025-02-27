@@ -11,6 +11,16 @@ const MyLectureInstructor = ({ courseList, isHome, courseCount }) => {
   const [isFetched, setIsFetched] = useState(false); // 🔥 API에서 가져왔는지 여부
   const navigate = useNavigate();
 
+  const formatPrice = (price) => {
+    return price === 0
+      ? "무료"
+      : new Intl.NumberFormat("ko-KR").format(price) + "원";
+  };
+
+  const formatRate = (rate) => {
+    return Math.round(rate * 10) / 10;
+  };
+
   // const displayedLectures = showAll
   //   ? Array.isArray(courseData)
   //     ? courseData
@@ -76,9 +86,9 @@ const MyLectureInstructor = ({ courseList, isHome, courseCount }) => {
               <LectureInfo>
                 <LectureTitle>{lecture.courseTitle}</LectureTitle>
                 <Rating>
-                  ⭐ {lecture.rate} ({lecture.reviewCount})
+                  ⭐ {formatRate(lecture.rate)} ({lecture.reviewCount})
                 </Rating>
-                <Price>{lecture.price.toLocaleString()}원</Price>
+                <Price>{formatPrice(lecture.price)}</Price>
               </LectureInfo>
             </LectureCard>
           ))
