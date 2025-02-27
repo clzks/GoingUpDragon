@@ -45,7 +45,7 @@ const Header = ({ inputRef }) => {
   const goToSignup = () => {
     navigate("/SignUp"); // "/signup" 경로로 이동
   };
-  
+
   // 카테고리 렌더링을 위한 useEffect
   useEffect(() => {
     const loadCategories = async () => {
@@ -79,6 +79,13 @@ const Header = ({ inputRef }) => {
       localStorage.removeItem("showLogin"); // 한 번만 실행되도록 제거
     }
   }, []);
+
+  // useEffect에서 상태 변화 감지 후 로그 출력
+  useEffect(() => {
+    if (searchInput) {
+      // console.log("검색창 업데이트됨:", searchInput);
+    }
+  }, [searchInput]);
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -169,7 +176,14 @@ const Header = ({ inputRef }) => {
     });
   };
 
-  console.log("user ->", user);
+  const handleSelectSuggestion = (suggestion) => {
+    // console.log("선택한 검색어:", suggestion); // 선택한 값 확인
+    setSearchInput(suggestion); // 검색어 업데이트
+    setIsDropdownVisible(false); // 드롭다운 닫기
+  };
+
+  // console.log("user ->", user);
+  // console.log("records", records);
 
   return (
     <StyledHeader>
@@ -270,8 +284,11 @@ const Header = ({ inputRef }) => {
               </DropdownContainer> */}
             {isDropdownVisible && records.length > 0 && (
               <DropdownContainer isVisible={isDropdownVisible}>
-                {records.map((record) => (
-                  <RecordItem key={record.id} type={record.type}>
+                {records.map((record, index) => (
+                  <RecordItem
+                    key={index}
+                    onMouseDown={() => handleSelectSuggestion(record)} // 해결: onClick 대신 onMouseDown 사용
+                  >
                     {record}
                   </RecordItem>
                 ))}
@@ -314,7 +331,7 @@ const Header = ({ inputRef }) => {
                       {user.nickname}
                       <StyledArrowIcon /> */}
 
-                      <StyledDropDownMenuNickname to={`/MyPage/${user.infoId}`}>
+                    <StyledDropDownMenuNickname to={`/MyPage/${user.infoId}`}>
                       <StyledHomeIcon />
                       {user.nickname}
                       <StyledArrowIcon />
