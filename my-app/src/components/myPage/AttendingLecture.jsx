@@ -2,29 +2,37 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const AttendingLecture = ({ lectures }) => {
+const AttendingLecture = () => {
+  const [lectures, setLectures] = useState([]);
   const [showAll, setShowAll] = useState(false);
 
-  const displayedLectures = showAll
-    ? lectures || []
-    : lectures?.slice(0, 8) || [];
+  useEffect(() => {
+    axios.get("YOUR_BACKEND_API_URL")
+      .then((response) => {
+        setLectures(response.data);
+      })
+      .catch((error) => {
+        console.error("강의 데이터를 불러오는 중 오류 발생:", error);
+      });
+  }, []);
+
+  const displayedLectures = showAll ? lectures : lectures?.slice(0, 4);
 
   return (
     <LectureWrapper>
       <Header>
         <Title>수강 중인 강의</Title>
-        <TotalCount>전체 {lectures?.length}개</TotalCount>
+        <TotalCount>전체 {lectures.length}개</TotalCount>
       </Header>
       <LectureGrid>
-        {lectures?.length > 0 ? (
+        {lectures.length > 0 ? (
           displayedLectures.map((lecture) => (
             <LectureCard key={lecture.id}>
-              <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
+              <Thumbnail src={lecture.thumbnail} alt={lecture.courseTitle} />
               <LectureTitle>{lecture.courseTitle}</LectureTitle>
               <ProgressWrapper>
-                <ProgressBar progress={100} /> {/* 진행률을 항상 50%로 설정 */}
-                <ProgressText>100% 완료</ProgressText>{" "}
-                {/* 텍스트도 50%로 설정 */}
+                <ProgressBar progress={lecture.progress} />
+                <ProgressText>{lecture.progress}% 완료</ProgressText>
               </ProgressWrapper>
             </LectureCard>
           ))
@@ -32,7 +40,7 @@ const AttendingLecture = ({ lectures }) => {
           <NoLectureText>현재 수강 중인 강의가 없습니다.</NoLectureText>
         )}
       </LectureGrid>
-      {lectures?.length > 8 && (
+      {lectures.length > 8 && (
         <ViewAllButton onClick={() => setShowAll(!showAll)}>
           {showAll ? "돌아가기 >" : "전체보기 >"}
         </ViewAllButton>
@@ -49,13 +57,14 @@ const LectureWrapper = styled.div`
   margin: 20px 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  max-width: 1000px;
   margin-bottom: 20px;
 `;
 
@@ -67,43 +76,48 @@ const Title = styled.h2`
 const TotalCount = styled.span`
   font-size: 14px;
   color: #7cd0d5;
-  text-align: right;
 `;
 
 const LectureGrid = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-  min-height: 150px;
-  text-align: center;
+  width: 100%;
+  max-width: 1100px;
+  justify-content: flex-start;
 `;
 
 const LectureCard = styled.div`
-  padding: 10px;
+  padding: 15px;
   background-color: #fff;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-basis: calc(25% - 16px);
+  min-width: 220px;
+  max-width: 250px;
 `;
 
 const Thumbnail = styled.img`
-  width: 100%;
-  height: 100px;
+  width: 100%; 
+  aspect-ratio: 16 / 9; 
   object-fit: cover;
   border-radius: 4px;
 `;
 
+
 const LectureTitle = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-top: 10px;
 `;
 
 const ProgressWrapper = styled.div`
   width: 100%;
+  padding: 8px 0;
 `;
 
 const ProgressBar = styled.div`
@@ -118,7 +132,7 @@ const ProgressBar = styled.div`
     content: "";
     display: block;
     height: 100%;
-    width: ${({ progress }) => progress}%;
+    width: ${({ progress }) => progress}% ;
     background-color: #7cd0d5;
     transition: width 0.3s ease-in-out;
   }
@@ -134,20 +148,13 @@ const ViewAllButton = styled.button`
   background-color: #ffffff;
   color: #000000;
   border: none;
-  padding: 10px;
+  padding: 12px 16px;
   border-radius: 4px;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
   align-self: center;
-  margin-bottom: 20px;
-`;
-
-const LoadingText = styled.div`
-  text-align: center;
-  font-size: 16px;
-  color: #666;
-  margin: 20px 0;
+  margin-top: 20px;
 `;
 
 const NoLectureText = styled.div`

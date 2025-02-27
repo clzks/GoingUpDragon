@@ -2,28 +2,26 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const MyLectureStudent = ({ lectures }) => {
+const MyLectureStudent = () => {
+  const [lectures, setLectures] = useState([]);
   const [showAll, setShowAll] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const fetchLectures = async () => {
-  //     try {
-  //       const response = await axios.get("/api/student/lectures");
-  //       setLectures(response.data);
-  //     } catch (error) {
-  //       console.error("강의 데이터를 불러오지 못했습니다:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchLectures = async () => {
+      try {
+        const response = await axios.get("/api/student/lectures");
+        setLectures(response.data);
+      } catch (error) {
+        console.error("강의 데이터를 불러오지 못했습니다:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchLectures();
+  }, []);
 
-  //   fetchLectures();
-  // }, []);
-
-  const displayedLectures = showAll
-    ? lectures || []
-    : lectures?.slice(0, 6) || [];
+  const displayedLectures = showAll ? lectures : lectures?.slice(0, 6);
 
   if (loading) {
     return <LoadingText>강의 데이터를 불러오는 중...</LoadingText>;
@@ -39,7 +37,7 @@ const MyLectureStudent = ({ lectures }) => {
         {lectures?.length > 0 ? (
           displayedLectures.map((lecture) => (
             <LectureCard key={lecture.id}>
-              <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
+              <Thumbnail src={lecture.thumbnail} alt={lecture.courseTitle} />
               <LectureInfo>
                 <LectureTitle>{lecture.courseTitle}</LectureTitle>
                 <Subtitle>{lecture.courseDescription}</Subtitle>
@@ -50,12 +48,11 @@ const MyLectureStudent = ({ lectures }) => {
                         ? (parseInt(lecture.progress.split("/")[0]) /
                             parseInt(lecture.progress.split("/")[1])) *
                           100
-                        : 100 // progress가 없으면 50%로 처리
+                        : 100
                     }
                   />
                 </ProgressBar>
-                <ProgressText>{lecture.progress || "100% 완료"}</ProgressText>{" "}
-                {/* progress가 없으면 50%로 텍스트 처리 */}
+                <ProgressText>{lecture.progress || "100% 완료"}</ProgressText>
               </LectureInfo>
               <DetailButton>상세 보기</DetailButton>
             </LectureCard>
@@ -65,7 +62,7 @@ const MyLectureStudent = ({ lectures }) => {
         )}
       </LectureGrid>
 
-      {lectures?.length > 0 && (
+      {lectures?.length > 6 && (
         <ButtonWrapper>
           <ViewAllButton onClick={() => setShowAll(!showAll)}>
             {showAll ? "돌아가기 >" : "전체보기 >"}
@@ -82,7 +79,6 @@ export default MyLectureStudent;
 const LectureWrapper = styled.div`
   width: 100%;
   margin: 20px 0;
-  margin-bottom: 20px;
 `;
 
 const Header = styled.div`
@@ -97,14 +93,12 @@ const HeaderTitle = styled.h2`
 `;
 
 const LectureGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   gap: 20px;
   margin-top: 20px;
   min-height: ${({ hasLectures }) => (hasLectures ? "auto" : "150px")};
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const LectureCard = styled.div`
@@ -112,13 +106,20 @@ const LectureCard = styled.div`
   flex-direction: column;
   gap: 10px;
   padding: 15px;
+  width: calc(25% - 20px);
+  min-width: 240px;
+  max-width: 320px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 `;
 
 const Thumbnail = styled.img`
   width: 100%;
-  height: 100px;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 4px;
 `;
 
 const LectureInfo = styled.div`
