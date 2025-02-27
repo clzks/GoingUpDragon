@@ -334,14 +334,14 @@ const Header = ({ inputRef, onSearchData }) => {
                 />
                 {showProfileDropdown && (
                   <DropdownMenu>
-                    <button onClick={addItemToCart}>Add to Cart</button>
+                    {/* <button onClick={addItemToCart}>Add to Cart</button> */}
                     {/* <StyledDropDownMenuNickname to="/MyPage">
                       <StyledHomeIcon />
                       {user.nickname}
                       <StyledArrowIcon /> */}
 
                     <StyledDropDownMenuNickname
-                      to={`/MyPage/student/${user.infoId}`}
+                      to={`/myPage/student/${user.infoId}`}
                     >
                       <StyledHomeIcon />
                       {user.nickname}
@@ -595,8 +595,8 @@ const RecordItem = styled.div`
 
 const DropdownMenu = styled.div`
   position: absolute;
-  top: 330px; // 프로필 이미지 아래에 위치하도록 조정합니다.
-  right: 150px; // 프로필 이미지의 오른쪽 경계에 맞추도록 조정합니다.
+  top: 30px; // 프로필 이미지 아래에 위치하도록 조정합니다.
+  right: 250px; // 프로필 이미지의 오른쪽 경계에 맞추도록 조정합니다.
   background-color: #fff;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 5;
