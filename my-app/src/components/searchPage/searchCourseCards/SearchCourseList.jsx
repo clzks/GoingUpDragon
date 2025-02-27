@@ -8,6 +8,7 @@ import styled from "styled-components";
 import SearchCourseCards from "./SearchCourseCards";
 
 const CourseList = ( { courses } ) => {
+  // console.log("c2", courses);
 
   return (
     <StyledSearchCourseCardsContainer>

@@ -14,6 +14,7 @@ import { fetchCategories } from "../../../apis/common/categoryApi"; // API 함�
 import { saveSearchQuery } from "../../../apis/searchPage/SearchApi"; // API 함수 import
 import { fetchSuggestions } from "../../../apis/searchPage/fetchSuggestions"; // API 함수 불러오기
 import { logout } from "../../../apis/common/LogoutApi"; // 로그아웃 API 함수 임포트
+import { fetchCourses } from "../../../apis/common/CourseSearchApi"; // API 함수 불러오기
 
 // GoingUpDragon/my-app/src/components/common/layout
 import Logo from "./Logo";
@@ -21,7 +22,7 @@ import Logo from "./Logo";
 // GoingUpDragon/my-app/src/components/common
 import LoginModal from "../utilities/LoginModal";
 
-const Header = ({ inputRef }) => {
+const Header = ({ inputRef, onSearchData }) => {
   // 카테고리들을 담는 배열 빈 상태로 초기값 설정
   const [categories, setCategories] = useState([]);
   // 에러 발생시 에러를 담는 코드 초기값 null
@@ -42,10 +43,11 @@ const Header = ({ inputRef }) => {
 
   const [user, setUser] = useState(null);
 
+
   const goToSignup = () => {
     navigate("/SignUp"); // "/signup" 경로로 이동
   };
-  
+
   // 카테고리 렌더링을 위한 useEffect
   useEffect(() => {
     const loadCategories = async () => {
@@ -79,6 +81,13 @@ const Header = ({ inputRef }) => {
       localStorage.removeItem("showLogin"); // 한 번만 실행되도록 제거
     }
   }, []);
+
+  // useEffect에서 상태 변화 감지 후 로그 출력
+  useEffect(() => {
+    if (searchInput) {
+      // console.log("검색창 업데이트됨:", searchInput);
+    }
+  }, [searchInput]);
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -150,11 +159,21 @@ const Header = ({ inputRef }) => {
   const handleSearchSubmit = async (event) => {
     event.preventDefault(); // 기본 동작(페이지 새로고침) 방지
 
-    if (!searchInput.trim()) return; // 빈 값 방지
+    if (!searchInput.trim()) 
+      return; // 빈 값 방지
 
     try {
       await saveSearchQuery(searchInput); // 검색어 저장 API 호출
       console.log("검색어 저장 성공:", searchInput);
+
+      const results = await fetchCourses(searchInput); // 검색어로 강의 검색
+      console.log("검색 결과:", results);
+
+      onSearchData(results);
+
+      // searchQuery 쿼리 파라미터를 URL에 추가하여 검색 페이지로 이동
+      navigate(`/Search?searchQuery=${searchInput}`); // searchQuery 쿼리 파라미터로 검색어 전달
+
     } catch (error) {
       console.error("검색어 저장 실패:", error);
     }
@@ -169,7 +188,14 @@ const Header = ({ inputRef }) => {
     });
   };
 
-  console.log("user ->", user);
+  const handleSelectSuggestion = (suggestion) => {
+    // console.log("선택한 검색어:", suggestion); // 선택한 값 확인
+    setSearchInput(suggestion); // 검색어 업데이트
+    setIsDropdownVisible(false); // 드롭다운 닫기
+  };
+
+  // console.log("user ->", user);
+  // console.log("records", records);
 
   return (
     <StyledHeader>
@@ -241,7 +267,7 @@ const Header = ({ inputRef }) => {
 
           {/* 강의 검색창 */}
           <StyledCol xs={6}>
-            <StyledForm>
+            <StyledForm onSubmit={handleSearchSubmit}>
               <StyledFormControl
                 ref={inputRef}
                 type="search"
@@ -270,8 +296,11 @@ const Header = ({ inputRef }) => {
               </DropdownContainer> */}
             {isDropdownVisible && records.length > 0 && (
               <DropdownContainer isVisible={isDropdownVisible}>
-                {records.map((record) => (
-                  <RecordItem key={record.id} type={record.type}>
+                {records.map((record, index) => (
+                  <RecordItem
+                    key={index}
+                    onMouseDown={() => handleSelectSuggestion(record)} // 해결: onClick 대신 onMouseDown 사용
+                  >
                     {record}
                   </RecordItem>
                 ))}
@@ -314,7 +343,7 @@ const Header = ({ inputRef }) => {
                       {user.nickname}
                       <StyledArrowIcon /> */}
 
-                      <StyledDropDownMenuNickname to={`/MyPage/${user.infoId}`}>
+                    <StyledDropDownMenuNickname to={`/MyPage/${user.infoId}`}>
                       <StyledHomeIcon />
                       {user.nickname}
                       <StyledArrowIcon />
