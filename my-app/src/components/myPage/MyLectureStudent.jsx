@@ -82,7 +82,6 @@ export default MyLectureStudent;
 const LectureWrapper = styled.div`
   width: 100%;
   margin: 20px 0;
-  margin-bottom: 20px;
 `;
 
 const Header = styled.div`
@@ -97,14 +96,12 @@ const HeaderTitle = styled.h2`
 `;
 
 const LectureGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   gap: 20px;
   margin-top: 20px;
   min-height: ${({ hasLectures }) => (hasLectures ? "auto" : "150px")};
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const LectureCard = styled.div`
@@ -112,13 +109,20 @@ const LectureCard = styled.div`
   flex-direction: column;
   gap: 10px;
   padding: 15px;
+  width: calc(25% - 20px);
+  min-width: 240px;
+  max-width: 320px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 `;
 
 const Thumbnail = styled.img`
   width: 100%;
-  height: 100px;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 4px;
 `;
 
 const LectureInfo = styled.div`

@@ -49,13 +49,14 @@ const LectureWrapper = styled.div`
   margin: 20px 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  max-width: 1000px;
   margin-bottom: 20px;
 `;
 
@@ -67,43 +68,48 @@ const Title = styled.h2`
 const TotalCount = styled.span`
   font-size: 14px;
   color: #7cd0d5;
-  text-align: right;
 `;
 
 const LectureGrid = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-  min-height: 150px;
-  text-align: center;
+  width: 100%;
+  max-width: 1100px;
+  justify-content: flex-start;
 `;
 
 const LectureCard = styled.div`
-  padding: 10px;
+  padding: 15px;
   background-color: #fff;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-basis: calc(25% - 16px);
+  min-width: 220px;
+  max-width: 250px;
 `;
 
 const Thumbnail = styled.img`
-  width: 100%;
-  height: 100px;
+  width: 100%; 
+  aspect-ratio: 16 / 9; 
   object-fit: cover;
   border-radius: 4px;
 `;
 
+
 const LectureTitle = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-top: 10px;
 `;
 
 const ProgressWrapper = styled.div`
   width: 100%;
+  padding: 8px 0;
 `;
 
 const ProgressBar = styled.div`
@@ -118,7 +124,7 @@ const ProgressBar = styled.div`
     content: "";
     display: block;
     height: 100%;
-    width: ${({ progress }) => progress}%;
+    width: ${({ progress }) => progress}% ;
     background-color: #7cd0d5;
     transition: width 0.3s ease-in-out;
   }
@@ -134,20 +140,13 @@ const ViewAllButton = styled.button`
   background-color: #ffffff;
   color: #000000;
   border: none;
-  padding: 10px;
+  padding: 12px 16px;
   border-radius: 4px;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
   align-self: center;
-  margin-bottom: 20px;
-`;
-
-const LoadingText = styled.div`
-  text-align: center;
-  font-size: 16px;
-  color: #666;
-  margin: 20px 0;
+  margin-top: 20px;
 `;
 
 const NoLectureText = styled.div`
