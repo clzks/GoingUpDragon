@@ -30,43 +30,6 @@ function App() {
       <Router>
         <RouteChangeScroll></RouteChangeScroll>
         <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">메인 페이지</Link>
-              </li>
-              <li>
-                <Link to="/Search/?mainCategory=0">검색 페이지</Link>
-              </li>
-              <li>
-                <Link to="/CourseDetail/5641">강의 상세 페이지</Link>
-              </li>
-              <li>
-                <Link to="/myPage/student/2000">마이 페이지</Link>
-              </li>
-              <li>
-                <Link to="/myPage/instructor/501">강사 마이 페이지</Link>
-              </li>
-              <li>
-                <Link to="/Policy">약관 페이지</Link>
-              </li>
-              <li>
-                <Link to="/SignUp">회원가입 페이지</Link>
-              </li>
-              <li>
-                <Link to="/LoginModal">로그인 페이지</Link>
-              </li>
-              <li>
-                <Link to="/qna/course/500">QnA 메인 페이지</Link>
-              </li>
-              <li>
-                <Link to="/AccountRecoveryTabs">계정 찾기 페이지</Link>
-              </li>
-              <li>
-                <Link to="/qna/1">QnA 답변 페이지</Link>
-              </li>
-            </ul>
-          </nav>
           <Routes>
             <Route path="/" element={<MainLayout />} />
             <Route path="/Search" element={<SearchLayout />} />
