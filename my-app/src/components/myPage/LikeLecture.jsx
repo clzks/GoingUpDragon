@@ -112,6 +112,9 @@ const LectureCard = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
 `;
 
 const Thumbnail = styled.img`
