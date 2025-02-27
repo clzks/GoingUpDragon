@@ -1,74 +1,107 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import axios from "axios";
+import { getCourseList } from "../../apis/common/courseApi";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const MyLectureInstructor = () => {
-  const [lectures, setLectures] = useState([]);
+const MyLectureInstructor = ({ courseList, isHome, courseCount }) => {
   const [showAll, setShowAll] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [courseData, setCourseData] = useState([]);
+  const { infoId } = useParams();
+  const [isFetched, setIsFetched] = useState(false); // 🔥 API에서 가져왔는지 여부
+  const navigate = useNavigate();
+
+  // const displayedLectures = showAll
+  //   ? Array.isArray(courseData)
+  //     ? courseData
+  //     : []
+  //   : courseData?.slice(0, 4) || [];
 
   useEffect(() => {
-    const fetchLectures = async () => {
-      try {
-        const response = await axios.get("/api/instructor/lectures");
-        setLectures(response.data);
-      } catch (error) {
-        console.error("강의 데이터를 불러오지 못했습니다:", error);
-      } finally {
-        setLoading(false);
+    console.log(
+      "🔥 useEffect 실행됨! isHome:",
+      isHome,
+      "infoId:",
+      infoId,
+      "isFetched:",
+      isFetched
+    );
+
+    if (isHome) {
+      console.log("🏠 홈 모드 - 기존 데이터 사용");
+      setCourseData(courseList);
+    } else {
+      if (infoId) {
+        if (isFetched) {
+          console.log("⚡ 이미 불러온 강의 데이터 사용!");
+          return; // 🚀 기존 데이터가 있으면 API 호출 X
+        }
+
+        console.log("📡 강사 데이터 요청 중...");
+        getCourseList(infoId)
+          .then((data) => {
+            console.log("✅ 강의 리스트 불러오기 성공:", data);
+            setCourseData(data);
+            setIsFetched(true); // 🔥 API에서 데이터를 가져왔음을 표시
+          })
+          .catch((error) => console.error("강사 강의 가져오기 실패:", error));
+      } else {
+        console.log("❌ instructorId 없음! 데이터 요청 안함");
       }
-    };
-
-    fetchLectures();
-  }, []);
-
-  const displayedLectures = showAll ? lectures : lectures.slice(0, 4);
-
-  if (loading) {
-    return <LoadingText>강의 데이터를 불러오는 중...</LoadingText>;
-  }
+    }
+  }, [isHome, infoId]); // ✅ courseList 제거하여 불필요한 리렌더링 방지
 
   return (
     <LectureWrapper>
       <Header>
         <HeaderTitle>강의</HeaderTitle>
         <TotalCount>
-          전체 <TotalHighlight>{lectures.length}개</TotalHighlight>
+          전체{" "}
+          <TotalHighlight>
+            {isHome ? courseCount : courseData?.length}개
+          </TotalHighlight>
         </TotalCount>
       </Header>
 
-      <LectureGrid hasLectures={lectures.length > 0}>
-        {lectures.length > 0 ? (
-          displayedLectures.map((lecture) => (
-            <LectureCard key={lecture.id}>
-              <Thumbnail src={lecture.thumbnail} alt={lecture.title} />
+      <LectureGrid hasLectures={courseData?.length > 0}>
+        {isHome === false && isFetched === false ? ( // 🔥 강의 로딩 중 표시
+          <NoLectureText>강의 로딩 중...</NoLectureText>
+        ) : courseData?.length > 0 ? ( // ✅ 🔥 isFetched 완료되면 전체 강의 표시
+          courseData.map((lecture) => (
+            <LectureCard
+              key={lecture.courseId}
+              onClick={() => navigate(`/CourseDetail/${lecture.courseId}`)}
+            >
+              <Thumbnail src={lecture.thumbnail} alt={lecture.courseTitle} />
               <LectureInfo>
-                <LectureTitle>{lecture.title}</LectureTitle>
-                <Rating>⭐ {lecture.rating} ({lecture.reviews})</Rating>
+                <LectureTitle>{lecture.courseTitle}</LectureTitle>
+                <Rating>
+                  ⭐ {lecture.rate} ({lecture.reviewCount})
+                </Rating>
                 <Price>{lecture.price.toLocaleString()}원</Price>
               </LectureInfo>
             </LectureCard>
           ))
         ) : (
-          <NoLectureText>등록된 강의가 없습니다.</NoLectureText>
+          <NoLectureText>등록된 강의가 없습니다.</NoLectureText> // ✅ 강의가 없을 때
         )}
       </LectureGrid>
 
-      {lectures.length > 4 && (
-        <ButtonWrapper>
-          <ViewAllButton onClick={() => setShowAll(!showAll)}>
-            {showAll ? "돌아가기 >" : "전체보기 >"}
-          </ViewAllButton>
-        </ButtonWrapper>
-      )}
+      {/* {isHome &&
+        courseData?.length > 0 && ( // ✅ 홈에서는 전체보기 버튼 유지
+          <ButtonWrapper>
+            <ViewAllButton onClick={() => setShowAll(!showAll)}>
+              {showAll ? "돌아가기 >" : "전체보기 >"}
+            </ViewAllButton>
+          </ButtonWrapper>
+        )} */}
     </LectureWrapper>
   );
 };
 
 export default MyLectureInstructor;
 
-
-// 스타일 정의
+// 스타일 컴포넌트 (팀원 코드 적용)
 const LectureWrapper = styled.div`
   width: 100%;
   margin: 20px 0;
@@ -118,11 +151,12 @@ const LectureCard = styled.div`
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   text-align: center;
+  cursor: pointer; // ✅ 마우스 포인터 변경
 `;
 
 const Thumbnail = styled.img`
-  width: 190px;  
-  height: 120px; 
+  width: 190px;
+  height: 120px;
   object-fit: cover;
   border-radius: 8px;
   display: block;
@@ -176,13 +210,6 @@ const ViewAllButton = styled.button`
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-`;
-
-const LoadingText = styled.div`
-  text-align: center;
-  font-size: 16px;
-  color: #666;
-  margin: 20px 0;
 `;
 
 const NoLectureText = styled.div`
