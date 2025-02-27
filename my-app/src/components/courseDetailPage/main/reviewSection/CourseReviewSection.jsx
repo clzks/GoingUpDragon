@@ -13,7 +13,7 @@ const CourseReviewSection = forwardRef(({ reviewData }, ref) => {
   return (
     <StyledReviewContainer ref={ref}>
       <StyledTitleText>수강평</StyledTitleText>
-      <ReviewSortOption></ReviewSortOption>
+      {/* <ReviewSortOption></ReviewSortOption> */}
       <ReviewBanner reviewData={reviewData}></ReviewBanner>
       <CourseReviewCardList reviewData={reviewData}></CourseReviewCardList>
     </StyledReviewContainer>
