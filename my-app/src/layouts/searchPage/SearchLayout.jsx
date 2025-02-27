@@ -44,6 +44,14 @@ const SearchLayout = () => {
   const inputRef = useRef(null); // 검색창에 대한 참조 생성
   const searchCategoryRef = useRef(null); // 각 카테고리의 스크롤을 위한 ref
 
+  const [searchData, setSearchData] = useState([]);
+
+
+  const onSearchData = ( data ) => {
+    console.log(data);
+    setSearchData(data);
+  }
+
   const handleCategorySelect = (categoryId) => {
     setSelectedCategoryId(categoryId);
     setSelectedSubCategoryId(0);
@@ -98,7 +106,7 @@ const SearchLayout = () => {
 
   return (
     <>
-      <Header inputRef={inputRef}></Header>
+      <Header inputRef={inputRef} onSearchData={onSearchData}></Header>
       <HorizontalLine></HorizontalLine>
       <StyledSection>
         <Container>
@@ -165,6 +173,7 @@ const SearchLayout = () => {
             ></SearchFillterParent>
             <StyledInstructorCoursesContainer>
               <SearchCardDatas
+                searchData={searchData}
                 mainCategory={selectedCategoryId}
                 subCategory={selectedSubCategoryId}
                 level={filters.level}

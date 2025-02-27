@@ -25,6 +25,7 @@ const SearchCardDatas = ({
   language,
   timeFilter,
   selectedTags,
+  searchData
 }) => {
   // 동적으로 관리할 필터, 정렬 데이터
   //const [selectedTags, setSelectedTags] = useState([]);
@@ -104,10 +105,12 @@ const SearchCardDatas = ({
   // 데이터 렌더링 함수
   const renderContent = () => {
     const content = [];
+    // console.log("courses..", courses);
+    // console.log("searchData..", searchData);
     //const totalChunks = Math.ceil(totalCourses / 16);
 
     for (let i = 0; i < totalCourses; i += 16) {
-      const chunk = courses.slice(i, i + 16); // 강의 16개씩 분할
+      const chunk = !searchData?.length ? courses.slice(i, i + 16) : searchData.slice(i, i + 16); // 강의 16개씩 분할
       content.push(<CourseList key={`course-${i}`} courses={chunk} />);
 
       // 강사 목록 삽입 (마지막 chunk 이후에는 강사 리스트 추가 안 함)
@@ -118,6 +121,7 @@ const SearchCardDatas = ({
 
     return content;
   };
+  // console.log("content", content);
 
   return (
     <StyledCourseListContainer>

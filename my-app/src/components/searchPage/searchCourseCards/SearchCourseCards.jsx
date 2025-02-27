@@ -9,21 +9,33 @@ import styled from "styled-components";
 import RatingStarList from "../../common/icons/RatingStarList";
 
 const SearchCourseCards = ({ course }) => {
+  // console.log("courses", course);
+
   const navigate = useNavigate();
 
+    // ✅ 데이터 매핑: 서로 다른 데이터 구조를 통합
+    const courseData = {
+      courseId: course.courseId,
+      thumbnail: course.courseThumbnail || course.imageUrl || "https://via.placeholder.com/260x150", // 기본 이미지 추가
+      title: course.courseTitle || course.title,
+      instructor: course.instructorNickname || course.instructor,
+      rating: course.avgRate || course.rating || 0, // 기본값 0
+      reviewCount: course.reviewCount || course.numReviews || 0, // 기본값 0
+      price: course.price ? `${course.price.toLocaleString()}원` : "무료", // 가격 포맷
+    };
+
   return (
-    <CardContainer onClick={() => navigate(`/CourseDetail/${course.courseId}`)}>
-      <Thumbnail src={course.imageUrl} alt={`${course.title} 썸네일`} />
+    <CardContainer onClick={() => navigate(`/CourseDetail/${courseData.courseId}`)}>
+      <Thumbnail src={courseData.thumbnail} alt={`${courseData.title} 썸네일`} />
       <CardContent>
-        <CourseTitle>{course.title}</CourseTitle>
-        <InstructorName>{course.instructor}</InstructorName>
+        <CourseTitle>{courseData.title}</CourseTitle>
+        <InstructorName>{courseData.instructor}</InstructorName>
         <RatingContainer>
-          <RatingStarList rating={course.rating} size="18px" />{" "}
-          {/* 별 렌더링 */}
-          <Rating>{course.rating}</Rating>
-          <ReviewCount>({course.numReviews})</ReviewCount>
+          <RatingStarList rating={courseData.rating} size="18px" />
+          <Rating>{courseData.rating}</Rating>
+          <ReviewCount>({courseData.reviewCount})</ReviewCount>
         </RatingContainer>
-        <Price>{course.price}</Price>
+        <Price>{courseData.price}</Price>
       </CardContent>
     </CardContainer>
   );

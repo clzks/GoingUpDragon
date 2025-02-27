@@ -14,6 +14,7 @@ import { fetchCategories } from "../../../apis/common/categoryApi"; // API 함�
 import { saveSearchQuery } from "../../../apis/searchPage/SearchApi"; // API 함수 import
 import { fetchSuggestions } from "../../../apis/searchPage/fetchSuggestions"; // API 함수 불러오기
 import { logout } from "../../../apis/common/LogoutApi"; // 로그아웃 API 함수 임포트
+import { fetchCourses } from "../../../apis/common/CourseSearchApi"; // API 함수 불러오기
 
 // GoingUpDragon/my-app/src/components/common/layout
 import Logo from "./Logo";
@@ -21,7 +22,7 @@ import Logo from "./Logo";
 // GoingUpDragon/my-app/src/components/common
 import LoginModal from "../utilities/LoginModal";
 
-const Header = ({ inputRef }) => {
+const Header = ({ inputRef, onSearchData }) => {
   // 카테고리들을 담는 배열 빈 상태로 초기값 설정
   const [categories, setCategories] = useState([]);
   // 에러 발생시 에러를 담는 코드 초기값 null
@@ -41,6 +42,7 @@ const Header = ({ inputRef }) => {
   const { addItemToCart } = useCart();
 
   const [user, setUser] = useState(null);
+
 
   const goToSignup = () => {
     navigate("/SignUp"); // "/signup" 경로로 이동
@@ -157,11 +159,21 @@ const Header = ({ inputRef }) => {
   const handleSearchSubmit = async (event) => {
     event.preventDefault(); // 기본 동작(페이지 새로고침) 방지
 
-    if (!searchInput.trim()) return; // 빈 값 방지
+    if (!searchInput.trim()) 
+      return; // 빈 값 방지
 
     try {
       await saveSearchQuery(searchInput); // 검색어 저장 API 호출
       console.log("검색어 저장 성공:", searchInput);
+
+      const results = await fetchCourses(searchInput); // 검색어로 강의 검색
+      console.log("검색 결과:", results);
+
+      onSearchData(results);
+
+      // searchQuery 쿼리 파라미터를 URL에 추가하여 검색 페이지로 이동
+      navigate(`/Search?searchQuery=${searchInput}`); // searchQuery 쿼리 파라미터로 검색어 전달
+
     } catch (error) {
       console.error("검색어 저장 실패:", error);
     }
@@ -255,7 +267,7 @@ const Header = ({ inputRef }) => {
 
           {/* 강의 검색창 */}
           <StyledCol xs={6}>
-            <StyledForm>
+            <StyledForm onSubmit={handleSearchSubmit}>
               <StyledFormControl
                 ref={inputRef}
                 type="search"
